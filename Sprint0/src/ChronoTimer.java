@@ -1,7 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Queue;
 import java.util.Scanner;
 
 public class ChronoTimer {
