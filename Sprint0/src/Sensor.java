@@ -16,11 +16,11 @@ public class Sensor {
 		}
 	}
 	
-	public void toggleOn(){
-		isToggledOn = true;
-	}
-	
-	public void toggleOff(){
-		isToggledOn = false;
+	public void toggle(){
+		if(isToggledOn){
+			isToggledOn = false;
+		}else{
+			isToggledOn = true;
+		}
 	}
 }
