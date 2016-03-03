@@ -68,6 +68,7 @@ public class ChronoTimer {
 					break;
 				}
 				case "TRIG":{
+					int channelNum = Integer.parseInt(commands[1]);
 					break;
 				}
 				case "PRINT":{
