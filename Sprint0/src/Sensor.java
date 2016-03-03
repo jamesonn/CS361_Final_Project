@@ -11,7 +11,9 @@ public class Sensor {
 	}
 	
 	public void triggerSensor(){
-		
+		if(isToggledOn){
+			//do something
+		}
 	}
 	
 	public void toggleOn(){

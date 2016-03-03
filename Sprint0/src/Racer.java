@@ -4,6 +4,7 @@ public class Racer {
 	int laneNum;
 	int numLaps;
 	double startTime;
+	double stopTime;
 	private double[] lapTimes = new double[numLaps];
 	private int lapNum = 0;
 	double totalTime;
@@ -42,8 +43,5 @@ public class Racer {
 			s += "Finish: " + lapTimes[lapTimes.length-1];
 		}
 		return s;
-	}
-	
-	
-	
+	}	
 }
