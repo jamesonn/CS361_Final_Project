@@ -8,16 +8,13 @@ public class Racer {
 	private double[] lapTimes = new double[numLaps];
 	private int lapNum = 0;
 	double totalTime;
-	public boolean hasStarted = false;
 	
-	public Racer(int bn, int ln){
+	public Racer(int bn, int laneNum){
 		racerNum = bn;
-		laneNum = ln;
+		this.laneNum = laneNum;
 	}
 
 	public int getBibNum(){ return racerNum; }
-	public int getLaneNum(){ return laneNum; }
-	public void changeLaneNum(int ln){ laneNum = ln; }
 	public double getStartTime(){ return startTime; }
 	public void setStartTime(double st){ startTime = st; }
 	public double gettotalTime(){
@@ -44,13 +41,5 @@ public class Racer {
 			s += "Finish: " + lapTimes[lapTimes.length-1];
 		}
 		return s;
-	}
-	
-	public boolean hasStarted(){
-		if(hasStarted){
-			return true;
-		}else{
-			return false;
-		}
 	}
 }

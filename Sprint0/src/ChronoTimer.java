@@ -62,7 +62,11 @@ public class ChronoTimer {
 				}
 				case "TRIG":{
 					if(sensors[Integer.parseInt(commands[1])-1].canTriggerSensor()){
-						
+						if(timer.hasLaneStarted(Integer.parseInt(commands[1]))){
+							timer.stop(Integer.parseInt(commands[1]));
+						}else{
+							timer.start(Integer.parseInt(commands[1]));
+						}
 					}
 					break;
 				}
