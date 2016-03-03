@@ -69,6 +69,9 @@ public class ChronoTimer {
 					}
 					break;
 				}
+				case "DNF":{
+					break;
+				}
 				case "PRINT":{
 					break;
 				}
