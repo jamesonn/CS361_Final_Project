@@ -29,7 +29,8 @@ public class Timer {
 		for(int i = 0; i < Racers.size(); i++){
 			Racer racer = Racers.get(i);
 			if(racer.laneNum == laneNum){
-				racer.startTime = systemTime;				
+				racer.startTime = systemTime;
+				racer.hasStarted = true;
 			}
 		}		
 	}
@@ -39,9 +40,9 @@ public class Timer {
 			Racer racer = Racers.get(i);
 			if(racer.laneNum == laneNum){
 				racer.stopTime = systemTime;
+				racer.hasStarted = false;
 			}
 		}
-	}
-	
+	}	
 	public void calculateTime(){}
 }
