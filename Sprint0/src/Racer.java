@@ -8,6 +8,7 @@ public class Racer {
 	private double[] lapTimes = new double[numLaps];
 	private int lapNum = 0;
 	double totalTime;
+	public boolean hasStarted = false;
 	
 	public Racer(int bn, int ln){
 		racerNum = bn;
@@ -43,5 +44,13 @@ public class Racer {
 			s += "Finish: " + lapTimes[lapTimes.length-1];
 		}
 		return s;
-	}	
+	}
+	
+	public boolean hasStarted(){
+		if(hasStarted){
+			return true;
+		}else{
+			return false;
+		}
+	}
 }
