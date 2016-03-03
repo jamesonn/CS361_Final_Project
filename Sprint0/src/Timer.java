@@ -7,10 +7,10 @@ public class Timer {
 	int lane = 0;
 	int hour;
 	int minute;
-	double second;
-	double systemTime;
+	float second;
+	float systemTime;
 
-	public void setTime(int hour, int minute, double second){
+	public void setTime(int hour, int minute, float second){
 		this.hour = hour;
 		this.minute = minute;
 		this.second = second;

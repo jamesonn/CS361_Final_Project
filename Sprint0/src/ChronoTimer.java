@@ -8,13 +8,6 @@ public class ChronoTimer {
 	public static int hours;
 	public static int minutes;
 	public static float seconds;
-
-	Queue<Racer> chan1_2;
-	Queue<Racer> chan3_4;
-	Queue<Racer> chan5_6;
-	Queue<Racer> chan7_8;
-	
-	//Beginning of parsing test data
 	
 	public static void main(String args[]){
 		File instructions;
@@ -68,7 +61,9 @@ public class ChronoTimer {
 					break;
 				}
 				case "TRIG":{
-					int channelNum = Integer.parseInt(commands[1]);
+					if(sensors[Integer.parseInt(commands[1])-1].canTriggerSensor()){
+						
+					}
 					break;
 				}
 				case "PRINT":{
