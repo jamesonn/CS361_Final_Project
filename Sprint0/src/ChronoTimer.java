@@ -21,7 +21,7 @@ public class ChronoTimer {
 		Scanner instructionParser;
 		ArrayList<String> instructionLines = new ArrayList<String>();
 		Timer timer = new Timer();
-		Sensor[] sensors = new Sensor[4];
+		Sensor[] sensors = new Sensor[8];
 		
 		try{
 			instructions = new File("src/Sprint1_Test.txt");
@@ -53,14 +53,14 @@ public class ChronoTimer {
 					break;
 				}
 				case "CONN":{
-					sensors[Integer.parseInt(commands[2])] = new Sensor(commands[1],Integer.parseInt(commands[2]));
+					sensors[Integer.parseInt(commands[2])-1] = new Sensor(commands[1],Integer.parseInt(commands[2]));
 					break;
 				}
 				case "EVENT":{
 					break;
 				}
 				case "TOGGLE":{
-					sensors[Integer.parseInt(commands[1])].toggle();
+					sensors[Integer.parseInt(commands[1])-1].toggle();
 					break;
 				}
 				case "NUM":{
