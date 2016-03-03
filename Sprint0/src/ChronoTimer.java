@@ -39,8 +39,44 @@ public class ChronoTimer {
 			hours = Integer.parseInt(time[0]);
 			minutes = Integer.parseInt(time[1]);
 			seconds = Integer.parseInt(time[2]);
+			switch (commands[0]){
+				case "TIME":{
+					break;
+				}
+				case "ON":{
+					break;
+				}
+				case "OFF":{
+					break;
+				}
+				case "CONN":{
+					break;
+				}
+				case "EVENT":{
+					break;
+				}
+				case "TOGGLE":{
+					break;
+				}
+				case "NUM":{
+					break;
+				}
+				case "TRIG":{
+					break;
+				}
+				case "PRINT":{
+					break;
+				}
+				case "ENDRUN":{
+					break;
+				}
+				case"NEWRUN":{
+					break;
+				}
+				case "EXIT":{
+					break;
+				}
+			}			
 		}
-
-		//go through lines, determine actions to take (switch case maybe)
 	}
 }
