@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class ChronoTimer {
 	public static int hours;
 	public static int minutes;
-	public static int seconds;
+	public static float seconds;
 
 	Queue<Racer> chan1_2;
 	Queue<Racer> chan3_4;
@@ -20,6 +20,7 @@ public class ChronoTimer {
 		File instructions;
 		Scanner instructionParser;
 		ArrayList<String> instructionLines = new ArrayList<String>();
+		Timer timer = new Timer();
 		
 		try{
 			instructions = new File("src/Sprint1_Test.txt");
@@ -33,14 +34,15 @@ public class ChronoTimer {
 		}
 		
 		for(int i = 0; i < instructionLines.size(); i++){
-			String[] timeCommand = instructionLines.get(i).split(" ");
+			String[] timeCommand = instructionLines.get(i).split("/t");
 			String[] time = timeCommand[0].split(":");
 			String[] commands = timeCommand[1].split(" ");
 			hours = Integer.parseInt(time[0]);
 			minutes = Integer.parseInt(time[1]);
-			seconds = Integer.parseInt(time[2]);
+			seconds = Float.parseFloat(time[2]);
 			switch (commands[0]){
 				case "TIME":{
+					timer.setTime(hours, minutes, seconds);
 					break;
 				}
 				case "ON":{
@@ -59,6 +61,7 @@ public class ChronoTimer {
 					break;
 				}
 				case "NUM":{
+					timer.addNum(Integer.parseInt(commands[1]));
 					break;
 				}
 				case "TRIG":{
