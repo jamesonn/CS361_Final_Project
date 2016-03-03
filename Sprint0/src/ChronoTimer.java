@@ -60,7 +60,7 @@ public class ChronoTimer {
 					break;
 				}
 				case "TOGGLE":{
-					sensors.toggle()[Integer.parseInt(commands[1]));
+					sensors[Integer.parseInt(commands[1])].toggle();
 					break;
 				}
 				case "NUM":{
