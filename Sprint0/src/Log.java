@@ -16,11 +16,16 @@ public class Log {
 		currentIndex++;		
 	}
 	
-	// Set location where printer was turned on
+	/**
+	 *  Set location where printer was turned on
+	 */
 	public void setPrintStart(){
 		printStartPoint = currentIndex;
 	}
 	
+	/**
+	 * @return returns an array of strings 
+	 */
 	public String[] getEventLog(){
 		return eventList;
 	}
