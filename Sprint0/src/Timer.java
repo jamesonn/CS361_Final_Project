@@ -18,6 +18,13 @@ public class Timer {
 	float second;
 	float systemTime;
 	boolean laneStarted = false;
+	
+	public Timer(){
+		lanes[0] = new Lane();
+		lanes[1] = new Lane();
+		lanes[2] = new Lane();
+		lanes[3] = new Lane();
+	}
 
 	/**
 	 * saves and converts passed values into float systemTime
@@ -68,6 +75,7 @@ public class Timer {
 			}
 			if(racer.laneNum == workingLane){
 				racer.startTime = systemTime;
+				lanes[workingLane].setStarted(true);
 			}
 		}		
 	}
@@ -94,6 +102,7 @@ public class Timer {
 			}
 			if(racer.laneNum == workingLane){
 				racer.stopTime = systemTime;
+				lanes[workingLane].setStarted(false);
 			}
 		}
 	}
