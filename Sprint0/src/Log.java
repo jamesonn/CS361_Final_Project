@@ -5,7 +5,8 @@ public class Log {
 	
 	public Log(){
 		eventList = new String[10];
-		currentIndex =  0;	
+		currentIndex =  0;
+		printStartPoint = -1;
 	}
 		
 	// TODO work on return value
@@ -25,10 +26,16 @@ public class Log {
 	}
 	
 	/**
-	 * @return position of the first event after the printer was turned on
+	 * @return position of the first event after the printer was turned on or 
+	 * -1 if printer was not turned on
 	 */
 	public int getPrintStart(){
 		return printStartPoint;
+	}
+	
+	
+	public void resetPrintPoint(){
+		printStartPoint = -1;
 	}
 	
 	private void resize(){		
