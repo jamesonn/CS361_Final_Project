@@ -21,6 +21,7 @@ public class ChronoTimer {
 		ArrayList<String> instructionLines = new ArrayList<String>();
 		Timer timer = new Timer();
 		boolean systemOn = true;  
+		boolean eventRunning = false;
 		Sensor[] sensors = new Sensor[8];
 		
 		try{
@@ -72,6 +73,7 @@ public class ChronoTimer {
 						//TODO: need a way to tell the system what type of event to handle 
 						String eventType = SysTime +" "+ commands[1];
 						eventLog.addEvent(eventType);
+						eventRunning = true;
 					} break;
 				}
 				case "TOGGLE":{
@@ -102,8 +104,7 @@ public class ChronoTimer {
 				}
 				case "PRINT":{
 					if (systemOn){ 
-						//for loop through all racers printing Number,
-						//start time and end time? or just total time/DNF?
+						//TODO: determine if printer is on; see "Operation of Unit" on p4
 						String[] log = eventLog.getEventLog();
 						for(int j = eventLog.getPrintStart(); j < log.length; ++j){
 							System.out.println(log[j]);
@@ -112,12 +113,16 @@ public class ChronoTimer {
 				}
 				case "ENDRUN":{
 					if (systemOn){ 
-						
+						eventRunning = false;
 					} break;
 				}
 				case"NEWRUN":{
 					if (systemOn){ 
-						
+						if(!eventRunning)
+						eventRunning = true;
+						else{
+							//TODO: report error? unclear instructions here
+						}
 					} break;
 				}
 				case "EXIT":{
