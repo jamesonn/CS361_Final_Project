@@ -95,9 +95,10 @@ public class ChronoTimer {
 					}break;
 				}
 				case "PRINT":{
-					//for loop through all racers printing Number,
-					//start time and end time? or just total time/DNF?
-					break;
+					if (systemOn){ 
+						//for loop through all racers printing Number,
+						//start time and end time? or just total time/DNF?
+					} break;
 				}
 				case "ENDRUN":{
 					if (systemOn){ 
