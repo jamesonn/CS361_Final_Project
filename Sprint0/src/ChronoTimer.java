@@ -27,7 +27,7 @@ public class ChronoTimer {
 		}
 		
 		for(int i = 0; i < instructionLines.size(); i++){
-			String[] timeCommand = instructionLines.get(i).split("/t");
+			String[] timeCommand = instructionLines.get(i).split("\t");
 			String[] time = timeCommand[0].split(":");
 			String[] commands = timeCommand[1].split(" ");
 			hours = Integer.parseInt(time[0]);
