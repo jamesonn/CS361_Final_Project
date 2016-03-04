@@ -6,7 +6,7 @@
  */
 public class Racer {
 	int racerNum;
-	int laneNum;
+	int queuePosition;
 	int numLaps;
 	double startTime;
 	double stopTime;
@@ -18,9 +18,9 @@ public class Racer {
 	 * @param bibNum
 	 * @param laneNum
 	 */
-	public Racer(int bibNum, int laneNum){
+	public Racer(int bibNum, int queuePosition){
 		racerNum = bibNum;
-		this.laneNum = laneNum;
+		this.queuePosition = queuePosition;
 	}
 
 	public int getBibNum(){ 
