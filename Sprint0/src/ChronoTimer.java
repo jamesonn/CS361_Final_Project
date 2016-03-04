@@ -89,6 +89,7 @@ public class ChronoTimer {
 					break;
 				}
 				case "EXIT":{
+					System.exit(0);
 					break;
 				}
 			}			
