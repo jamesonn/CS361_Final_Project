@@ -83,7 +83,11 @@ public class ChronoTimer {
 					if (systemOn){
 						if(sensors[Integer.parseInt(commands[1])-1].canTriggerSensor()){ //is sensor toggled on
 							if(timer.hasLaneStarted(Integer.parseInt(commands[1]))){ //did this lane start or stop
-								timer.stop(Integer.parseInt(commands[1]));
+								if(sensors[Integer.parseInt(commands[1])-1].isStartSensor){//if this is true, another racer has started in this lane before the previous finished
+									
+								}else{
+									timer.stop(Integer.parseInt(commands[1]));
+								}
 							}else{
 								timer.start(Integer.parseInt(commands[1]));
 							}
