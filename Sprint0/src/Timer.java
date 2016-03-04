@@ -2,6 +2,12 @@ import java.util.ArrayList;
 
 
 //Unfinished, working on it more tonight 3/1/2016
+
+/**
+ * Manages time, racer and lane information;
+ * 
+ * @author Group 1
+ */
 public class Timer {
 	ArrayList<Racer> Racers = new ArrayList<Racer>();
 	Lane lane;
@@ -13,6 +19,12 @@ public class Timer {
 	float systemTime;
 	boolean laneStarted = false;
 
+	/**
+	 * saves and converts passed values into float systemTime
+	 * @param hour
+	 * @param minute
+	 * @param second
+	 */
 	public void setTime(int hour, int minute, float second){
 		this.hour = hour;
 		this.minute = minute;
@@ -20,6 +32,10 @@ public class Timer {
 		systemTime = (((hour*60)+minute)*60)+second;
 	}
 	
+	/**
+	 * creates a Racer and adds it to the first available lane
+	 * @param racerNum
+	 */
 	public void addNum(int racerNum){
 		if(lanesUsed > 4){
 			lanesUsed = 0;
@@ -30,6 +46,10 @@ public class Timer {
 		lanesUsed++;
 	}
 	
+	/**
+	 * starts a lane's racer based on channel passed
+	 * @param channel
+	 */
 	public void start(int channel){
 		int workingLane = 0;
 		for(int i = 0; i < Racers.size(); i++){
@@ -52,6 +72,10 @@ public class Timer {
 		}		
 	}
 	
+	/**
+	 * stops a lane's racer based on channel passed
+	 * @param channel
+	 */
 	public void stop(int channel){
 		int workingLane = 0;
 		for(int i = 0; i < Racers.size(); i++){
@@ -74,6 +98,12 @@ public class Timer {
 		}
 	}
 	
+	/**
+	 * determines if the lane corresponding with the 
+	 * passed channel has started or not
+	 * @param channel
+	 * @return boolean
+	 */
 	public boolean hasLaneStarted(int channel){
 		if(channel == 1 || channel == 2){
 			if(lanes[0].hasStarted){
@@ -97,5 +127,8 @@ public class Timer {
 		}
 		return false;
 	}
+	/**
+	 * calculates the time for...
+	 */
 	public void calculateTime(){}
 }

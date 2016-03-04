@@ -1,4 +1,8 @@
 
+/**
+ * Determines is a lane has started
+ * @author Group 1
+ */
 public class Lane {
 	boolean hasStarted = false;
 	
