@@ -18,6 +18,7 @@ public class ChronoTimer {
 		Scanner instructionParser;
 		ArrayList<String> instructionLines = new ArrayList<String>();
 		Timer timer = new Timer();
+		boolean systemOn = true;  
 		Sensor[] sensors = new Sensor[8];
 		
 		try{
@@ -44,38 +45,54 @@ public class ChronoTimer {
 					break;
 				}
 				case "ON":{
+					systemOn = true;
 					break;
 				}
 				case "OFF":{
-					break;
+					if (systemOn){
+						systemOn = false;
+					} break;
+				}
+				case "RESET":{
+					if (systemOn){
+						timer = new Timer();
+					} break;
 				}
 				case "CONN":{
-					sensors[Integer.parseInt(commands[2])-1] = new Sensor(commands[1],Integer.parseInt(commands[2]));
-					break;
+					if (systemOn){
+						sensors[Integer.parseInt(commands[2])-1] = new Sensor(commands[1],Integer.parseInt(commands[2]));
+					} break;
 				}
 				case "EVENT":{
-					break;
+					if (systemOn){
+						
+					} break;
 				}
 				case "TOGGLE":{
-					sensors[Integer.parseInt(commands[1])-1].toggle();
-					break;
+					if (systemOn){
+						sensors[Integer.parseInt(commands[1])-1].toggle();
+					} break;
 				}
 				case "NUM":{
-					timer.addNum(Integer.parseInt(commands[1]));
-					break;
+					if (systemOn){
+						timer.addNum(Integer.parseInt(commands[1]));
+					} break;
 				}
 				case "TRIG":{
-					if(sensors[Integer.parseInt(commands[1])-1].canTriggerSensor()){ //is sensor toggled on
-						if(timer.hasLaneStarted(Integer.parseInt(commands[1]))){ //did this lane start or stop
-							timer.stop(Integer.parseInt(commands[1]));
-						}else{
-							timer.start(Integer.parseInt(commands[1]));
+					if (systemOn){
+						if(sensors[Integer.parseInt(commands[1])-1].canTriggerSensor()){ //is sensor toggled on
+							if(timer.hasLaneStarted(Integer.parseInt(commands[1]))){ //did this lane start or stop
+								timer.stop(Integer.parseInt(commands[1]));
+							}else{
+								timer.start(Integer.parseInt(commands[1]));
+							}
 						}
-					}
-					break;
+					} break;
 				}
 				case "DNF":{
-					break;
+					if (systemOn){ 
+						
+					}break;
 				}
 				case "PRINT":{
 					//for loop through all racers printing Number,
@@ -83,10 +100,14 @@ public class ChronoTimer {
 					break;
 				}
 				case "ENDRUN":{
-					break;
+					if (systemOn){ 
+						
+					} break;
 				}
 				case"NEWRUN":{
-					break;
+					if (systemOn){ 
+						
+					} break;
 				}
 				case "EXIT":{
 					System.exit(0);
