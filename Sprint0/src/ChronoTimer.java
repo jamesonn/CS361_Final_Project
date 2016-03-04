@@ -41,8 +41,9 @@ public class ChronoTimer {
 			seconds = Float.parseFloat(time[2]);
 			switch (commands[0]){
 				case "TIME":{
-					timer.setTime(hours, minutes, seconds);
-					break;
+					if (systemOn){
+						timer.setTime(hours, minutes, seconds);
+					} break;
 				}
 				case "ON":{
 					systemOn = true;
