@@ -1,3 +1,7 @@
+/**
+ * the event log used in print and export
+ * @author Group 1
+ */
 public class Log {
 	private String[] eventList;
 	private int currentIndex, printStartPoint;
@@ -10,6 +14,10 @@ public class Log {
 	}
 		
 	// TODO work on return value
+	/**
+	 * take pre-made string and add to array 
+	 * @param event
+	 */
 	public void addEvent(String event){
 		resize();
 		eventList[currentIndex] = event;

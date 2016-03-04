@@ -12,6 +12,8 @@ public class ChronoTimer {
 	public static int hours;
 	public static int minutes;
 	public static float seconds;
+	private static String SysTime;
+	private static Log eventLog = new Log();
 	
 	public static void main(String args[]){
 		File instructions;
@@ -43,6 +45,7 @@ public class ChronoTimer {
 				case "TIME":{
 					if (systemOn){
 						timer.setTime(hours, minutes, seconds);
+						SysTime = ""+hours+":"+minutes+":"+seconds+" ";
 					} break;
 				}
 				case "ON":{
@@ -66,7 +69,9 @@ public class ChronoTimer {
 				}
 				case "EVENT":{
 					if (systemOn){
-						
+						//TODO: need a way to tell the system what type of event to handle 
+						String eventType = SysTime +" "+ commands[1];
+						eventLog.addEvent(eventType);
 					} break;
 				}
 				case "TOGGLE":{
@@ -83,11 +88,7 @@ public class ChronoTimer {
 					if (systemOn){
 						if(sensors[Integer.parseInt(commands[1])-1].canTriggerSensor()){ //is sensor toggled on
 							if(timer.hasLaneStarted(Integer.parseInt(commands[1]))){ //did this lane start or stop
-								if(sensors[Integer.parseInt(commands[1])-1].isStartSensor){//if this is true, another racer has started in this lane before the previous finished
-									
-								}else{
-									timer.stop(Integer.parseInt(commands[1]));
-								}
+								timer.stop(Integer.parseInt(commands[1]));
 							}else{
 								timer.start(Integer.parseInt(commands[1]));
 							}
@@ -103,6 +104,10 @@ public class ChronoTimer {
 					if (systemOn){ 
 						//for loop through all racers printing Number,
 						//start time and end time? or just total time/DNF?
+						String[] log = eventLog.getEventLog();
+						for(int j = eventLog.getPrintStart(); j < log.length; ++j){
+							System.out.println(log[j]);
+						}
 					} break;
 				}
 				case "ENDRUN":{
