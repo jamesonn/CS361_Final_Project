@@ -3,6 +3,11 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+
+/**
+ * contains main method; handles parsing of input 
+ * @author Group 1
+ */
 public class ChronoTimer {
 	public static int hours;
 	public static int minutes;
@@ -73,6 +78,8 @@ public class ChronoTimer {
 					break;
 				}
 				case "PRINT":{
+					//for loop through all racers printing Number,
+					//start time and end time? or just total time/DNF?
 					break;
 				}
 				case "ENDRUN":{
