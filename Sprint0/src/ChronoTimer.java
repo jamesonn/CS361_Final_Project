@@ -21,7 +21,7 @@ public class ChronoTimer {
 		ArrayList<String> instructionLines = new ArrayList<String>();
 		Timer timer = new Timer();
 		boolean systemOn = true;  
-		boolean eventRunning = false; //TODO: instructions treat this as a class, perhaps solution to tracking what type of event is happening?
+		boolean eventRunning = false; //instructions treat this as a class, perhaps solution to tracking what type of event is happening?
 		Sensor[] sensors = new Sensor[8];
 		
 		try{
@@ -76,7 +76,7 @@ public class ChronoTimer {
 				}
 				case "EVENT":{
 					if (systemOn){
-						//TODO: need a way to tell the system what type of event to handle 
+						//Sprint 2; need a way to tell the system what type of event to handle 
 						String eventType = SysTime +" "+ commands[1];
 						eventLog.addEvent(eventType);
 						eventRunning = true;
@@ -84,7 +84,9 @@ public class ChronoTimer {
 				}
 				case "TOGGLE":{
 					if (systemOn){
-						sensors[Integer.parseInt(commands[1])-1].toggle();
+						if(sensors[Integer.parseInt(commands[1])-1] != null){
+							sensors[Integer.parseInt(commands[1])-1].toggle();
+						}
 					} break;
 				}
 				case "NUM":{
@@ -94,7 +96,8 @@ public class ChronoTimer {
 				}
 				case "TRIG":{
 					if (systemOn){
-						if(sensors[Integer.parseInt(commands[1])-1].canTriggerSensor()){ //is sensor toggled on
+						if(sensors[Integer.parseInt(commands[1])-1] != null &&
+								sensors[Integer.parseInt(commands[1])-1].canTriggerSensor()){ //is sensor toggled on
 							if(timer.hasLaneStarted(Integer.parseInt(commands[1]))){ //did this lane start or stop
 								timer.stop(Integer.parseInt(commands[1]));
 							}else{
@@ -103,9 +106,28 @@ public class ChronoTimer {
 						}
 					} break;
 				}
+				case "START":{
+					if (systemOn){ 
+						//Sprint 2; "shorthand for TRIG 1"
+					}break;
+				}case "FINISH":{
+					if (systemOn){ 
+						//Sprint 2; "shorthand for TRIG 2"
+					}break;
+				}
 				case "DNF":{
 					if (systemOn){ 
-						
+						//TODO: Sprint 1; "next competitor to finish will not finish"
+					}break;
+				}
+				case "CLR":{
+					if (systemOn){ 
+						//TODO: Sprint 2; "clear NUM as the next competitor" a.k.a. remove them from queue
+					}break;
+				}
+				case "SWAP":{
+					if (systemOn){ 
+						//Sprint 2; "exchange next to competitors to finish in IND"
 					}break;
 				}
 				case "PRINT":{
@@ -117,12 +139,17 @@ public class ChronoTimer {
 						}
 					} break;
 				}
+				case "EXPORT":{
+					if (systemOn){ 
+						//Sprint 2; "export run in XML to file RUN<RUN>"
+					}break;
+				}
 				case "ENDRUN":{
 					if (systemOn){ 
 						eventRunning = false;
 					} break;
 				}
-				case"NEWRUN":{
+				case "NEWRUN":{
 					if (systemOn){ 
 						if(!eventRunning)
 						eventRunning = true;
