@@ -113,10 +113,22 @@ public class ChronoTimer {
 				case "START":{
 					if (systemOn){ 
 						//Sprint 2; "shorthand for TRIG 1"
+						if(sensors[Integer.parseInt(commands[1])-1] != null){
+							if(Integer.parseInt(commands[1])-1 == 1 || Integer.parseInt(commands[1])-1 == 3 || Integer.parseInt(commands[1])-1 == 5 || Integer.parseInt(commands[1])-1 == 7){
+								timer.setTime(hours, minutes, seconds);
+								timer.start(Integer.parseInt(commands[1]));
+ 							}
+						}
 					}break;
 				}case "FINISH":{
 					if (systemOn){ 
 						//Sprint 2; "shorthand for TRIG 2"
+						if(sensors[Integer.parseInt(commands[1])-1] != null){
+							if(Integer.parseInt(commands[1])-1 == 2 || Integer.parseInt(commands[1])-1 == 4 || Integer.parseInt(commands[1])-1 == 6 || Integer.parseInt(commands[1])-1 == 8){
+								timer.setTime(hours, minutes, seconds);
+								eventLog.addEvent(timer.stop(Integer.parseInt(commands[1])));
+ 							}
+						}
 					}break;
 				}
 				case "DNF":{
