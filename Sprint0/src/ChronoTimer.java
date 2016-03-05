@@ -97,11 +97,12 @@ public class ChronoTimer {
 				case "TRIG":{
 					if (systemOn){
 						if(sensors[Integer.parseInt(commands[1])-1] != null &&
-								sensors[Integer.parseInt(commands[1])-1].canTriggerSensor()){ //is sensor toggled on
-							if(timer.hasLaneStarted(Integer.parseInt(commands[1]))){ //did this lane start or stop
-								timer.stop(Integer.parseInt(commands[1]));
-							}else{
+								sensors[Integer.parseInt(commands[1])-1].canTriggerSensor()){
+							if(Integer.parseInt(commands[1])-1 == 1 || Integer.parseInt(commands[1])-1 == 3 || Integer.parseInt(commands[1])-1 == 5 || Integer.parseInt(commands[1])-1 == 7){
 								timer.start(Integer.parseInt(commands[1]));
+							}
+							if(Integer.parseInt(commands[1])-1 == 1 || Integer.parseInt(commands[1])-1 == 3 || Integer.parseInt(commands[1])-1 == 5 || Integer.parseInt(commands[1])-1 == 7){
+								timer.stop(Integer.parseInt(commands[1]));
 							}
 						}
 					} break;
