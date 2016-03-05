@@ -18,6 +18,8 @@ public class Timer {
 	float second;
 	float systemTime;
 	boolean laneStarted = false;
+	//int racersQueued;
+	
 	
 	public Timer(){
 		lanes[0] = new Lane();
@@ -44,13 +46,16 @@ public class Timer {
 	 * @param racerNum
 	 */
 	public void addNum(int racerNum){
+		//this is startement will go
 		if(lanesUsed > 4){
 			lanesUsed = 0;
 			Racers.add(new Racer(racerNum,lanesUsed)); //LanesUsed is just the laneNum
 		}else{
 			Racers.add(new Racer(racerNum,lanesUsed));
 		}
+		//so will this
 		lanesUsed++;
+		//new racer is created, and is marked as to the order in which is was added
 	}
 	
 	/**
@@ -61,6 +66,7 @@ public class Timer {
 		int workingLane = 0;
 		for(int i = 0; i < Racers.size(); i++){
 			Racer racer = Racers.get(i);
+			//will no longer have to check whether the channel is a start or finish since the check is done in the switch case
 			if(channel == 1 || channel == 2){
 				workingLane = 0;
 			}
@@ -73,6 +79,7 @@ public class Timer {
 			if(channel == 7 || channel == 28){
 				workingLane = 3;
 			}
+			//depending on which sensor was hit, we will place the next queued racer into the lane to which the sensor belongs
 			if(racer.laneNum == workingLane){
 				System.out.println("systime at start "+second);
 				racer.startTime = systemTime;
