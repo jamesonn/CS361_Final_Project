@@ -7,10 +7,10 @@
 public class Racer {
 	int racerNum;
 	int laneNum;
-	int numLaps;
-	double startTime;
-	double stopTime;
-	private double[] lapTimes = new double[numLaps];
+	int numLaps = 1;
+	float startTime;
+	float stopTime;
+	private float[] lapTimes = new float[numLaps];
 	private int lapNum = 0;
 	double totalTime;
 	
@@ -29,18 +29,18 @@ public class Racer {
 	public double getStartTime(){ 
 		return startTime; }
 	
-	public void setStartTime(double st){ 
+	public void setStartTime(float st){ 
 		startTime = st; }
 	
-	public double gettotalTime(){
+	public double getTotalTime(){
 		calcTotalTime();
 		return totalTime;
 	}
 	public void setNumLaps(int ls){ 
 		numLaps = ls; 
-		lapTimes = new double[numLaps];
+		lapTimes = new float[numLaps];
 	}
-	public void setLapTime(double t){
+	public void setLapTime(float t){
 		lapTimes[lapNum] = t;
 	}
 	/**
@@ -48,7 +48,12 @@ public class Racer {
 	 * it from the start time to get the total time.  
 	 */
 	private void calcTotalTime(){
-		double lastTime = lapTimes[lapTimes.length-1];
+		if(numLaps == 1){
+			lapTimes[lapTimes.length-1] = stopTime;
+		}
+		System.out.println("racer end time "+lapTimes[lapTimes.length-1]);
+		System.out.println("racer start time "+startTime);
+		float lastTime = lapTimes[lapTimes.length-1];
 		totalTime = lastTime-startTime;
 	}
 	/**

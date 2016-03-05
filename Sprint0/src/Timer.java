@@ -74,6 +74,7 @@ public class Timer {
 				workingLane = 3;
 			}
 			if(racer.laneNum == workingLane){
+				System.out.println("systime at start"+systemTime);
 				racer.startTime = systemTime;
 				lanes[workingLane].setStarted(true);
 			}
@@ -84,7 +85,7 @@ public class Timer {
 	 * stops a lane's racer based on channel passed
 	 * @param channel
 	 */
-	public void stop(int channel){
+	public String stop(int channel){
 		int workingLane = 0;
 		for(int i = 0; i < Racers.size(); i++){
 			Racer racer = Racers.get(i);
@@ -103,8 +104,10 @@ public class Timer {
 			if(racer.laneNum == workingLane){
 				racer.stopTime = systemTime;
 				lanes[workingLane].setStarted(false);
+				return ""+racer.racerNum+" "+racer.getTotalTime();
 			}
 		}
+		return "0.0\n";
 	}
 	
 	/**

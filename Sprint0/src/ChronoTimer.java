@@ -42,11 +42,11 @@ public class ChronoTimer {
 			hours = Integer.parseInt(time[0]);
 			minutes = Integer.parseInt(time[1]);
 			seconds = Float.parseFloat(time[2]);
+			SysTime = ""+hours+":"+minutes+":"+seconds+" ";
 			switch (commands[0]){
 				case "TIME":{
 					if (systemOn){
 						timer.setTime(hours, minutes, seconds);
-						SysTime = ""+hours+":"+minutes+":"+seconds+" ";
 					} break;
 				}
 				case "ON":{
@@ -80,6 +80,7 @@ public class ChronoTimer {
 						String eventType = SysTime +" "+ commands[1];
 						eventLog.addEvent(eventType);
 						eventRunning = true;
+						eventLog.setPrintStart();
 					} break;
 				}
 				case "TOGGLE":{
@@ -99,7 +100,7 @@ public class ChronoTimer {
 						if(sensors[Integer.parseInt(commands[1])-1] != null &&
 								sensors[Integer.parseInt(commands[1])-1].canTriggerSensor()){ //is sensor toggled on
 							if(timer.hasLaneStarted(Integer.parseInt(commands[1]))){ //did this lane start or stop
-								timer.stop(Integer.parseInt(commands[1]));
+								eventLog.addEvent(timer.stop(Integer.parseInt(commands[1])));
 							}else{
 								timer.start(Integer.parseInt(commands[1]));
 							}
@@ -134,6 +135,7 @@ public class ChronoTimer {
 					if (systemOn){ 
 						//TODO: determine if printer is on; see "Operation of Unit" on p4
 						String[] log = eventLog.getEventLog();
+						System.out.println(log[0]);
 						for(int j = eventLog.getPrintStart(); j < log.length; ++j){
 							System.out.println(log[j]);
 						}
