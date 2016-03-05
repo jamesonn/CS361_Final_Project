@@ -99,9 +99,11 @@ public class ChronoTimer {
 					if (systemOn){
 						if(sensors[Integer.parseInt(commands[1])-1] != null){
 								if(Integer.parseInt(commands[1])-1 == 1 || Integer.parseInt(commands[1])-1 == 3 || Integer.parseInt(commands[1])-1 == 5 || Integer.parseInt(commands[1])-1 == 7){
-	 								timer.start(Integer.parseInt(commands[1]));
+									timer.setTime(hours, minutes, seconds);
+									timer.start(Integer.parseInt(commands[1]));
 	 							}
 								if(Integer.parseInt(commands[1])-1 == 2 || Integer.parseInt(commands[1])-1 == 4 || Integer.parseInt(commands[1])-1 == 6 || Integer.parseInt(commands[1])-1 == 8){
+									timer.setTime(hours, minutes, seconds);
 									eventLog.addEvent(timer.stop(Integer.parseInt(commands[1])));
 	 							}
 							

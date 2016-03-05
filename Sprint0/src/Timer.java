@@ -36,7 +36,7 @@ public class Timer {
 		this.hour = hour;
 		this.minute = minute;
 		this.second = second;
-		systemTime = (((hour*60)+minute)*60)+second;
+		systemTime = (hour*60)+(minute*60)+second;
 	}
 	
 	/**
@@ -74,7 +74,7 @@ public class Timer {
 				workingLane = 3;
 			}
 			if(racer.laneNum == workingLane){
-				System.out.println("systime at start"+systemTime);
+				System.out.println("systime at start "+second);
 				racer.startTime = systemTime;
 				lanes[workingLane].setStarted(true);
 			}
