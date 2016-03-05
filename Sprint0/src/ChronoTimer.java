@@ -21,7 +21,7 @@ public class ChronoTimer {
 		ArrayList<String> instructionLines = new ArrayList<String>();
 		Timer timer = new Timer();
 		boolean systemOn = true;  
-		boolean eventRunning = false;
+		boolean eventRunning = false; //TODO: instructions treat this as a class, perhaps solution to tracking what type of event is happening?
 		Sensor[] sensors = new Sensor[8];
 		
 		try{
@@ -66,6 +66,12 @@ public class ChronoTimer {
 				case "CONN":{
 					if (systemOn){
 						sensors[Integer.parseInt(commands[2])-1] = new Sensor(commands[1],Integer.parseInt(commands[2]));
+					} break;
+				}
+				case "DISC":{
+					if (systemOn){
+						int deviceNum = Integer.parseInt(commands[1]);
+						sensors[deviceNum] = null;
 					} break;
 				}
 				case "EVENT":{
