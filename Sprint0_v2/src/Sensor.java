@@ -30,22 +30,14 @@ public class Sensor {
 	 * @return boolean
 	 */
 	public boolean canTriggerSensor(){
-		if(isToggledOn){
-			return true;
-		}else{
-			return false;
-		}
+		return isToggledOn;		
 	}
 	
 	/**
 	 * toggles the boolean isToggledOn
 	 */
 	public void toggle(){
-		if(isToggledOn){
-			isToggledOn = false;
-		}else{
-			isToggledOn = true;
-		}
+			isToggledOn = !isToggledOn;		
 	}
 	
 	public boolean isStartSensor(){
