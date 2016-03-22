@@ -9,10 +9,10 @@ import java.util.Queue;
 public class Event {
 	//TODO
 	//lanes = array of queues?
-	Lane[] lanes;
-	ArrayList<String> log = new ArrayList<String>();
-	float totalTime = 0;
-	String curTime = "";
+	private Lane[] lanes;
+	private ArrayList<String> log = new ArrayList<String>();
+	private float totalTime = 0;
+	private String curTime = "";
 	
 	/**
 	 * create an Event object setting the current time to t

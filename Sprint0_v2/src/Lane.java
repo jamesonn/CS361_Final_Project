@@ -7,17 +7,19 @@ import java.util.Queue;
  */
 public class Lane {
 	private Queue<Racer> peps = new LinkedList<Racer>();
-	Racer curRacer = null; 
+	private Racer curRacer = null; 
 	
 	
 	
 	
 	
 	public void start(float t){
-		
+		curRacer = peps.remove();
+		curRacer.start(t);
 	}
 	
 	public Racer stop(float t){
+		curRacer.stop(t);
 		return curRacer;
 	}
 	
