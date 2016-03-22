@@ -11,6 +11,7 @@ public class ChronoTimer {
 	public static int hours;
 	public static int minutes;
 	public static float seconds;
+	private static float TotalTime;
 	private static String SysTime;
 	
 	/**
@@ -22,7 +23,7 @@ public class ChronoTimer {
 		Scanner instructionParser;
 		ArrayList<String> instructionLines = new ArrayList<String>();
 		//Timer timer = new Timer();
-		Event event = new Event();
+		Event event = new Event(SysTime);
 		boolean systemOn = true;  
 		boolean eventRunning = false; //instructions treat this as a class, perhaps solution to tracking what type of event is happening?
 		Sensor[] sensors = new Sensor[8];
@@ -49,6 +50,7 @@ public class ChronoTimer {
 			hours = Integer.parseInt(time[0]);
 			minutes = Integer.parseInt(time[1]);
 			seconds = Float.parseFloat(time[2]);
+			TotalTime = seconds + minutes*60 + hours*120;
 			SysTime = ""+hours+":"+minutes+":"+seconds+" ";
 			switch (commands[0]){
 				case "TIME":{
@@ -68,7 +70,7 @@ public class ChronoTimer {
 				}
 				case "RESET":{
 					if (systemOn){
-						event = new Event();
+						event = new Event(SysTime);
 					} break;
 				}
 				case "CONN":{
@@ -85,7 +87,8 @@ public class ChronoTimer {
 				case "EVENT":{
 					if (systemOn){
 						//Sprint 2; need a way to tell the system what type of event to handle 
-						String eventType = SysTime +" "+ commands[1];
+						String eventType = commands[1];
+//						event = new switch case
 //						eventLog.addEvent(eventType);
 //						eventRunning = true;
 //						eventLog.setPrintStart();
