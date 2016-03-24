@@ -5,10 +5,10 @@
  */
 public class Sensor {
 	
-	String deviceType;
-	int sensorNum;
-	boolean isToggledOn;
-	boolean isStartSensor;
+	private String deviceType;
+	private int sensorNum;
+	private boolean isToggledOn;
+	private boolean isStartSensor;
 	
 	/**
 	 * 
@@ -42,5 +42,13 @@ public class Sensor {
 	
 	public boolean isStartSensor(){
 		return isStartSensor;
+	}
+	
+	public String getDeviceType(){
+		return this.deviceType;
+	}
+	
+	public int getSensorNumber(){
+		return this.sensorNum;
 	}
 }

@@ -9,10 +9,6 @@ public class Lane {
 	private Queue<Racer> peps = new LinkedList<Racer>();
 	private Racer curRacer = null; 
 	
-	
-	
-	
-	
 	public void start(float t){
 		curRacer = peps.remove();
 		curRacer.start(t);

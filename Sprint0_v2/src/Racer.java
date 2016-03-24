@@ -1,7 +1,7 @@
 
 /**
  * constructor requires racerNum and laneNum; 
- * knows start time, laps, and total time
+ * knows start time, stop time, and total time
  * @author Group 1
  */
 public class Racer {
