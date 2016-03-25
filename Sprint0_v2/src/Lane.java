@@ -9,7 +9,7 @@ import java.util.Queue;
 public class Lane {
 	private Queue<Racer> ready = new LinkedList<Racer>();
 	private LinkedList<Racer> active = new LinkedList<Racer>();
-	Racer curRacer;
+	private Racer curRacer;
 	
 	public void start(double t){
 		curRacer = ready.remove();
@@ -34,7 +34,7 @@ public class Lane {
 	
 	public String didNotFinish(){
 		curRacer = active.removeFirst();
-		return curRacer.getBibNum() + "DNF";
+		return curRacer.getBibNum() + " DNF";
 	}
 	
 	public boolean isReadyEmpty(){
