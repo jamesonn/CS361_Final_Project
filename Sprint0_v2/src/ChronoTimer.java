@@ -10,8 +10,8 @@ import java.util.Scanner;
 public class ChronoTimer {
 	public static int hours;
 	public static int minutes;
-	public static float seconds;
-	private static float TotalTime;
+	public static double seconds;
+	private static double TotalTime;
 	private static String SysTime;
 	
 	/**
@@ -49,7 +49,7 @@ public class ChronoTimer {
 			String[] commands = timeCommand[1].split(" ");
 			hours = Integer.parseInt(time[0]);
 			minutes = Integer.parseInt(time[1]);
-			seconds = Float.parseFloat(time[2]);
+			seconds = Double.parseDouble(time[2]);
 			TotalTime = seconds + minutes*60 + hours*120;
 			SysTime = ""+hours+":"+minutes+":"+seconds+" ";
 			switch (commands[0]){

@@ -54,11 +54,11 @@ public class Event {
 	}
 	
 	public void trigger(int lane, float t){
-		if(lane == 1 && !lanes[0].isEmpty()){
+		if(lane == 1 && !lanes[0].isReadyEmpty()){
 			lanes[0].start(t);
 			//runner already start case
 		}
-		if(lane == 2 && !lanes[0].isEmpty()){
+		if(lane == 2 && !lanes[0].isActiveEmpty()){
 			Racer r = lanes[0].stop(t);
 			String racerInfo = "blah";
 			log.add(racerInfo);
