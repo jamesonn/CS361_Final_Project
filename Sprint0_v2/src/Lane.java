@@ -29,7 +29,9 @@ public class Lane {
 	}
 	
 	public void swap(){
-		Collections.swap(active, 0, 1);
+		if (active.size() > 1 ) {
+			Collections.swap(active, 0, 1);
+		}
 	}
 	
 	public String didNotFinish(){
