@@ -39,5 +39,9 @@ public class Racer {
 	
 	public double getTotalTime(){
 		return stopTime-startTime;	}
+	
+	public String print(){
+		return ""+ racerNum +" "+ getTotalTime();
+	}
 
 }

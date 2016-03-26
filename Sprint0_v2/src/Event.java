@@ -26,12 +26,12 @@ public class Event {
 	/**
 	 * Update the total and currentSystem time from a float
 	 * @param t
-	 */
+	 *///TODO
 	private void updateTime(float t){
 		totalTime = t;
-		//TODO convert
-		String min, hr, sec = "";
-		
+		String time = "";
+//		float m, h, s, temp = 0;
+//		t/60
 	}
 	
 	/**
@@ -40,28 +40,36 @@ public class Event {
 	 */
 	private void updateTime(String t){
 		curTime = t;
-		//TODO convert
 		String[] time = t.split(":");
 		float tempTime = Float.parseFloat(time[2]);//add seconds
 		tempTime += Float.parseFloat(time[1])*60 + Float.parseFloat(time[0])*120;
 		totalTime = tempTime;
 	}
 	
+	/**
+	 * takes the current time and the Racer NUM, makes and adds a new Racer to the IND lane 
+	 * @param bib
+	 * @param newT
+	 */
 	public void addRacer(int bib, float newT){
 		updateTime(newT);
 		Racer r = new Racer(bib, 1);
 		lanes[0].addRacer(r);
 	}
 	
-	public void trigger(int lane, float t){
-		if(lane == 1 && !lanes[0].isReadyEmpty()){
+	/**
+	 * Takes the current time and the number triggered;  
+	 * starts or stops based on number triggered;  if a stop adds finished Racer to log
+	 * @param lane
+	 * @param t
+	 */
+	public void trigger(int chan, float t){
+		if(chan == 1 && !lanes[0].isReadyEmpty()){
 			lanes[0].start(t);
 			//runner already start case
 		}
-		if(lane == 2 && !lanes[0].isActiveEmpty()){
-			Racer r = lanes[0].stop(t);
-			String racerInfo = "blah";
-			log.add(racerInfo);
+		if(chan == 2 && !lanes[0].isActiveEmpty()){
+			log.add(lanes[0].stop(t));
 			
 		}
 	}
