@@ -1,57 +1,62 @@
 import java.util.ArrayList;
 
 /**
- * Manages time, racer and lane information;
- * default is IND type event
+ * Handles two active lanes at once;
  * @author Group 1
  */
-public class Event {
+public class PARINT extends Event{
 	private Lane[] lanes;
 	private ArrayList<String> log = new ArrayList<String>();
 	private double totalTime = 0;
 	private String curTime = "";
 	
 	/**
-	 * create an Event object setting the current time to t
+	 * Handles two active lanes at once;
 	 * @param t
 	 */
-	public Event(String t){
+	public PARINT(String t) {
+		super(t);
 		lanes = new Lane[1];
 		updateTime(t);
-		log.add(curTime+ " IND");
+		log.add(curTime+ " PARIND");
 	}
 	
-	/**
-	 * takes the current time and the Racer NUM, makes and adds a new Racer to the IND lane 
-	 * @param bib
-	 * @param newT
-	 */
+	@Override
 	public void addRacer(int bib, double t){
 		updateTime(t);
 		Racer r = new Racer(bib, 1);
-		lanes[0].addRacer(r);
+		if(lanes[0].getNumRacers() <= lanes[1].getNumRacers())
+			lanes[0].addRacer(r);
+		else
+			lanes[1].addRacer(r);
+		//TODO: verify order of adding racers to lanes
 	}
 	
-	/**
-	 * Takes the current time and the number triggered;  
-	 * starts or stops based on number triggered;  if a stop adds finished Racer to log
-	 * @param lane
-	 * @param t
-	 */
+	@Override
 	public void trigger(int chan, double t){
 		updateTime(t);
-		if(chan == 1 && !lanes[0].isReadyEmpty()){
-			lanes[0].start(t);
-			//runner already start case
+		switch(chan){
+			case 1:{
+				if(!lanes[0].isReadyEmpty()){
+					lanes[0].start(t);
+				}
+			}
+			case 2:{
+				if(!lanes[0].isActiveEmpty()){
+					log.add(lanes[0].stop(t));
+				}
+			}
+			case 3:{
+				if(!lanes[1].isReadyEmpty()){
+					lanes[1].start(t);
+				}
+			}
+			case 4:{
+				if(!lanes[1].isActiveEmpty()){
+					log.add(lanes[1].stop(t));
+				}
+			}
 		}
-		if(chan == 2 && !lanes[0].isActiveEmpty()){
-			log.add(lanes[0].stop(t));
-			
-		}
-	}
-	
-	public ArrayList<String> print(){
-		return log;
 	}
 	
 	/**
@@ -102,11 +107,4 @@ public class Event {
 		return high;
 	}
 	
-	public String getCurTime(){
-		return curTime;
-	}
-	
-	public double getTotalTime(){
-		return totalTime;
-	}
 }

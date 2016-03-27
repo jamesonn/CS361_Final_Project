@@ -102,5 +102,14 @@ public class Testing {
 		assertTrue(lane.isActiveEmpty());
 	}
 	
+	@Test
+	public void testUpdateTime(){
+		Event e = new Event("11:14:30");
+		assertEquals(e.getCurTime(), "11:14:30");
+		assertEquals(e.getTotalTime(), 40470);
+		e.trigger(0, 40502);
+		assertEquals(e.getCurTime(), "11:15:02");
+		assertEquals(e.getTotalTime(), 40502);
+	}
 	
 }
