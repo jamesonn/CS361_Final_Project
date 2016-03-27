@@ -50,7 +50,7 @@ public class ChronoTimer {
 			hours = Integer.parseInt(time[0]);
 			minutes = Integer.parseInt(time[1]);
 			seconds = Double.parseDouble(time[2]);
-			TotalTime = seconds + minutes*60 + hours*120;
+			TotalTime = seconds + minutes*60 + hours*3600;
 			SysTime = ""+hours+":"+minutes+":"+seconds+" ";
 			switch (commands[0]){
 				case "TIME":{

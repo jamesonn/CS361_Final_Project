@@ -8,7 +8,7 @@ public class Testing {
 	Lane lane;
 	
 	/**
-	 * test racer constructor and getters
+	 * test racer constructor and getters, start() and stop()
 	 */
 	@Test
 	public void testNewRacer(){
@@ -18,60 +18,32 @@ public class Testing {
 		assertEquals(racer.getStartTime(), 0.0, 0.0);
 		assertEquals(racer.getEndTime(), 0.0, 0.0);
 		assertEquals(racer.getTotalTime(),0.0,0.0);
-	}
-	
-	/**
-	 * test racer setters and getters
-	 */
-	@Test
-	public void testRacerStartFinish(){
-		racer = new Racer(002, 1);
 		racer.start(50.0);
 		racer.stop(300.00);
-		assertEquals(racer.getBibNum(), 002);
-		assertEquals(racer.getLaneNum(), 1);
 		assertEquals(racer.getStartTime(), 50.0, 0.0);
 		assertEquals(racer.getEndTime(), 300.0, 0.0);
 		assertEquals(racer.getTotalTime(), 250.0, 0.0);
 	}
 	
 	/**
-	 * test start sensor constructor and getters
+	 * test start sensor constructor and getters and toggle()
 	 */
 	
 	@Test
-	public void testNewStartSensor(){
+	public void testSensor(){
 		sensor = new Sensor("EYE", 1);
 		assertEquals(sensor.getDeviceType(), "EYE");
 		assertEquals(sensor.getSensorNumber(), 1);
 		assertTrue(sensor.isStartSensor());
 		assertFalse(sensor.canTriggerSensor());
-	}
-	
-	/**
-	 * test stop sensor constructor and getters
-	 */
-	@Test
-	public void testNewStopSensor(){
 		sensor = new Sensor("GATE", 2);
 		assertEquals(sensor.getDeviceType(), "GATE");
 		assertEquals(sensor.getSensorNumber(), 2);
 		assertFalse(sensor.isStartSensor());
 		assertFalse(sensor.canTriggerSensor());
-	}
-	
-	/**
-	 * test sensor toggle()
-	 */
-	@Test
-	public void testToggleSensor(){
-		sensor = new Sensor("PAD", 3);
-		assertEquals(sensor.getDeviceType(), "PAD");
-		assertEquals(sensor.getSensorNumber(), 3);
-		assertTrue(sensor.isStartSensor());
-		assertFalse(sensor.canTriggerSensor());
 		sensor.toggle();
 		assertTrue(sensor.canTriggerSensor());
+		
 	}
 	
 	@Test
@@ -87,29 +59,33 @@ public class Testing {
 		lane.addRacer(racer3);
 		assertFalse(lane.isReadyEmpty());
 		assertTrue(lane.isActiveEmpty());
-		lane.start(100.00);	//racer start
-		lane.start(200.00);	//racer2 start
-		lane.start(300.00);	//racer3 start
+		lane.start(100.0);	//racer start
+		lane.start(200.0);	//racer2 start
+		lane.start(300.0);	//racer3 start
 		assertTrue(lane.isReadyEmpty());
 		assertFalse(lane.isActiveEmpty());
-		lane.stop(400.00);	//racer stop
-		assertEquals(racer.getTotalTime(), 300.00, 0.0);
+		lane.stop(400.0);	//racer stop
+		assertEquals(racer.getTotalTime(), 300.0, 0.0);
 		lane.swap(); //swap racer2 and racer3
-		lane.stop(500.00); //racer3 stop
-		assertEquals(racer3.getTotalTime(), 200.00, 0.0);
-		lane.stop(600.00);	//racer2 stop
-		assertEquals(racer2.getTotalTime(), 400.00, 0.0);
+		lane.stop(500.0); //racer3 stop
+		assertEquals(racer3.getTotalTime(), 200.0, 0.0);
+		lane.stop(600.0);	//racer2 stop
+		assertEquals(racer2.getTotalTime(), 400.0, 0.0);
 		assertTrue(lane.isActiveEmpty());
 	}
 	
 	@Test
 	public void testUpdateTime(){
-		Event e = new Event("11:14:30");
-		assertEquals(e.getCurTime(), "11:14:30");
-		assertEquals(e.getTotalTime(), 40470);
+		Event e = new Event("11:14:30.0");
+		assertEquals(e.getCurTime(), "11:14:30.0");
+		assertEquals(e.getTotalTime(), 40470, 0.0);
 		e.trigger(0, 40502);
-		assertEquals(e.getCurTime(), "11:15:02");
-		assertEquals(e.getTotalTime(), 40502);
+		assertEquals(e.getCurTime(), "11:15:2.0");
+		assertEquals(e.getTotalTime(), 40502, 0.0);
+		e.trigger(0, 43199.9);
+		assertEquals(e.getCurTime(), "11:59:59.9");
+		assertEquals(e.getTotalTime(), 43199.9, 0.0);
+		
 	}
 	
 }
