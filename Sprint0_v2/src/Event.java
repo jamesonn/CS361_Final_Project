@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Manages time, racer and lane information;
@@ -48,6 +49,21 @@ public class Event {
 			log.add(lanes[0].stop(t));
 			
 		}
+	}
+	
+	/**
+	 * Swap the next two Racers to finish, those in position 0 and 1
+	 */
+	public void swap(){
+		lanes[0].swap();
+	}
+	
+	/**
+	 * use if a Racer DNFs;  returns the log string for the DNF 
+	 * Racer instead of calling the Racers print
+	 */
+	public void didNotFinish(){
+		lanes[0].didNotFinish();
 	}
 	
 	public ArrayList<String> print(){

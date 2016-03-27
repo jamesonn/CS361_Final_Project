@@ -4,7 +4,7 @@ import java.util.ArrayList;
  * Handles two active lanes at once;
  * @author Group 1
  */
-public class PARINT extends Event{
+public class PARIND extends Event{
 	private Lane[] lanes;
 	private ArrayList<String> log = new ArrayList<String>();
 	private double totalTime = 0;
@@ -14,7 +14,7 @@ public class PARINT extends Event{
 	 * Handles two active lanes at once;
 	 * @param t
 	 */
-	public PARINT(String t) {
+	public PARIND(String t) {
 		super(t);
 		lanes = new Lane[1];
 		updateTime(t);
@@ -39,22 +39,22 @@ public class PARINT extends Event{
 			case 1:{
 				if(!lanes[0].isReadyEmpty()){
 					lanes[0].start(t);
-				}
+				}break;
 			}
 			case 2:{
 				if(!lanes[0].isActiveEmpty()){
 					log.add(lanes[0].stop(t));
-				}
+				}break;
 			}
 			case 3:{
 				if(!lanes[1].isReadyEmpty()){
 					lanes[1].start(t);
-				}
+				}break;
 			}
 			case 4:{
 				if(!lanes[1].isActiveEmpty()){
 					log.add(lanes[1].stop(t));
-				}
+				}break;
 			}
 		}
 	}

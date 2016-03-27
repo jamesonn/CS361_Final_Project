@@ -13,9 +13,10 @@ public class ChronoTimer {
 	public static double seconds;
 	private static double TotalTime;
 	private static String SysTime;
+	protected static Event event;
 	
 	/**
-	 * 
+	 * handles parsing and switch case
 	 * @param args
 	 */
 	public static void main(String args[]){
@@ -23,7 +24,6 @@ public class ChronoTimer {
 		Scanner instructionParser;
 		ArrayList<String> instructionLines = new ArrayList<String>();
 		//Timer timer = new Timer();
-		Event event = new Event(SysTime);
 		boolean systemOn = true;  
 		boolean eventRunning = false; //instructions treat this as a class, perhaps solution to tracking what type of event is happening?
 		Sensor[] sensors = new Sensor[8];
@@ -55,8 +55,7 @@ public class ChronoTimer {
 			switch (commands[0]){
 				case "TIME":{
 					if (systemOn){
-						//TODO
-						//timer.setTime(hours, minutes, seconds);
+						event = new Event(SysTime);
 					} break;
 				}
 				case "ON":{
@@ -88,11 +87,22 @@ public class ChronoTimer {
 					if (systemOn){
 						//Sprint 2; need a way to tell the system what type of event to handle 
 						String eventType = commands[1];
-//						event = new switch case
-//						eventLog.addEvent(eventType);
-//						eventRunning = true;
-//						eventLog.setPrintStart();
-						//TODO
+						switch(eventType){
+							case "IND":{//no change necessary, default case
+								break;
+							}
+							case "PARIND":{
+								event = new PARIND(SysTime);
+								break;
+							}
+							case "GRP":{
+								break;
+							}
+							case "PARGRP":{
+								break;
+							}
+						}
+						eventRunning = true;
 					} break;
 				}
 				case "TOGGLE":{
@@ -103,72 +113,64 @@ public class ChronoTimer {
 					} break;
 				}
 				case "NUM":{
-					if (systemOn){
-						//TODO
-						//timer.addNum(Integer.parseInt(commands[1]));
+					if (systemOn  && eventRunning){
+						event.addRacer(Integer.parseInt(commands[1]), TotalTime);
 					} break;
 				}
 				case "TRIG":{
-					if (systemOn){
+					if (systemOn  && eventRunning){
 						if(sensors[Integer.parseInt(commands[1])-1] != null){
-//								if(Integer.parseInt(commands[1])-1 == 1 || Integer.parseInt(commands[1])-1 == 3 || Integer.parseInt(commands[1])-1 == 5 || Integer.parseInt(commands[1])-1 == 7){
-//									timer.setTime(hours, minutes, seconds);
-//									timer.start(Integer.parseInt(commands[1]));
-//	 							}
-//								if(Integer.parseInt(commands[1])-1 == 2 || Integer.parseInt(commands[1])-1 == 4 || Integer.parseInt(commands[1])-1 == 6 || Integer.parseInt(commands[1])-1 == 8){
-//									timer.setTime(hours, minutes, seconds);
-//									eventLog.addEvent(timer.stop(Integer.parseInt(commands[1])));
-//	 							}
-							//TODO
+							event.trigger(Integer.parseInt(commands[1])-1, TotalTime);
 						}
 					} break;
 				}
 				case "START":{
-					if (systemOn){ 
-						//Sprint 2; "shorthand for TRIG 1"
-						if(sensors[Integer.parseInt(commands[1])-1] != null){
-							if(Integer.parseInt(commands[1])-1 == 1 || Integer.parseInt(commands[1])-1 == 3 || Integer.parseInt(commands[1])-1 == 5 || Integer.parseInt(commands[1])-1 == 7){
-								//TODO
-								//timer.setTime(hours, minutes, seconds);
-								//timer.start(Integer.parseInt(commands[1]));
- 							}
+					if (systemOn && eventRunning){ //Sprint 2; "shorthand for TRIG 1"
+						if(sensors[0] != null){
+						//TODO: DOES THIS NEED TO BE A SWITCH CASE???? Or does it litterally just mean trig 1?
+							//in GRP trig 1 starts all lanes, in PARIND this would start 1 & 3
+							event.trigger(3, TotalTime);
+							event.trigger(1, TotalTime);
+							//trig 3 MUST be before trig 1 to allow PARIND start otherwise
+							//would case a false-finish for GRP events
 						}
 					}break;
 				}case "FINISH":{
-					if (systemOn){ 
-						//Sprint 2; "shorthand for TRIG 2"
-						if(sensors[Integer.parseInt(commands[1])-1] != null){
-							if(Integer.parseInt(commands[1])-1 == 2 || Integer.parseInt(commands[1])-1 == 4 || Integer.parseInt(commands[1])-1 == 6 || Integer.parseInt(commands[1])-1 == 8){
-							//TODO
-								//timer.setTime(hours, minutes, seconds);
-								//eventLog.addEvent(timer.stop(Integer.parseInt(commands[1])));
- 							}
+					if (systemOn && eventRunning){ //Sprint 2; "shorthand for TRIG 2"
+						if(sensors[1] != null){
+							//TODO: DOES THIS NEED TO BE A SWITCH CASE????
+							event.trigger(2, TotalTime);
+							
 						}
 					}break;
 				}
 				case "DNF":{
-					if (systemOn){ 
-						//TODO: Sprint 1; "next competitor to finish will not finish"
+					if (systemOn && eventRunning){ //IND only???
+						//Sprint 1; "next competitor to finish will not finish"
+						event.didNotFinish();
 					}break;
 				}
 				case "CLR":{
-					if (systemOn){ 
+					if (systemOn && eventRunning){ 
 						//TODO: Sprint 2; "clear NUM as the next competitor" a.k.a. remove them from queue
+					//???
 					}break;
 				}
 				case "SWAP":{
-					if (systemOn){ 
-						//Sprint 2; "exchange next to competitors to finish in IND"
+					if (systemOn && eventRunning){ 
+						//Sprint 2; "exchange next two competitors to finish in IND type"
+						event.swap();
 					}break;
 				}
 				case "PRINT":{
-					if (systemOn){ 
+					if (systemOn && eventRunning){ 
 						//TODO: determine if printer is on; see "Operation of Unit" on p4
-//						String[] log = eventLog.getEventLog();
-//						System.out.println(log[0]);
-//						for(int j = eventLog.getPrintStart(); j < log.length; ++j){
-//							System.out.println(log[j]);
-//						}
+						ArrayList<String> log = event.print();
+						//verify passed: System.out.println(log[0]);
+						//j = getPrinterStartTime/Location, however we determine that
+						for(int j = 0; j < log.size(); ++j){
+							System.out.println(log.get(j));
+						}
 					} break;
 				}
 				case "EXPORT":{
@@ -183,10 +185,12 @@ public class ChronoTimer {
 				}
 				case "NEWRUN":{
 					if (systemOn){ 
-						if(!eventRunning)
-						eventRunning = true;
+						if(!eventRunning){
+							eventRunning = true;
+							event = new Event(SysTime);
+						}
 						else{
-							//TODO: report error? unclear instructions here
+							//TODO: reset or do nothing? unclear instructions here
 						}
 					} break;
 				}
