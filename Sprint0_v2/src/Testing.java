@@ -3,7 +3,7 @@ import org.junit.Test;
 
 public class Testing {
 
-	Racer racer, racer2, racer3;
+	Racer racer, racer2, racer3, racer4;
 	Sensor sensor;
 	Lane lane;
 	
@@ -12,8 +12,8 @@ public class Testing {
 	 */
 	@Test
 	public void testNewRacer(){
-		racer = new Racer(001, 1);
-		assertEquals(racer.getBibNum(), 001);
+		racer = new Racer(111, 1);
+		assertEquals(racer.getBibNum(), 111);
 		assertEquals(racer.getLaneNum(), 1);
 		assertEquals(racer.getStartTime(), 0.0, 0.0);
 		assertEquals(racer.getEndTime(), 0.0, 0.0);
@@ -46,22 +46,28 @@ public class Testing {
 		
 	}
 	
+	/**
+	 * test lane, start racers 1-4, stop 1, swap 2&3, stop 3&2, DNF 4, check all total times
+	 */
 	@Test
 	public void testLane(){
 		lane = new Lane();
-		racer = new Racer(001, 1);
-		racer2 = new Racer(002, 1);
-		racer3 = new Racer(003, 1);
+		racer = new Racer(111, 1);
+		racer2 = new Racer(222, 1);
+		racer3 = new Racer(333, 1);
+		racer4 = new Racer(444, 1);
 		assertTrue(lane.isReadyEmpty());
 		assertTrue(lane.isActiveEmpty());
 		lane.addRacer(racer);
 		lane.addRacer(racer2);
 		lane.addRacer(racer3);
+		lane.addRacer(racer4);
 		assertFalse(lane.isReadyEmpty());
 		assertTrue(lane.isActiveEmpty());
 		lane.start(100.0);	//racer start
 		lane.start(200.0);	//racer2 start
 		lane.start(300.0);	//racer3 start
+		lane.start(400.0);  //racer4 start
 		assertTrue(lane.isReadyEmpty());
 		assertFalse(lane.isActiveEmpty());
 		lane.stop(400.0);	//racer stop
@@ -71,6 +77,7 @@ public class Testing {
 		assertEquals(racer3.getTotalTime(), 200.0, 0.0);
 		lane.stop(600.0);	//racer2 stop
 		assertEquals(racer2.getTotalTime(), 400.0, 0.0);
+		assertEquals(lane.didNotFinish(), "444 DNF");  //racer4 DNF
 		assertTrue(lane.isActiveEmpty());
 	}
 	
