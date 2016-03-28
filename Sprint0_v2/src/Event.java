@@ -7,7 +7,7 @@ import java.util.Collections;
  * @author Group 1
  */
 public class Event {
-	private Lane[] lanes;
+	private Lane[] lanes = new Lane[1];
 	private ArrayList<String> log = new ArrayList<String>();
 	private double totalTime = 0;
 	private String curTime = "";
@@ -17,7 +17,7 @@ public class Event {
 	 * @param t
 	 */
 	public Event(String t){
-		lanes = new Lane[1];
+		lanes[0] = new Lane();
 		updateTime(t);
 		log.add(curTime+ " IND");
 	}

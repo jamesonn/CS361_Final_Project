@@ -1,4 +1,7 @@
 import static org.junit.Assert.*;
+
+import java.util.ArrayList;
+
 import org.junit.Test;
 
 public class Testing {
@@ -111,10 +114,10 @@ public class Testing {
 		e.trigger(1, 40700.5);
 		e.trigger(1, 40701);
 		e.swap();
-		e.trigger(2, 40928.3);
-		e.trigger(2, 41008);
-		e.didNotFinish();
-		assertEquals(e.getLog().size(), 4);
+		e.trigger(2, 40928.3);//finish R2
+		e.didNotFinish();//DNF R1, R3 in progress
+		ArrayList<String> list = e.print();
+		assertEquals(4, list.size());
 	}
 	
 	/**
@@ -130,12 +133,13 @@ public class Testing {
 		e.addRacer(114, 41215);
 		e.trigger(1, 40505.5);
 		e.trigger(1, 40700.5);
-		e.trigger(2, 40702.7);
+		e.trigger(2, 40702.7);//finish R1
 		e.trigger(3, 40710);
-		e.trigger(4, 40800.3);
+		e.trigger(4, 40800.3);//finish R3
 		e.trigger(3, 40810);
-		//e.didNotFinish();
-		assertEquals(e.getLog().size(), 5);
+		//R2 and R4 should be in progress
+		ArrayList<String> list = e.print();
+		assertEquals(5, list.size());
 		
 	}
 	

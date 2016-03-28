@@ -5,7 +5,7 @@ import java.util.ArrayList;
  * @author Group 1
  */
 public class PARIND extends Event{
-	private Lane[] lanes;
+	private Lane[] lanes = new Lane[2];
 	private ArrayList<String> log = new ArrayList<String>();
 	private double totalTime = 0;
 	private String curTime = "";
@@ -16,7 +16,8 @@ public class PARIND extends Event{
 	 */
 	public PARIND(String t) {
 		super(t);
-		lanes = new Lane[1];
+		lanes[0] = new Lane();
+		lanes[1] = new Lane();
 		updateTime(t);
 		log.add(curTime+ " PARIND");
 	}
@@ -57,6 +58,13 @@ public class PARIND extends Event{
 				}break;
 			}
 		}
+	}
+	
+	@Override
+	public ArrayList<String> print(){
+		log.addAll(lanes[0].print(totalTime));
+		log.addAll(lanes[1].print(totalTime));
+		return log;
 	}
 	
 	/**
