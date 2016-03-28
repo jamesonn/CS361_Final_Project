@@ -58,6 +58,10 @@ public class Lane {
 		return curRacer.getBibNum() + " DNF";
 	}
 	
+	public String removeRacer(){
+		return curRacer.getBibNum() + " CLR";
+	}
+	
 	/**
 	 * is the queue of waiting Racers empty?
 	 * @return boolean

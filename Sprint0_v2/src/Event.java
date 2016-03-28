@@ -59,11 +59,17 @@ public class Event {
 	}
 	
 	/**
-	 * use if a Racer DNFs;  returns the log string for the DNF 
-	 * Racer instead of calling the Racers print
+	 * use if a Racer DNFs;  adds the log string for the DNF Racer
 	 */
 	public void didNotFinish(){
-		lanes[0].didNotFinish();
+		log.add(lanes[0].didNotFinish());
+	}
+	
+	/**
+	 * handles CLR case; ;
+	 */
+	public void removeRacer(){
+		log.add(lanes[0].removeRacer());
 	}
 	
 	public ArrayList<String> print(){
