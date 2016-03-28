@@ -73,6 +73,7 @@ public class Event {
 	}
 	
 	public ArrayList<String> print(){
+		log.addAll(lanes[0].print(totalTime));
 		return log;
 	}
 	
@@ -109,5 +110,9 @@ public class Event {
 	
 	public double getTotalTime(){
 		return totalTime;
+	}
+	
+	public ArrayList<String> getLog(){
+		return log;
 	}
 }

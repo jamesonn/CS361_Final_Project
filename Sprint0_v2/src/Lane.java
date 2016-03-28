@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -18,7 +19,6 @@ public class Lane {
 		active.add(curRacer);
 	}
 	
-	// ?? make this return String with racer bib number and total time ??
 	/**
 	 * takes first Racer in the active queue and passes t as the Racers stop time;
 	 * returns the string needed for the log
@@ -28,7 +28,7 @@ public class Lane {
 	public String stop(double t){
 		curRacer = active.removeFirst();
 		curRacer.stop(t);
-		return curRacer.print();
+		return curRacer.print() + " F";
 	}
 	
 	/**
@@ -58,15 +58,39 @@ public class Lane {
 		return curRacer.getBibNum() + " DNF";
 	}
 	
+	/**
+	 * Clear a Racer from the competition
+	 * @return
+	 */
 	public String removeRacer(){
 		return curRacer.getBibNum() + " CLR";
+	}
+	
+	
+	public ArrayList<String> print(double t){
+		ArrayList<String> list = new ArrayList<String>();
+		double elapsed;
+		while(!isActiveEmpty()){
+			curRacer = active.removeFirst();
+			elapsed = t - curRacer.getStartTime();
+			list.add(curRacer.getBibNum()+" "+elapsed+" R");
+		}
+		if(!isReadyEmpty()){
+			curRacer = ready.remove();
+			list.add(curRacer.getBibNum()+" "+curRacer.getStartTime()+" >");
+		}
+		while(!isReadyEmpty()){
+			curRacer = ready.remove();
+			list.add(curRacer.getBibNum()+" "+curRacer.getStartTime());
+		}
+		return list;
 	}
 	
 	/**
 	 * is the queue of waiting Racers empty?
 	 * @return boolean
 	 */
-	public boolean isReadyEmpty(){
+ 	public boolean isReadyEmpty(){
 		return ready.isEmpty();
 	}
 	/**

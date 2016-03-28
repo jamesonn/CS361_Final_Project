@@ -144,7 +144,7 @@ public class ChronoTimer {
 					ArrayList<String> log = event.print();
 					//verify passed: System.out.println(log[0]);
 					//j = getPrinterStartTime/Location, however we determine that
-					for(int j = 0; j < log.size(); ++j){
+					for(int j = log.size()-1; j >= 0; ++j){
 						System.out.println(log.get(j));
 					}
 				} break;

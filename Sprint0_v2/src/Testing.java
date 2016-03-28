@@ -28,7 +28,6 @@ public class Testing {
 	/**
 	 * test start sensor constructor and getters and toggle()
 	 */
-	
 	@Test
 	public void testSensor(){
 		sensor = new Sensor("EYE", 1);
@@ -81,6 +80,9 @@ public class Testing {
 		assertTrue(lane.isActiveEmpty());
 	}
 	
+	/**
+	 * ensure the SysTime and TotalTime are updating correctly in Event
+	 */
 	@Test
 	public void testUpdateTime(){
 		Event e = new Event("11:14:30.0");
@@ -95,4 +97,61 @@ public class Testing {
 		
 	}
 	
+	/**
+	 * test basic example of IND event
+	 */
+	@Test
+	public void testNormalIND(){
+		Event e = new Event("11:14:30.0");
+		assertFalse(e.getLog().isEmpty());
+		e.addRacer(111, 40502);
+		e.addRacer(112, 41199.9);
+		e.addRacer(113, 41200);		
+		e.trigger(1, 40505.5);
+		e.trigger(1, 40700.5);
+		e.trigger(1, 40701);
+		e.swap();
+		e.trigger(2, 40928.3);
+		e.trigger(2, 41008);
+		e.didNotFinish();
+		assertEquals(e.getLog().size(), 4);
+	}
+	
+	/**
+	 * test basic example of PARIND event
+	 */
+	@Test
+	public void testNormalPARIND(){
+		Event e = new PARIND("11:14:30.0");
+		assertFalse(e.getLog().isEmpty());
+		e.addRacer(111, 40502);
+		e.addRacer(112, 41199.9);
+		e.addRacer(113, 41204);
+		e.addRacer(114, 41215);
+		e.trigger(1, 40505.5);
+		e.trigger(1, 40700.5);
+		e.trigger(2, 40702.7);
+		e.trigger(3, 40710);
+		e.trigger(4, 40800.3);
+		e.trigger(3, 40810);
+		//e.didNotFinish();
+		assertEquals(e.getLog().size(), 5);
+		
+	}
+	
+	/**
+	 * test basic example of GRP event
+	 */
+	@Test
+	public void testNormalGRP(){
+		Event e = new Event("11:14:30.0");
+	}
+	
+	/**
+	 * test basic example of PARGRP event
+	 */
+	@Test
+	public void testNormalPARGRP(){
+		Event e = new Event("11:14:30.0");
+	}
 }
