@@ -8,50 +8,65 @@ import java.util.Scanner;
  * @author Group 1
  */
 public class ChronoTimer {
-	public static int hours;
-	public static int minutes;
-	public static double seconds;
-	private static double TotalTime;
-	private static String SysTime;
+//	public static int hours;
+//	public static int minutes;
+//	public static double seconds;
+//	private static double TotalTime;
+//	private static String SysTime;
+	
+	boolean systemOn;
+	boolean eventRunning;
+	Sensor[] sensors;
+	
 	protected static Event event;
 	
 	/**
-	 * handles parsing and switch case
-	 * @param args
+	 * constructor
 	 */
-	public static void main(String args[]){
-		File instructions;
-		Scanner instructionParser;
-		ArrayList<String> instructionLines = new ArrayList<String>();
+	public ChronoTimer(){
+		systemOn = true;  
+		eventRunning = false; //instructions treat this as a class, perhaps solution to tracking what type of event is happening?
+		sensors = new Sensor[8];
+	}
+	
+//	/**
+//	 * handles parsing and switch case
+//	 * @param args
+//	 */
+	//public static void main(String args[])
+	public void exicuteCommand(String[] commands, double TotalTime, String SysTime)
+	{
+//		File instructions;
+//		Scanner instructionParser;
+//		ArrayList<String> instructionLines = new ArrayList<String>();
 		//Timer timer = new Timer();
-		boolean systemOn = true;  
-		boolean eventRunning = false; //instructions treat this as a class, perhaps solution to tracking what type of event is happening?
-		Sensor[] sensors = new Sensor[8];
+//		boolean systemOn = true;  
+//		boolean eventRunning = false; //instructions treat this as a class, perhaps solution to tracking what type of event is happening?
+//		Sensor[] sensors = new Sensor[8];
 		
-		try{
-			instructions = new File("src/Sprint1_Test.txt");
-			instructionParser = new Scanner(instructions);
-			while(instructionParser.hasNextLine()){
-				instructionLines.add(instructionParser.nextLine());
-			}
-			instructionParser.close();
-		}catch(FileNotFoundException e1){
-			
-		}
+//		try{
+//			instructions = new File("src/Sprint1_Test.txt");
+//			instructionParser = new Scanner(instructions);
+//			while(instructionParser.hasNextLine()){
+//				instructionLines.add(instructionParser.nextLine());
+//			}
+//			instructionParser.close();
+//		}catch(FileNotFoundException e1){}
 		
 		/**
 		 * begin switch case parsing;
 		 * SysTime is string version
 		 */
-		for(int i = 0; i < instructionLines.size(); i++){
-			String[] timeCommand = instructionLines.get(i).split("\t");
-			String[] time = timeCommand[0].split(":");
-			String[] commands = timeCommand[1].split(" ");
-			hours = Integer.parseInt(time[0]);
-			minutes = Integer.parseInt(time[1]);
-			seconds = Double.parseDouble(time[2]);
-			TotalTime = seconds + minutes*60 + hours*3600;
-			SysTime = ""+hours+":"+minutes+":"+seconds+" ";
+//		for(int i = 0; i < instructionLines.size(); i++){
+//			String[] timeCommand = instructionLines.get(i).split("\t");
+//			String[] time = timeCommand[0].split(":");
+//			String[] commands = timeCommand[1].split(" ");
+//			hours = Integer.parseInt(time[0]);
+//			minutes = Integer.parseInt(time[1]);
+//			seconds = Double.parseDouble(time[2]);
+//			TotalTime = seconds + minutes*60 + hours*3600;
+//			SysTime = ""+hours+":"+minutes+":"+seconds+" ";
+		
 			switch (commands[0]){
 				case "TIME":{
 					if (systemOn){
@@ -127,7 +142,7 @@ public class ChronoTimer {
 				case "START":{
 					if (systemOn && eventRunning){ //Sprint 2; "shorthand for TRIG 1"
 						if(sensors[0] != null){
-						//TODO: DOES THIS NEED TO BE A SWITCH CASE???? Or does it litterally just mean trig 1?
+						//TODO: DOES THIS NEED TO BE A SWITCH CASE???? Or does it literally just mean trig 1?
 							//in GRP trig 1 starts all lanes, in PARIND this would start 1 & 3
 							event.trigger(3, TotalTime);
 							event.trigger(1, TotalTime);
@@ -199,6 +214,8 @@ public class ChronoTimer {
 					break;
 				}
 			}//end switch case
-		}
+		
+		//} end for
 	}
 }
+
