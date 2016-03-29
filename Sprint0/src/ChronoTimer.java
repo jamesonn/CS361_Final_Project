@@ -98,9 +98,9 @@ public class ChronoTimer {
 				case "TRIG":{
 					if (systemOn){
 						if(sensors[Integer.parseInt(commands[1])-1] != null){
-								if(Integer.parseInt(commands[1])-1 == 1){
+								if(Integer.parseInt(commands[1]) == 1){
 									timer.setTime(hours, minutes, seconds);
-									timer.start(Integer.parseInt(commands[1])-1);
+									timer.start(Integer.parseInt(commands[1]));
 	 							}
 								if(Integer.parseInt(commands[1])-1 == 2){
 									timer.setTime(hours, minutes, seconds);
