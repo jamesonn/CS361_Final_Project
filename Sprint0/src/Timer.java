@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+
 
 
 //Unfinished, working on it more tonight 3/1/2016
@@ -21,9 +21,9 @@ public class Timer {
 	
 	public Timer(){
 		lanes[0] = new Lane();
-		lanes[1] = new Lane();
-		lanes[2] = new Lane();
-		lanes[3] = new Lane();
+		//lanes[1] = new Lane();
+		//lanes[2] = new Lane();
+		//lanes[3] = new Lane();
 	}
 
 	/**
@@ -44,11 +44,14 @@ public class Timer {
 	 * @param racerNum
 	 */
 	public void addNum(int racerNum){
-		if(lanesUsed >= 4){
+		/*if(lanesUsed >= 4){
 			lanesUsed = 0;
 		}
 		lanes[lanesUsed].addRacer(new Racer(racerNum,lanesUsed));
 		lanesUsed++;
+		*/
+		lanes[0].addRacer(new Racer(racerNum,0));
+		
 	}
 	
 	/**
@@ -56,8 +59,12 @@ public class Timer {
 	 * @param channel
 	 */
 	public void start(int channel){
+		/*
 		if(!lanes[channel-1].isReadyEmpty())
 			lanes[channel-1].start(systemTime);	
+		*/
+		if(!lanes[0].isReadyEmpty())
+			lanes[0].start(systemTime);	
 	}
 	
 	/**
@@ -65,7 +72,7 @@ public class Timer {
 	 * @param channel
 	 */
 	public String stop(int channel){
-		Racer runner;
+		/*Racer runner;
 		System.out.println(channel);
 		if(!lanes[channel-2].isActiveEmpty()){
 			return lanes[channel-2].stop(systemTime);
@@ -73,6 +80,14 @@ public class Timer {
 		else{
 			return "hasn't started";
 		}
+		*/
+		if(!lanes[0].isActiveEmpty()){
+			return lanes[0].stop(systemTime);
+		}
+		else{
+			return "hasn't started";
+		}
+		
 	}
 	
 //	/**

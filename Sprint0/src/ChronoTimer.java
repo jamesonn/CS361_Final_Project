@@ -102,7 +102,7 @@ public class ChronoTimer {
 									timer.setTime(hours, minutes, seconds);
 									timer.start(Integer.parseInt(commands[1]));
 	 							}
-								if(Integer.parseInt(commands[1])-1 == 2){
+								if(Integer.parseInt(commands[1]) == 2){
 									timer.setTime(hours, minutes, seconds);
 									eventLog.addEvent(timer.stop(Integer.parseInt(commands[1])-1));
 	 							}
