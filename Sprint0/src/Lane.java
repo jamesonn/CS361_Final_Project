@@ -1,71 +1,112 @@
 import java.util.ArrayList;
-
-import sun.misc.Queue;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.Queue;
 
 /**
- * Determines is a lane has started
+ * handles interactions between the Event and the Racers
  * @author Group 1
  */
 public class Lane {
-	private boolean hasStarted = false;
-	private Queue<Racer> racers = new Queue<Racer>();
-	private Racer currentRacer;
-	//ArrayList<Racer> racers = new ArrayList<Racer>(); //potential queue situation
+	private Queue<Racer> ready = new LinkedList<Racer>();
+	private LinkedList<Racer> active = new LinkedList<Racer>();
+	private Racer curRacer;
+	int numRacers = ready.size() + active.size();
 	
-	public void setStarted(boolean started){
-		hasStarted = started;
+	public void start(double t){
+		curRacer = ready.remove();
+		curRacer.start(t);
+		active.add(curRacer);
 	}
 	
-	//remove once racers are stored in the lane we the trigger starting sets them in
 	/**
-	 * 
-	 * @return boolean
+	 * takes first Racer in the active queue and passes t as the Racers stop time;
+	 * returns the string needed for the log
+	 * @param t
+	 * @return String
 	 */
-	public boolean hasStarted(){
-		return hasStarted;
+	public String stop(double t){
+		curRacer = active.removeFirst();
+		curRacer.stop(t);
+		return curRacer.print() + " F";
 	}
 	
 	/**
-	 * dequeues the FI racer and sets their start time
-	 * @param time
+	 * adds a Racer to the ready queue
+	 * @param r
 	 */
-	public void startRacer(float time){
-		currentRacer = popRacer();
-		currentRacer.setStartTime(time);
-		hasStarted = true;
+	public void addRacer(Racer r){
+		ready.add(r);
 	}
 	
 	/**
-	 * 
-	 * @param time
+	 * Swap the next two Racers to finish, those in position 0 and 1
+	 */
+	public void swap(){
+		if (active.size() > 1 ) {
+			Collections.swap(active, 0, 1);
+		}
+	}
+	
+	/**
+	 * use if a Racer DNFs;  returns the log string for the DNF 
+	 * Racer instead of calling the Racers print
+	 * @return String
+	 */
+	public String didNotFinish(){
+		curRacer = active.removeFirst();
+		return curRacer.getBibNum() + " DNF";
+	}
+	
+	/**
+	 * Clear a Racer from the competition
 	 * @return
 	 */
-	public Racer racerFinished(float time){
-		currentRacer.setLapTime(time);
-		return currentRacer;
+	public String removeRacer(){
+		return curRacer.getBibNum() + " CLR";
 	}
 	
 	
-	/**
-	 * adds a racer to the queue
-	 * @param racer
-	 */
-	public void pushRacer(Racer racer){
-		racers.enqueue(racer);
-	}
-	
-	/**
-	 * handles the dequeue try-catch
-	 * @return FI racer
-	 */
-	public Racer popRacer(){
-		Racer finisher = new Racer(0, 0);
-		try {
-			finisher = racers.dequeue();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	public ArrayList<String> print(double t){
+		ArrayList<String> list = new ArrayList<String>();
+		double elapsed;
+		while(!isActiveEmpty()){
+			curRacer = active.removeFirst();
+			elapsed = t - curRacer.getStartTime();
+			list.add(curRacer.getBibNum()+" "+elapsed+" R");
 		}
-		return finisher;
+		if(!isReadyEmpty()){
+			curRacer = ready.remove();
+			list.add(curRacer.getBibNum()+" "+curRacer.getStartTime()+" >");
+		}
+		while(!isReadyEmpty()){
+			curRacer = ready.remove();
+			list.add(curRacer.getBibNum()+" "+curRacer.getStartTime());
+		}
+		return list;
+	}
+	
+	/**
+	 * is the queue of waiting Racers empty?
+	 * @return boolean
+	 */
+ 	public boolean isReadyEmpty(){
+		return ready.isEmpty();
+	}
+	/**
+	 * is the queue of active Racers empty?
+	 * @return boolean
+	 */
+	public boolean isActiveEmpty(){
+		return active.isEmpty();
+	}
+	
+	/**
+	 * returns the number of racers the Lane knows 
+	 * it has in both active and ready
+	 * @return int
+	 */
+	public int getNumRacers(){
+		return numRacers;
 	}
 }

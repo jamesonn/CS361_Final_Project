@@ -7,8 +7,8 @@
 public class Racer {
 	private int racerNum;
 	private int laneNum;
-	private float startTime;
-	private float stopTime;
+	private double startTime;
+	private double stopTime;
 	
 	/**
 	 * @param bibNum
@@ -25,19 +25,23 @@ public class Racer {
 	public int getLaneNum(){
 		return laneNum;	}
 	
-	public float getStartTime(){ 
+	public double getStartTime(){ 
 		return startTime; }
 	
-	public void start(float st){ 
+	public void start(double st){ 
 		startTime = st; }
 	
-	public float getEndTime(){
+	public double getEndTime(){
 		return stopTime;	}
 	
-	public void stop(float st){
+	public void stop(double st){
 		stopTime = st;	}
 	
-	public float getTotalTime(){
+	public double getTotalTime(){
 		return stopTime-startTime;	}
+	
+	public String print(){
+		return ""+ racerNum +" "+ getTotalTime();
+	}
 
 }

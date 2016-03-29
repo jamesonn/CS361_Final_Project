@@ -77,10 +77,10 @@ public class ChronoTimer {
 				case "EVENT":{
 					if (systemOn){
 						//Sprint 2; need a way to tell the system what type of event to handle 
-						String eventType = SysTime +" "+ commands[1];
+						String eventType = SysTime +" Event "+ commands[1];
 						eventLog.addEvent(eventType);
 						eventRunning = true;
-						eventLog.setPrintStart();
+						//eventLog.setPrintStart();
 					} break;
 				}
 				case "TOGGLE":{
@@ -98,13 +98,13 @@ public class ChronoTimer {
 				case "TRIG":{
 					if (systemOn){
 						if(sensors[Integer.parseInt(commands[1])-1] != null){
-								if(Integer.parseInt(commands[1])-1 == 1 || Integer.parseInt(commands[1])-1 == 3 || Integer.parseInt(commands[1])-1 == 5 || Integer.parseInt(commands[1])-1 == 7){
+								if(Integer.parseInt(commands[1])-1 == 1){
 									timer.setTime(hours, minutes, seconds);
-									timer.start(Integer.parseInt(commands[1]));
+									timer.start(Integer.parseInt(commands[1])-1);
 	 							}
-								if(Integer.parseInt(commands[1])-1 == 2 || Integer.parseInt(commands[1])-1 == 4 || Integer.parseInt(commands[1])-1 == 6 || Integer.parseInt(commands[1])-1 == 8){
+								if(Integer.parseInt(commands[1])-1 == 2){
 									timer.setTime(hours, minutes, seconds);
-									eventLog.addEvent(timer.stop(Integer.parseInt(commands[1])));
+									eventLog.addEvent(timer.stop(Integer.parseInt(commands[1])-1));
 	 							}
 							
 						}
@@ -114,9 +114,9 @@ public class ChronoTimer {
 					if (systemOn){ 
 						//Sprint 2; "shorthand for TRIG 1"
 						if(sensors[Integer.parseInt(commands[1])-1] != null){
-							if(Integer.parseInt(commands[1])-1 == 1 || Integer.parseInt(commands[1])-1 == 3 || Integer.parseInt(commands[1])-1 == 5 || Integer.parseInt(commands[1])-1 == 7){
+							if(Integer.parseInt(commands[1])-1 == 1){
 								timer.setTime(hours, minutes, seconds);
-								timer.start(Integer.parseInt(commands[1]));
+								timer.start(Integer.parseInt(commands[1])-1);
  							}
 						}
 					}break;
@@ -124,9 +124,9 @@ public class ChronoTimer {
 					if (systemOn){ 
 						//Sprint 2; "shorthand for TRIG 2"
 						if(sensors[Integer.parseInt(commands[1])-1] != null){
-							if(Integer.parseInt(commands[1])-1 == 2 || Integer.parseInt(commands[1])-1 == 4 || Integer.parseInt(commands[1])-1 == 6 || Integer.parseInt(commands[1])-1 == 8){
+							if(Integer.parseInt(commands[1])-1 == 2){
 								timer.setTime(hours, minutes, seconds);
-								eventLog.addEvent(timer.stop(Integer.parseInt(commands[1])));
+								eventLog.addEvent(timer.stop(Integer.parseInt(commands[1])-1));
  							}
 						}
 					}break;
@@ -149,9 +149,9 @@ public class ChronoTimer {
 				case "PRINT":{
 					if (systemOn){ 
 						//TODO: determine if printer is on; see "Operation of Unit" on p4
-						String[] log = eventLog.getEventLog();
-						System.out.println(log[0]);
-						for(int j = eventLog.getPrintStart(); j < log.length; ++j){
+						String[] log = eventLog.getEventLog();//make a copy
+//						System.out.println(log[0]);
+						for(int j = 0; j < log.length; ++j){
 							System.out.println(log[j]);
 						}
 					} break;
@@ -168,9 +168,11 @@ public class ChronoTimer {
 				}
 				case "NEWRUN":{
 					if (systemOn){ 
+						eventLog.clear();
 						if(!eventRunning)
 						eventRunning = true;
 						else{
+							eventLog = new Log();
 							//TODO: report error? unclear instructions here
 						}
 					} break;

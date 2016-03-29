@@ -44,10 +44,10 @@ public class Timer {
 	 * @param racerNum
 	 */
 	public void addNum(int racerNum){
-		if(lanesUsed > 4){
+		if(lanesUsed >= 4){
 			lanesUsed = 0;
 		}
-		lanes[lanesUsed].pushRacer(new Racer(racerNum,lanesUsed));
+		lanes[lanesUsed].addRacer(new Racer(racerNum,lanesUsed));
 		lanesUsed++;
 	}
 	
@@ -56,7 +56,8 @@ public class Timer {
 	 * @param channel
 	 */
 	public void start(int channel){
-		lanes[channel-1].startRacer(systemTime);	
+		if(!lanes[channel-1].isReadyEmpty())
+			lanes[channel-1].start(systemTime);	
 	}
 	
 	/**
@@ -64,13 +65,14 @@ public class Timer {
 	 * @param channel
 	 */
 	public String stop(int channel){
-		if(lanes[channel-1].hasStarted()){
-			Racer fini = lanes[channel-1].racerFinished(systemTime);
-			return ""+fini.racerNum+" "+fini.totalTime;
+		Racer runner;
+		System.out.println(channel);
+		if(!lanes[channel-2].isActiveEmpty()){
+			return lanes[channel-2].stop(systemTime);
 		}
-		
-		
-		return "0.0\n";
+		else{
+			return "hasn't started";
+		}
 	}
 	
 //	/**

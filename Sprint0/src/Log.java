@@ -8,9 +8,9 @@ public class Log {
 
 	
 	public Log(){
-		eventList = new String[10];
+		eventList = new String[2];
 		currentIndex =  0;
-		printStartPoint = -1;
+		printStartPoint = 0;
 	}
 		
 	// TODO work on return value
@@ -21,8 +21,16 @@ public class Log {
 	public void addEvent(String event){
 		resize();
 		eventList[currentIndex] = event;
+//		System.out.println(eventList[currentIndex]);
 		currentIndex++;		
 	}
+	
+	public void clear(){
+		eventList = new String[2];
+		currentIndex =  0;
+		printStartPoint = 0;
+	}
+	
 	
 	/**
 	 *  Set location where printer was turned on
