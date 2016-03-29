@@ -43,7 +43,11 @@ public class Log {
 	 * @return returns an array of strings 
 	 */
 	public String[] getEventLog(){
-		return eventList;
+		String[] printList = new String[currentIndex];
+		for (int i = 0; i < currentIndex; i++){
+			printList[i] = eventList[i];
+		}
+		return printList;
 	}
 	
 	/**
