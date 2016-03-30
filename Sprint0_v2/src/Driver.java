@@ -18,7 +18,7 @@ public class Driver {
 		ArrayList<String> instructionLines = new ArrayList<String>();
 
 		try{
-			instructions = new File("Sprint2TestData.txt");
+			instructions = new File("Sprint2TestData2Fixed.txt");
 			instructionParser = new Scanner(instructions);
 			while(instructionParser.hasNextLine()){
 				instructionLines.add(instructionParser.nextLine());

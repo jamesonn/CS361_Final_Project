@@ -96,8 +96,11 @@ public class ChronoTimer {
 			}
 			case "TRIG":{
 				if (systemOn  && eventRunning){
-					if(sensors[Integer.parseInt(commands[1])-1] != null){
+					/*if(sensors[Integer.parseInt(commands[1])-1] != null){
 						event.trigger(Integer.parseInt(commands[1])-1, TotalTime);
+					}*/
+					if(sensors[Integer.parseInt(commands[1])-1] != null){
+						event.trigger(Integer.parseInt(commands[1]), TotalTime);
 					}
 				} break;
 			}
@@ -140,7 +143,8 @@ public class ChronoTimer {
 				}break;
 			}
 			case "PRINT":{
-				if (systemOn && eventRunning){ 
+				//if (systemOn && eventRunning){ 
+				if (systemOn){ 
 					//TODO: determine if printer is on; see "Operation of Unit" on p4
 					ArrayList<String> log = event.print(TotalTime);
 					//verify passed: System.out.println(log[0]);
