@@ -168,7 +168,12 @@ public class ChronoTimer {
 				if (systemOn){ 
 					if(!eventRunning){
 						eventRunning = true;
-						event = new Event(SysTime);
+						if ( event.getClass().equals(PARIND.class)){
+							event = new PARIND(SysTime);
+						}
+						else {
+							event = new Event(SysTime);
+						}
 					}
 					else{
 						//TODO: reset or do nothing? unclear instructions here
