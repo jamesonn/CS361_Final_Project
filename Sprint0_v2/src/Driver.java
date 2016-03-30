@@ -18,7 +18,7 @@ public class Driver {
 		ArrayList<String> instructionLines = new ArrayList<String>();
 
 		try{
-			instructions = new File("src/Sprint1_Test.txt");
+			instructions = new File("Sprint2TestData.txt");
 			instructionParser = new Scanner(instructions);
 			while(instructionParser.hasNextLine()){
 				instructionLines.add(instructionParser.nextLine());
@@ -36,7 +36,7 @@ public class Driver {
 			TotalTime = seconds + minutes*60 + hours*3600;
 			SysTime = ""+hours+":"+minutes+":"+seconds+" ";
 
-			cTimer.exicuteCommand(commands, TotalTime, SysTime);
+			cTimer.executeCommand(commands, TotalTime, SysTime);
 		}
 	}
 }

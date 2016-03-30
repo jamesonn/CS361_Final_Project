@@ -1,4 +1,3 @@
-
 /**
  * constructor requires racerNum and laneNum; 
  * knows start time, stop time, and total time
@@ -6,7 +5,7 @@
  */
 public class Racer {
 	private int racerNum;
-	private int laneNum;
+	//private int laneNum;
 	private double startTime;
 	private double stopTime;
 	
@@ -14,16 +13,20 @@ public class Racer {
 	 * @param bibNum
 	 * @param laneNum
 	 */
-	public Racer(int bibNum, int laneNum){
+	/*public Racer(int bibNum, int laneNum){
 		racerNum = bibNum;
 		this.laneNum = laneNum;
+	}*/
+	
+	public Racer(int bibNum){
+		racerNum = bibNum;
 	}
 
 	public int getBibNum(){ 
 		return racerNum; }
 	
-	public int getLaneNum(){
-		return laneNum;	}
+	/*public int getLaneNum(){
+		return laneNum;	}*/
 	
 	public double getStartTime(){ 
 		return startTime; }
@@ -41,7 +44,9 @@ public class Racer {
 		return stopTime-startTime;	}
 	
 	public String print(){
-		return ""+ racerNum +" "+ getTotalTime();
+		double time = getTotalTime();
+		String t = String.format("%.1f", time);
+		return ""+ racerNum +" "+ t;
 	}
 
 }

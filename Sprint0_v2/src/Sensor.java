@@ -1,4 +1,3 @@
-
 /**
  * handles toggle and the triggering of different devices
  * @author Group 1

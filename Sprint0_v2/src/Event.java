@@ -27,9 +27,13 @@ public class Event {
 	 * @param bib
 	 * @param newT
 	 */
-	public void addRacer(int bib, double t){
+	/*public void addRacer(int bib, double t){
 		updateTime(t);
-		Racer r = new Racer(bib, 1);
+		Racer r = new Racer(bib);
+		lanes[0].addRacer(r);
+	}*/
+	public void addRacer(int bib){
+		Racer r = new Racer(bib);
 		lanes[0].addRacer(r);
 	}
 	
@@ -72,8 +76,8 @@ public class Event {
 		log.add(lanes[0].removeRacer());
 	}
 	
-	public ArrayList<String> print(){
-		log.addAll(lanes[0].print(totalTime));
+	public ArrayList<String> print(double time){
+		log.addAll(lanes[0].print(time));
 		return log;
 	}
 	

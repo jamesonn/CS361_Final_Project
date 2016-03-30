@@ -5,11 +5,11 @@ import java.util.ArrayList;
  * @author Group 1
  */
 public class ChronoTimer {
-	boolean systemOn;
-	boolean eventRunning;
-	Sensor[] sensors;
+	private boolean systemOn;
+	private boolean eventRunning;
+	private Sensor[] sensors;
 	
-	protected static Event event;
+	private Event event;
 	
 	/**
 	 * ChronoTimer constructor
@@ -26,7 +26,7 @@ public class ChronoTimer {
 	 * @param TotalTime
 	 * @param SysTime
 	 */
-	public void exicuteCommand(String[] commands, double TotalTime, String SysTime)
+	public void executeCommand(String[] commands, double TotalTime, String SysTime)
 	{
 		switch (commands[0]){
 			case "TIME":{
@@ -65,6 +65,7 @@ public class ChronoTimer {
 					String eventType = commands[1];
 					switch(eventType){
 						case "IND":{//no change necessary, default case
+							event = new Event(SysTime);
 							break;
 						}
 						case "PARIND":{
@@ -90,7 +91,7 @@ public class ChronoTimer {
 			}
 			case "NUM":{
 				if (systemOn  && eventRunning){
-					event.addRacer(Integer.parseInt(commands[1]), TotalTime);
+					event.addRacer(Integer.parseInt(commands[1]));
 				} break;
 			}
 			case "TRIG":{
@@ -141,10 +142,10 @@ public class ChronoTimer {
 			case "PRINT":{
 				if (systemOn && eventRunning){ 
 					//TODO: determine if printer is on; see "Operation of Unit" on p4
-					ArrayList<String> log = event.print();
+					ArrayList<String> log = event.print(TotalTime);
 					//verify passed: System.out.println(log[0]);
 					//j = getPrinterStartTime/Location, however we determine that
-					for(int j = log.size()-1; j >= 0; ++j){
+					for(int j = 0; j < log.size(); j++){
 						System.out.println(log.get(j));
 					}
 				} break;

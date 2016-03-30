@@ -15,9 +15,8 @@ public class Testing {
 	 */
 	@Test
 	public void testNewRacer(){
-		racer = new Racer(111, 1);
+		racer = new Racer(111);
 		assertEquals(racer.getBibNum(), 111);
-		assertEquals(racer.getLaneNum(), 1);
 		assertEquals(racer.getStartTime(), 0.0, 0.0);
 		assertEquals(racer.getEndTime(), 0.0, 0.0);
 		assertEquals(racer.getTotalTime(),0.0,0.0);
@@ -54,10 +53,10 @@ public class Testing {
 	@Test
 	public void testLane(){
 		lane = new Lane();
-		racer = new Racer(111, 1);
-		racer2 = new Racer(222, 1);
-		racer3 = new Racer(333, 1);
-		racer4 = new Racer(444, 1);
+		racer = new Racer(111);
+		racer2 = new Racer(222);
+		racer3 = new Racer(333);
+		racer4 = new Racer(444);
 		assertTrue(lane.isReadyEmpty());
 		assertTrue(lane.isActiveEmpty());
 		lane.addRacer(racer);
@@ -107,17 +106,22 @@ public class Testing {
 	public void testNormalIND(){
 		Event e = new Event("11:14:30.0");
 		assertFalse(e.getLog().isEmpty());
-		e.addRacer(111, 40502);
-		e.addRacer(112, 41199.9);
-		e.addRacer(113, 41200);		
+		e.addRacer(111);
+		e.addRacer(112);
+		e.addRacer(113);		
 		e.trigger(1, 40505.5);
 		e.trigger(1, 40700.5);
 		e.trigger(1, 40701);
 		e.swap();
 		e.trigger(2, 40928.3);//finish R2
 		e.didNotFinish();//DNF R1, R3 in progress
-		ArrayList<String> list = e.print();
+		ArrayList<String> list = e.print(40950.0);
 		assertEquals(4, list.size());
+		assertEquals(list.get(0), "11:14:30.0 IND");
+		assertEquals(list.get(1), "112 227.8 F");
+		assertEquals(list.get(2), "111 DNF");
+		assertEquals(list.get(3), "113 249.0 R");
+		
 	}
 	
 	/**
@@ -127,19 +131,25 @@ public class Testing {
 	public void testNormalPARIND(){
 		Event e = new PARIND("11:14:30.0");
 		assertFalse(e.getLog().isEmpty());
-		e.addRacer(111, 40502);
-		e.addRacer(112, 41199.9);
-		e.addRacer(113, 41204);
-		e.addRacer(114, 41215);
-		e.trigger(1, 40505.5);
-		e.trigger(1, 40700.5);
+		e.addRacer(111);
+		e.addRacer(112);
+		e.addRacer(113);
+		e.addRacer(114);
+		e.trigger(1, 40505.5); //start R1
+		e.trigger(1, 40700.5); //start R3
 		e.trigger(2, 40702.7);//finish R1
-		e.trigger(3, 40710);
-		e.trigger(4, 40800.3);//finish R3
-		e.trigger(3, 40810);
-		//R2 and R4 should be in progress
-		ArrayList<String> list = e.print();
+		e.trigger(3, 40710);  //start R2
+		e.trigger(4, 40800.3);//finish R2
+		e.trigger(3, 40810); //start R4
+		//R3 and R4 should be in progress
+		ArrayList<String> list = e.print(40900);
 		assertEquals(5, list.size());
+		assertEquals(list.get(0), "11:14:30.0 PARIND");
+		assertEquals(list.get(1), "111 197.2 F");
+		assertEquals(list.get(2), "112 90.3 F");
+		assertEquals(list.get(3), "113 199.5 R");
+		assertEquals(list.get(4), "114 90.0 R");
+		
 		
 	}
 	
