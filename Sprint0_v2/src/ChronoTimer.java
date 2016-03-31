@@ -13,7 +13,6 @@ public class ChronoTimer {
 	//events start at 1 not 0
 	private ArrayList<Event> events = new ArrayList<>();
 	private int currentEvent;
-	private Event event;
 	
 	/**
 	 * ChronoTimer constructor
@@ -173,13 +172,16 @@ public class ChronoTimer {
 			}
 
 			case "NEWRUN":{
-				if (systemOn){ 
+				if (systemOn){
+
 					if(!eventRunning){
 						eventRunning = true;
 						if ( events.get(currentEvent).getClass().equals(PARIND.class)){
+							currentEvent++;
 							events.add(new PARIND(SysTime));
 						}
 						else {
+							currentEvent++;
 							events.add(new Event(SysTime));
 						}
 					}
