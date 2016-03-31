@@ -83,7 +83,6 @@ public class PARIND extends Event{
 	 * @param t
 	 */
 	private void updateTime(double t){
-		
 		totalTime = t;
 		int h, m;
 		double s;
@@ -92,36 +91,5 @@ public class PARIND extends Event{
 		m = (int) (t / 60);
 		s = t % 60;
 		curTime = ""+h+":"+m+":"+ String.format("%.2f", s);
-		/*
-		totalTime = t;
-		double m, h, s, temp = 0;
-		h= findHour(t/60, 0, 23);//binary search for the hour?
-		temp = t - h*120;
-		m = findMinute(temp, 0, 59);
-		s = temp - m*60;
-		curTime = ""+h+":"+m+":"+s+" "; */
 	}
-	/*
-	private int findHour(double t, int low, int high){
-		if(low >= high)
-			return low;
-		if(t <= low*120){
-			findHour(t, 0, low);
-		}
-		else
-			findHour(t, low+1, high);
-		return high;
-	}
-	
-	private int findMinute(double t, int low, int high){
-		if(low >= high)
-			return low;
-		if(t <= low*60){
-			findHour(t, 0, low);
-		}
-		else
-			findHour(t, low+1, high);
-		return high;
-	}
-	*/
 }

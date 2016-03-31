@@ -5,18 +5,8 @@
  */
 public class Racer {
 	private int racerNum;
-	//private int laneNum;
 	private double startTime;
 	private double stopTime;
-	
-	/**
-	 * @param bibNum
-	 * @param laneNum
-	 */
-	/*public Racer(int bibNum, int laneNum){
-		racerNum = bibNum;
-		this.laneNum = laneNum;
-	}*/
 	
 	public Racer(int bibNum){
 		racerNum = bibNum;
@@ -24,9 +14,6 @@ public class Racer {
 
 	public int getBibNum(){ 
 		return racerNum; }
-	
-	/*public int getLaneNum(){
-		return laneNum;	}*/
 	
 	public double getStartTime(){ 
 		return startTime; }
