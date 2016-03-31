@@ -162,7 +162,7 @@ public class ChronoTimer {
 			case "EXPORT":{
 				if (systemOn){
 					Gson g = new Gson();
-					//g.toJson(events);
+					g.toJson(events);
 				}break;
 			}
 			case "ENDRUN":{
