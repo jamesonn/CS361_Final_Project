@@ -1,3 +1,5 @@
+import com.google.gson.Gson;
+
 import java.util.ArrayList;
 
 /**
@@ -8,7 +10,9 @@ public class ChronoTimer {
 	private boolean systemOn;
 	private boolean eventRunning;
 	private Sensor[] sensors;
-	
+	//events start at 1 not 0
+	private Event[] events;
+	private int currentEvent;
 	private Event event;
 	
 	/**
@@ -31,7 +35,7 @@ public class ChronoTimer {
 		switch (commands[0]){
 			case "TIME":{
 				if (systemOn){
-					event = new Event(SysTime);
+					events[currentEvent] = new Event(SysTime);
 				} break;
 			}
 			case "ON":{
@@ -45,7 +49,8 @@ public class ChronoTimer {
 			}
 			case "RESET":{
 				if (systemOn){
-					event = new Event(SysTime);
+					currentEvent = 0;
+					//event = new Event(SysTime);
 				} break;
 			}
 			case "CONN":{
@@ -61,15 +66,16 @@ public class ChronoTimer {
 			}
 			case "EVENT":{
 				if (systemOn){
+					currentEvent++;
 					//Sprint 2; need a way to tell the system what type of event to handle 
 					String eventType = commands[1];
 					switch(eventType){
 						case "IND":{//no change necessary, default case
-							event = new Event(SysTime);
+							events[currentEvent] = new Event(SysTime);
 							break;
 						}
 						case "PARIND":{
-							event = new PARIND(SysTime);
+							events[currentEvent] = new PARIND(SysTime);
 							break;
 						}
 						case "GRP":{
@@ -91,16 +97,16 @@ public class ChronoTimer {
 			}
 			case "NUM":{
 				if (systemOn  && eventRunning){
-					event.addRacer(Integer.parseInt(commands[1]));
+					events[currentEvent].addRacer(Integer.parseInt(commands[1]));
 				} break;
 			}
 			case "TRIG":{
 				if (systemOn  && eventRunning){
 					/*if(sensors[Integer.parseInt(commands[1])-1] != null){
-						event.trigger(Integer.parseInt(commands[1])-1, TotalTime);
+						events[currentEvent].trigger(Integer.parseInt(commands[1])-1, TotalTime);
 					}*/
 					if(sensors[Integer.parseInt(commands[1])-1] != null){
-						event.trigger(Integer.parseInt(commands[1]), TotalTime);
+						events[currentEvent].trigger(Integer.parseInt(commands[1]), TotalTime);
 					}
 				} break;
 			}
@@ -109,8 +115,8 @@ public class ChronoTimer {
 					if(sensors[0] != null){
 					//TODO: DOES THIS NEED TO BE A SWITCH CASE???? Or does it literally just mean trig 1?
 						//in GRP trig 1 starts all lanes, in PARIND this would start 1 & 3
-						event.trigger(3, TotalTime);
-						event.trigger(1, TotalTime);
+						events[currentEvent].trigger(3, TotalTime);
+						events[currentEvent].trigger(1, TotalTime);
 						//trig 3 MUST be before trig 1 to allow PARIND start otherwise
 						//would case a false-finish for GRP events
 					}
@@ -119,7 +125,7 @@ public class ChronoTimer {
 				if (systemOn && eventRunning){ //Sprint 2; "shorthand for TRIG 2"
 					if(sensors[1] != null){
 						//TODO: DOES THIS NEED TO BE A SWITCH CASE????
-						event.trigger(2, TotalTime);
+						events[currentEvent].trigger(2, TotalTime);
 						
 					}
 				}break;
@@ -127,26 +133,26 @@ public class ChronoTimer {
 			case "DNF":{
 				if (systemOn && eventRunning){ //IND only???
 					//Sprint 1; "next competitor to finish will not finish"
-					event.didNotFinish();
+					events[currentEvent].didNotFinish();
 				}break;
 			}
 			case "CLR":{
 				if (systemOn && eventRunning){ 
 					//TODO: Sprint 2; "clear NUM as the next competitor" a.k.a. remove them from queue
-					event.removeRacer();
+					events[currentEvent].removeRacer();
 				}break;
 			}
 			case "SWAP":{
 				if (systemOn && eventRunning){ 
 					//Sprint 2; "exchange next two competitors to finish in IND type"
-					event.swap();
+					events[currentEvent].swap();
 				}break;
 			}
 			case "PRINT":{
 				//if (systemOn && eventRunning){ 
 				if (systemOn){ 
 					//TODO: determine if printer is on; see "Operation of Unit" on p4
-					ArrayList<String> log = event.print(TotalTime);
+					ArrayList<String> log = events[currentEvent].print(TotalTime);
 					//verify passed: System.out.println(log[0]);
 					//j = getPrinterStartTime/Location, however we determine that
 					for(int j = 0; j < log.size(); j++){
@@ -155,8 +161,9 @@ public class ChronoTimer {
 				} break;
 			}
 			case "EXPORT":{
-				if (systemOn){ 
-					//Sprint 2; "export run in XML to file RUN<RUN>"
+				if (systemOn){
+					Gson g = new Gson();
+					g.toJson(events);
 				}break;
 			}
 			case "ENDRUN":{
@@ -164,15 +171,16 @@ public class ChronoTimer {
 					eventRunning = false;
 				} break;
 			}
+
 			case "NEWRUN":{
 				if (systemOn){ 
 					if(!eventRunning){
 						eventRunning = true;
 						if ( event.getClass().equals(PARIND.class)){
-							event = new PARIND(SysTime);
+							events[currentEvent] = new PARIND(SysTime);
 						}
 						else {
-							event = new Event(SysTime);
+							events[currentEvent] = new Event(SysTime);
 						}
 					}
 					else{
