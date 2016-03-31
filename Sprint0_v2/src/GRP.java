@@ -18,7 +18,7 @@ public class GRP extends Event{
 		super(t);
 		lanes[0] = new Lane();
 		updateTime(t);
-		log.add(curTime+ " PARIND");
+		log.add(curTime+ " GRP");
 	}
 	
 	/**
@@ -62,19 +62,9 @@ public class GRP extends Event{
 		t = t % 3600;
 		m = (int) (t / 60);
 		s = t % 60;
-		curTime = ""+h+":"+m+":"+ String.format("%.1f", s);
+		curTime = ""+h+":"+m+":"+ String.format("%.2f", s);
 	}
 	
 	
 	
 }
-/**all have the same start time. By convention the start
- *is on channel 1 and there are multiple finishes on channel 2,
- *but there is nothing particularly special about the events on 
- *each channel. When a start event is received, it is associated
- * with the start of the event. When a finish event is received,
- * it is associated with the next “place” – for example, the 
- * first finish is entered in the list of finishers with the 
- * first time, the next time with 2nd place, etc. There may be 
- * up to 9,999
-*/
