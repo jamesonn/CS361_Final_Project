@@ -164,7 +164,7 @@ public class ChronoTimer {
 				if (systemOn){
 					Gson g = new Gson();
 					try{
-						BufferedWriter writer = new BufferedWriter(new FileWriter("json.json"));
+						BufferedWriter writer = new BufferedWriter(new FileWriter("Export"+commands[1]+".json"));
 						writer.write(g.toJson(events));
 						writer.close();
 					}catch(Exception IOException){
