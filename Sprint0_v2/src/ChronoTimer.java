@@ -1,5 +1,6 @@
 import com.google.gson.Gson;
 
+import java.io.*;
 import java.util.ArrayList;
 
 /**
@@ -162,7 +163,13 @@ public class ChronoTimer {
 			case "EXPORT":{
 				if (systemOn){
 					Gson g = new Gson();
-					g.toJson(events);
+					try{
+						BufferedWriter writer = new BufferedWriter(new FileWriter("json.json"));
+						writer.write(g.toJson(events));
+						writer.close();
+					}catch(Exception IOException){
+
+					}
 				}break;
 			}
 			case "ENDRUN":{
