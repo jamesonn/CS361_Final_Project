@@ -27,11 +27,6 @@ public class Event {
 	 * @param bib
 	 * @param newT
 	 */
-	/*public void addRacer(int bib, double t){
-		updateTime(t);
-		Racer r = new Racer(bib);
-		lanes[0].addRacer(r);
-	}*/
 	public void addRacer(int bib){
 		Racer r = new Racer(bib);
 		lanes[0].addRacer(r);

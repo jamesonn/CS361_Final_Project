@@ -11,7 +11,6 @@ public class Lane {
 	private Queue<Racer> ready = new LinkedList<Racer>();
 	private LinkedList<Racer> active = new LinkedList<Racer>();
 	private Racer curRacer;
-	//int numRacers = ready.size() + active.size();
 	
 	public void start(double t){
 		curRacer = ready.remove();
