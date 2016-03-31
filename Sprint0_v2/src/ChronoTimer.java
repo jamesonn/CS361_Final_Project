@@ -11,7 +11,7 @@ public class ChronoTimer {
 	private boolean eventRunning;
 	private Sensor[] sensors;
 	//events start at 1 not 0
-	private ArrayList<Event> events;
+	private ArrayList<Event> events = new ArrayList<>();
 	private int currentEvent;
 	private Event event;
 	
@@ -163,7 +163,7 @@ public class ChronoTimer {
 			case "EXPORT":{
 				if (systemOn){
 					Gson g = new Gson();
-					g.toJson(events);
+					//g.toJson(events);
 				}break;
 			}
 			case "ENDRUN":{
@@ -176,7 +176,7 @@ public class ChronoTimer {
 				if (systemOn){ 
 					if(!eventRunning){
 						eventRunning = true;
-						if ( event.getClass().equals(PARIND.class)){
+						if ( events.get(currentEvent).getClass().equals(PARIND.class)){
 							events.add(new PARIND(SysTime));
 						}
 						else {
