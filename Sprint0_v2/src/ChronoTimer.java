@@ -11,7 +11,7 @@ public class ChronoTimer {
 	private boolean eventRunning;
 	private Sensor[] sensors;
 	//events start at 1 not 0
-	private Event[] events;
+	private ArrayList<Event> events;
 	private int currentEvent;
 	private Event event;
 	
@@ -35,7 +35,7 @@ public class ChronoTimer {
 		switch (commands[0]){
 			case "TIME":{
 				if (systemOn){
-					events[currentEvent] = new Event(SysTime);
+					events.add(new Event(SysTime));
 				} break;
 			}
 			case "ON":{
@@ -71,11 +71,11 @@ public class ChronoTimer {
 					String eventType = commands[1];
 					switch(eventType){
 						case "IND":{//no change necessary, default case
-							events[currentEvent] = new Event(SysTime);
+							events.add(new Event(SysTime));
 							break;
 						}
 						case "PARIND":{
-							events[currentEvent] = new PARIND(SysTime);
+							events.add(new PARIND(SysTime));
 							break;
 						}
 						case "GRP":{
@@ -97,16 +97,16 @@ public class ChronoTimer {
 			}
 			case "NUM":{
 				if (systemOn  && eventRunning){
-					events[currentEvent].addRacer(Integer.parseInt(commands[1]));
+					events.get(currentEvent).addRacer(Integer.parseInt(commands[1]));
 				} break;
 			}
 			case "TRIG":{
 				if (systemOn  && eventRunning){
 					/*if(sensors[Integer.parseInt(commands[1])-1] != null){
-						events[currentEvent].trigger(Integer.parseInt(commands[1])-1, TotalTime);
+						events.get(currentEvent).trigger(Integer.parseInt(commands[1])-1, TotalTime);
 					}*/
 					if(sensors[Integer.parseInt(commands[1])-1] != null){
-						events[currentEvent].trigger(Integer.parseInt(commands[1]), TotalTime);
+						events.get(currentEvent).trigger(Integer.parseInt(commands[1]), TotalTime);
 					}
 				} break;
 			}
@@ -115,8 +115,8 @@ public class ChronoTimer {
 					if(sensors[0] != null){
 					//TODO: DOES THIS NEED TO BE A SWITCH CASE???? Or does it literally just mean trig 1?
 						//in GRP trig 1 starts all lanes, in PARIND this would start 1 & 3
-						events[currentEvent].trigger(3, TotalTime);
-						events[currentEvent].trigger(1, TotalTime);
+						events.get(currentEvent).trigger(3, TotalTime);
+						events.get(currentEvent).trigger(1, TotalTime);
 						//trig 3 MUST be before trig 1 to allow PARIND start otherwise
 						//would case a false-finish for GRP events
 					}
@@ -125,7 +125,7 @@ public class ChronoTimer {
 				if (systemOn && eventRunning){ //Sprint 2; "shorthand for TRIG 2"
 					if(sensors[1] != null){
 						//TODO: DOES THIS NEED TO BE A SWITCH CASE????
-						events[currentEvent].trigger(2, TotalTime);
+						events.get(currentEvent).trigger(2, TotalTime);
 						
 					}
 				}break;
@@ -133,26 +133,26 @@ public class ChronoTimer {
 			case "DNF":{
 				if (systemOn && eventRunning){ //IND only???
 					//Sprint 1; "next competitor to finish will not finish"
-					events[currentEvent].didNotFinish();
+					events.get(currentEvent).didNotFinish();
 				}break;
 			}
 			case "CLR":{
 				if (systemOn && eventRunning){ 
 					//TODO: Sprint 2; "clear NUM as the next competitor" a.k.a. remove them from queue
-					events[currentEvent].removeRacer();
+					events.get(currentEvent).removeRacer();
 				}break;
 			}
 			case "SWAP":{
 				if (systemOn && eventRunning){ 
 					//Sprint 2; "exchange next two competitors to finish in IND type"
-					events[currentEvent].swap();
+					events.get(currentEvent).swap();
 				}break;
 			}
 			case "PRINT":{
 				//if (systemOn && eventRunning){ 
 				if (systemOn){ 
 					//TODO: determine if printer is on; see "Operation of Unit" on p4
-					ArrayList<String> log = events[currentEvent].print(TotalTime);
+					ArrayList<String> log = events.get(currentEvent).print(TotalTime);
 					//verify passed: System.out.println(log[0]);
 					//j = getPrinterStartTime/Location, however we determine that
 					for(int j = 0; j < log.size(); j++){
@@ -177,10 +177,10 @@ public class ChronoTimer {
 					if(!eventRunning){
 						eventRunning = true;
 						if ( event.getClass().equals(PARIND.class)){
-							events[currentEvent] = new PARIND(SysTime);
+							events.add(new PARIND(SysTime));
 						}
 						else {
-							events[currentEvent] = new Event(SysTime);
+							events.add(new Event(SysTime));
 						}
 					}
 					else{
