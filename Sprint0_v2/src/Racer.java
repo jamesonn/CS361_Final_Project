@@ -45,7 +45,7 @@ public class Racer {
 	
 	public String print(){
 		double time = getTotalTime();
-		String t = String.format("%.1f", time);
+		String t = String.format("%.2f", time);
 		return ""+ racerNum +" "+ t;
 	}
 

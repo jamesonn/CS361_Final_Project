@@ -91,7 +91,7 @@ public class PARIND extends Event{
 		t = t % 3600;
 		m = (int) (t / 60);
 		s = t % 60;
-		curTime = ""+h+":"+m+":"+ String.format("%.1f", s);
+		curTime = ""+h+":"+m+":"+ String.format("%.2f", s);
 		/*
 		totalTime = t;
 		double m, h, s, temp = 0;

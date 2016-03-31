@@ -91,10 +91,10 @@ public class Testing {
 		assertEquals(e.getCurTime(), "11:14:30.0");
 		assertEquals(e.getTotalTime(), 40470, 0.0);
 		e.trigger(0, 40502);
-		assertEquals(e.getCurTime(), "11:15:2.0");
+		assertEquals(e.getCurTime(), "11:15:2.00");
 		assertEquals(e.getTotalTime(), 40502, 0.0);
 		e.trigger(0, 43199.9);
-		assertEquals(e.getCurTime(), "11:59:59.9");
+		assertEquals(e.getCurTime(), "11:59:59.90");
 		assertEquals(e.getTotalTime(), 43199.9, 0.0);
 		
 	}
@@ -118,10 +118,9 @@ public class Testing {
 		ArrayList<String> list = e.print(40950.0);
 		assertEquals(4, list.size());
 		assertEquals(list.get(0), "11:14:30.0 IND");
-		assertEquals(list.get(1), "112 227.8 F");
+		assertEquals(list.get(1), "112 227.80 F");
 		assertEquals(list.get(2), "111 DNF");
-		assertEquals(list.get(3), "113 249.0 R");
-		
+		assertEquals(list.get(3), "113 249.00 R");
 	}
 	
 	/**
@@ -145,10 +144,10 @@ public class Testing {
 		ArrayList<String> list = e.print(40900);
 		assertEquals(5, list.size());
 		assertEquals(list.get(0), "11:14:30.0 PARIND");
-		assertEquals(list.get(1), "111 197.2 F");
-		assertEquals(list.get(2), "112 90.3 F");
-		assertEquals(list.get(3), "113 199.5 R");
-		assertEquals(list.get(4), "114 90.0 R");
+		assertEquals(list.get(1), "111 197.20 F");
+		assertEquals(list.get(2), "112 90.30 F");
+		assertEquals(list.get(3), "113 199.50 R");
+		assertEquals(list.get(4), "114 90.00 R");
 		
 		
 	}

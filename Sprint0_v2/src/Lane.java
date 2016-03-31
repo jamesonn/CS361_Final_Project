@@ -73,7 +73,7 @@ public class Lane {
 		while(!isActiveEmpty()){
 			curRacer = active.removeFirst();
 			elapsed = t - curRacer.getStartTime();
-			String e = String.format("%.1f", elapsed);
+			String e = String.format("%.2f", elapsed);
 			list.add(curRacer.getBibNum()+" "+e+" R");
 		}
 		if(!isReadyEmpty()){
