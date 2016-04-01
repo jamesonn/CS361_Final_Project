@@ -9,19 +9,44 @@ public class UserInterface extends JFrame{
 	public UserInterface(){
 		Container cp = getContentPane();
 	    cp.setLayout(null);
-	    
+
 	    JButton power = new JButton("Power");
 	    power.setBounds(30, 20, 100, 30);  // (x, y, width, height)
+	    power.addActionListener(new ActionListener() {
+
+	    	public void actionPerformed(ActionEvent e)
+	    	{
+	    		//TODO
+	    		//toggle the system power (ON/OFF)
+	    	}
+	    }); 
 	    cp.add(power);
 	    
 	    JButton function = new JButton("FUNCTION");
 	    function.setBounds(30, 250, 100, 30);
+	    function.addActionListener(new ActionListener() {
+
+	    	public void actionPerformed(ActionEvent e)
+	    	{
+	    		//TODO
+	    		//system functions?? not sure what this is exactly
+	    	}
+	    }); 
 	    cp.add(function);
 	    
+	    //TODO
 	    //add arrow buttons
 	    
 	    JButton swap = new JButton("SWAP");
 	    swap.setBounds(30,400, 100, 30);
+	    swap.addActionListener(new ActionListener() {
+
+	    	public void actionPerformed(ActionEvent e)
+	    	{
+	    		//TODO
+	    		//swap first 2 racers currently running, only in IND Event
+	    	}
+	    }); 
 	    cp.add(swap);
 	    
 	    JLabel title = new JLabel("CHRONOTIMER 1009");
@@ -58,6 +83,14 @@ public class UserInterface extends JFrame{
 	    startOne.setOpaque(true);
 	    startOne.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 	    startOne.setBounds(345, 70, 20, 20);
+	    startOne.addActionListener(new ActionListener() {
+
+	    	public void actionPerformed(ActionEvent e)
+	    	{
+	    		//TODO
+	    		//TRIG on Sensor 1
+	    	}
+	    }); 
 	    cp.add(startOne);
 	    
 	    JButton startThree = new JButton();
@@ -66,12 +99,28 @@ public class UserInterface extends JFrame{
 	    startThree.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 	    startThree.setBounds(375, 70, 20, 20);
 	    cp.add(startThree);
+	    startThree.addActionListener(new ActionListener() {
+
+	    	public void actionPerformed(ActionEvent e)
+	    	{
+	    		//TODO
+	    		//TRIG on Sensor 3
+	    	}
+	    }); 
 	    
 	    JButton startFive = new JButton();
 	    startFive.setBackground(Color.GREEN);
 	    startFive.setOpaque(true);
 	    startFive.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 	    startFive.setBounds(405, 70, 20, 20);
+	    startFive.addActionListener(new ActionListener() {
+
+	    	public void actionPerformed(ActionEvent e)
+	    	{
+	    		//TODO
+	    		//TRIG on Sensor 5
+	    	}
+	    }); 
 	    cp.add(startFive);
 	    
 	    JButton startSeven = new JButton();
@@ -79,22 +128,62 @@ public class UserInterface extends JFrame{
 	    startSeven.setOpaque(true);
 	    startSeven.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 	    startSeven.setBounds(435, 70, 20, 20);
+	    startSeven.addActionListener(new ActionListener() {
+
+	    	public void actionPerformed(ActionEvent e)
+	    	{
+	    		//TODO
+	    		//TRIG on Sensor 5
+	    	}
+	    }); 
 	    cp.add(startSeven);
 	    
 	    JRadioButton toggleOne = new JRadioButton();
 	    toggleOne.setBounds(341, 100, 22, 22);
+	    toggleOne.addActionListener(new ActionListener() {
+
+	    	public void actionPerformed(ActionEvent e)
+	    	{
+	    		//TODO
+	    		//toggle Sensor 1
+	    	}
+	    }); 
 	    cp.add(toggleOne);
 	    
 	    JRadioButton toggleThree = new JRadioButton();
 	    toggleThree.setBounds(371, 100, 22, 22);
+	    toggleThree.addActionListener(new ActionListener() {
+
+	    	public void actionPerformed(ActionEvent e)
+	    	{
+	    		//TODO
+	    		//toggle Sensor 3
+	    	}
+	    }); 
 	    cp.add(toggleThree);
 	    
 	    JRadioButton toggleFive = new JRadioButton();
 	    toggleFive.setBounds(401, 100, 22, 22);
+	    toggleFive.addActionListener(new ActionListener() {
+
+	    	public void actionPerformed(ActionEvent e)
+	    	{
+	    		//TODO
+	    		//toggle Sensor 5
+	    	}
+	    }); 
 	    cp.add(toggleFive);
 	    
 	    JRadioButton toggleSeven = new JRadioButton();
 	    toggleSeven.setBounds(431, 100, 22, 22);
+	    toggleSeven.addActionListener(new ActionListener() {
+
+	    	public void actionPerformed(ActionEvent e)
+	    	{
+	    		//TODO
+	    		//toggle Sensor 7
+	    	}
+	    }); 
 	    cp.add(toggleSeven);
 	    
 	    JLabel finish = new JLabel("Finish");
@@ -121,58 +210,125 @@ public class UserInterface extends JFrame{
 	    eight.setBounds(440, 140, 10, 10);
 	    cp.add(eight);
 	    
-	    JButton startTwo = new JButton();
-	    startTwo.setBackground(Color.RED);
-	    startTwo.setOpaque(true);
-	    startTwo.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-	    startTwo.setBounds(345, 160, 20, 20);
-	    cp.add(startTwo);
+	    JButton finishTwo = new JButton();
+	    finishTwo.setBackground(Color.RED);
+	    finishTwo.setOpaque(true);
+	    finishTwo.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+	    finishTwo.setBounds(345, 160, 20, 20);
+	    finishTwo.addActionListener(new ActionListener() {
+
+	    	public void actionPerformed(ActionEvent e)
+	    	{
+	    		//TODO
+	    		//TRIG on Sensor 2
+	    	}
+	    }); 
+	    cp.add(finishTwo);
 	    
-	    JButton startFour = new JButton();
-	    startFour.setBackground(Color.RED);
-	    startFour.setOpaque(true);
-	    startFour.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-	    startFour.setBounds(375, 160, 20, 20);
-	    cp.add(startFour);
+	    JButton finishFour = new JButton();
+	    finishFour.setBackground(Color.RED);
+	    finishFour.setOpaque(true);
+	    finishFour.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+	    finishFour.setBounds(375, 160, 20, 20);
+	    finishFour.addActionListener(new ActionListener() {
+
+	    	public void actionPerformed(ActionEvent e)
+	    	{
+	    		//TODO
+	    		//TRIG on Sensor 4
+	    	}
+	    }); 
+	    cp.add(finishFour);
 	    
-	    JButton startSix = new JButton();
-	    startSix.setBackground(Color.RED);
-	    startSix.setOpaque(true);
-	    startSix.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-	    startSix.setBounds(405, 160, 20, 20);
-	    cp.add(startSix);
+	    JButton finishSix = new JButton();
+	    finishSix.setBackground(Color.RED);
+	    finishSix.setOpaque(true);
+	    finishSix.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+	    finishSix.setBounds(405, 160, 20, 20);
+	    finishSix.addActionListener(new ActionListener() {
+
+	    	public void actionPerformed(ActionEvent e)
+	    	{
+	    		//TODO
+	    		//TRIG on Sensor 6
+	    	}
+	    }); 
+	    cp.add(finishSix);
 	    
-	    JButton startEight = new JButton();
-	    startEight.setBackground(Color.RED);
-	    startEight.setOpaque(true);
-	    startEight.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-	    startEight.setBounds(435, 160, 20, 20);
-	    cp.add(startEight);
+	    JButton finishEight = new JButton();
+	    finishEight.setBackground(Color.RED);
+	    finishEight.setOpaque(true);
+	    finishEight.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+	    finishEight.setBounds(435, 160, 20, 20);
+	    finishEight.addActionListener(new ActionListener() {
+
+	    	public void actionPerformed(ActionEvent e)
+	    	{
+	    		//TODO
+	    		//TRIG on Sensor 8
+	    	}
+	    }); 
+	    cp.add(finishEight);
 	    
 	    JRadioButton toggleTwo = new JRadioButton();
 	    toggleTwo.setBounds(341, 190, 22, 22);
+	    toggleTwo.addActionListener(new ActionListener() {
+
+	    	public void actionPerformed(ActionEvent e)
+	    	{
+	    		//TODO
+	    		//toggle Sensor 2
+	    	}
+	    }); 
 	    cp.add(toggleTwo);
 	    
 	    JRadioButton toggleFour = new JRadioButton();
 	    toggleFour.setBounds(371, 190, 22, 22);
+	    toggleFour.addActionListener(new ActionListener() {
+
+	    	public void actionPerformed(ActionEvent e)
+	    	{
+	    		//TODO
+	    		//toggle Sensor 4
+	    	}
+	    }); 
 	    cp.add(toggleFour);
 	    
 	    JRadioButton toggleSix = new JRadioButton();
 	    toggleSix.setBounds(401, 190, 22, 22);
+	    toggleSix.addActionListener(new ActionListener() {
+
+	    	public void actionPerformed(ActionEvent e)
+	    	{
+	    		//TODO
+	    		//toggle Sensor 6
+	    	}
+	    }); 
 	    cp.add(toggleSix);
 	    
 	    JRadioButton toggleEight = new JRadioButton();
 	    toggleEight.setBounds(431, 190, 22, 22);
+	    toggleEight.addActionListener(new ActionListener() {
+
+	    	public void actionPerformed(ActionEvent e)
+	    	{
+	    		//TODO
+	    		//toggle Sensor 8
+	    	}
+	    }); 
 	    cp.add(toggleEight);
 	    
+	    //TODO
 	    //add console display
 	    
 	    JButton printerPower = new JButton("Printer Pwr");
 	    printerPower.setBounds(600, 20, 100, 30);
 	    cp.add(printerPower);
 	    
+	    //TODO
 	    //add printer display
 	    
+	    //TODO
 	    //add numeric keypad
 		
 	    JPanel back = new JPanel();
@@ -203,18 +359,50 @@ public class UserInterface extends JFrame{
 	    
 	    JRadioButton toggleBackOne = new JRadioButton();
 	    toggleBackOne.setBounds(91, 40, 22, 22);
+	    toggleOne.addActionListener(new ActionListener() {
+
+	    	public void actionPerformed(ActionEvent e)
+	    	{
+	    		//TODO
+	    		//CONN/DISC Sensor 1 (CONN brings up drop down list of types)
+	    	}
+	    }); 
 	    back.add(toggleBackOne);
 	    
 	    JRadioButton toggleBackThree = new JRadioButton();
 	    toggleBackThree.setBounds(121, 40, 22, 22);
+	    toggleBackThree.addActionListener(new ActionListener() {
+
+	    	public void actionPerformed(ActionEvent e)
+	    	{
+	    		//TODO
+	    		//CONN/DISC Sensor 3 (CONN brings up drop down list of types)
+	    	}
+	    }); 
 	    back.add(toggleBackThree);
 	    
 	    JRadioButton toggleBackFive = new JRadioButton();
 	    toggleBackFive.setBounds(151, 40, 22, 22);
+	    toggleBackFive.addActionListener(new ActionListener() {
+
+	    	public void actionPerformed(ActionEvent e)
+	    	{
+	    		//TODO
+	    		//CONN/DISC Sensor 5 (CONN brings up drop down list of types)
+	    	}
+	    }); 
 	    back.add(toggleBackFive);
 	    
 	    JRadioButton toggleBackSeven = new JRadioButton();
 	    toggleBackSeven.setBounds(181, 40, 22, 22);
+	    toggleBackSeven.addActionListener(new ActionListener() {
+
+	    	public void actionPerformed(ActionEvent e)
+	    	{
+	    		//TODO
+	    		//CONN/DISC Sensor 7 (CONN brings up drop down list of types)
+	    	}
+	    }); 
 	    back.add(toggleBackSeven);
 	    
 	    JLabel backTwo = new JLabel("2");
@@ -235,20 +423,53 @@ public class UserInterface extends JFrame{
 	    
 	    JRadioButton toggleBackTwo = new JRadioButton();
 	    toggleBackTwo.setBounds(91, 90, 22, 22);
+	    toggleBackTwo.addActionListener(new ActionListener() {
+
+	    	public void actionPerformed(ActionEvent e)
+	    	{
+	    		//TODO
+	    		//CONN/DISC Sensor 2 (CONN brings up drop down list of types)
+	    	}
+	    }); 
 	    back.add(toggleBackTwo);
 	    
 	    JRadioButton toggleBackFour = new JRadioButton();
 	    toggleBackFour.setBounds(121, 90, 22, 22);
+	    toggleBackFour.addActionListener(new ActionListener() {
+
+	    	public void actionPerformed(ActionEvent e)
+	    	{
+	    		//TODO
+	    		//CONN/DISC Sensor 4 (CONN brings up drop down list of types)
+	    	}
+	    }); 
 	    back.add(toggleBackFour);
 	    
 	    JRadioButton toggleBackSix = new JRadioButton();
 	    toggleBackSix.setBounds(151, 90, 22, 22);
+	    toggleBackSix.addActionListener(new ActionListener() {
+
+	    	public void actionPerformed(ActionEvent e)
+	    	{
+	    		//TODO
+	    		//CONN/DISC Sensor 6 (CONN brings up drop down list of types)
+	    	}
+	    }); 
 	    back.add(toggleBackSix);
 	    
 	    JRadioButton toggleBackEight = new JRadioButton();
 	    toggleBackEight.setBounds(181, 90, 22, 22);
+	    toggleBackEight.addActionListener(new ActionListener() {
+
+	    	public void actionPerformed(ActionEvent e)
+	    	{
+	    		//TODO
+	    		//CONN/DISC Sensor 8 (CONN brings up drop down list of types)
+	    	}
+	    }); 
 	    back.add(toggleBackEight);
 	   
+	    //TODO
 	    //add USB port
 	    
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
