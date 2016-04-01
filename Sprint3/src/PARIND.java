@@ -5,10 +5,10 @@ import java.util.ArrayList;
  * @author Group 1
  */
 public class PARIND extends Event{
-	private Lane[] lanes = new Lane[2];
-	private ArrayList<String> log = new ArrayList<String>();
-	private double totalTime = 0;
-	private String curTime = "";
+	private Lane[] paraLane = new Lane[2];
+	private ArrayList<String> paraLog = new ArrayList<String>();
+	private double paraTotalTime = 0;
+	private String paraCurTime = "";
 	
 	/**
 	 * Handles two active lanes at once;
@@ -16,19 +16,19 @@ public class PARIND extends Event{
 	 */
 	public PARIND(String t) {
 		super(t);
-		lanes[0] = new Lane();
-		lanes[1] = new Lane();
+		paraLane[0] = new Lane();
+		paraLane[1] = new Lane();
 		updateTime(t);
-		log.add(curTime+ " PARIND");
+		paraLog.add(paraCurTime+ " PARIND");
 	}
 	
 	@Override
 	public void addRacer(int bib){
 		Racer r = new Racer(bib);
-		if(lanes[0].getNumRacers() <= lanes[1].getNumRacers())
-			lanes[0].addRacer(r);
+		if(paraLane[0].getNumRacers() <= paraLane[1].getNumRacers())
+			paraLane[0].addRacer(r);
 		else
-			lanes[1].addRacer(r);
+			paraLane[1].addRacer(r);
 		//TODO: verify order of adding racers to lanes, currently adds to lane 1 first
 	}
 	
@@ -37,23 +37,23 @@ public class PARIND extends Event{
 		updateTime(t);
 		switch(chan){
 			case 1:{
-				if(!lanes[0].isReadyEmpty()){
-					lanes[0].start(t);
+				if(!paraLane[0].isReadyEmpty()){
+					paraLane[0].start(t);
 				}break;
 			}
 			case 2:{
-				if(!lanes[0].isActiveEmpty()){
-					log.add(lanes[0].stop(t));
+				if(!paraLane[0].isActiveEmpty()){
+					paraLog.add(paraLane[0].stop(t));
 				}break;
 			}
 			case 3:{
-				if(!lanes[1].isReadyEmpty()){
-					lanes[1].start(t);
+				if(!paraLane[1].isReadyEmpty()){
+					paraLane[1].start(t);
 				}break;
 			}
 			case 4:{
-				if(!lanes[1].isActiveEmpty()){
-					log.add(lanes[1].stop(t));
+				if(!paraLane[1].isActiveEmpty()){
+					paraLog.add(paraLane[1].stop(t));
 				}break;
 			}
 		}
@@ -61,9 +61,9 @@ public class PARIND extends Event{
 	
 	@Override
 	public ArrayList<String> print(double time){
-		log.addAll(lanes[0].print(time));
-		log.addAll(lanes[1].print(time));
-		return log;
+		paraLog.addAll(paraLane[0].print(time));
+		paraLog.addAll(paraLane[1].print(time));
+		return paraLog;
 	}
 	
 	/**
@@ -71,11 +71,11 @@ public class PARIND extends Event{
 	 * @param t
 	 */
 	private void updateTime(String t){
-		curTime = t;
+		paraCurTime = t;
 		String[] time = t.split(":");
 		double tempTime = Float.parseFloat(time[2]);//add seconds
 		tempTime += Float.parseFloat(time[1])*60 + Float.parseFloat(time[0])*3600;
-		totalTime = tempTime;
+		paraTotalTime = tempTime;
 	}
 	
 	/**
@@ -83,13 +83,13 @@ public class PARIND extends Event{
 	 * @param t
 	 */
 	private void updateTime(double t){
-		totalTime = t;
+		paraTotalTime = t;
 		int h, m;
 		double s;
 		h = (int) (t / 3600);
 		t = t % 3600;
 		m = (int) (t / 60);
 		s = t % 60;
-		curTime = ""+h+":"+m+":"+ String.format("%.2f", s);
+		paraCurTime = ""+h+":"+m+":"+ String.format("%.2f", s);
 	}
 }

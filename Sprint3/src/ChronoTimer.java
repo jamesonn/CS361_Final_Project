@@ -1,5 +1,6 @@
 import com.google.gson.Gson;
 
+import java.io.*;
 import java.util.ArrayList;
 
 /**
@@ -13,7 +14,6 @@ public class ChronoTimer {
 	//events start at 1 not 0
 	private ArrayList<Event> events = new ArrayList<>();
 	private int currentEvent;
-	private Event event;
 	
 	/**
 	 * ChronoTimer constructor
@@ -163,7 +163,13 @@ public class ChronoTimer {
 			case "EXPORT":{
 				if (systemOn){
 					Gson g = new Gson();
-					//g.toJson(events);
+					try{
+						BufferedWriter writer = new BufferedWriter(new FileWriter("Export"+commands[1]+".json"));
+						writer.write(g.toJson(events));
+						writer.close();
+					}catch(Exception IOException){
+
+					}
 				}break;
 			}
 			case "ENDRUN":{
@@ -173,13 +179,16 @@ public class ChronoTimer {
 			}
 
 			case "NEWRUN":{
-				if (systemOn){ 
+				if (systemOn){
+
 					if(!eventRunning){
 						eventRunning = true;
 						if ( events.get(currentEvent).getClass().equals(PARIND.class)){
+							currentEvent++;
 							events.add(new PARIND(SysTime));
 						}
 						else {
+							currentEvent++;
 							events.add(new Event(SysTime));
 						}
 					}
