@@ -1,6 +1,7 @@
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import javax.swing.plaf.basic.BasicArrowButton;
 
 public class UserInterface extends JFrame{
 
@@ -30,8 +31,45 @@ public class UserInterface extends JFrame{
 		}); 
 		cp.add(function);
 
-		//TODO
-		//add arrow buttons
+		BasicArrowButton left = new BasicArrowButton(BasicArrowButton.WEST);
+		left.setBounds(30, 300, 30, 30);
+		left.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e){
+				//TODO
+				//left arrow button
+			}
+		}); 
+		cp.add(left);
+
+		BasicArrowButton right = new BasicArrowButton(BasicArrowButton.EAST);
+		right.setBounds(70, 300, 30, 30);
+		right.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e){
+				//TODO
+				//right arrow button
+			}
+		}); 
+		cp.add(right);
+
+		BasicArrowButton down = new BasicArrowButton(BasicArrowButton.SOUTH);
+		down.setBounds(110, 300, 30, 30);
+		down.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e){
+				//TODO
+				//down arrow button
+			}
+		}); 
+		cp.add(down);
+
+		BasicArrowButton up = new BasicArrowButton(BasicArrowButton.NORTH);
+		up.setBounds(150, 300, 30, 30);
+		up.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e){
+				//TODO
+				//up arrow button
+			}
+		}); 
+		cp.add(up);
 
 		JButton swap = new JButton("SWAP");
 		swap.setBounds(30,400, 100, 30);
@@ -279,14 +317,14 @@ public class UserInterface extends JFrame{
 			}
 		}); 
 		cp.add(toggleEight);
-		
+
 		JTextField console = new JTextField();
 		console.setBounds(280, 250, 220, 200);
 		console.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
 		//console.setBackground(Color.;
 		cp.add(console);
-		
-		
+
+
 		JLabel consoleLabel = new JLabel("Queue/Running/Final Time");
 		consoleLabel.setBounds(300,460,200,20);
 		cp.add(consoleLabel);
@@ -300,16 +338,15 @@ public class UserInterface extends JFrame{
 			}
 		}); 
 		cp.add(printerPower);
-		
+
 		JTextField printer = new JTextField();
 		printer.setBounds(575, 60, 150, 150);
 		printer.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
 		cp.add(printer);
 
-		//TODO
-		//add numeric keypad
 		JPanel keypad = new JPanel(new GridLayout(4,3));
-		keypad.setBounds(575, 240, 150, 200);
+		keypad.setBounds(575, 250, 150, 200);
+
 		JButton b1 = new JButton("1");
 		b1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
@@ -388,10 +425,10 @@ public class UserInterface extends JFrame{
 			}
 		}); 
 		JButton bp = new JButton("#");
-		ba.addActionListener(new ActionListener() {
+		bp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
 				//TODO
-				//button a
+				//button p
 			}
 		}); 
 		keypad.add(b1);
@@ -407,7 +444,6 @@ public class UserInterface extends JFrame{
 		keypad.add(b0);
 		keypad.add(bp);
 		cp.add(keypad);
-		
 
 		JPanel back = new JPanel();
 		back.setLayout(null);
@@ -531,8 +567,19 @@ public class UserInterface extends JFrame{
 		}); 
 		back.add(toggleBackEight);
 
-		//TODO
-		//add USB port
+		JButton USB = new JButton();
+		USB.setBounds(300, 60, 60, 15);
+		USB.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e){
+				//TODO
+				//CONN/DISC USB (enter a filename??)
+			}
+		}); 
+		back.add(USB);
+
+		JLabel USBLabel = new JLabel("USB PORT");
+		USBLabel.setBounds(370, 60, 60, 15);
+		back.add(USBLabel);
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("Chrono Timer");
