@@ -279,9 +279,17 @@ public class UserInterface extends JFrame{
 			}
 		}); 
 		cp.add(toggleEight);
-
-		//TODO
-		//add console display
+		
+		JTextField console = new JTextField();
+		console.setBounds(280, 250, 220, 200);
+		console.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+		//console.setBackground(Color.;
+		cp.add(console);
+		
+		
+		JLabel consoleLabel = new JLabel("Queue/Running/Final Time");
+		consoleLabel.setBounds(300,460,200,20);
+		cp.add(consoleLabel);
 
 		JButton printerPower = new JButton("Printer Pwr");
 		printerPower.setBounds(600, 20, 100, 30);
@@ -292,12 +300,114 @@ public class UserInterface extends JFrame{
 			}
 		}); 
 		cp.add(printerPower);
-
-		//TODO
-		//add printer display
+		
+		JTextField printer = new JTextField();
+		printer.setBounds(575, 60, 150, 150);
+		printer.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+		cp.add(printer);
 
 		//TODO
 		//add numeric keypad
+		JPanel keypad = new JPanel(new GridLayout(4,3));
+		keypad.setBounds(575, 240, 150, 200);
+		JButton b1 = new JButton("1");
+		b1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e){
+				//TODO
+				//button 1
+			}
+		}); 
+		JButton b2 = new JButton("2");
+		b2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e){
+				//TODO
+				//button 2
+			}
+		}); 
+		JButton b3 = new JButton("3");
+		b3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e){
+				//TODO
+				//button 3
+			}
+		}); 
+		JButton b4 = new JButton("4");
+		b4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e){
+				//TODO
+				//button 4
+			}
+		}); 
+		JButton b5 = new JButton("5");
+		b5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e){
+				//TODO
+				//button 5
+			}
+		}); 
+		JButton b6 = new JButton("6");
+		b6.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e){
+				//TODO
+				//button 6
+			}
+		}); 
+		JButton b7 = new JButton("7");
+		b7.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e){
+				//TODO
+				//button 7
+			}
+		}); 
+		JButton b8 = new JButton("8");
+		b8.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e){
+				//TODO
+				//button 8
+			}
+		}); 
+		JButton b9 = new JButton("9");
+		b9.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e){
+				//TODO
+				//button 9
+			}
+		}); 
+		JButton ba = new JButton("*");
+		ba.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e){
+				//TODO
+				//button a
+			}
+		}); 
+		JButton b0 = new JButton("0");
+		b0.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e){
+				//TODO
+				//button 0
+			}
+		}); 
+		JButton bp = new JButton("#");
+		ba.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e){
+				//TODO
+				//button a
+			}
+		}); 
+		keypad.add(b1);
+		keypad.add(b2);
+		keypad.add(b3);
+		keypad.add(b4);
+		keypad.add(b5);
+		keypad.add(b6);
+		keypad.add(b7);
+		keypad.add(b8);
+		keypad.add(b9);
+		keypad.add(ba);
+		keypad.add(b0);
+		keypad.add(bp);
+		cp.add(keypad);
+		
 
 		JPanel back = new JPanel();
 		back.setLayout(null);
