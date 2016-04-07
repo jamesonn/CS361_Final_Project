@@ -9,7 +9,7 @@ public class Event {
 	private Lane[] lanes = new Lane[1];
 	private ArrayList<Racer> participants = new ArrayList<Racer>();
 	//NOTE: runs starts at 1 not 0
-	private ArrayList<ArrayList<String>> runs = new ArrayList<ArrayList<String>>();
+	private ArrayList<String> runs = new ArrayList<String>();
 	private ArrayList<String> log = new ArrayList<String>();
 	private double totalTime = 0;
 	private String curTime = "";
@@ -22,7 +22,7 @@ public class Event {
 	public Event(String t){
 		lanes[0] = new Lane();
 		updateTime(t);
-		log.add(curTime+ " IND");
+		runs.add(curTime+ " IND");
 	}
 	
 	/**
@@ -77,8 +77,9 @@ public class Event {
 	
 	public ArrayList<String> print(double time){
 		log.addAll(lanes[0].print(time));
-		runs.add(getLog());
-		return log;
+		runs.add(getCurTime()+" Run "+ runNum);
+		runs.addAll(getLog());
+		return runs;
 	}
 	
 	/**
