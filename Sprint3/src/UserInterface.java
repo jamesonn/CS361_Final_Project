@@ -19,6 +19,7 @@ public class UserInterface extends JFrame{
     Calendar calendar = Calendar.getInstance();
     private double totalTime;
     private String sysTime;
+    private String swap1;
 
 	public UserInterface(ChronoTimer cTimer){
 		this.cTimer = cTimer;
@@ -497,7 +498,32 @@ public class UserInterface extends JFrame{
 		JButton bp = new JButton("#");
 		bp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-                command[1] = enteredNumber.toString();
+                //TODO i think conn/disc/swap are the only ones where the number isnt in the second position
+                if(command[0] == CommandConstants.connect || command[0] == CommandConstants.disconnect) {
+                    command[2] = enteredNumber.toString();
+                    calendar.getInstance();
+                    totalTime = calendar.get(Calendar.HOUR) + calendar.get(Calendar.MINUTE)*60 + calendar.get(Calendar.SECOND)*3600;
+                    sysTime = sdf.format(new Date());
+                    cTimer.executeCommand(command,totalTime,sysTime);
+                }else if(command[0] == CommandConstants.swap){
+                    if(swap1 == null) {
+                        swap1 = enteredNumber.toString();
+                    }else{
+                        command[1] = swap1;
+                        command[2] = enteredNumber.toString();
+                        swap1 = null;
+                        calendar.getInstance();
+                        totalTime = calendar.get(Calendar.HOUR) + calendar.get(Calendar.MINUTE)*60 + calendar.get(Calendar.SECOND)*3600;
+                        sysTime = sdf.format(new Date());
+                        cTimer.executeCommand(command,totalTime,sysTime);
+                    }
+                }else{
+                    command[1] = enteredNumber.toString();
+                    calendar.getInstance();
+                    totalTime = calendar.get(Calendar.HOUR) + calendar.get(Calendar.MINUTE)*60 + calendar.get(Calendar.SECOND)*3600;
+                    sysTime = sdf.format(new Date());
+                    cTimer.executeCommand(command,totalTime,sysTime);
+                }
 			}
 		}); 
 		keypad.add(b1);
@@ -655,14 +681,4 @@ public class UserInterface extends JFrame{
 		setSize(800, 700);
 		setVisible(true);
 	}
-
-	/*public static void main(String[] args) {
-		SwingUtilities.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				new UserInterface();
-			}
-		});
-	}*/
-
 }
