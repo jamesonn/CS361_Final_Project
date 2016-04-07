@@ -7,12 +7,13 @@ import java.util.Scanner;
  * Created by Nate on 4/7/2016.
  */
 public class Client {
-    public Client(boolean formatChoice) {
+
+    public Client(boolean formatChoiceIsUI) {
 
         ChronoTimer cTimer = new ChronoTimer();
 
-        if(formatChoice){
-            UserInterface ui = new UserInterface();
+        if(formatChoiceIsUI){
+            UserInterface ui = new UserInterface(cTimer);
         }else {
             int hours;
             int minutes;

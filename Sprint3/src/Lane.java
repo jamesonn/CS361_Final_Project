@@ -73,7 +73,7 @@ public class Lane {
 		else{
 			Racer clearRacer = this.findRacer(bib);
 			while(ready.remove(clearRacer)){
-				
+
 			}
 			return "";
 		}

@@ -1,13 +1,27 @@
 import java.awt.*;
 import java.awt.event.*;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicArrowButton;
+import javax.xml.crypto.Data;
 
 public class UserInterface extends JFrame{
 
 	private static final long serialVersionUID = 1L;
+	private ChronoTimer cTimer;
+    private String[] command = new String[3];
+    //there's got to be a more efficient way, but this is the simplest i can think of for entered numbers atm
+    private StringBuilder enteredNumber = new StringBuilder();
+    private int finalNumber;
+    SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+    Calendar calendar = Calendar.getInstance();
+    private double totalTime;
+    private String sysTime;
 
-	public UserInterface(){
+	public UserInterface(ChronoTimer cTimer){
+		this.cTimer = cTimer;
 		Container cp = getContentPane();
 		cp.setLayout(null);
 
@@ -15,8 +29,8 @@ public class UserInterface extends JFrame{
 		power.setBounds(30, 20, 100, 30);  // (x, y, width, height)
 		power.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				//TODO
-				//toggle the system power (ON/OFF)
+				//assuming the system is on if the ui is open
+                command[0] = "OFF";
 			}
 		}); 
 		cp.add(power);
@@ -75,8 +89,7 @@ public class UserInterface extends JFrame{
 		swap.setBounds(30,400, 100, 30);
 		swap.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				//TODO
-				//swap first 2 racers currently running, only in IND Event
+                command[0] = CommandConstants.swap;
 			}
 		}); 
 		cp.add(swap);
@@ -117,8 +130,12 @@ public class UserInterface extends JFrame{
 		startOne.setBounds(345, 70, 20, 20);
 		startOne.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				//TODO
-				//TRIG on Sensor 1
+				command[0] = CommandConstants.trigger;
+                command[1] = "1";
+                calendar.getInstance();
+                totalTime = calendar.get(Calendar.HOUR) + calendar.get(Calendar.MINUTE)*60 + calendar.get(Calendar.SECOND)*3600;
+                sysTime = sdf.format(new Date());
+				cTimer.executeCommand(command,totalTime,sysTime);
 			}
 		}); 
 		cp.add(startOne);
@@ -131,8 +148,12 @@ public class UserInterface extends JFrame{
 		cp.add(startThree);
 		startThree.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				//TODO
-				//TRIG on Sensor 3
+                command[0] = CommandConstants.trigger;
+                command[1] = "3";
+                calendar.getInstance();
+                totalTime = calendar.get(Calendar.HOUR) + calendar.get(Calendar.MINUTE)*60 + calendar.get(Calendar.SECOND)*3600;
+                sysTime = sdf.format(new Date());
+                cTimer.executeCommand(command,totalTime,sysTime);
 			}
 		}); 
 
@@ -143,8 +164,12 @@ public class UserInterface extends JFrame{
 		startFive.setBounds(405, 70, 20, 20);
 		startFive.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				//TODO
-				//TRIG on Sensor 5
+                command[0] = CommandConstants.trigger;
+                command[1] = "5";
+                calendar.getInstance();
+                totalTime = calendar.get(Calendar.HOUR) + calendar.get(Calendar.MINUTE)*60 + calendar.get(Calendar.SECOND)*3600;
+                sysTime = sdf.format(new Date());
+                cTimer.executeCommand(command,totalTime,sysTime);
 			}
 		}); 
 		cp.add(startFive);
@@ -156,8 +181,12 @@ public class UserInterface extends JFrame{
 		startSeven.setBounds(435, 70, 20, 20);
 		startSeven.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				//TODO
-				//TRIG on Sensor 5
+                command[0] = CommandConstants.trigger;
+                command[1] = "7";
+                calendar.getInstance();
+                totalTime = calendar.get(Calendar.HOUR) + calendar.get(Calendar.MINUTE)*60 + calendar.get(Calendar.SECOND)*3600;
+                sysTime = sdf.format(new Date());
+                cTimer.executeCommand(command,totalTime,sysTime);
 			}
 		}); 
 		cp.add(startSeven);
@@ -166,8 +195,12 @@ public class UserInterface extends JFrame{
 		toggleOne.setBounds(341, 100, 22, 22);
 		toggleOne.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				//TODO
-				//toggle Sensor 1
+                command[0] = CommandConstants.toggle;
+                command[1] = "1";
+                calendar.getInstance();
+                totalTime = calendar.get(Calendar.HOUR) + calendar.get(Calendar.MINUTE)*60 + calendar.get(Calendar.SECOND)*3600;
+                sysTime = sdf.format(new Date());
+                cTimer.executeCommand(command,totalTime,sysTime);
 			}
 		}); 
 		cp.add(toggleOne);
@@ -176,8 +209,12 @@ public class UserInterface extends JFrame{
 		toggleThree.setBounds(371, 100, 22, 22);
 		toggleThree.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				//TODO
-				//toggle Sensor 3
+                command[0] = CommandConstants.toggle;
+                command[1] = "3";
+                calendar.getInstance();
+                totalTime = calendar.get(Calendar.HOUR) + calendar.get(Calendar.MINUTE)*60 + calendar.get(Calendar.SECOND)*3600;
+                sysTime = sdf.format(new Date());
+                cTimer.executeCommand(command,totalTime,sysTime);
 			}
 		}); 
 		cp.add(toggleThree);
@@ -186,8 +223,12 @@ public class UserInterface extends JFrame{
 		toggleFive.setBounds(401, 100, 22, 22);
 		toggleFive.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				//TODO
-				//toggle Sensor 5
+                command[0] = CommandConstants.toggle;
+                command[1] = "5";
+                calendar.getInstance();
+                totalTime = calendar.get(Calendar.HOUR) + calendar.get(Calendar.MINUTE)*60 + calendar.get(Calendar.SECOND)*3600;
+                sysTime = sdf.format(new Date());
+                cTimer.executeCommand(command,totalTime,sysTime);
 			}
 		}); 
 		cp.add(toggleFive);
@@ -196,8 +237,12 @@ public class UserInterface extends JFrame{
 		toggleSeven.setBounds(431, 100, 22, 22);
 		toggleSeven.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				//TODO
-				//toggle Sensor 7
+                command[0] = CommandConstants.toggle;
+                command[1] = "7";
+                calendar.getInstance();
+                totalTime = calendar.get(Calendar.HOUR) + calendar.get(Calendar.MINUTE)*60 + calendar.get(Calendar.SECOND)*3600;
+                sysTime = sdf.format(new Date());
+                cTimer.executeCommand(command,totalTime,sysTime);
 			}
 		}); 
 		cp.add(toggleSeven);
@@ -233,8 +278,12 @@ public class UserInterface extends JFrame{
 		finishTwo.setBounds(345, 160, 20, 20);
 		finishTwo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				//TODO
-				//TRIG on Sensor 2
+                command[0] = CommandConstants.trigger;
+                command[1] = "2";
+                calendar.getInstance();
+                totalTime = calendar.get(Calendar.HOUR) + calendar.get(Calendar.MINUTE)*60 + calendar.get(Calendar.SECOND)*3600;
+                sysTime = sdf.format(new Date());
+                cTimer.executeCommand(command,totalTime,sysTime);
 			}
 		}); 
 		cp.add(finishTwo);
@@ -246,8 +295,12 @@ public class UserInterface extends JFrame{
 		finishFour.setBounds(375, 160, 20, 20);
 		finishFour.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				//TODO
-				//TRIG on Sensor 4
+                command[0] = CommandConstants.trigger;
+                command[1] = "4";
+                calendar.getInstance();
+                totalTime = calendar.get(Calendar.HOUR) + calendar.get(Calendar.MINUTE)*60 + calendar.get(Calendar.SECOND)*3600;
+                sysTime = sdf.format(new Date());
+                cTimer.executeCommand(command,totalTime,sysTime);
 			}
 		}); 
 		cp.add(finishFour);
@@ -259,8 +312,12 @@ public class UserInterface extends JFrame{
 		finishSix.setBounds(405, 160, 20, 20);
 		finishSix.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				//TODO
-				//TRIG on Sensor 6
+                command[0] = CommandConstants.trigger;
+                command[1] = "6";
+                calendar.getInstance();
+                totalTime = calendar.get(Calendar.HOUR) + calendar.get(Calendar.MINUTE)*60 + calendar.get(Calendar.SECOND)*3600;
+                sysTime = sdf.format(new Date());
+                cTimer.executeCommand(command,totalTime,sysTime);
 			}
 		}); 
 		cp.add(finishSix);
@@ -272,8 +329,12 @@ public class UserInterface extends JFrame{
 		finishEight.setBounds(435, 160, 20, 20);
 		finishEight.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				//TODO
-				//TRIG on Sensor 8
+                command[0] = CommandConstants.trigger;
+                command[1] = "8";
+                calendar.getInstance();
+                totalTime = calendar.get(Calendar.HOUR) + calendar.get(Calendar.MINUTE)*60 + calendar.get(Calendar.SECOND)*3600;
+                sysTime = sdf.format(new Date());
+                cTimer.executeCommand(command,totalTime,sysTime);
 			}
 		}); 
 		cp.add(finishEight);
@@ -282,8 +343,12 @@ public class UserInterface extends JFrame{
 		toggleTwo.setBounds(341, 190, 22, 22);
 		toggleTwo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				//TODO
-				//toggle Sensor 2
+                command[0] = CommandConstants.toggle;
+                command[1] = "2";
+                calendar.getInstance();
+                totalTime = calendar.get(Calendar.HOUR) + calendar.get(Calendar.MINUTE)*60 + calendar.get(Calendar.SECOND)*3600;
+                sysTime = sdf.format(new Date());
+                cTimer.executeCommand(command,totalTime,sysTime);
 			}
 		}); 
 		cp.add(toggleTwo);
@@ -292,8 +357,12 @@ public class UserInterface extends JFrame{
 		toggleFour.setBounds(371, 190, 22, 22);
 		toggleFour.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				//TODO
-				//toggle Sensor 4
+                command[0] = CommandConstants.toggle;
+                command[1] = "4";
+                calendar.getInstance();
+                totalTime = calendar.get(Calendar.HOUR) + calendar.get(Calendar.MINUTE)*60 + calendar.get(Calendar.SECOND)*3600;
+                sysTime = sdf.format(new Date());
+                cTimer.executeCommand(command,totalTime,sysTime);
 			}
 		}); 
 		cp.add(toggleFour);
@@ -302,8 +371,12 @@ public class UserInterface extends JFrame{
 		toggleSix.setBounds(401, 190, 22, 22);
 		toggleSix.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				//TODO
-				//toggle Sensor 6
+                command[0] = CommandConstants.toggle;
+                command[1] = "6";
+                calendar.getInstance();
+                totalTime = calendar.get(Calendar.HOUR) + calendar.get(Calendar.MINUTE)*60 + calendar.get(Calendar.SECOND)*3600;
+                sysTime = sdf.format(new Date());
+                cTimer.executeCommand(command,totalTime,sysTime);
 			}
 		}); 
 		cp.add(toggleSix);
@@ -312,16 +385,21 @@ public class UserInterface extends JFrame{
 		toggleEight.setBounds(431, 190, 22, 22);
 		toggleEight.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				//TODO
-				//toggle Sensor 8
+                command[0] = CommandConstants.toggle;
+                command[1] = "8";
+                calendar.getInstance();
+                totalTime = calendar.get(Calendar.HOUR) + calendar.get(Calendar.MINUTE)*60 + calendar.get(Calendar.SECOND)*3600;
+                sysTime = sdf.format(new Date());
+                cTimer.executeCommand(command,totalTime,sysTime);
 			}
 		}); 
 		cp.add(toggleEight);
 
 		JTextField console = new JTextField();
+        console.setEditable(false);
 		console.setBounds(280, 250, 220, 200);
 		console.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
-		//console.setBackground(Color.;
+		console.setBackground(Color.white);
 		cp.add(console);
 
 
@@ -340,8 +418,10 @@ public class UserInterface extends JFrame{
 		cp.add(printerPower);
 
 		JTextField printer = new JTextField();
+        printer.setEditable(false);
 		printer.setBounds(575, 60, 150, 150);
 		printer.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+        printer.setBackground(Color.white);
 		cp.add(printer);
 
 		JPanel keypad = new JPanel(new GridLayout(4,3));
@@ -350,85 +430,74 @@ public class UserInterface extends JFrame{
 		JButton b1 = new JButton("1");
 		b1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				//TODO
-				//button 1
+				enteredNumber.append("1");
 			}
 		}); 
 		JButton b2 = new JButton("2");
 		b2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				//TODO
-				//button 2
+                enteredNumber.append("2");
 			}
 		}); 
 		JButton b3 = new JButton("3");
 		b3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				//TODO
-				//button 3
+                enteredNumber.append("3");
 			}
 		}); 
 		JButton b4 = new JButton("4");
 		b4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				//TODO
-				//button 4
+                enteredNumber.append("4");
 			}
 		}); 
 		JButton b5 = new JButton("5");
 		b5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				//TODO
-				//button 5
+                enteredNumber.append("5");
 			}
 		}); 
 		JButton b6 = new JButton("6");
 		b6.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				//TODO
-				//button 6
+                enteredNumber.append("6");
 			}
 		}); 
 		JButton b7 = new JButton("7");
 		b7.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				//TODO
-				//button 7
+                enteredNumber.append("7");
 			}
 		}); 
 		JButton b8 = new JButton("8");
 		b8.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				//TODO
-				//button 8
+                enteredNumber.append("8");
 			}
 		}); 
 		JButton b9 = new JButton("9");
 		b9.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				//TODO
-				//button 9
+                enteredNumber.append("9");
 			}
 		}); 
 		JButton ba = new JButton("*");
 		ba.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				//TODO
-				//button a
+				//TODO wtf is * supposed to do? im just guessing
+                enteredNumber.append("*");
 			}
 		}); 
 		JButton b0 = new JButton("0");
 		b0.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				//TODO
-				//button 0
+                enteredNumber.append("0");
 			}
 		}); 
 		JButton bp = new JButton("#");
 		bp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				//TODO
-				//button p
+                command[1] = enteredNumber.toString();
 			}
 		}); 
 		keypad.add(b1);
@@ -473,7 +542,7 @@ public class UserInterface extends JFrame{
 
 		JRadioButton toggleBackOne = new JRadioButton();
 		toggleBackOne.setBounds(91, 40, 22, 22);
-		toggleOne.addActionListener(new ActionListener() {
+		toggleBackOne.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
 				//TODO
 				//CONN/DISC Sensor 1 (CONN brings up drop down list of types)
@@ -587,13 +656,13 @@ public class UserInterface extends JFrame{
 		setVisible(true);
 	}
 
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
 			public void run() {
 				new UserInterface();
 			}
 		});
-	}
+	}*/
 
 }
