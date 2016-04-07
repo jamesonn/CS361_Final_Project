@@ -14,7 +14,6 @@ public class ChronoTimer {
 	//events start at 1 not 0
 	private ArrayList<Event> events = new ArrayList<>();
 	private int currentEvent;
-	private int runNumber;
 	
 	/**
 	 * ChronoTimer constructor
@@ -23,7 +22,6 @@ public class ChronoTimer {
 		systemOn = true;  
 		eventRunning = false; //instructions treat this as a class, perhaps solution to tracking what type of event is happening?
 		sensors = new Sensor[8];
-		runNumber = 1;
 	}
 
 	/**
@@ -195,6 +193,7 @@ public class ChronoTimer {
 						}
 					}
 					else{
+						events.get(currentEvent).newRun();
 						//TODO: reset or do nothing? unclear instructions here
 					}
 				} break;
