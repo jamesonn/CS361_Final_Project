@@ -61,9 +61,29 @@ public class Lane {
 	 * Clear a Racer from the competition
 	 * @return
 	 */
-	public String removeRacer(){
+	public String removeRacer(int bib){
+		if(!ready.contains(bib) && curRacer.getBibNum() != bib) 
+			return null;
 		
-		return curRacer.getBibNum() + " CLR";
+		// if found
+		else if (curRacer.getBibNum() == bib){
+			ready.remove();
+			return curRacer.getBibNum() + " CLR";
+		}
+		else{
+			Racer clearRacer = this.findRacer(bib);
+			while(ready.remove(clearRacer))
+			return "";
+		}
+	}
+	
+	private Racer findRacer(int bib){
+		Racer searchingRacer = ready.remove();
+		while(searchingRacer != null){
+			if(searchingRacer.getBibNum() != bib)
+			searchingRacer = ready.remove();
+		}
+		return searchingRacer;
 	}
 	
 	
