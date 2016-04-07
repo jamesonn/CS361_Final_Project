@@ -23,6 +23,7 @@ public class Event {
 		lanes[0] = new Lane();
 		updateTime(t);
 		runs.add(curTime+ " IND");
+		runs.add(curTime+ "Run "+runNum);//TODO: is this needed?
 	}
 	
 	/**

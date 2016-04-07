@@ -16,6 +16,7 @@ public class Testing {
 	@Test
 	public void testNewRacer(){
 		racer = new Racer(111);
+		//TODO: add test for runLog
 		assertEquals(racer.getBibNum(), 111);
 		assertEquals(racer.getStartTime(), 0.0, 0.0);
 		assertEquals(racer.getEndTime(), 0.0, 0.0);
@@ -57,6 +58,7 @@ public class Testing {
 		racer2 = new Racer(222);
 		racer3 = new Racer(333);
 		racer4 = new Racer(444);
+		//TODO: add test for removeRacer()
 		assertTrue(lane.isReadyEmpty());
 		assertTrue(lane.isActiveEmpty());
 		lane.addRacer(racer);
@@ -105,6 +107,7 @@ public class Testing {
 	@Test
 	public void testNormalIND(){
 		Event e = new Event("11:14:30.0");
+		//TODO: test CLR here or in WeirdEvents?
 		assertFalse(e.getLog().isEmpty());
 		e.addRacer(111);
 		e.addRacer(112);
@@ -116,11 +119,12 @@ public class Testing {
 		e.trigger(2, 40928.3);//finish R2
 		e.didNotFinish();//DNF R1, R3 in progress
 		ArrayList<String> list = e.print(40950.0);
-		assertEquals(4, list.size());
+		assertEquals(5, list.size());
 		assertEquals(list.get(0), "11:14:30.0 IND");
-		assertEquals(list.get(1), "112 227.80 F");
-		assertEquals(list.get(2), "111 DNF");
-		assertEquals(list.get(3), "113 249.00 R");
+		assertEquals(list.get(1), "11:14:30.0 Run 1");
+		assertEquals(list.get(2), "112 227.80 F");
+		assertEquals(list.get(3), "111 DNF");
+		assertEquals(list.get(4), "113 249.00 R");
 	}
 	
 	/**
@@ -142,12 +146,13 @@ public class Testing {
 		e.trigger(3, 40810); //start R4
 		//R3 and R4 should be in progress
 		ArrayList<String> list = e.print(40900);
-		assertEquals(5, list.size());
+		assertEquals(6, list.size());
 		assertEquals(list.get(0), "11:14:30.0 PARIND");
-		assertEquals(list.get(1), "111 197.20 F");
-		assertEquals(list.get(2), "112 90.30 F");
-		assertEquals(list.get(3), "113 199.50 R");
-		assertEquals(list.get(4), "114 90.00 R");
+		assertEquals(list.get(1), "11:14:30.0 Run 1");
+		assertEquals(list.get(2), "111 197.20 F");
+		assertEquals(list.get(3), "112 90.30 F");
+		assertEquals(list.get(4), "113 199.50 R");
+		assertEquals(list.get(5), "114 90.00 R");
 		
 		
 	}
@@ -165,6 +170,12 @@ public class Testing {
 	 */
 	@Test
 	public void testNormalPARGRP(){
+		Event e = new Event("11:14:30.0");
+	}
+	
+	@Test
+	public void testWeirdEvents(){
+		//TODO: test CLR, etc.
 		Event e = new Event("11:14:30.0");
 	}
 }
