@@ -113,18 +113,17 @@ public class ChronoTimer {
 			case "START":{
 				if (systemOn && eventRunning){ //Sprint 2; "shorthand for TRIG 1"
 					if(sensors[0] != null){
-					//TODO: DOES THIS NEED TO BE A SWITCH CASE???? Or does it literally just mean trig 1?
-						//in GRP trig 1 starts all lanes, in PARIND this would start 1 & 3
+					//in GRP & PARGRP trig 1 starts all lanes, in PARIND this would start 1 & 3
 						events.get(currentEvent).trigger(3, TotalTime);
 						events.get(currentEvent).trigger(1, TotalTime);
-						//trig 3 MUST be before trig 1 to allow PARIND start otherwise
-						//would case a false-finish for GRP events
+					//trig 3 MUST be before trig 1 to allow PARIND start otherwise
+					//would case a false-finish for GRP/PARGRP events
 					}
 				}break;
 			}case "FINISH":{
 				if (systemOn && eventRunning){ //Sprint 2; "shorthand for TRIG 2"
 					if(sensors[1] != null){
-						//TODO: DOES THIS NEED TO BE A SWITCH CASE????
+						//DOES THIS NEED TO BE A SWITCH CASE????
 						events.get(currentEvent).trigger(2, TotalTime);
 						
 					}
@@ -139,7 +138,7 @@ public class ChronoTimer {
 			case "CLR":{
 				if (systemOn && eventRunning){ 
 					//TODO: Sprint 2; "clear NUM as the next competitor" a.k.a. remove them from queue
-					events.get(currentEvent).removeRacer();
+					events.get(currentEvent).removeRacer(commands[1]);
 				}break;
 			}
 			case "SWAP":{
@@ -192,9 +191,9 @@ public class ChronoTimer {
 							events.add(new Event(SysTime));
 						}
 					}
-					else{
-						events.get(currentEvent).newRun(); // increment run number
-						//TODO: reset or do nothing? unclear instructions here
+					else{ // increment run number
+						events.get(currentEvent).newRun();
+						
 					}
 				} break;
 			}
@@ -203,6 +202,6 @@ public class ChronoTimer {
 				break;
 			}
 		}//end switch case
-	}
-}
+	}//end method
+}//end class
 
