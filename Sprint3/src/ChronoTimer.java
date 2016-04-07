@@ -137,7 +137,7 @@ public class ChronoTimer {
 			}
 			case "CLR":{
 				if (systemOn && eventRunning){ 
-					//TODO: Sprint 2; "clear NUM as the next competitor" a.k.a. remove them from queue
+					//Sprint 2; "clear NUM as the next competitor" a.k.a. remove them from queue
 					events.get(currentEvent).removeRacer(commands[1]);
 				}break;
 			}
