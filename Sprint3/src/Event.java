@@ -77,7 +77,7 @@ public class Event {
 	
 	public ArrayList<String> print(double time){
 		log.addAll(lanes[0].print(time));
-		runs.add(getCurTime()+" Run "+ runNum);
+		runs.add(getCurTime()+" Run "+ runNum + "In Progress");
 		runs.addAll(getLog());
 		return runs;
 	}
@@ -86,6 +86,8 @@ public class Event {
 	 * start a new run in the current event
 	 */
 	public void newRun(){
+		runs.add(getCurTime()+" Run "+ runNum);
+		runs.addAll(getLog());
 		++runNum;
 	}
 	
