@@ -193,7 +193,7 @@ public class ChronoTimer {
 						}
 					}
 					else{
-						events.get(currentEvent).newRun();
+						events.get(currentEvent).newRun(); // increment run number
 						//TODO: reset or do nothing? unclear instructions here
 					}
 				} break;
