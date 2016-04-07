@@ -71,8 +71,9 @@ public class Event {
 	/**
 	 * handles CLR case; ;
 	 */
-	public void removeRacer(){
+	public void removeRacer(int bib){
 		log.add(lanes[0].removeRacer());
+		lanes[0].removeRacer(bib);
 	}
 	
 	public ArrayList<String> print(double time){

@@ -62,6 +62,7 @@ public class Lane {
 	 * @return
 	 */
 	public String removeRacer(){
+		
 		return curRacer.getBibNum() + " CLR";
 	}
 	
