@@ -33,6 +33,16 @@ public class PARIND extends Event{
 	}
 	
 	@Override
+	public void removeRacer(int bib){
+		if(paraLane[0].removeRacer(bib) != null){
+			paraLog.add(paraLane[0].removeRacer(bib));
+		}
+		else if(paraLane[1].removeRacer(bib) != null){
+			paraLog.add(paraLane[1].removeRacer(bib));
+		}
+	}
+	
+	@Override
 	public void trigger(int chan, double t){
 		updateTime(t);
 		switch(chan){
