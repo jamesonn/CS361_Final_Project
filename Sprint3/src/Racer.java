@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /**
  * constructor requires racerNum and laneNum; 
  * knows start time, stop time, and total time
@@ -7,6 +9,7 @@ public class Racer {
 	private int racerNum;
 	private double startTime;
 	private double stopTime;
+	private ArrayList<String> runLog = new ArrayList<String>();
 	
 	public Racer(int bibNum){
 		racerNum = bibNum;
@@ -25,7 +28,9 @@ public class Racer {
 		return stopTime;	}
 	
 	public void stop(double st){
-		stopTime = st;	}
+		stopTime = st;	
+		runLog.add(print());
+	}
 	
 	public double getTotalTime(){
 		return stopTime-startTime;	}
@@ -33,6 +38,7 @@ public class Racer {
 	public String print(){
 		double time = getTotalTime();
 		String t = String.format("%.2f", time);
+		//TODO: Handle race canceled midway through, i.e. stop() never called
 		return ""+ racerNum +" "+ t;
 	}
 

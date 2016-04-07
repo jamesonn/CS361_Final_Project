@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Collections;
 
 /**
  * Manages time, racer and lane information;
@@ -8,9 +7,13 @@ import java.util.Collections;
  */
 public class Event {
 	private Lane[] lanes = new Lane[1];
+	private ArrayList<Racer> participants = new ArrayList<Racer>();
+	//NOTE: runs starts at 1 not 0
+	private ArrayList<ArrayList<String>> runs = new ArrayList<ArrayList<String>>();
 	private ArrayList<String> log = new ArrayList<String>();
 	private double totalTime = 0;
 	private String curTime = "";
+	private int runNum = 1;
 	
 	/**
 	 * create an Event object setting the current time to t
@@ -29,6 +32,7 @@ public class Event {
 	 */
 	public void addRacer(int bib){
 		Racer r = new Racer(bib);
+		participants.add(r);
 		lanes[0].addRacer(r);
 	}
 	
@@ -73,7 +77,15 @@ public class Event {
 	
 	public ArrayList<String> print(double time){
 		log.addAll(lanes[0].print(time));
+		runs.add(getLog());
 		return log;
+	}
+	
+	/**
+	 * start a new run in the current event
+	 */
+	public void newRun(){
+		++runNum;
 	}
 	
 	/**
