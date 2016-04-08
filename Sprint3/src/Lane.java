@@ -68,10 +68,9 @@ public class Lane {
 		// if found		
 		else{
 			Queue<Racer> temp = new LinkedList<Racer>();
-			String removed = "check lane removeRacer"; // should never print this
-			curRacer = ready.remove();
+			String removed = "check lane removeRacer"; // should only print this if ready is empty
 			
-			while(curRacer != null){
+			while(!ready.isEmpty()){
 				if(curRacer.getBibNum() != bib){
 					// add to temp queue
 					temp.add(curRacer);
