@@ -62,31 +62,29 @@ public class Lane {
 	 * @return
 	 */
 	public String removeRacer(int bib){
-		if(!ready.contains(bib) && curRacer.getBibNum() != bib) 
+		if(!ready.contains(bib)) 
 			return null;
 		
-		// if found
-		else if (curRacer.getBibNum() == bib){
-			ready.remove();
-			return curRacer.getBibNum() + " CLR";
-		}
+		// if found		
 		else{
-			Racer clearRacer = this.findRacer(bib);
-			while(ready.remove(clearRacer)){
-
+			Queue<Racer> temp = new LinkedList<Racer>();
+			String removed = "check lane removeRacer"; // should never print this
+			curRacer = ready.remove();
+			
+			while(curRacer != null){
+				if(curRacer.getBibNum() != bib){
+					// add to temp queue
+					temp.add(curRacer);
+				}
+				else{
+					removed = curRacer.getBibNum() + " CLR";
+				}
 			}
-			return "";
+			ready = temp;
+			return removed;
 		}
 	}
 	
-	private Racer findRacer(int bib){
-		Racer searchingRacer = ready.remove();
-		while(searchingRacer != null){
-			if(searchingRacer.getBibNum() != bib)
-			searchingRacer = ready.remove();
-		}
-		return searchingRacer;
-	}
 	
 	
 	public ArrayList<String> print(double t){
