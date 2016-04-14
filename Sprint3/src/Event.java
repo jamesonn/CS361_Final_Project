@@ -131,4 +131,9 @@ public class Event {
 	public ArrayList<String> getLog(){
 		return log;
 	}
+	
+	public ArrayList<Racer> getParticipants(){
+		return participants;
+		
+	}
 }
