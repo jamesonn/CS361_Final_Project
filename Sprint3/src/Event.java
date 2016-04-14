@@ -6,16 +6,16 @@ import java.util.ArrayList;
  * @author Group 1
  */
 public class Event {
-	private Lane[] lanes = new Lane[1];
-	private ArrayList<Racer> participants = new ArrayList<Racer>();
+	protected Lane[] lanes = new Lane[1];
+	protected ArrayList<Racer> participants = new ArrayList<Racer>();
 	//NOTE: line 0 is event name, rest records all the run info
-	private ArrayList<String> runs = new ArrayList<String>();
+	protected ArrayList<String> runs = new ArrayList<String>();
 	//log handles current run only
-	private ArrayList<String> log = new ArrayList<String>();
-	private double totalTime = 0;
-	private String curTime = "";
-	private int runNum = 0;
-	private boolean isActiveRun = false;
+	protected ArrayList<String> log = new ArrayList<String>();
+	protected double totalTime = 0;
+	protected String curTime = "";
+	protected int runNum = 0;
+	protected boolean isActiveRun = false;
 	
 	/**
 	 * create an Event object setting the current time to t
@@ -117,7 +117,7 @@ public class Event {
 	 * update the total and currentSystem time from a string
 	 * @param t
 	 */
-	private void updateTime(String t){
+	protected void updateTime(String t){
 		curTime = t;
 		String[] time = t.split(":");
 		double tempTime = Float.parseFloat(time[2]);//add seconds
@@ -129,7 +129,7 @@ public class Event {
 	 * Update the total and currentSystem time from a float
 	 * @param t
 	 */
-	private void updateTime(double t){
+	protected void updateTime(double t){
 		totalTime = t;
 		int h, m;
 		double s;
