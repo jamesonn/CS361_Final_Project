@@ -91,6 +91,8 @@ public class UserInterface extends JFrame{
 		swap.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
 				command[0] = CommandConstants.swap;
+				updateTime();
+				cTimer.executeCommand(command, totalTime, sysTime);
 			}
 		}); 
 		cp.add(swap);
