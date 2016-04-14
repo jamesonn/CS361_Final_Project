@@ -58,7 +58,6 @@ public class Testing {
 		racer2 = new Racer(222);
 		racer3 = new Racer(333);
 		racer4 = new Racer(444);
-		//TODO: add test for removeRacer()
 		assertTrue(lane.isReadyEmpty());
 		assertTrue(lane.isActiveEmpty());
 		lane.addRacer(racer);
@@ -107,7 +106,6 @@ public class Testing {
 	@Test
 	public void testNormalIND(){
 		Event e = new Event("11:14:30.0");
-		//TODO: test CLR here or in WeirdEvents?
 		assertFalse(e.getLog().isEmpty());
 		e.addRacer(111);
 		e.addRacer(112);
@@ -173,9 +171,38 @@ public class Testing {
 		Event e = new Event("11:14:30.0");
 	}
 	
+	/**
+	 * Tests CLR command methods removeRacer in both Event
+	 * and Lane
+	 */
 	@Test
-	public void testWeirdEvents(){
-		//TODO: test CLR, etc.
+	public void testCLRracer(){
+		lane = new Lane();
+		lane.addRacer(new Racer(111));
+		lane.addRacer(new Racer(222));
+		lane.addRacer(new Racer(333));
+		lane.addRacer(new Racer(444));
+		lane.start(100.0);	//racer start
+		lane.start(200.0);	//racer2 start
+		lane.start(300.0);	//racer3 start
+		lane.stop(400.0);	//racer stop
+		ArrayList<String> laneList = lane.print(900);
+		assertEquals(3, laneList.size());
+		lane.removeRacer(444);
+		laneList = lane.print(900);
+		assertEquals(2, laneList.size());
+		lane.removeRacer(222);
+		assertEquals(1, laneList.size());
+		
+		
 		Event e = new Event("11:14:30.0");
+		e.addRacer(114);
+		e.trigger(1, 40505.5); //start R1
+		ArrayList<String> eventList = e.print(40900);
+		assertEquals(3, eventList.size());
+		e.removeRacer(114);
+		eventList = e.print(40900);
+		assertEquals("114 CLR", eventList.get(2));
+		
 	}
 }
