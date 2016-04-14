@@ -61,7 +61,7 @@ public class ChronoTimer {
 			case "DISC":{
 				if (systemOn){
 					int deviceNum = Integer.parseInt(commands[1]);
-					sensors[deviceNum] = null;
+					sensors[deviceNum-1] = null;
 				} break;
 			}
 			case "EVENT":{
