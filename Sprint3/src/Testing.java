@@ -119,10 +119,11 @@ public class Testing {
 		ArrayList<String> list = e.print(40950.0);
 		assertEquals(5, list.size());
 		assertEquals(list.get(0), "11:14:30.0 IND");
-		assertEquals(list.get(1), "11:14:30.0 Run 1");
+		assertEquals(list.get(1), "11:22:8.30 Run 1 In Progress");
 		assertEquals(list.get(2), "112 227.80 F");
 		assertEquals(list.get(3), "111 DNF");
 		assertEquals(list.get(4), "113 249.00 R");
+		
 	}
 	
 	/**

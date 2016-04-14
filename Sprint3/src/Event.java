@@ -14,7 +14,8 @@ public class Event {
 	private ArrayList<String> log = new ArrayList<String>();
 	private double totalTime = 0;
 	private String curTime = "";
-	private int runNum = 1;
+	private int runNum = 0;
+	private boolean isActiveRun = false;
 	
 	/**
 	 * create an Event object setting the current time to t
@@ -24,7 +25,7 @@ public class Event {
 		lanes[0] = new Lane();
 		updateTime(t);
 		runs.add(curTime+ " IND");
-		log.add(curTime+ "Run "+runNum);//TODO: is this needed?
+		newRun();
 	}
 	
 	/**
@@ -53,6 +54,9 @@ public class Event {
 		if(chan == 2 && !lanes[0].isActiveEmpty()){
 			log.add(lanes[0].stop(t));
 			
+			if(lanes[0].isActiveEmpty() && lanes[0].isReadyEmpty()){
+				
+			}
 		}
 	}
 	
@@ -80,11 +84,13 @@ public class Event {
 	
 	public ArrayList<String> print(double time){
 		log.addAll(lanes[0].print(time));
-		ArrayList<String> temp = new ArrayList<String>();
-		temp.add(getCurTime()+" Run "+ runNum + " In Progress");
-		log.remove(0);
-		temp.addAll(log);
-		log = temp;
+		if(isActiveRun){
+			ArrayList<String> temp = new ArrayList<String>();
+			temp.add(getCurTime()+" Run "+ runNum + " In Progress");
+			log.remove(0);
+			temp.addAll(log);
+			log = temp;
+		}
 		runs.addAll(getLog());
 		for(int i =0; i < runs.size(); i++){
 			System.out.println(runs.get(i));
@@ -96,9 +102,15 @@ public class Event {
 	 * start a new run in the current event
 	 */
 	public void newRun(){
-		runs.add(getCurTime()+" Run "+ runNum);
-		runs.addAll(getLog());
-		++runNum;
+		if(!isActiveRun){
+			log.add(getCurTime()+" Run "+ runNum);
+			isActiveRun = true;
+			++runNum;
+		}
+		else{
+			//this is illegal per functional requirements
+		}
+		
 	}
 	
 	/**
