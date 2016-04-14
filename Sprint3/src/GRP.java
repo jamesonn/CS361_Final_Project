@@ -36,35 +36,4 @@ public class GRP extends Event{
 			
 		}
 	}
-	
-	/**
-	 * update the total and currentSystem time from a string
-	 * @param t
-	 */
-	private void updateTime(String t){
-		curTime = t;
-		String[] time = t.split(":");
-		double tempTime = Float.parseFloat(time[2]);//add seconds
-		tempTime += Float.parseFloat(time[1])*60 + Float.parseFloat(time[0])*3600;
-		totalTime = tempTime;
-	}
-	
-	/**
-	 * Update the total and currentSystem time from a float
-	 * @param t
-	 */
-	private void updateTime(double t){
-		
-		totalTime = t;
-		int h, m;
-		double s;
-		h = (int) (t / 3600);
-		t = t % 3600;
-		m = (int) (t / 60);
-		s = t % 60;
-		curTime = ""+h+":"+m+":"+ String.format("%.2f", s);
-	}
-	
-	
-	
 }
