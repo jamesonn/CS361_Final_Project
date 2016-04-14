@@ -8,8 +8,9 @@ import java.util.ArrayList;
 public class Event {
 	private Lane[] lanes = new Lane[1];
 	private ArrayList<Racer> participants = new ArrayList<Racer>();
-	//NOTE: runs starts at 1 not 0
+	//NOTE: line 0 is event name, rest records all the run info
 	private ArrayList<String> runs = new ArrayList<String>();
+	//log handles current run only
 	private ArrayList<String> log = new ArrayList<String>();
 	private double totalTime = 0;
 	private String curTime = "";
@@ -23,7 +24,7 @@ public class Event {
 		lanes[0] = new Lane();
 		updateTime(t);
 		runs.add(curTime+ " IND");
-		runs.add(curTime+ "Run "+runNum);//TODO: is this needed?
+		log.add(curTime+ "Run "+runNum);//TODO: is this needed?
 	}
 	
 	/**
@@ -79,8 +80,15 @@ public class Event {
 	
 	public ArrayList<String> print(double time){
 		log.addAll(lanes[0].print(time));
-		runs.add(getCurTime()+" Run "+ runNum + "In Progress");
+		ArrayList<String> temp = new ArrayList<String>();
+		temp.add(getCurTime()+" Run "+ runNum + " In Progress");
+		log.remove(0);
+		temp.addAll(log);
+		log = temp;
 		runs.addAll(getLog());
+		for(int i =0; i < runs.size(); i++){
+			System.out.println(runs.get(i));
+		}
 		return runs;
 	}
 	
