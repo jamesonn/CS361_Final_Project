@@ -133,9 +133,7 @@ public class UserInterface extends JFrame{
 			public void actionPerformed(ActionEvent e){
 				command[0] = CommandConstants.trigger;
 				command[1] = "1";
-				calendar.getInstance();
-				totalTime = calendar.get(Calendar.HOUR) + calendar.get(Calendar.MINUTE)*60 + calendar.get(Calendar.SECOND)*3600;
-				sysTime = sdf.format(new Date());
+				updateTime();
 				cTimer.executeCommand(command,totalTime,sysTime);
 			}
 		}); 
@@ -151,9 +149,7 @@ public class UserInterface extends JFrame{
 			public void actionPerformed(ActionEvent e){
 				command[0] = CommandConstants.trigger;
 				command[1] = "3";
-				calendar.getInstance();
-				totalTime = calendar.get(Calendar.HOUR) + calendar.get(Calendar.MINUTE)*60 + calendar.get(Calendar.SECOND)*3600;
-				sysTime = sdf.format(new Date());
+				updateTime();
 				cTimer.executeCommand(command,totalTime,sysTime);
 			}
 		}); 
@@ -167,9 +163,7 @@ public class UserInterface extends JFrame{
 			public void actionPerformed(ActionEvent e){
 				command[0] = CommandConstants.trigger;
 				command[1] = "5";
-				calendar.getInstance();
-				totalTime = calendar.get(Calendar.HOUR) + calendar.get(Calendar.MINUTE)*60 + calendar.get(Calendar.SECOND)*3600;
-				sysTime = sdf.format(new Date());
+				updateTime();
 				cTimer.executeCommand(command,totalTime,sysTime);
 			}
 		}); 
@@ -184,9 +178,7 @@ public class UserInterface extends JFrame{
 			public void actionPerformed(ActionEvent e){
 				command[0] = CommandConstants.trigger;
 				command[1] = "7";
-				calendar.getInstance();
-				totalTime = calendar.get(Calendar.HOUR) + calendar.get(Calendar.MINUTE)*60 + calendar.get(Calendar.SECOND)*3600;
-				sysTime = sdf.format(new Date());
+				updateTime();
 				cTimer.executeCommand(command,totalTime,sysTime);
 			}
 		}); 
@@ -198,9 +190,7 @@ public class UserInterface extends JFrame{
 			public void actionPerformed(ActionEvent e){
 				command[0] = CommandConstants.toggle;
 				command[1] = "1";
-				calendar.getInstance();
-				totalTime = calendar.get(Calendar.HOUR) + calendar.get(Calendar.MINUTE)*60 + calendar.get(Calendar.SECOND)*3600;
-				sysTime = sdf.format(new Date());
+				updateTime();
 				cTimer.executeCommand(command,totalTime,sysTime);
 			}
 		}); 
@@ -212,9 +202,7 @@ public class UserInterface extends JFrame{
 			public void actionPerformed(ActionEvent e){
 				command[0] = CommandConstants.toggle;
 				command[1] = "3";
-				calendar.getInstance();
-				totalTime = calendar.get(Calendar.HOUR) + calendar.get(Calendar.MINUTE)*60 + calendar.get(Calendar.SECOND)*3600;
-				sysTime = sdf.format(new Date());
+				updateTime();
 				cTimer.executeCommand(command,totalTime,sysTime);
 			}
 		}); 
@@ -226,9 +214,7 @@ public class UserInterface extends JFrame{
 			public void actionPerformed(ActionEvent e){
 				command[0] = CommandConstants.toggle;
 				command[1] = "5";
-				calendar.getInstance();
-				totalTime = calendar.get(Calendar.HOUR) + calendar.get(Calendar.MINUTE)*60 + calendar.get(Calendar.SECOND)*3600;
-				sysTime = sdf.format(new Date());
+				updateTime();
 				cTimer.executeCommand(command,totalTime,sysTime);
 			}
 		}); 
@@ -240,9 +226,7 @@ public class UserInterface extends JFrame{
 			public void actionPerformed(ActionEvent e){
 				command[0] = CommandConstants.toggle;
 				command[1] = "7";
-				calendar.getInstance();
-				totalTime = calendar.get(Calendar.HOUR) + calendar.get(Calendar.MINUTE)*60 + calendar.get(Calendar.SECOND)*3600;
-				sysTime = sdf.format(new Date());
+				updateTime();
 				cTimer.executeCommand(command,totalTime,sysTime);
 			}
 		}); 
@@ -281,9 +265,7 @@ public class UserInterface extends JFrame{
 			public void actionPerformed(ActionEvent e){
 				command[0] = CommandConstants.trigger;
 				command[1] = "2";
-				calendar.getInstance();
-				totalTime = calendar.get(Calendar.HOUR) + calendar.get(Calendar.MINUTE)*60 + calendar.get(Calendar.SECOND)*3600;
-				sysTime = sdf.format(new Date());
+				updateTime();
 				cTimer.executeCommand(command,totalTime,sysTime);
 			}
 		}); 
@@ -298,9 +280,7 @@ public class UserInterface extends JFrame{
 			public void actionPerformed(ActionEvent e){
 				command[0] = CommandConstants.trigger;
 				command[1] = "4";
-				calendar.getInstance();
-				totalTime = calendar.get(Calendar.HOUR) + calendar.get(Calendar.MINUTE)*60 + calendar.get(Calendar.SECOND)*3600;
-				sysTime = sdf.format(new Date());
+				updateTime();
 				cTimer.executeCommand(command,totalTime,sysTime);
 			}
 		}); 
@@ -315,9 +295,7 @@ public class UserInterface extends JFrame{
 			public void actionPerformed(ActionEvent e){
 				command[0] = CommandConstants.trigger;
 				command[1] = "6";
-				calendar.getInstance();
-				totalTime = calendar.get(Calendar.HOUR) + calendar.get(Calendar.MINUTE)*60 + calendar.get(Calendar.SECOND)*3600;
-				sysTime = sdf.format(new Date());
+				updateTime();
 				cTimer.executeCommand(command,totalTime,sysTime);
 			}
 		}); 
@@ -332,9 +310,7 @@ public class UserInterface extends JFrame{
 			public void actionPerformed(ActionEvent e){
 				command[0] = CommandConstants.trigger;
 				command[1] = "8";
-				calendar.getInstance();
-				totalTime = calendar.get(Calendar.HOUR) + calendar.get(Calendar.MINUTE)*60 + calendar.get(Calendar.SECOND)*3600;
-				sysTime = sdf.format(new Date());
+				updateTime();
 				cTimer.executeCommand(command,totalTime,sysTime);
 			}
 		}); 
@@ -346,9 +322,7 @@ public class UserInterface extends JFrame{
 			public void actionPerformed(ActionEvent e){
 				command[0] = CommandConstants.toggle;
 				command[1] = "2";
-				calendar.getInstance();
-				totalTime = calendar.get(Calendar.HOUR) + calendar.get(Calendar.MINUTE)*60 + calendar.get(Calendar.SECOND)*3600;
-				sysTime = sdf.format(new Date());
+				updateTime();
 				cTimer.executeCommand(command,totalTime,sysTime);
 			}
 		}); 
@@ -360,9 +334,7 @@ public class UserInterface extends JFrame{
 			public void actionPerformed(ActionEvent e){
 				command[0] = CommandConstants.toggle;
 				command[1] = "4";
-				calendar.getInstance();
-				totalTime = calendar.get(Calendar.HOUR) + calendar.get(Calendar.MINUTE)*60 + calendar.get(Calendar.SECOND)*3600;
-				sysTime = sdf.format(new Date());
+				updateTime();
 				cTimer.executeCommand(command,totalTime,sysTime);
 			}
 		}); 
@@ -374,9 +346,7 @@ public class UserInterface extends JFrame{
 			public void actionPerformed(ActionEvent e){
 				command[0] = CommandConstants.toggle;
 				command[1] = "6";
-				calendar.getInstance();
-				totalTime = calendar.get(Calendar.HOUR) + calendar.get(Calendar.MINUTE)*60 + calendar.get(Calendar.SECOND)*3600;
-				sysTime = sdf.format(new Date());
+				updateTime();
 				cTimer.executeCommand(command,totalTime,sysTime);
 			}
 		}); 
@@ -388,9 +358,7 @@ public class UserInterface extends JFrame{
 			public void actionPerformed(ActionEvent e){
 				command[0] = CommandConstants.toggle;
 				command[1] = "8";
-				calendar.getInstance();
-				totalTime = calendar.get(Calendar.HOUR) + calendar.get(Calendar.MINUTE)*60 + calendar.get(Calendar.SECOND)*3600;
-				sysTime = sdf.format(new Date());
+				updateTime();
 				cTimer.executeCommand(command,totalTime,sysTime);
 			}
 		}); 
@@ -501,9 +469,7 @@ public class UserInterface extends JFrame{
 				//TODO i think conn/disc/swap are the only ones where the number isnt in the second position
 				if(command[0] == CommandConstants.connect || command[0] == CommandConstants.disconnect) {
 					command[2] = enteredNumber.toString();
-					calendar.getInstance();
-					totalTime = calendar.get(Calendar.HOUR) + calendar.get(Calendar.MINUTE)*60 + calendar.get(Calendar.SECOND)*3600;
-					sysTime = sdf.format(new Date());
+					updateTime();
 					cTimer.executeCommand(command,totalTime,sysTime);
 				}else if(command[0] == CommandConstants.swap){
 					if(swap1 == null) {
@@ -512,16 +478,12 @@ public class UserInterface extends JFrame{
 						command[1] = swap1;
 						command[2] = enteredNumber.toString();
 						swap1 = null;
-						calendar.getInstance();
-						totalTime = calendar.get(Calendar.HOUR) + calendar.get(Calendar.MINUTE)*60 + calendar.get(Calendar.SECOND)*3600;
-						sysTime = sdf.format(new Date());
+						updateTime();
 						cTimer.executeCommand(command,totalTime,sysTime);
 					}
 				}else{
 					command[1] = enteredNumber.toString();
-					calendar.getInstance();
-					totalTime = calendar.get(Calendar.HOUR) + calendar.get(Calendar.MINUTE)*60 + calendar.get(Calendar.SECOND)*3600;
-					sysTime = sdf.format(new Date());
+					updateTime();
 					cTimer.executeCommand(command,totalTime,sysTime);
 				}
 			}
@@ -585,6 +547,7 @@ public class UserInterface extends JFrame{
 							command[1] = (String) sensorType.getSelectedItem();
 							sensorType.setVisible(false);
 							command[2] = "1";
+							updateTime();
 							cTimer.executeCommand(command, totalTime, sysTime);
 						}
 					});
@@ -593,6 +556,7 @@ public class UserInterface extends JFrame{
 				else if (e.getStateChange() == ItemEvent.DESELECTED) {
 					command[0] = CommandConstants.disconnect;
 					command[1] = "1";
+					updateTime();
 					cTimer.executeCommand(command, totalTime, sysTime);
 				}
 
@@ -613,6 +577,7 @@ public class UserInterface extends JFrame{
 							command[1] = (String) sensorType.getSelectedItem();
 							sensorType.setVisible(false);
 							command[2] = "3";
+							updateTime();
 							cTimer.executeCommand(command, totalTime, sysTime);
 						}
 					});
@@ -621,6 +586,7 @@ public class UserInterface extends JFrame{
 				else if (e.getStateChange() == ItemEvent.DESELECTED) {
 					command[0] = CommandConstants.disconnect;
 					command[1] = "3";
+					updateTime();
 					cTimer.executeCommand(command, totalTime, sysTime);
 				}
 			}
@@ -640,6 +606,7 @@ public class UserInterface extends JFrame{
 							command[1] = (String) sensorType.getSelectedItem();
 							sensorType.setVisible(false);
 							command[2] = "5";
+							updateTime();
 							cTimer.executeCommand(command, totalTime, sysTime);
 						}
 					});
@@ -648,6 +615,7 @@ public class UserInterface extends JFrame{
 				else if (e.getStateChange() == ItemEvent.DESELECTED) {
 					command[0] = CommandConstants.disconnect;
 					command[1] = "5";
+					updateTime();
 					cTimer.executeCommand(command, totalTime, sysTime);
 				}
 			}
@@ -667,6 +635,7 @@ public class UserInterface extends JFrame{
 							command[1] = (String) sensorType.getSelectedItem();
 							sensorType.setVisible(false);
 							command[2] = "7";
+							updateTime();
 							cTimer.executeCommand(command, totalTime, sysTime);
 						}
 					});
@@ -675,6 +644,7 @@ public class UserInterface extends JFrame{
 				else if (e.getStateChange() == ItemEvent.DESELECTED) {
 					command[0] = CommandConstants.disconnect;
 					command[1] = "7";
+					updateTime();
 					cTimer.executeCommand(command, totalTime, sysTime);
 				}
 			}
@@ -710,6 +680,7 @@ public class UserInterface extends JFrame{
 							command[1] = (String) sensorType.getSelectedItem();
 							sensorType.setVisible(false);
 							command[2] = "2";
+							updateTime();
 							cTimer.executeCommand(command, totalTime, sysTime);
 						}
 					});
@@ -718,6 +689,7 @@ public class UserInterface extends JFrame{
 				else if (e.getStateChange() == ItemEvent.DESELECTED) {
 					command[0] = CommandConstants.disconnect;
 					command[1] = "2";
+					updateTime();
 					cTimer.executeCommand(command, totalTime, sysTime);
 				}
 			}
@@ -737,6 +709,7 @@ public class UserInterface extends JFrame{
 							command[1] = (String) sensorType.getSelectedItem();
 							sensorType.setVisible(false);
 							command[2] = "4";
+							updateTime();
 							cTimer.executeCommand(command, totalTime, sysTime);
 						}
 					});
@@ -745,6 +718,7 @@ public class UserInterface extends JFrame{
 				else if (e.getStateChange() == ItemEvent.DESELECTED) {
 					command[0] = CommandConstants.disconnect;
 					command[1] = "4";
+					updateTime();
 					cTimer.executeCommand(command, totalTime, sysTime);
 				}
 			}
@@ -764,6 +738,7 @@ public class UserInterface extends JFrame{
 							command[1] = (String) sensorType.getSelectedItem();
 							sensorType.setVisible(false);
 							command[2] = "6";
+							updateTime();
 							cTimer.executeCommand(command, totalTime, sysTime);
 						}
 					});
@@ -772,6 +747,7 @@ public class UserInterface extends JFrame{
 				else if (e.getStateChange() == ItemEvent.DESELECTED) {
 					command[0] = CommandConstants.disconnect;
 					command[1] = "6";
+					updateTime();
 					cTimer.executeCommand(command, totalTime, sysTime);
 				}
 			}
@@ -791,6 +767,7 @@ public class UserInterface extends JFrame{
 							command[1] = (String) sensorType.getSelectedItem();
 							sensorType.setVisible(false);
 							command[2] = "8";
+							updateTime();
 							cTimer.executeCommand(command, totalTime, sysTime);
 						}
 					});
@@ -799,6 +776,7 @@ public class UserInterface extends JFrame{
 				else if (e.getStateChange() == ItemEvent.DESELECTED) {
 					command[0] = CommandConstants.disconnect;
 					command[1] = "8";
+					updateTime();
 					cTimer.executeCommand(command, totalTime, sysTime);
 				}
 			}
@@ -823,5 +801,11 @@ public class UserInterface extends JFrame{
 		setTitle("Chrono Timer");
 		setSize(800, 700);
 		setVisible(true);
+	}
+	
+	public void updateTime(){
+		calendar.getInstance();
+		totalTime = calendar.get(Calendar.HOUR)*3600 + calendar.get(Calendar.MINUTE)*60 + calendar.get(Calendar.SECOND);
+		sysTime = sdf.format(new Date());
 	}
 }
