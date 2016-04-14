@@ -89,20 +89,30 @@ public class Lane {
 	public ArrayList<String> print(double t){
 		ArrayList<String> list = new ArrayList<String>();
 		double elapsed;
+		
+		LinkedList<Racer> tempActive = new LinkedList<Racer>();
 		while(!isActiveEmpty()){
 			curRacer = active.removeFirst();
 			elapsed = t - curRacer.getStartTime();
 			String e = String.format("%.2f", elapsed);
 			list.add(curRacer.getBibNum()+" "+e+" R");
+			tempActive.add(curRacer);
 		}
+		active = tempActive;
+		
+		Queue<Racer> tempReady = new LinkedList<Racer>();
 		if(!isReadyEmpty()){
 			curRacer = ready.remove();
 			list.add(curRacer.getBibNum()+" "+curRacer.getStartTime()+" >");
+			tempReady.add(curRacer);
 		}
 		while(!isReadyEmpty()){
 			curRacer = ready.remove();
 			list.add(curRacer.getBibNum()+" "+curRacer.getStartTime());
+			tempReady.add(curRacer);
 		}
+		ready = tempReady;
+		
 		return list;
 	}
 	
