@@ -12,9 +12,12 @@ public class PARIND extends Event{
 	 */
 	public PARIND(String t) {
 		super(t);
+		runs.clear();
+		lanes = new Lane[2];
 		lanes[0] = new Lane();
 		lanes[1] = new Lane();
-		runs.add(curTime+ "PARIND");
+		runs.add(curTime+ " PARIND");
+		newRun();
 	}
 	
 	@Override
@@ -29,11 +32,12 @@ public class PARIND extends Event{
 	
 	@Override
 	public void removeRacer(int bib){
-		if(lanes[0].removeRacer(bib) != null){
-			log.add(lanes[0].removeRacer(bib));
+		Racer temp = new Racer(bib);
+		if(lanes[0].removeRacer(temp) != null){
+			log.add(lanes[0].removeRacer(temp));
 		}
-		else if(lanes[1].removeRacer(bib) != null){
-			log.add(lanes[1].removeRacer(bib));
+		else if(lanes[1].removeRacer(temp) != null){
+			log.add(lanes[1].removeRacer(temp));
 		}
 	}
 	
@@ -66,9 +70,35 @@ public class PARIND extends Event{
 	
 	@Override
 	public ArrayList<String> print(double time){
+		//log.addAll(lanes[0].print(time));
+		//log.addAll(lanes[1].print(time));
+		//return log;
 		log.addAll(lanes[0].print(time));
 		log.addAll(lanes[1].print(time));
-		return log;
+		if(isActiveRun){
+			ArrayList<String> temp = new ArrayList<String>();
+			temp.add(log.remove(0) + " In Progress");
+			temp.addAll(log);
+			log = temp;
+		}
+		runs.addAll(getLog());
+//		for(int i =0; i < runs.size(); i++){
+//			System.out.println(runs.get(i));
+//		}//check for printing log
+		return runs;
+	}
+	
+	@Override
+	public void newRun(){
+		if(!isActiveRun){
+			log.add(getCurTime()+" Run "+ runNum);
+			isActiveRun = true;
+			++runNum;
+		}
+		else{
+			//this is illegal per functional requirements
+		}
+		
 	}
 	
 }

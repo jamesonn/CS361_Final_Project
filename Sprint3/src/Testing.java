@@ -118,11 +118,11 @@ public class Testing {
 		e.didNotFinish();//DNF R1, R3 in progress
 		ArrayList<String> list = e.print(40950.0);
 		assertEquals(5, list.size());
-		assertEquals(list.get(0), "11:14:30.0 IND");
-		assertEquals(list.get(1), "11:22:8.30 Run 1 In Progress");
-		assertEquals(list.get(2), "112 227.80 F");
-		assertEquals(list.get(3), "111 DNF");
-		assertEquals(list.get(4), "113 249.00 R");
+		assertEquals("11:14:30.0 IND", list.get(0));
+		assertEquals("11:14:30.0 Run 1 In Progress", list.get(1));
+		assertEquals("112 227.80 F", list.get(2));
+		assertEquals("111 DNF", list.get(3));
+		assertEquals("113 249.00 R", list.get(4));
 		
 	}
 	
@@ -146,12 +146,12 @@ public class Testing {
 		//R3 and R4 should be in progress
 		ArrayList<String> list = e.print(40900);
 		assertEquals(6, list.size());
-		assertEquals(list.get(0), "11:14:30.0 PARIND");
-		assertEquals(list.get(1), "11:14:30.0 Run 1");
-		assertEquals(list.get(2), "111 197.20 F");
-		assertEquals(list.get(3), "112 90.30 F");
-		assertEquals(list.get(4), "113 199.50 R");
-		assertEquals(list.get(5), "114 90.00 R");
+		assertEquals("11:14:30.0 PARIND", list.get(0));
+		assertEquals("11:14:30.0 Run 1 In Progress", list.get(1));
+		assertEquals("111 197.20 F", list.get(2));
+		assertEquals("112 90.30 F", list.get(3));
+		assertEquals("113 199.50 R", list.get(4));
+		assertEquals("114 90.00 R", list.get(5));
 		
 		
 	}
@@ -189,11 +189,13 @@ public class Testing {
 		lane.stop(400.0);	//racer stop
 		ArrayList<String> laneList = lane.print(900);
 		assertEquals(3, laneList.size());
-		lane.removeRacer(444);
+		Racer take = new Racer(444);
+		lane.removeRacer(take);
 		laneList = lane.print(900);
-		assertEquals(2, laneList.size());
-		lane.removeRacer(222);
-		assertEquals(1, laneList.size());
+		assertEquals(3, laneList.size());
+		take = new Racer(222);
+		lane.removeRacer(take);
+		assertEquals(3, laneList.size());
 		
 		
 		Event e = new Event("11:14:30.0");
@@ -201,8 +203,11 @@ public class Testing {
 		e.trigger(1, 40505.5); //start R1
 		ArrayList<String> eventList = e.print(40900);
 		assertEquals(3, eventList.size());
+		eventList = new ArrayList<String>();
 		e.removeRacer(114);
 		eventList = e.print(40900);
+		//does not overwrite info if on same race
+		assertEquals(3, eventList.size()); 
 		assertEquals("114 CLR", eventList.get(2));
 		
 	}

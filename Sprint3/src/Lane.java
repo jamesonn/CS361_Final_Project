@@ -61,19 +61,16 @@ public class Lane {
 	 * Clear a Racer from the competition
 	 * @return
 	 */
-	public String removeRacer(int bib){
-		if(!ready.contains(bib)) 
-			return null;
-		
-		// if found		
-		else{
+	public String removeRacer(Racer find){
+		if(ready.contains(find)){
 			Queue<Racer> temp = new LinkedList<Racer>();
-			String removed = "check lane removeRacer"; // should only print this if ready is empty
+			String removed = "checking lane removeRacer"; // should only print this if ready is empty
 			
 			while(!ready.isEmpty()){
-				if(curRacer.getBibNum() != bib){
+				if(curRacer.getBibNum() != find.getBibNum()){
 					// add to temp queue
 					temp.add(curRacer);
+					curRacer = ready.remove();
 				}
 				else{
 					removed = curRacer.getBibNum() + " CLR";
@@ -81,6 +78,27 @@ public class Lane {
 			}
 			ready = temp;
 			return removed;
+		}
+		else if(active.contains(find)){
+			Queue<Racer> temp = new LinkedList<Racer>();
+			String removed = "checking lane removeRacer"; // should only print this if ready is empty
+			
+			while(!active.isEmpty()){
+				if(curRacer.getBibNum() != find.getBibNum()){
+					// add to temp queue
+					temp.add(curRacer);
+					curRacer = active.removeFirst();
+				}
+				else{
+					removed = curRacer.getBibNum() + " CLR";
+				}
+			}
+			ready = temp;
+			return removed;
+		}
+		// if not found		
+		else{
+			return null;
 		}
 	}
 	

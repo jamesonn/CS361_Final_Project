@@ -14,7 +14,7 @@ public class Event {
 	protected ArrayList<String> log = new ArrayList<String>();
 	protected double totalTime = 0;
 	protected String curTime = "";
-	protected int runNum = 0;
+	protected int runNum = 1;
 	protected boolean isActiveRun = false;
 	
 	/**
@@ -78,23 +78,31 @@ public class Event {
 	 * handles CLR case; ;
 	 */
 	public void removeRacer(int bib){
-		if(lanes[0].removeRacer(bib) != null){
-			log.add(lanes[0].removeRacer(bib));}
+		Racer temp = new Racer(bib);
+		if(participants.contains(temp)){
+			log.add(lanes[0].removeRacer(temp));
+			System.out.println("in removeRacer method");
+		}
+		System.out.println("outside if statement in RemoveRacer");
 	}
 	
 	public ArrayList<String> print(double time){
 		log.addAll(lanes[0].print(time));
 		if(isActiveRun){
-			ArrayList<String> temp = new ArrayList<String>();
-			temp.add(getCurTime()+" Run "+ runNum + " In Progress");
-			log.remove(0);
-			temp.addAll(log);
-			log = temp;
+			String a = log.get(0);
+			String n = ""+runNum;
+			if(a.endsWith(n)){
+				ArrayList<String> temp = new ArrayList<String>();
+				temp.add(log.remove(0) + " In Progress");
+	//			log.remove(0);
+				temp.addAll(log);
+				log = temp;
+			}
 		}
 		runs.addAll(getLog());
 		for(int i =0; i < runs.size(); i++){
 			System.out.println(runs.get(i));
-		}
+		}//check for printing log
 		return runs;
 	}
 	
