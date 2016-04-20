@@ -13,8 +13,8 @@ public class UserInterface extends JFrame{
     private String[] command = new String[3];
     private StringBuilder enteredNumber = new StringBuilder();
     private int finalNumber;
-    SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
-    Calendar calendar = Calendar.getInstance();
+    private SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+    private Calendar calendar = Calendar.getInstance();
     private double totalTime;
     private String sysTime;
     private String swap1;
@@ -322,7 +322,6 @@ public class UserInterface extends JFrame{
         //This is how the console is now created/refreshed
         refreshConsole();
 
-
 		JLabel consoleLabel = new JLabel("Queue/Running/Final Time");
 		consoleLabel.setBounds(300,460,200,20);
 		cp.add(consoleLabel);
@@ -330,8 +329,10 @@ public class UserInterface extends JFrame{
 		JButton printerPower = new JButton("Printer Pwr");
 		printerPower.setBounds(600, 20, 100, 30);
 		printerPower.addActionListener(e -> {
-				//TODO
-				//toggle printer power
+				//TODO does this just print?
+            command[0] = CommandConstants.print;
+            updateTime();
+            cTimer.executeCommand(command,totalTime,sysTime);
 		}); 
 		cp.add(printerPower);
 
@@ -667,7 +668,7 @@ public class UserInterface extends JFrame{
 		setVisible(true);
 	}
 	
-	public void updateTime(){
+	private void updateTime(){
 		calendar.getInstance();
 		totalTime = calendar.get(Calendar.HOUR)*3600 + calendar.get(Calendar.MINUTE)*60 + calendar.get(Calendar.SECOND);
 		sysTime = sdf.format(new Date());
