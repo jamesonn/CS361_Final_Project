@@ -62,71 +62,55 @@ public class UserInterface extends JFrame{
 
 		JButton power = new JButton("Power");
 		power.setBounds(30, 20, 100, 30);  // (x, y, width, height)
-		power.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e){
-				//assuming the system is on if the ui is open
-				command[0] = "OFF";
-			}
+		power.addActionListener(e -> {
+            //assuming the system is on if the ui is open
+            command[0] = "OFF";
 		}); 
 		cp.add(power);
 
 		JButton function = new JButton("FUNCTION");
 		function.setBounds(30, 250, 100, 30);
-		function.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e){
-				refreshConsole();
-			}
-		}); 
+		function.addActionListener(e -> refreshConsole());
 		cp.add(function);
 
 		BasicArrowButton left = new BasicArrowButton(BasicArrowButton.WEST);
 		left.setBounds(30, 300, 30, 30);
-		left.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e){
+		left.addActionListener(e -> {
 				//TODO
 				//left arrow button
-			}
 		}); 
 		cp.add(left);
 
 		BasicArrowButton right = new BasicArrowButton(BasicArrowButton.EAST);
 		right.setBounds(70, 300, 30, 30);
-		right.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e){
+		right.addActionListener(e -> {
 				//TODO
 				//right arrow button
-			}
 		}); 
 		cp.add(right);
 
 		BasicArrowButton down = new BasicArrowButton(BasicArrowButton.SOUTH);
 		down.setBounds(110, 300, 30, 30);
-		down.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e){
+		down.addActionListener(e -> {
 				//TODO
 				//down arrow button
-			}
 		}); 
 		cp.add(down);
 
 		BasicArrowButton up = new BasicArrowButton(BasicArrowButton.NORTH);
 		up.setBounds(150, 300, 30, 30);
-		up.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e){
+		up.addActionListener(e -> {
 				//TODO
 				//up arrow button
-			}
 		}); 
 		cp.add(up);
 
 		JButton swap = new JButton("SWAP");
 		swap.setBounds(30,400, 100, 30);
-		swap.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e){
-				command[0] = CommandConstants.swap;
-				updateTime();
-				cTimer.executeCommand(command, totalTime, sysTime);
-			}
+		swap.addActionListener(e -> {
+            command[0] = CommandConstants.swap;
+            updateTime();
+            cTimer.executeCommand(command, totalTime, sysTime);
 		}); 
 		cp.add(swap);
 
@@ -164,13 +148,11 @@ public class UserInterface extends JFrame{
 		startOne.setOpaque(true);
 		startOne.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		startOne.setBounds(345, 70, 20, 20);
-		startOne.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e){
-				command[0] = CommandConstants.trigger;
-				command[1] = "1";
-				updateTime();
-				cTimer.executeCommand(command,totalTime,sysTime);
-			}
+		startOne.addActionListener(e -> {
+            command[0] = CommandConstants.trigger;
+            command[1] = "1";
+            updateTime();
+            cTimer.executeCommand(command,totalTime,sysTime);
 		}); 
 		cp.add(startOne);
 
@@ -180,13 +162,11 @@ public class UserInterface extends JFrame{
 		startThree.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		startThree.setBounds(375, 70, 20, 20);
 		cp.add(startThree);
-		startThree.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e){
-				command[0] = CommandConstants.trigger;
-				command[1] = "3";
-				updateTime();
-				cTimer.executeCommand(command,totalTime,sysTime);
-			}
+		startThree.addActionListener(e -> {
+            command[0] = CommandConstants.trigger;
+            command[1] = "3";
+            updateTime();
+            cTimer.executeCommand(command,totalTime,sysTime);
 		}); 
 
 		JButton startFive = new JButton();
@@ -194,13 +174,11 @@ public class UserInterface extends JFrame{
 		startFive.setOpaque(true);
 		startFive.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		startFive.setBounds(405, 70, 20, 20);
-		startFive.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e){
-				command[0] = CommandConstants.trigger;
-				command[1] = "5";
-				updateTime();
-				cTimer.executeCommand(command,totalTime,sysTime);
-			}
+		startFive.addActionListener(e -> {
+            command[0] = CommandConstants.trigger;
+            command[1] = "5";
+            updateTime();
+            cTimer.executeCommand(command,totalTime,sysTime);
 		}); 
 		cp.add(startFive);
 
@@ -209,61 +187,51 @@ public class UserInterface extends JFrame{
 		startSeven.setOpaque(true);
 		startSeven.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		startSeven.setBounds(435, 70, 20, 20);
-		startSeven.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e){
-				command[0] = CommandConstants.trigger;
-				command[1] = "7";
-				updateTime();
-				cTimer.executeCommand(command,totalTime,sysTime);
-			}
+		startSeven.addActionListener(e -> {
+            command[0] = CommandConstants.trigger;
+            command[1] = "7";
+            updateTime();
+            cTimer.executeCommand(command,totalTime,sysTime);
 		}); 
 		cp.add(startSeven);
 
 		JRadioButton toggleOne = new JRadioButton();
 		toggleOne.setBounds(341, 100, 22, 22);
-		toggleOne.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e){
-				command[0] = CommandConstants.toggle;
-				command[1] = "1";
-				updateTime();
-				cTimer.executeCommand(command,totalTime,sysTime);
-			}
+		toggleOne.addActionListener(e -> {
+            command[0] = CommandConstants.toggle;
+            command[1] = "1";
+            updateTime();
+            cTimer.executeCommand(command,totalTime,sysTime);
 		}); 
 		cp.add(toggleOne);
 
 		JRadioButton toggleThree = new JRadioButton();
 		toggleThree.setBounds(371, 100, 22, 22);
-		toggleThree.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e){
-				command[0] = CommandConstants.toggle;
-				command[1] = "3";
-				updateTime();
-				cTimer.executeCommand(command,totalTime,sysTime);
-			}
+		toggleThree.addActionListener(e -> {
+            command[0] = CommandConstants.toggle;
+            command[1] = "3";
+            updateTime();
+            cTimer.executeCommand(command,totalTime,sysTime);
 		}); 
 		cp.add(toggleThree);
 
 		JRadioButton toggleFive = new JRadioButton();
 		toggleFive.setBounds(401, 100, 22, 22);
-		toggleFive.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e){
-				command[0] = CommandConstants.toggle;
-				command[1] = "5";
-				updateTime();
-				cTimer.executeCommand(command,totalTime,sysTime);
-			}
+		toggleFive.addActionListener(e -> {
+            command[0] = CommandConstants.toggle;
+            command[1] = "5";
+            updateTime();
+            cTimer.executeCommand(command,totalTime,sysTime);
 		}); 
 		cp.add(toggleFive);
 
 		JRadioButton toggleSeven = new JRadioButton();
 		toggleSeven.setBounds(431, 100, 22, 22);
-		toggleSeven.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e){
-				command[0] = CommandConstants.toggle;
-				command[1] = "7";
-				updateTime();
-				cTimer.executeCommand(command,totalTime,sysTime);
-			}
+		toggleSeven.addActionListener(e -> {
+            command[0] = CommandConstants.toggle;
+            command[1] = "7";
+            updateTime();
+            cTimer.executeCommand(command,totalTime,sysTime);
 		}); 
 		cp.add(toggleSeven);
 
@@ -296,13 +264,11 @@ public class UserInterface extends JFrame{
 		finishTwo.setOpaque(true);
 		finishTwo.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		finishTwo.setBounds(345, 160, 20, 20);
-		finishTwo.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e){
-				command[0] = CommandConstants.trigger;
-				command[1] = "2";
-				updateTime();
-				cTimer.executeCommand(command,totalTime,sysTime);
-			}
+		finishTwo.addActionListener(e -> {
+            command[0] = CommandConstants.trigger;
+            command[1] = "2";
+            updateTime();
+            cTimer.executeCommand(command,totalTime,sysTime);
 		}); 
 		cp.add(finishTwo);
 
@@ -311,13 +277,11 @@ public class UserInterface extends JFrame{
 		finishFour.setOpaque(true);
 		finishFour.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		finishFour.setBounds(375, 160, 20, 20);
-		finishFour.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e){
-				command[0] = CommandConstants.trigger;
-				command[1] = "4";
-				updateTime();
-				cTimer.executeCommand(command,totalTime,sysTime);
-			}
+		finishFour.addActionListener(e -> {
+            command[0] = CommandConstants.trigger;
+            command[1] = "4";
+            updateTime();
+            cTimer.executeCommand(command,totalTime,sysTime);
 		}); 
 		cp.add(finishFour);
 
@@ -326,13 +290,11 @@ public class UserInterface extends JFrame{
 		finishSix.setOpaque(true);
 		finishSix.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		finishSix.setBounds(405, 160, 20, 20);
-		finishSix.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e){
-				command[0] = CommandConstants.trigger;
-				command[1] = "6";
-				updateTime();
-				cTimer.executeCommand(command,totalTime,sysTime);
-			}
+		finishSix.addActionListener(e -> {
+            command[0] = CommandConstants.trigger;
+            command[1] = "6";
+            updateTime();
+            cTimer.executeCommand(command,totalTime,sysTime);
 		}); 
 		cp.add(finishSix);
 
@@ -341,61 +303,51 @@ public class UserInterface extends JFrame{
 		finishEight.setOpaque(true);
 		finishEight.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		finishEight.setBounds(435, 160, 20, 20);
-		finishEight.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e){
-				command[0] = CommandConstants.trigger;
-				command[1] = "8";
-				updateTime();
-				cTimer.executeCommand(command,totalTime,sysTime);
-			}
+		finishEight.addActionListener(e -> {
+            command[0] = CommandConstants.trigger;
+            command[1] = "8";
+            updateTime();
+            cTimer.executeCommand(command,totalTime,sysTime);
 		}); 
 		cp.add(finishEight);
 
 		JRadioButton toggleTwo = new JRadioButton();
 		toggleTwo.setBounds(341, 190, 22, 22);
-		toggleTwo.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e){
-				command[0] = CommandConstants.toggle;
-				command[1] = "2";
-				updateTime();
-				cTimer.executeCommand(command,totalTime,sysTime);
-			}
+		toggleTwo.addActionListener(e -> {
+            command[0] = CommandConstants.toggle;
+            command[1] = "2";
+            updateTime();
+            cTimer.executeCommand(command,totalTime,sysTime);
 		}); 
 		cp.add(toggleTwo);
 
 		JRadioButton toggleFour = new JRadioButton();
 		toggleFour.setBounds(371, 190, 22, 22);
-		toggleFour.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e){
-				command[0] = CommandConstants.toggle;
-				command[1] = "4";
-				updateTime();
-				cTimer.executeCommand(command,totalTime,sysTime);
-			}
+		toggleFour.addActionListener(e -> {
+            command[0] = CommandConstants.toggle;
+            command[1] = "4";
+            updateTime();
+            cTimer.executeCommand(command,totalTime,sysTime);
 		}); 
 		cp.add(toggleFour);
 
 		JRadioButton toggleSix = new JRadioButton();
 		toggleSix.setBounds(401, 190, 22, 22);
-		toggleSix.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e){
-				command[0] = CommandConstants.toggle;
-				command[1] = "6";
-				updateTime();
-				cTimer.executeCommand(command,totalTime,sysTime);
-			}
+		toggleSix.addActionListener(e -> {
+            command[0] = CommandConstants.toggle;
+            command[1] = "6";
+            updateTime();
+            cTimer.executeCommand(command,totalTime,sysTime);
 		}); 
 		cp.add(toggleSix);
 
 		JRadioButton toggleEight = new JRadioButton();
 		toggleEight.setBounds(431, 190, 22, 22);
-		toggleEight.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e){
-				command[0] = CommandConstants.toggle;
-				command[1] = "8";
-				updateTime();
-				cTimer.executeCommand(command,totalTime,sysTime);
-			}
+		toggleEight.addActionListener(e -> {
+            command[0] = CommandConstants.toggle;
+            command[1] = "8";
+            updateTime();
+            cTimer.executeCommand(command,totalTime,sysTime);
 		}); 
 		cp.add(toggleEight);
 
@@ -409,11 +361,9 @@ public class UserInterface extends JFrame{
 
 		JButton printerPower = new JButton("Printer Pwr");
 		printerPower.setBounds(600, 20, 100, 30);
-		printerPower.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e){
+		printerPower.addActionListener(e -> {
 				//TODO
 				//toggle printer power
-			}
 		}); 
 		cp.add(printerPower);
 
@@ -428,96 +378,61 @@ public class UserInterface extends JFrame{
 		keypad.setBounds(575, 250, 150, 200);
 
 		JButton b1 = new JButton("1");
-		b1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e){
-				enteredNumber.append("1");
-			}
-		}); 
+		b1.addActionListener(e -> enteredNumber.append("1"));
+
 		JButton b2 = new JButton("2");
-		b2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e){
-				enteredNumber.append("2");
-			}
-		}); 
+		b2.addActionListener(e -> enteredNumber.append("2"));
+
 		JButton b3 = new JButton("3");
-		b3.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e){
-				enteredNumber.append("3");
-			}
-		}); 
+		b3.addActionListener(e -> enteredNumber.append("3"));
+
 		JButton b4 = new JButton("4");
-		b4.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e){
-				enteredNumber.append("4");
-			}
-		}); 
+		b4.addActionListener(e -> enteredNumber.append("4"));
+
 		JButton b5 = new JButton("5");
-		b5.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e){
-				enteredNumber.append("5");
-			}
-		}); 
+		b5.addActionListener(e -> enteredNumber.append("5"));
+
 		JButton b6 = new JButton("6");
-		b6.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e){
-				enteredNumber.append("6");
-			}
-		}); 
+		b6.addActionListener(e -> enteredNumber.append("6"));
+
 		JButton b7 = new JButton("7");
-		b7.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e){
-				enteredNumber.append("7");
-			}
-		}); 
+		b7.addActionListener(e -> enteredNumber.append("7"));
+
 		JButton b8 = new JButton("8");
-		b8.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e){
-				enteredNumber.append("8");
-			}
-		}); 
+		b8.addActionListener(e -> enteredNumber.append("8"));
+
 		JButton b9 = new JButton("9");
-		b9.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e){
-				enteredNumber.append("9");
-			}
-		}); 
+		b9.addActionListener(e -> enteredNumber.append("9"));
+
+        //TODO wtf is * supposed to do? im just guessing
 		JButton ba = new JButton("*");
-		ba.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e){
-				//TODO wtf is * supposed to do? im just guessing
-				enteredNumber.append("*");
-			}
-		}); 
+		ba.addActionListener(e -> enteredNumber.append("*"));
+
 		JButton b0 = new JButton("0");
-		b0.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e){
-				enteredNumber.append("0");
-			}
-		}); 
+		b0.addActionListener(e -> enteredNumber.append("0"));
+
 		JButton bp = new JButton("#");
-		bp.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e){
-				//TODO i think conn/disc/swap are the only ones where the number isnt in the second position
-				if(command[0] == CommandConstants.connect || command[0] == CommandConstants.disconnect) {
-					command[2] = enteredNumber.toString();
-					updateTime();
-					cTimer.executeCommand(command,totalTime,sysTime);
-				}else if(command[0] == CommandConstants.swap){
-					if(swap1 == null) {
-						swap1 = enteredNumber.toString();
-					}else{
-						command[1] = swap1;
-						command[2] = enteredNumber.toString();
-						swap1 = null;
-						updateTime();
-						cTimer.executeCommand(command,totalTime,sysTime);
-					}
-				}else{
-					command[1] = enteredNumber.toString();
-					updateTime();
-					cTimer.executeCommand(command,totalTime,sysTime);
-				}
-			}
+		bp.addActionListener(e -> {
+            //TODO i think conn/disc/swap are the only ones where the number isnt in the second position
+            if(command[0] == CommandConstants.connect || command[0] == CommandConstants.disconnect) {
+                command[2] = enteredNumber.toString();
+                updateTime();
+                cTimer.executeCommand(command,totalTime,sysTime);
+            }else if(command[0] == CommandConstants.swap){
+                if(swap1 == null) {
+                    swap1 = enteredNumber.toString();
+                }else{
+                    command[1] = swap1;
+                    command[2] = enteredNumber.toString();
+                    swap1 = null;
+                    updateTime();
+                    cTimer.executeCommand(command,totalTime,sysTime);
+                }
+            }else{
+                command[1] = enteredNumber.toString();
+                updateTime();
+                cTimer.executeCommand(command,totalTime,sysTime);
+            }
 		}); 
 		keypad.add(b1);
 		keypad.add(b2);
@@ -569,22 +484,20 @@ public class UserInterface extends JFrame{
 		toggleBackOne.setBounds(91, 40, 22, 22);
 		toggleBackOne.addItemListener(new ItemListener() {
 			@Override
-			public void itemStateChanged(ItemEvent e) {
+			public void itemStateChanged(ItemEvent ie) {
 
-				if (e.getStateChange() == ItemEvent.SELECTED) {
+				if (ie.getStateChange() == ItemEvent.SELECTED) {
 					command[0] = CommandConstants.connect;
-					sensorType.addActionListener(new ActionListener(){
-						public void actionPerformed(ActionEvent e){
-							command[1] = (String) sensorType.getSelectedItem();
-							sensorType.setVisible(false);
-							command[2] = "1";
-							updateTime();
-							cTimer.executeCommand(command, totalTime, sysTime);
-						}
+					sensorType.addActionListener(e ->{
+                        command[1] = (String) sensorType.getSelectedItem();
+                        sensorType.setVisible(false);
+                        command[2] = "1";
+                        updateTime();
+                        cTimer.executeCommand(command, totalTime, sysTime);
 					});
 					sensorType.setVisible(true);
 				}
-				else if (e.getStateChange() == ItemEvent.DESELECTED) {
+				else if (ie.getStateChange() == ItemEvent.DESELECTED) {
 					command[0] = CommandConstants.disconnect;
 					command[1] = "1";
 					updateTime();
@@ -599,22 +512,19 @@ public class UserInterface extends JFrame{
 		toggleBackThree.setBounds(121, 40, 22, 22);
 		toggleBackThree.addItemListener(new ItemListener() {
 			@Override
-			public void itemStateChanged(ItemEvent e) {
-
-				if (e.getStateChange() == ItemEvent.SELECTED) {
+			public void itemStateChanged(ItemEvent ie) {
+				if (ie.getStateChange() == ItemEvent.SELECTED) {
 					command[0] = CommandConstants.connect;
-					sensorType.addActionListener(new ActionListener(){
-						public void actionPerformed(ActionEvent e){
-							command[1] = (String) sensorType.getSelectedItem();
-							sensorType.setVisible(false);
-							command[2] = "3";
-							updateTime();
-							cTimer.executeCommand(command, totalTime, sysTime);
-						}
+					sensorType.addActionListener(e ->{
+                        command[1] = (String) sensorType.getSelectedItem();
+                        sensorType.setVisible(false);
+                        command[2] = "3";
+                        updateTime();
+                        cTimer.executeCommand(command, totalTime, sysTime);
 					});
 					sensorType.setVisible(true);
 				}
-				else if (e.getStateChange() == ItemEvent.DESELECTED) {
+				else if (ie.getStateChange() == ItemEvent.DESELECTED) {
 					command[0] = CommandConstants.disconnect;
 					command[1] = "3";
 					updateTime();
@@ -628,22 +538,19 @@ public class UserInterface extends JFrame{
 		toggleBackFive.setBounds(151, 40, 22, 22);
 		toggleBackFive.addItemListener(new ItemListener() {
 			@Override
-			public void itemStateChanged(ItemEvent e) {
-
-				if (e.getStateChange() == ItemEvent.SELECTED) {
+			public void itemStateChanged(ItemEvent ie) {
+				if (ie.getStateChange() == ItemEvent.SELECTED) {
 					command[0] = CommandConstants.connect;
-					sensorType.addActionListener(new ActionListener(){
-						public void actionPerformed(ActionEvent e){
-							command[1] = (String) sensorType.getSelectedItem();
-							sensorType.setVisible(false);
-							command[2] = "5";
-							updateTime();
-							cTimer.executeCommand(command, totalTime, sysTime);
-						}
+					sensorType.addActionListener(e ->{
+                        command[1] = (String) sensorType.getSelectedItem();
+                        sensorType.setVisible(false);
+                        command[2] = "5";
+                        updateTime();
+                        cTimer.executeCommand(command, totalTime, sysTime);
 					});
 					sensorType.setVisible(true);
 				}
-				else if (e.getStateChange() == ItemEvent.DESELECTED) {
+				else if (ie.getStateChange() == ItemEvent.DESELECTED) {
 					command[0] = CommandConstants.disconnect;
 					command[1] = "5";
 					updateTime();
@@ -657,22 +564,20 @@ public class UserInterface extends JFrame{
 		toggleBackSeven.setBounds(181, 40, 22, 22);
 		toggleBackSeven.addItemListener(new ItemListener() {
 			@Override
-			public void itemStateChanged(ItemEvent e) {
+			public void itemStateChanged(ItemEvent ie) {
 
-				if (e.getStateChange() == ItemEvent.SELECTED) {
+				if (ie.getStateChange() == ItemEvent.SELECTED) {
 					command[0] = CommandConstants.connect;
-					sensorType.addActionListener(new ActionListener(){
-						public void actionPerformed(ActionEvent e){
-							command[1] = (String) sensorType.getSelectedItem();
-							sensorType.setVisible(false);
-							command[2] = "7";
-							updateTime();
-							cTimer.executeCommand(command, totalTime, sysTime);
-						}
+					sensorType.addActionListener(e ->{
+                        command[1] = (String) sensorType.getSelectedItem();
+                        sensorType.setVisible(false);
+                        command[2] = "7";
+                        updateTime();
+                        cTimer.executeCommand(command, totalTime, sysTime);
 					});
 					sensorType.setVisible(true);
 				}
-				else if (e.getStateChange() == ItemEvent.DESELECTED) {
+				else if (ie.getStateChange() == ItemEvent.DESELECTED) {
 					command[0] = CommandConstants.disconnect;
 					command[1] = "7";
 					updateTime();
@@ -702,22 +607,20 @@ public class UserInterface extends JFrame{
 		toggleBackTwo.setBounds(91, 90, 22, 22);
 		toggleBackTwo.addItemListener(new ItemListener() {
 			@Override
-			public void itemStateChanged(ItemEvent e) {
+			public void itemStateChanged(ItemEvent ie) {
 
-				if (e.getStateChange() == ItemEvent.SELECTED) {
+				if (ie.getStateChange() == ItemEvent.SELECTED) {
 					command[0] = CommandConstants.connect;
-					sensorType.addActionListener(new ActionListener(){
-						public void actionPerformed(ActionEvent e){
-							command[1] = (String) sensorType.getSelectedItem();
-							sensorType.setVisible(false);
-							command[2] = "2";
-							updateTime();
-							cTimer.executeCommand(command, totalTime, sysTime);
-						}
+					sensorType.addActionListener(e ->{
+                        command[1] = (String) sensorType.getSelectedItem();
+                        sensorType.setVisible(false);
+                        command[2] = "2";
+                        updateTime();
+                        cTimer.executeCommand(command, totalTime, sysTime);
 					});
 					sensorType.setVisible(true);
 				}
-				else if (e.getStateChange() == ItemEvent.DESELECTED) {
+				else if (ie.getStateChange() == ItemEvent.DESELECTED) {
 					command[0] = CommandConstants.disconnect;
 					command[1] = "2";
 					updateTime();
@@ -731,22 +634,20 @@ public class UserInterface extends JFrame{
 		toggleBackFour.setBounds(121, 90, 22, 22);
 		toggleBackFour.addItemListener(new ItemListener() {
 			@Override
-			public void itemStateChanged(ItemEvent e) {
+			public void itemStateChanged(ItemEvent ie) {
 
-				if (e.getStateChange() == ItemEvent.SELECTED) {
+				if (ie.getStateChange() == ItemEvent.SELECTED) {
 					command[0] = CommandConstants.connect;
-					sensorType.addActionListener(new ActionListener(){
-						public void actionPerformed(ActionEvent e){
-							command[1] = (String) sensorType.getSelectedItem();
-							sensorType.setVisible(false);
-							command[2] = "4";
-							updateTime();
-							cTimer.executeCommand(command, totalTime, sysTime);
-						}
+					sensorType.addActionListener(e ->{
+                        command[1] = (String) sensorType.getSelectedItem();
+                        sensorType.setVisible(false);
+                        command[2] = "4";
+                        updateTime();
+                        cTimer.executeCommand(command, totalTime, sysTime);
 					});
 					sensorType.setVisible(true);
 				}
-				else if (e.getStateChange() == ItemEvent.DESELECTED) {
+				else if (ie.getStateChange() == ItemEvent.DESELECTED) {
 					command[0] = CommandConstants.disconnect;
 					command[1] = "4";
 					updateTime();
@@ -760,22 +661,20 @@ public class UserInterface extends JFrame{
 		toggleBackSix.setBounds(151, 90, 22, 22);
 		toggleBackSix.addItemListener(new ItemListener() {
 			@Override
-			public void itemStateChanged(ItemEvent e) {
+			public void itemStateChanged(ItemEvent ie) {
 
-				if (e.getStateChange() == ItemEvent.SELECTED) {
+				if (ie.getStateChange() == ItemEvent.SELECTED) {
 					command[0] = CommandConstants.connect;
-					sensorType.addActionListener(new ActionListener(){
-						public void actionPerformed(ActionEvent e){
-							command[1] = (String) sensorType.getSelectedItem();
-							sensorType.setVisible(false);
-							command[2] = "6";
-							updateTime();
-							cTimer.executeCommand(command, totalTime, sysTime);
-						}
+					sensorType.addActionListener(e ->{
+                        command[1] = (String) sensorType.getSelectedItem();
+                        sensorType.setVisible(false);
+                        command[2] = "6";
+                        updateTime();
+                        cTimer.executeCommand(command, totalTime, sysTime);
 					});
 					sensorType.setVisible(true);
 				}
-				else if (e.getStateChange() == ItemEvent.DESELECTED) {
+				else if (ie.getStateChange() == ItemEvent.DESELECTED) {
 					command[0] = CommandConstants.disconnect;
 					command[1] = "6";
 					updateTime();
@@ -789,22 +688,20 @@ public class UserInterface extends JFrame{
 		toggleBackEight.setBounds(181, 90, 22, 22);
 		toggleBackEight.addItemListener(new ItemListener() {
 			@Override
-			public void itemStateChanged(ItemEvent e) {
+			public void itemStateChanged(ItemEvent ie) {
 
-				if (e.getStateChange() == ItemEvent.SELECTED) {
+				if (ie.getStateChange() == ItemEvent.SELECTED) {
 					command[0] = CommandConstants.connect;
-					sensorType.addActionListener(new ActionListener(){
-						public void actionPerformed(ActionEvent e){
-							command[1] = (String) sensorType.getSelectedItem();
-							sensorType.setVisible(false);
-							command[2] = "8";
-							updateTime();
-							cTimer.executeCommand(command, totalTime, sysTime);
-						}
+					sensorType.addActionListener(e ->{
+                        command[1] = (String) sensorType.getSelectedItem();
+                        sensorType.setVisible(false);
+                        command[2] = "8";
+                        updateTime();
+                        cTimer.executeCommand(command, totalTime, sysTime);
 					});
 					sensorType.setVisible(true);
 				}
-				else if (e.getStateChange() == ItemEvent.DESELECTED) {
+				else if (ie.getStateChange() == ItemEvent.DESELECTED) {
 					command[0] = CommandConstants.disconnect;
 					command[1] = "8";
 					updateTime();
@@ -816,11 +713,9 @@ public class UserInterface extends JFrame{
 
 		JButton USB = new JButton();
 		USB.setBounds(320, 60, 60, 15);
-		USB.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e){
+		USB.addActionListener(e -> {
 				//TODO
 				//CONN/DISC USB (enter a filename??)
-			}
 		}); 
 		back.add(USB);
 
@@ -828,7 +723,7 @@ public class UserInterface extends JFrame{
 		USBLabel.setBounds(390, 60, 60, 15);
 		back.add(USBLabel);
 
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setTitle("Chrono Timer");
 		setSize(800, 700);
 		setVisible(true);
