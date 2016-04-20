@@ -382,11 +382,11 @@ public class UserInterface extends JFrame{
 		JButton bp = new JButton("#");
 		bp.addActionListener(e -> {
             //TODO i think conn/disc/swap are the only ones where the number isn't in the second position
-            if(command[0] == CommandConstants.connect || command[0] == CommandConstants.disconnect) {
+            if(command[0].equals(CommandConstants.connect) || command[0].equals(CommandConstants.disconnect)) {
                 command[2] = enteredNumber.toString();
                 updateTime();
                 cTimer.executeCommand(command,totalTime,sysTime);
-            }else if(command[0] == CommandConstants.swap){
+            }else if(command[0].equals(CommandConstants.swap)){
                 if(swap1 == null) {
                     swap1 = enteredNumber.toString();
                 }else{
@@ -450,108 +450,93 @@ public class UserInterface extends JFrame{
 
 		JRadioButton toggleBackOne = new JRadioButton();
 		toggleBackOne.setBounds(91, 40, 22, 22);
-		toggleBackOne.addItemListener(new ItemListener() {
-			@Override
-			public void itemStateChanged(ItemEvent ie) {
-
-				if (ie.getStateChange() == ItemEvent.SELECTED) {
-					command[0] = CommandConstants.connect;
-					sensorType.addActionListener(e ->{
-                        command[1] = (String) sensorType.getSelectedItem();
-                        sensorType.setVisible(false);
-                        command[2] = "1";
-                        updateTime();
-                        cTimer.executeCommand(command, totalTime, sysTime);
-					});
-					sensorType.setVisible(true);
-				}
-				else if (ie.getStateChange() == ItemEvent.DESELECTED) {
-					command[0] = CommandConstants.disconnect;
-					command[1] = "1";
-					updateTime();
-					cTimer.executeCommand(command, totalTime, sysTime);
-				}
-
-			}
+		toggleBackOne.addItemListener(ie -> {
+            if (ie.getStateChange() == ItemEvent.SELECTED) {
+                command[0] = CommandConstants.connect;
+                sensorType.addActionListener(e ->{
+                    command[1] = (String) sensorType.getSelectedItem();
+                    sensorType.setVisible(false);
+                    command[2] = "1";
+                    updateTime();
+                    cTimer.executeCommand(command, totalTime, sysTime);
+                });
+                sensorType.setVisible(true);
+            }
+            else if (ie.getStateChange() == ItemEvent.DESELECTED) {
+                command[0] = CommandConstants.disconnect;
+                command[1] = "1";
+                updateTime();
+                cTimer.executeCommand(command, totalTime, sysTime);
+            }
 		}); 
 		back.add(toggleBackOne);
 
 		JRadioButton toggleBackThree = new JRadioButton();
 		toggleBackThree.setBounds(121, 40, 22, 22);
-		toggleBackThree.addItemListener(new ItemListener() {
-			@Override
-			public void itemStateChanged(ItemEvent ie) {
-				if (ie.getStateChange() == ItemEvent.SELECTED) {
-					command[0] = CommandConstants.connect;
-					sensorType.addActionListener(e ->{
-                        command[1] = (String) sensorType.getSelectedItem();
-                        sensorType.setVisible(false);
-                        command[2] = "3";
-                        updateTime();
-                        cTimer.executeCommand(command, totalTime, sysTime);
-					});
-					sensorType.setVisible(true);
-				}
-				else if (ie.getStateChange() == ItemEvent.DESELECTED) {
-					command[0] = CommandConstants.disconnect;
-					command[1] = "3";
-					updateTime();
-					cTimer.executeCommand(command, totalTime, sysTime);
-				}
-			}
+		toggleBackThree.addItemListener(ie -> {
+            if (ie.getStateChange() == ItemEvent.SELECTED) {
+                command[0] = CommandConstants.connect;
+                sensorType.addActionListener(e ->{
+                    command[1] = (String) sensorType.getSelectedItem();
+                    sensorType.setVisible(false);
+                    command[2] = "3";
+                    updateTime();
+                    cTimer.executeCommand(command, totalTime, sysTime);
+                });
+                sensorType.setVisible(true);
+            }
+            else if (ie.getStateChange() == ItemEvent.DESELECTED) {
+                command[0] = CommandConstants.disconnect;
+                command[1] = "3";
+                updateTime();
+                cTimer.executeCommand(command, totalTime, sysTime);
+            }
 		}); 
 		back.add(toggleBackThree);
 
 		JRadioButton toggleBackFive = new JRadioButton();
 		toggleBackFive.setBounds(151, 40, 22, 22);
-		toggleBackFive.addItemListener(new ItemListener() {
-			@Override
-			public void itemStateChanged(ItemEvent ie) {
-				if (ie.getStateChange() == ItemEvent.SELECTED) {
-					command[0] = CommandConstants.connect;
-					sensorType.addActionListener(e ->{
-                        command[1] = (String) sensorType.getSelectedItem();
-                        sensorType.setVisible(false);
-                        command[2] = "5";
-                        updateTime();
-                        cTimer.executeCommand(command, totalTime, sysTime);
-					});
-					sensorType.setVisible(true);
-				}
-				else if (ie.getStateChange() == ItemEvent.DESELECTED) {
-					command[0] = CommandConstants.disconnect;
-					command[1] = "5";
-					updateTime();
-					cTimer.executeCommand(command, totalTime, sysTime);
-				}
-			}
+		toggleBackFive.addItemListener(ie -> {
+            if (ie.getStateChange() == ItemEvent.SELECTED) {
+                command[0] = CommandConstants.connect;
+                sensorType.addActionListener(e ->{
+                    command[1] = (String) sensorType.getSelectedItem();
+                    sensorType.setVisible(false);
+                    command[2] = "5";
+                    updateTime();
+                    cTimer.executeCommand(command, totalTime, sysTime);
+                });
+                sensorType.setVisible(true);
+            }
+            else if (ie.getStateChange() == ItemEvent.DESELECTED) {
+                command[0] = CommandConstants.disconnect;
+                command[1] = "5";
+                updateTime();
+                cTimer.executeCommand(command, totalTime, sysTime);
+            }
 		}); 
 		back.add(toggleBackFive);
 
 		JRadioButton toggleBackSeven = new JRadioButton();
 		toggleBackSeven.setBounds(181, 40, 22, 22);
-		toggleBackSeven.addItemListener(new ItemListener() {
-			@Override
-			public void itemStateChanged(ItemEvent ie) {
-
-				if (ie.getStateChange() == ItemEvent.SELECTED) {
-					command[0] = CommandConstants.connect;
-					sensorType.addActionListener(e ->{
-                        command[1] = (String) sensorType.getSelectedItem();
-                        sensorType.setVisible(false);
-                        command[2] = "7";
-                        updateTime();
-                        cTimer.executeCommand(command, totalTime, sysTime);
-					});
-					sensorType.setVisible(true);
-				}
-				else if (ie.getStateChange() == ItemEvent.DESELECTED) {
-					command[0] = CommandConstants.disconnect;
-					command[1] = "7";
-					updateTime();
-					cTimer.executeCommand(command, totalTime, sysTime);
-				}
-			}
+		toggleBackSeven.addItemListener(ie -> {
+            if (ie.getStateChange() == ItemEvent.SELECTED) {
+                command[0] = CommandConstants.connect;
+                sensorType.addActionListener(e ->{
+                    command[1] = (String) sensorType.getSelectedItem();
+                    sensorType.setVisible(false);
+                    command[2] = "7";
+                    updateTime();
+                    cTimer.executeCommand(command, totalTime, sysTime);
+                });
+                sensorType.setVisible(true);
+            }
+            else if (ie.getStateChange() == ItemEvent.DESELECTED) {
+                command[0] = CommandConstants.disconnect;
+                command[1] = "7";
+                updateTime();
+                cTimer.executeCommand(command, totalTime, sysTime);
+            }
 		}); 
 		back.add(toggleBackSeven);
 
@@ -573,109 +558,93 @@ public class UserInterface extends JFrame{
 
 		JRadioButton toggleBackTwo = new JRadioButton();
 		toggleBackTwo.setBounds(91, 90, 22, 22);
-		toggleBackTwo.addItemListener(new ItemListener() {
-			@Override
-			public void itemStateChanged(ItemEvent ie) {
-
-				if (ie.getStateChange() == ItemEvent.SELECTED) {
-					command[0] = CommandConstants.connect;
-					sensorType.addActionListener(e ->{
-                        command[1] = (String) sensorType.getSelectedItem();
-                        sensorType.setVisible(false);
-                        command[2] = "2";
-                        updateTime();
-                        cTimer.executeCommand(command, totalTime, sysTime);
-					});
-					sensorType.setVisible(true);
-				}
-				else if (ie.getStateChange() == ItemEvent.DESELECTED) {
-					command[0] = CommandConstants.disconnect;
-					command[1] = "2";
-					updateTime();
-					cTimer.executeCommand(command, totalTime, sysTime);
-				}
-			}
+		toggleBackTwo.addItemListener(ie -> {
+            if (ie.getStateChange() == ItemEvent.SELECTED) {
+                command[0] = CommandConstants.connect;
+                sensorType.addActionListener(e ->{
+                    command[1] = (String) sensorType.getSelectedItem();
+                    sensorType.setVisible(false);
+                    command[2] = "2";
+                    updateTime();
+                    cTimer.executeCommand(command, totalTime, sysTime);
+                });
+                sensorType.setVisible(true);
+            }
+            else if (ie.getStateChange() == ItemEvent.DESELECTED) {
+                command[0] = CommandConstants.disconnect;
+                command[1] = "2";
+                updateTime();
+                cTimer.executeCommand(command, totalTime, sysTime);
+            }
 		}); 
 		back.add(toggleBackTwo);
 
 		JRadioButton toggleBackFour = new JRadioButton();
 		toggleBackFour.setBounds(121, 90, 22, 22);
-		toggleBackFour.addItemListener(new ItemListener() {
-			@Override
-			public void itemStateChanged(ItemEvent ie) {
-
-				if (ie.getStateChange() == ItemEvent.SELECTED) {
-					command[0] = CommandConstants.connect;
-					sensorType.addActionListener(e ->{
-                        command[1] = (String) sensorType.getSelectedItem();
-                        sensorType.setVisible(false);
-                        command[2] = "4";
-                        updateTime();
-                        cTimer.executeCommand(command, totalTime, sysTime);
-					});
-					sensorType.setVisible(true);
-				}
-				else if (ie.getStateChange() == ItemEvent.DESELECTED) {
-					command[0] = CommandConstants.disconnect;
-					command[1] = "4";
-					updateTime();
-					cTimer.executeCommand(command, totalTime, sysTime);
-				}
-			}
+		toggleBackFour.addItemListener(ie -> {
+            if (ie.getStateChange() == ItemEvent.SELECTED) {
+                command[0] = CommandConstants.connect;
+                sensorType.addActionListener(e ->{
+                    command[1] = (String) sensorType.getSelectedItem();
+                    sensorType.setVisible(false);
+                    command[2] = "4";
+                    updateTime();
+                    cTimer.executeCommand(command, totalTime, sysTime);
+                });
+                sensorType.setVisible(true);
+            }
+            else if (ie.getStateChange() == ItemEvent.DESELECTED) {
+                command[0] = CommandConstants.disconnect;
+                command[1] = "4";
+                updateTime();
+                cTimer.executeCommand(command, totalTime, sysTime);
+            }
 		}); 
 		back.add(toggleBackFour);
 
 		JRadioButton toggleBackSix = new JRadioButton();
 		toggleBackSix.setBounds(151, 90, 22, 22);
-		toggleBackSix.addItemListener(new ItemListener() {
-			@Override
-			public void itemStateChanged(ItemEvent ie) {
-
-				if (ie.getStateChange() == ItemEvent.SELECTED) {
-					command[0] = CommandConstants.connect;
-					sensorType.addActionListener(e ->{
-                        command[1] = (String) sensorType.getSelectedItem();
-                        sensorType.setVisible(false);
-                        command[2] = "6";
-                        updateTime();
-                        cTimer.executeCommand(command, totalTime, sysTime);
-					});
-					sensorType.setVisible(true);
-				}
-				else if (ie.getStateChange() == ItemEvent.DESELECTED) {
-					command[0] = CommandConstants.disconnect;
-					command[1] = "6";
-					updateTime();
-					cTimer.executeCommand(command, totalTime, sysTime);
-				}
-			}
+		toggleBackSix.addItemListener(ie -> {
+            if (ie.getStateChange() == ItemEvent.SELECTED) {
+                command[0] = CommandConstants.connect;
+                sensorType.addActionListener(e ->{
+                    command[1] = (String) sensorType.getSelectedItem();
+                    sensorType.setVisible(false);
+                    command[2] = "6";
+                    updateTime();
+                    cTimer.executeCommand(command, totalTime, sysTime);
+                });
+                sensorType.setVisible(true);
+            }
+            else if (ie.getStateChange() == ItemEvent.DESELECTED) {
+                command[0] = CommandConstants.disconnect;
+                command[1] = "6";
+                updateTime();
+                cTimer.executeCommand(command, totalTime, sysTime);
+            }
 		}); 
 		back.add(toggleBackSix);
 
 		JRadioButton toggleBackEight = new JRadioButton();
 		toggleBackEight.setBounds(181, 90, 22, 22);
-		toggleBackEight.addItemListener(new ItemListener() {
-			@Override
-			public void itemStateChanged(ItemEvent ie) {
-
-				if (ie.getStateChange() == ItemEvent.SELECTED) {
-					command[0] = CommandConstants.connect;
-					sensorType.addActionListener(e ->{
-                        command[1] = (String) sensorType.getSelectedItem();
-                        sensorType.setVisible(false);
-                        command[2] = "8";
-                        updateTime();
-                        cTimer.executeCommand(command, totalTime, sysTime);
-					});
-					sensorType.setVisible(true);
-				}
-				else if (ie.getStateChange() == ItemEvent.DESELECTED) {
-					command[0] = CommandConstants.disconnect;
-					command[1] = "8";
-					updateTime();
-					cTimer.executeCommand(command, totalTime, sysTime);
-				}
-			}
+		toggleBackEight.addItemListener(ie -> {
+            if (ie.getStateChange() == ItemEvent.SELECTED) {
+                command[0] = CommandConstants.connect;
+                sensorType.addActionListener(e ->{
+                    command[1] = (String) sensorType.getSelectedItem();
+                    sensorType.setVisible(false);
+                    command[2] = "8";
+                    updateTime();
+                    cTimer.executeCommand(command, totalTime, sysTime);
+                });
+                sensorType.setVisible(true);
+            }
+            else if (ie.getStateChange() == ItemEvent.DESELECTED) {
+                command[0] = CommandConstants.disconnect;
+                command[1] = "8";
+                updateTime();
+                cTimer.executeCommand(command, totalTime, sysTime);
+            }
 		}); 
 		back.add(toggleBackEight);
 
