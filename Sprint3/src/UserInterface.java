@@ -5,14 +5,12 @@ import java.util.Calendar;
 import java.util.Date;
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicArrowButton;
-import javax.xml.crypto.Data;
 
 public class UserInterface extends JFrame{
 
 	private static final long serialVersionUID = 1L;
 	private ChronoTimer cTimer;
     private String[] command = new String[3];
-    //there's got to be a more efficient way, but this is the simplest i can think of for entered numbers atm
     private StringBuilder enteredNumber = new StringBuilder();
     private int finalNumber;
     SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
@@ -24,36 +22,6 @@ public class UserInterface extends JFrame{
 	private JList functionMenu;
     private Container cp = getContentPane();
     private boolean functionMenuIsOpen;
-
-    private void refreshConsole(){
-        if(console == null){
-            console = new JTextField();
-            console.setEditable(false);
-            console.setBounds(280, 250, 220, 200);
-            console.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
-            console.setBackground(Color.white);
-            cp.add(console);
-
-            //function menu created, but not visible
-            String functions[] = {"Add Racer","Event","Reset","Did Not Finish","Clear","Print","NewRun","EndRun","Exit"};
-            functionMenu = new JList(functions);
-            functionMenu.setBounds(280, 250, 220, 200);
-            functionMenu.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
-            functionMenu.setBackground(Color.white);
-            cp.add(functionMenu);
-            functionMenuIsOpen = false;
-        }else if(!functionMenuIsOpen){
-            functionMenu.setVisible(true);
-			console.setVisible(false);
-			functionMenuIsOpen = true;
-			revalidate();
-        }else if(functionMenuIsOpen){
-			console.setVisible(true);
-			functionMenu.setVisible(false);
-			functionMenuIsOpen = false;
-			revalidate();
-		}
-    }
 
     public UserInterface(ChronoTimer cTimer){
 
@@ -413,7 +381,7 @@ public class UserInterface extends JFrame{
 
 		JButton bp = new JButton("#");
 		bp.addActionListener(e -> {
-            //TODO i think conn/disc/swap are the only ones where the number isnt in the second position
+            //TODO i think conn/disc/swap are the only ones where the number isn't in the second position
             if(command[0] == CommandConstants.connect || command[0] == CommandConstants.disconnect) {
                 command[2] = enteredNumber.toString();
                 updateTime();
@@ -726,6 +694,7 @@ public class UserInterface extends JFrame{
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setTitle("Chrono Timer");
 		setSize(800, 700);
+        setResizable(false);
 		setVisible(true);
 	}
 	
@@ -734,4 +703,34 @@ public class UserInterface extends JFrame{
 		totalTime = calendar.get(Calendar.HOUR)*3600 + calendar.get(Calendar.MINUTE)*60 + calendar.get(Calendar.SECOND);
 		sysTime = sdf.format(new Date());
 	}
+
+    private void refreshConsole(){
+        if(console == null){
+            console = new JTextField();
+            console.setEditable(false);
+            console.setBounds(280, 250, 220, 200);
+            console.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+            console.setBackground(Color.white);
+            cp.add(console);
+
+            //function menu created, but not visible
+            String functions[] = {"Add Racer","Event","Reset","Did Not Finish","Clear","Print","NewRun","EndRun","Exit"};
+            functionMenu = new JList(functions);
+            functionMenu.setBounds(280, 250, 220, 200);
+            functionMenu.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+            functionMenu.setBackground(Color.white);
+            cp.add(functionMenu);
+            functionMenuIsOpen = false;
+        }else if(!functionMenuIsOpen){
+            functionMenu.setVisible(true);
+            console.setVisible(false);
+            functionMenuIsOpen = true;
+            revalidate();
+        }else if(functionMenuIsOpen){
+            console.setVisible(true);
+            functionMenu.setVisible(false);
+            functionMenuIsOpen = false;
+            revalidate();
+        }
+    }
 }
