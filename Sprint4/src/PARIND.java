@@ -88,17 +88,4 @@ public class PARIND extends Event{
 		return runs;
 	}
 	
-	@Override
-	public void newRun(){
-		if(!isActiveRun){
-			log.add(getCurTime()+" Run "+ runNum);
-			isActiveRun = true;
-			++runNum;
-		}
-		else{
-			//this is illegal per functional requirements
-		}
-		
-	}
-	
 }

@@ -162,6 +162,29 @@ public class Testing {
 	@Test
 	public void testNormalGRP(){
 		Event e = new Event("11:14:30.0");
+		assertFalse(e.getLog().isEmpty());
+		e.addRacer(111);
+		e.addRacer(112);
+		e.addRacer(113);
+		e.addRacer(114);
+		e.trigger(1, 40505.5); //start R1
+		e.trigger(1, 40700.5); //do nothing
+		e.trigger(2, 40702.7);//finish R1
+		e.trigger(3, 40710);  //do nothing
+		e.trigger(2, 40800.3);//finish R2
+		e.trigger(4, 40810); //do nothing
+		e.trigger(2, 40835.2);//finish R3
+		//R3 and R4 should be in progress
+		
+		ArrayList<String> list = e.print(40900);
+		assertEquals(6, list.size());
+		assertEquals("11:14:30.0 GRP", list.get(0));
+		assertEquals("11:14:30.0 Run 1 In Progress", list.get(1));
+		assertEquals("111 197.20 F", list.get(2));
+		assertEquals("112 90.30 F", list.get(3));
+		assertEquals("113 199.50 F", list.get(4));
+		assertEquals("114 90.00 R", list.get(5));
+		
 	}
 	
 	/**

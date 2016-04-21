@@ -86,6 +86,11 @@ public class Event {
 		System.out.println("outside if statement in RemoveRacer");
 	}
 	
+	/**
+	 * print the full record of every run in this event
+	 * @param time
+	 * @return ArrayList<String>
+	 */
 	public ArrayList<String> print(double time){
 		log.addAll(lanes[0].print(time));
 		if(isActiveRun){

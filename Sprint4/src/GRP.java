@@ -7,7 +7,6 @@ import java.util.ArrayList;
 public class GRP extends Event{
 	private Lane[] lanes = new Lane[1];
 	private ArrayList<String> log = new ArrayList<String>();
-	private double totalTime = 0;
 	private String curTime = "";
 	
 	/**
@@ -16,9 +15,11 @@ public class GRP extends Event{
 	 */
 	public GRP(String t) {
 		super(t);
+		runs.clear();
 		lanes[0] = new Lane();
 		updateTime(t);
-		log.add(curTime+ " GRP");
+		runs.add(curTime+ " GRP");
+		newRun();
 	}
 	
 	/**
