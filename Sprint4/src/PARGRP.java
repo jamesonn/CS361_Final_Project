@@ -43,38 +43,47 @@ public class PARGRP extends Event{
 				lanes[i].start(t);
 			}
 		}
+		//TODO somehow check for pads connected
 		else if(lanes[0].isReadyEmpty()){//already started bool?
 			switch(chan){
 				case 1:{
-					lanes[0].stop(t);
+					if(!lanes[0].isActiveEmpty())
+						lanes[0].stop(t);
 					break;
 				}
 				case 2:{
-					lanes[1].stop(t);
+					if(!lanes[1].isActiveEmpty())
+						lanes[1].stop(t);
 					break;
 				}
 				case 3:{
-					lanes[2].stop(t);
+					if(!lanes[2].isActiveEmpty())
+						lanes[2].stop(t);
 					break;
 				}
 				case 4:{
-					lanes[3].stop(t);
+					if(!lanes[3].isActiveEmpty())
+						lanes[3].stop(t);
 					break;
 				}
 				case 5:{
-					lanes[4].stop(t);
+					if(!lanes[4].isActiveEmpty())
+						lanes[4].stop(t);
 					break;
 				}
 				case 6:{
-					lanes[5].stop(t);
+					if(!lanes[5].isActiveEmpty())
+						lanes[5].stop(t);
 					break;
 				}
 				case 7:{
-					lanes[6].stop(t);
+					if(!lanes[6].isActiveEmpty())
+						lanes[6].stop(t);
 					break;
 				}
 				case 8:{
-					lanes[7].stop(t);
+					if(!lanes[7].isActiveEmpty())
+						lanes[7].stop(t);
 					break;
 				}
 			}//end switch
