@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * Created by Nate on 4/7/2016.
+ * Takes input choice and either parses the test data or opens the GUI
  */
 public class Client {
 
@@ -48,7 +48,7 @@ public class Client {
 
                     cTimer.executeCommand(commands, TotalTime, SysTime);
                 } catch (Exception e) {
-
+                    System.out.println("Something went wrong parsing test data");
                 }
             }
         }
