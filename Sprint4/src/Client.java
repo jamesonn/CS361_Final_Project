@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * Created by Nate on 4/7/2016.
+ * Takes input choice and either parses the test data or opens the GUI
  */
 public class Client {
 
-    public Client(boolean formatChoiceIsUI, String testfile) {
+    protected Client(boolean formatChoiceIsUI, String testFile) {
 
         ChronoTimer cTimer = new ChronoTimer();
 
@@ -23,16 +23,17 @@ public class Client {
 
             File instructions;
             Scanner instructionParser;
-            ArrayList<String> instructionLines = new ArrayList<String>();
+            ArrayList<String> instructionLines = new ArrayList<>();
 
             try {
-                instructions = new File(testfile);
+                instructions = new File(testFile);
                 instructionParser = new Scanner(instructions);
                 while (instructionParser.hasNextLine()) {
                     instructionLines.add(instructionParser.nextLine());
                 }
                 instructionParser.close();
             } catch (FileNotFoundException e1) {
+                System.out.println("Something went wrong opening the test data");
             }
 
             for (int i = 0; i < instructionLines.size(); i++) {
@@ -48,7 +49,7 @@ public class Client {
 
                     cTimer.executeCommand(commands, TotalTime, SysTime);
                 } catch (Exception e) {
-
+                    System.out.println("Something went wrong parsing test data");
                 }
             }
         }
