@@ -8,7 +8,7 @@ import java.util.Scanner;
  */
 public class Client {
 
-    public Client(boolean formatChoiceIsUI) {
+    public Client(boolean formatChoiceIsUI, String testfile) {
 
         ChronoTimer cTimer = new ChronoTimer();
 
@@ -26,7 +26,7 @@ public class Client {
             ArrayList<String> instructionLines = new ArrayList<String>();
 
             try {
-                instructions = new File("Sprint2TestData.txt");
+                instructions = new File(testfile);
                 instructionParser = new Scanner(instructions);
                 while (instructionParser.hasNextLine()) {
                     instructionLines.add(instructionParser.nextLine());
