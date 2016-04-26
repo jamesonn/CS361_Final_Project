@@ -81,9 +81,9 @@ public class Event {
 		Racer temp = new Racer(bib);
 		if(participants.contains(temp)){
 			log.add(lanes[0].removeRacer(temp));
-			System.out.println("in removeRacer method");
+			//System.out.println("in removeRacer method");
 		}
-		System.out.println("outside if statement in RemoveRacer");
+		//System.out.println("outside if statement in RemoveRacer");
 	}
 	
 	/**

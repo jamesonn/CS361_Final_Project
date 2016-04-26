@@ -8,7 +8,12 @@ public class PARGRP extends Event{
 	public PARGRP(String t) {
 		super(t);
 		runs.clear();
-		lanes[0] = new Lane();
+		//all eight in one lane or 8 lanes?
+		//lanes[0] = new Lane();
+		lanes = new Lane[8];
+		for(int i = 0; i < 8; ++i){
+			lanes[i] = new Lane();
+		}
 		updateTime(t);
 		runs.add(curTime+ " PARGRP");
 		newRun();
@@ -16,9 +21,15 @@ public class PARGRP extends Event{
 	
 	@Override
 	public void addRacer(int bib){
-		//TODO
+		Racer r = new Racer(bib);
 		if(participants.size() < 8){
 			//add racer
+			for(int i=0; i < 8; ++i){
+				if(lanes[i].getNumRacers() != 1){
+					lanes[i].addRacer(r);
+					break;
+				}
+			}
 		}
 		else{
 			//not allowed
@@ -27,53 +38,64 @@ public class PARGRP extends Event{
 	
 	@Override
 	public void trigger(int chan, double t){
-		//TODO
-		if(chan == 1 && !lanes[0].isReadyEmpty()){
-			//start all
-			
+		if(chan == 1 && !lanes[0].isReadyEmpty()){//start all
+			for(int i = 0; i < 8; ++i){
+				lanes[i].start(t);
+			}
 		}
-		else if(!lanes[0].isActiveEmpty()){
+		else if(lanes[0].isReadyEmpty()){//already started bool?
 			switch(chan){
 				case 1:{
-					
+					lanes[0].stop(t);
 					break;
 				}
 				case 2:{
-					
+					lanes[1].stop(t);
 					break;
 				}
 				case 3:{
-					
+					lanes[2].stop(t);
 					break;
 				}
 				case 4:{
-					
+					lanes[3].stop(t);
 					break;
 				}
 				case 5:{
-					
+					lanes[4].stop(t);
 					break;
 				}
 				case 6:{
-					
+					lanes[5].stop(t);
 					break;
 				}
 				case 7:{
-					
+					lanes[6].stop(t);
 					break;
 				}
 				case 8:{
-					
+					lanes[7].stop(t);
 					break;
 				}
-			}
-		}
+			}//end switch
+		}//end else
 		
 	}
 
 	@Override
 	public void removeRacer(int bib){
-		//TODO
+		Racer temp = new Racer(bib);
+		boolean found = false;
+		String racer = "";
+		int i = 0;
+		while(!found && i < 8){
+			racer = lanes[i].removeRacer(temp);
+			if(racer != null && racer.contains("CLR")){
+				found = true;
+			}
+			++i;
+		}
+		if(found){ log.add(racer);}
 	}
 	
 	

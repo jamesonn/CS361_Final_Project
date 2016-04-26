@@ -33,12 +33,17 @@ public class PARIND extends Event{
 	@Override
 	public void removeRacer(int bib){
 		Racer temp = new Racer(bib);
-		if(lanes[0].removeRacer(temp) != null){
-			log.add(lanes[0].removeRacer(temp));
+		boolean found = false;
+		String racer = "";
+		int i = 0;
+		while(!found && i < 2){
+			racer = lanes[i].removeRacer(temp);
+			if(racer != null && racer.contains("CLR")){
+				found = true;
+			}
+			++i;
 		}
-		else if(lanes[1].removeRacer(temp) != null){
-			log.add(lanes[1].removeRacer(temp));
-		}
+		if(found){ log.add(racer);}
 	}
 	
 	@Override
