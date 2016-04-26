@@ -23,6 +23,7 @@ public class PARIND extends Event{
 	@Override
 	public void addRacer(int bib){
 		Racer r = new Racer(bib);
+		participants.add(r);
 		if(lanes[0].getNumRacers() <= lanes[1].getNumRacers())
 			lanes[0].addRacer(r);
 		else

@@ -24,6 +24,7 @@ public class PARGRP extends Event{
 		Racer r = new Racer(bib);
 		if(participants.size() < 8){
 			//add racer
+			participants.add(r);
 			for(int i=0; i < 8; ++i){
 				if(lanes[i].getNumRacers() != 1){
 					lanes[i].addRacer(r);
@@ -110,7 +111,12 @@ public class PARGRP extends Event{
 	
 	@Override
 	public ArrayList<String> print(double time){
-		//TODO
+		//TODO 
+		
+		//DNF cases prevent lane.print isActive loop
+		//how do we determine in-progress vs endRun? isActiveRun?
+		
+		
 		return runs;
 	}
 	
