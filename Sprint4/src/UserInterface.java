@@ -112,9 +112,6 @@ public class UserInterface extends JFrame{
 		cp.add(seven);
 
 		JButton startOne = new JButton();
-		startOne.setBackground(Color.GREEN);
-		startOne.setOpaque(true);
-		startOne.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		startOne.setBounds(345, 70, 20, 20);
 		startOne.addActionListener(e -> {
             command[0] = CommandConstants.trigger;
@@ -125,9 +122,6 @@ public class UserInterface extends JFrame{
 		cp.add(startOne);
 
 		JButton startThree = new JButton();
-		startThree.setBackground(Color.GREEN);
-		startThree.setOpaque(true);
-		startThree.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		startThree.setBounds(375, 70, 20, 20);
 		cp.add(startThree);
 		startThree.addActionListener(e -> {
@@ -138,9 +132,6 @@ public class UserInterface extends JFrame{
 		}); 
 
 		JButton startFive = new JButton();
-		startFive.setBackground(Color.GREEN);
-		startFive.setOpaque(true);
-		startFive.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		startFive.setBounds(405, 70, 20, 20);
 		startFive.addActionListener(e -> {
             command[0] = CommandConstants.trigger;
@@ -151,9 +142,6 @@ public class UserInterface extends JFrame{
 		cp.add(startFive);
 
 		JButton startSeven = new JButton();
-		startSeven.setBackground(Color.GREEN);
-		startSeven.setOpaque(true);
-		startSeven.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		startSeven.setBounds(435, 70, 20, 20);
 		startSeven.addActionListener(e -> {
             command[0] = CommandConstants.trigger;
@@ -228,9 +216,6 @@ public class UserInterface extends JFrame{
 		cp.add(eight);
 
 		JButton finishTwo = new JButton();
-		finishTwo.setBackground(Color.RED);
-		finishTwo.setOpaque(true);
-		finishTwo.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		finishTwo.setBounds(345, 160, 20, 20);
 		finishTwo.addActionListener(e -> {
             command[0] = CommandConstants.trigger;
@@ -241,9 +226,6 @@ public class UserInterface extends JFrame{
 		cp.add(finishTwo);
 
 		JButton finishFour = new JButton();
-		finishFour.setBackground(Color.RED);
-		finishFour.setOpaque(true);
-		finishFour.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		finishFour.setBounds(375, 160, 20, 20);
 		finishFour.addActionListener(e -> {
             command[0] = CommandConstants.trigger;
@@ -254,9 +236,6 @@ public class UserInterface extends JFrame{
 		cp.add(finishFour);
 
 		JButton finishSix = new JButton();
-		finishSix.setBackground(Color.RED);
-		finishSix.setOpaque(true);
-		finishSix.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		finishSix.setBounds(405, 160, 20, 20);
 		finishSix.addActionListener(e -> {
             command[0] = CommandConstants.trigger;
@@ -267,9 +246,6 @@ public class UserInterface extends JFrame{
 		cp.add(finishSix);
 
 		JButton finishEight = new JButton();
-		finishEight.setBackground(Color.RED);
-		finishEight.setOpaque(true);
-		finishEight.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		finishEight.setBounds(435, 160, 20, 20);
 		finishEight.addActionListener(e -> {
             command[0] = CommandConstants.trigger;
