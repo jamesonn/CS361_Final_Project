@@ -8,7 +8,7 @@ import java.util.Scanner;
  */
 public class Client {
 
-    public Client(boolean formatChoiceIsUI, String testfile) {
+    protected Client(boolean formatChoiceIsUI, String testFile) {
 
         ChronoTimer cTimer = new ChronoTimer();
 
@@ -23,16 +23,17 @@ public class Client {
 
             File instructions;
             Scanner instructionParser;
-            ArrayList<String> instructionLines = new ArrayList<String>();
+            ArrayList<String> instructionLines = new ArrayList<>();
 
             try {
-                instructions = new File(testfile);
+                instructions = new File(testFile);
                 instructionParser = new Scanner(instructions);
                 while (instructionParser.hasNextLine()) {
                     instructionLines.add(instructionParser.nextLine());
                 }
                 instructionParser.close();
             } catch (FileNotFoundException e1) {
+                System.out.println("Something went wrong opening the test data");
             }
 
             for (int i = 0; i < instructionLines.size(); i++) {
