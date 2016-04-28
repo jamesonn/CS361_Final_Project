@@ -4,9 +4,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import com.google.gson.Gson;
-import web.HTTPHandler;
-
 /**
  * Takes input choice and either parses the test data or opens the GUI
  */

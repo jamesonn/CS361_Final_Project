@@ -1,4 +1,3 @@
-package web;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -12,7 +11,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.InetSocketAddress;
 import java.util.*;
-
 
 public class HTTPHandler {
 
@@ -28,7 +26,6 @@ public class HTTPHandler {
             // create a context to get the request to display the results
             server.createContext("/displayresults/lastname", new DisplayHandlerLastName());
             server.createContext("/displayresults/firstname", new DisplayHandlerFirstName());
-            server.createContext("/displayresults/department", new DisplayHandlerDepartment());
             server.createContext("/displayresults/mystyle.css", new CSSHandler());
 
             // create a context to get the request for the POST
@@ -43,8 +40,7 @@ public class HTTPHandler {
         }
     }
 
-    //param ArrayList<Racer> fromJson
-    private static String getResponseBodyFromArrayList() {
+    private static String getResponseBodyFromArrayList(ArrayList<Racer> fromJson) {
         String result = "<link rel=\"stylesheet\" type=\"text/css\" href=\"mystyle.css\">";
         result += "<table>\n";
         result += "<caption>Company Directory";
@@ -56,14 +52,10 @@ public class HTTPHandler {
                 "<th><a href=\"/displayresults/department\">Department</a></th>" +
                 "<th>Phone Number</th>" +
                 "<tr>";
-        /*for (Employee e : fromJson) {
+        /*for (Racer racer : fromJson) {
             result += "<tr>" +
-                    "<td>" + e.getTitle() + "</td>" +
                     "<td>" + e.getFirstName() + "</td>" +
                     "<td>" + e.getLastName() + "</td>" +
-                    "<td>" + e.getGender() + "</td>" +
-                    "<td>" + e.getDepartment() + "</td>" +
-                    "<td>" + e.getPhoneNumber() + "</td>" +
                     "</tr>";
         }*/
 
@@ -98,12 +90,6 @@ public class HTTPHandler {
     static class DisplayHandlerFirstName implements HttpHandler {
         public void handle(HttpExchange t) throws IOException {
             //createResponseWithComparator(t, new EmployeeFirstNameComparator());
-        }
-    }
-
-    static class DisplayHandlerDepartment implements HttpHandler {
-        public void handle(HttpExchange t) throws IOException {
-            //createResponseWithComparator(t, new EmployeeDepartmentComparator());
         }
     }
 
