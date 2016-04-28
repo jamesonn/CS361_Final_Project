@@ -79,9 +79,11 @@ public class ChronoTimer {
 							break;
 						}
 						case "GRP":{
+							events.add(new GRP(SysTime));
 							break;
 						}
 						case "PARGRP":{
+							events.add(new PARGRP(SysTime));
 							break;
 						}
 					}

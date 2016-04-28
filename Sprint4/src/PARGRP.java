@@ -43,7 +43,7 @@ public class PARGRP extends Event{
 			for(int i = 0; i < 8; ++i){
 				lanes[i].start(t);
 				if(!sensors[i].canTriggerSensor()){
-					lanes[i].didNotFinish();
+					log.add(lanes[i].didNotFinish());
 				}
 			}
 		}
@@ -52,42 +52,37 @@ public class PARGRP extends Event{
 			switch(chan){
 				case 1:{
 					if(!lanes[0].isActiveEmpty())
-						lanes[0].stop(t);
+						log.add(lanes[0].stop(t));
 					break;
 				}
 				case 2:{
 					if(!lanes[1].isActiveEmpty())
-						lanes[1].stop(t);
+						log.add(lanes[1].stop(t));
 					break;
 				}
 				case 3:{
 					if(!lanes[2].isActiveEmpty())
-						lanes[2].stop(t);
+						log.add(lanes[2].stop(t));
 					break;
 				}
 				case 4:{
 					if(!lanes[3].isActiveEmpty())
-						lanes[3].stop(t);
-					break;
-				}
-				case 5:{
-					if(!lanes[4].isActiveEmpty())
-						lanes[4].stop(t);
+						log.add(lanes[3].stop(t));
 					break;
 				}
 				case 6:{
 					if(!lanes[5].isActiveEmpty())
-						lanes[5].stop(t);
+						log.add(lanes[5].stop(t));
 					break;
 				}
 				case 7:{
 					if(!lanes[6].isActiveEmpty())
-						lanes[6].stop(t);
+						log.add(lanes[6].stop(t));
 					break;
 				}
 				case 8:{
 					if(!lanes[7].isActiveEmpty())
-						lanes[7].stop(t);
+						log.add(lanes[7].stop(t));
 					break;
 				}
 			}//end switch
