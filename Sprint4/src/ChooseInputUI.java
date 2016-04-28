@@ -9,6 +9,8 @@ public class ChooseInputUI extends JFrame{
     protected ChooseInputUI() {
         createContents();
         setSize(300, 150);
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
         setVisible(true);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }

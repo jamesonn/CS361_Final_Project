@@ -1,7 +1,9 @@
 import com.google.gson.Gson;
-
 import java.io.*;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  * handles parsing of input; interface to Events and Sensors
@@ -10,22 +12,33 @@ import java.util.ArrayList;
 public class ChronoTimer {
 	private boolean systemOn;
 	private boolean eventRunning;
+    private boolean isPrinterOn;
+    private boolean eventCommandCalled;
 	private Sensor[] sensors;
 	//events start at 1 not 0
 	private ArrayList<Event> events = new ArrayList<>();
+    private ArrayList<String> eventPrintLines;
+    private SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+    private String runData;
+    private String systemTime;
 	private int currentEvent;
     private Log log;
 	
 	/**
 	 * ChronoTimer constructor
 	 */
-	public ChronoTimer(Log log){
+	public ChronoTimer(Log log) {
         this.log = log;
-		systemOn = true;
-		currentEvent = 0;
-		eventRunning = false; //instructions treat this as a class, perhaps solution to tracking what type of event is happening?
-		sensors = new Sensor[8];
-	}
+        systemOn = true;
+        isPrinterOn = false;
+        eventCommandCalled = false;
+        currentEvent = 0;
+        eventRunning = true;
+        sensors = new Sensor[8];
+        Calendar.getInstance();
+        systemTime = sdf.format(new Date());
+        events.add(new Event(systemTime));
+    }
 
 	/**
 	 * switch case parsing of the commands; SysTime string version
@@ -69,7 +82,10 @@ public class ChronoTimer {
 			}
 			case "EVENT":{
 				if (systemOn){
-					currentEvent++;
+                    if(currentEvent == 0 && !eventCommandCalled){
+                        currentEvent++;
+                    }
+                    eventCommandCalled = true;
 					//Sprint 2; need a way to tell the system what type of event to handle 
 					String eventType = commands[1];
 					switch(eventType){
@@ -102,17 +118,17 @@ public class ChronoTimer {
 			}
 			case "NUM":{
 				if (systemOn  && eventRunning){
-					events.get(currentEvent-1).addRacer(Integer.parseInt(commands[1]));
+					events.get(currentEvent).addRacer(Integer.parseInt(commands[1]));
 					log.setLatestLine(commands[1] + " " + sysTime);
 				} break;
 			}
 			case "TRIG":{
 				if (systemOn  && eventRunning){
 					/*if(sensors[Integer.parseInt(commands[1])-1] != null){
-						events.get(currentEvent-1).trigger(Integer.parseInt(commands[1])-1, TotalTime);
+						events.get(currentEvent).trigger(Integer.parseInt(commands[1])-1, TotalTime);
 					}*/
+                    Event runningEvent = events.get(currentEvent);
 					if(sensors[Integer.parseInt(commands[1])-1] != null){
-						Event runningEvent = events.get(currentEvent-1);
 						if (runningEvent instanceof PARGRP){
 							((PARGRP) runningEvent).trigger(Integer.parseInt(commands[1]), totalTime, sensors);
 						}
@@ -120,14 +136,15 @@ public class ChronoTimer {
 							runningEvent.trigger(Integer.parseInt(commands[1]), totalTime);
 						}
 					}
-				} break;
+				}
+                break;
 			}
 			case "START":{
 				if (systemOn && eventRunning){ //Sprint 2; "shorthand for TRIG 1"
 					if(sensors[0] != null){
 					//in GRP & PARGRP trig 1 starts all lanes, in PARIND this would start 1 & 3
-						events.get(currentEvent-1).trigger(3, totalTime);
-						events.get(currentEvent-1).trigger(1, totalTime);
+						events.get(currentEvent).trigger(3, totalTime);
+						events.get(currentEvent).trigger(1, totalTime);
 					//trig 3 MUST be before trig 1 to allow PARIND start otherwise
 					//would case a false-finish for GRP/PARGRP events
 					}
@@ -136,7 +153,7 @@ public class ChronoTimer {
 				if (systemOn && eventRunning){ //Sprint 2; "shorthand for TRIG 2"
 					if(sensors[1] != null){
 						//DOES THIS NEED TO BE A SWITCH CASE????
-						events.get(currentEvent-1).trigger(2, totalTime);
+						events.get(currentEvent).trigger(2, totalTime);
 						
 					}
 				}break;
@@ -144,27 +161,27 @@ public class ChronoTimer {
 			case "DNF":{
 				if (systemOn && eventRunning){ //IND only???
 					//Sprint 1; "next competitor to finish will not finish"
-					events.get(currentEvent-1).didNotFinish();
+					events.get(currentEvent).didNotFinish();
 				}break;
 			}
 			case "CLR":{
 				if (systemOn && eventRunning){ 
 					//Sprint 2; "clear NUM as the next competitor" a.k.a. remove them from queue
-					events.get(currentEvent-1).removeRacer(Integer.parseInt(commands[1]));
+					events.get(currentEvent).removeRacer(Integer.parseInt(commands[1]));
 				}break;
 			}
 			case "SWAP":{
 				if (systemOn && eventRunning){ 
 					//Sprint 2; "exchange next two competitors to finish in IND type"
-					events.get(currentEvent-1).swap();
+					events.get(currentEvent).swap();
 				}break;
 			}
 			case "PRINT":{
 				//if (systemOn && eventRunning){ 
 				if (systemOn){
-                    String runData = "";
+                    runData = "";
 					//TODO: determine if printer is on; see "Operation of Unit" on p4
-					ArrayList<String> eventPrintLines = events.get(currentEvent-1).print(totalTime);
+					eventPrintLines = events.get(currentEvent).print(totalTime);
 					//verify passed: System.out.println(eventPrintLines[0]);
 					//j = getPrinterStartTime/Location, however we determine that
 					for(int j = 0; j < eventPrintLines.size(); j++){
@@ -173,8 +190,17 @@ public class ChronoTimer {
 						System.out.println(eventPrintLines.get(j));
 					}
                     log.logRun(runData,Integer.parseInt(commands[1]));
-				} break;
+				}
+                break;
 			}
+            case "PRINTPWR":{
+                if(isPrinterOn){
+                    isPrinterOn = false;
+                }else{
+                    isPrinterOn = true;
+                }
+                break;
+            }
 			case "EXPORT":{
 				if (systemOn){
 					Gson g = new Gson();
@@ -190,28 +216,33 @@ public class ChronoTimer {
 			case "ENDRUN":{
 				if (systemOn){ 
 					eventRunning = false;
+                    if(isPrinterOn){
+                        runData = "";
+                        eventPrintLines = events.get(currentEvent).print(totalTime);
+                        for(int j = 0; j < eventPrintLines.size(); j++){
+                            runData += eventPrintLines.get(j);
+                            runData += "\n";
+                            System.out.println(eventPrintLines.get(j));
+                        }
+                        log.logRun(runData);
+                    }
 				} break;
 			}
 
 			case "NEWRUN":{
-				if (systemOn){
-
-					if(!eventRunning){
-						eventRunning = true;
-						if ( events.get(currentEvent-1).getClass().equals(PARIND.class)){
-							currentEvent++;
-							events.add(new PARIND(sysTime));
-						}
-						else {
-							currentEvent++;
-							events.add(new Event(sysTime));
-						}
-					}
-					else{ // increment run number
-						events.get(currentEvent-1).newRun();
-						
-					}
-				} break;
+				if (systemOn && !eventRunning){
+                    eventRunning = true;
+                    if ( events.get(currentEvent).getClass().equals(PARIND.class)){
+                        currentEvent++;
+                        events.add(new PARIND(sysTime));
+                    } else {
+                        currentEvent++;
+                        events.add(new Event(sysTime));
+                    }
+                     // increment run number
+                    events.get(currentEvent).newRun();
+				}
+                break;
 			}
 			case "EXIT":{
 				System.exit(0);

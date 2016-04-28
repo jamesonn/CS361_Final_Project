@@ -18,6 +18,7 @@ public class CommandConstants {
     public static final String clear = "CLR";
     public static final String swap = "SWAP";
     public static final String print = "PRINT";
+    public static final String printPWR = "PRINTPWR";
     public static final String export = "EXPORT";
     public static final String endrun = "ENDRUN";
     public static final String newrun = "NEWRUN";

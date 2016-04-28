@@ -16,6 +16,7 @@ public class UserInterface extends JFrame{
     private String sysTime;
     private String selectedMenuOption;
     private String consoleText = "";
+    private String printerText = "";
     private StringBuilder enteredNumber = new StringBuilder();
     private SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
     private Calendar calendar = Calendar.getInstance();
@@ -31,17 +32,25 @@ public class UserInterface extends JFrame{
     private boolean isExportMenuOpen;
     private boolean isEventListOpen;
     private boolean printCalled;
+    private boolean isSystemOn;
     private int functionMenuIndex;
     private int eventIndex;
 
     public UserInterface(ChronoTimer cTimer, Log log){
+        isSystemOn = true;
 		cp.setLayout(null);
+
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        setLocation(dim.width/4-this.getSize().width/4, dim.height/5-this.getSize().height/5);
 
 		JButton power = new JButton("Power");
 		power.setBounds(30, 20, 100, 30);  // (x, y, width, height)
 		power.addActionListener(e -> {
-            //assuming the system is on if the ui is open
-            command[0] = "OFF";
+            if(isSystemOn) {
+                command[0] = "OFF";
+            }else{
+                command[0] = "ON";
+            }
 		}); 
 		cp.add(power);
 
@@ -107,6 +116,7 @@ public class UserInterface extends JFrame{
                     }
                     selectingNumber = true;
                     functionMenuIsOpen = false;
+
                     functionMenu.setVisible(false);
                     eventTypes.setVisible(false);
                     numberSelectionField.setVisible(true);
@@ -116,6 +126,18 @@ public class UserInterface extends JFrame{
                     isEventListOpen = true;
                     eventTypes.setVisible(true);
                     functionMenu.setVisible(false);
+                }else{
+                    command[0] = selectedMenuOption;
+                    updateTime();
+                    cTimer.executeCommand(command,totalTime,sysTime);
+                    if(selectedMenuOption.equals("ENDRUN")){
+                        printerText += log.getRun();
+                        printer.setText(printerText);
+                        revalidate();
+                    }
+                    console.setVisible(true);
+                    functionMenu.setVisible(false);
+                    functionMenuIsOpen = false;
                 }
             }else if(selectingNumber){
                 selectingNumber = false;
@@ -128,10 +150,12 @@ public class UserInterface extends JFrame{
                 cTimer.executeCommand(command,totalTime,sysTime);
                 if(printCalled){
                     printCalled = false;
-                    printer.setText(log.getRun(Integer.parseInt(command[1])));
+                    printerText += log.getRun(Integer.parseInt(command[1]));
+                    printer.setText(printerText);
                     revalidate();
                 }
                 consoleText += log.getLatestLine();
+                consoleText += "\n";
                 console.setText(consoleText);
             }
 		}); 
@@ -403,8 +427,7 @@ public class UserInterface extends JFrame{
 		JButton printerPower = new JButton("Printer Pwr");
 		printerPower.setBounds(600, 20, 100, 30);
 		printerPower.addActionListener(e -> {
-				//TODO does this just print?
-            command[0] = CommandConstants.print;
+            command[0] = CommandConstants.printPWR;
             updateTime();
             cTimer.executeCommand(command,totalTime,sysTime);
 		}); 

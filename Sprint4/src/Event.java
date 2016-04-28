@@ -52,7 +52,6 @@ public class Event {
 		}
 		if(chan == 2 && !lanes[0].isActiveEmpty()){
 			log.add(lanes[0].stop(t));
-			
 			if(lanes[0].isActiveEmpty() && lanes[0].isReadyEmpty()){
 				
 			}
