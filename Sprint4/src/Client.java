@@ -58,7 +58,7 @@ public class Client {
         }
     }
 
-    public String sendData(String route, String data) {
+    public String sendData() {
         String urlSite = "http://localhost" + 8000;
         StringBuilder response = new StringBuilder();
         try {
@@ -68,7 +68,7 @@ public class Client {
             conn.setDoOutput(true);
             conn.setDoInput(true);
             DataOutputStream out = new DataOutputStream(conn.getOutputStream());
-            out.writeBytes("data=" + data);
+            out.writeBytes("data=" + 8000);
             out.flush();
             out.close();
             InputStreamReader inputStr = new InputStreamReader(conn.getInputStream());

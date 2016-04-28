@@ -22,6 +22,7 @@ public class UserInterface extends JFrame{
 	private JList functionMenu;
     private Container cp = getContentPane();
     private boolean functionMenuIsOpen;
+    private int functionMenuIndex;
 
     public UserInterface(ChronoTimer cTimer){
 
@@ -60,16 +61,24 @@ public class UserInterface extends JFrame{
 		BasicArrowButton down = new BasicArrowButton(BasicArrowButton.SOUTH);
 		down.setBounds(110, 300, 30, 30);
 		down.addActionListener(e -> {
-				//TODO
-				//down arrow button
+            if(functionMenuIsOpen) {
+                if (functionMenuIndex < 9) {
+                    functionMenuIndex++;
+                    functionMenu.setSelectedIndex(functionMenuIndex);
+                }
+            }
 		}); 
 		cp.add(down);
 
 		BasicArrowButton up = new BasicArrowButton(BasicArrowButton.NORTH);
 		up.setBounds(150, 300, 30, 30);
 		up.addActionListener(e -> {
-				//TODO
-				//up arrow button
+            if(functionMenuIsOpen) {
+                if (functionMenuIndex > 0) {
+                    functionMenuIndex--;
+                    functionMenu.setSelectedIndex(functionMenuIndex);
+                }
+            }
 		}); 
 		cp.add(up);
 
@@ -661,10 +670,12 @@ public class UserInterface extends JFrame{
 
             //function menu created, but not visible
             String functions[] = {"Add Racer","Event","Reset","Did Not Finish","Clear","Print","NewRun","EndRun","Exit"};
+            functionMenuIndex = 0;
             functionMenu = new JList(functions);
             functionMenu.setBounds(280, 250, 220, 200);
             functionMenu.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
             functionMenu.setBackground(Color.white);
+			functionMenu.setSelectedIndex(functionMenuIndex);
             cp.add(functionMenu);
             functionMenuIsOpen = false;
         }else if(!functionMenuIsOpen){
