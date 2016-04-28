@@ -9,7 +9,6 @@ import javax.swing.plaf.basic.BasicArrowButton;
 public class UserInterface extends JFrame{
 
 	private static final long serialVersionUID = 1L;
-	private ChronoTimer cTimer;
     private String[] command = new String[3];
     private StringBuilder enteredNumber = new StringBuilder();
     private SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
@@ -17,17 +16,16 @@ public class UserInterface extends JFrame{
     private double totalTime;
     private String sysTime;
     private String selectedMenuOption;
-    private JTextField console;
-    private JTextField numberSelectionField;
+    private JTextArea console;
+    private JTextArea numberSelectionField;
 	private JList<String> functionMenu;
     private Container cp = getContentPane();
     private boolean functionMenuIsOpen;
     private boolean selectingNumber;
+    private boolean isExportMenuOpen;
     private int functionMenuIndex;
 
     public UserInterface(ChronoTimer cTimer){
-
-		this.cTimer = cTimer;
 		cp.setLayout(null);
 
 		JButton power = new JButton("Power");
@@ -72,6 +70,7 @@ public class UserInterface extends JFrame{
                     functionMenuIsOpen = false;
                     functionMenu.setVisible(false);
                     numberSelectionField.setVisible(true);
+                    numberSelectionField.setText(selectedMenuOption + " ");
                 }
             }else if(selectingNumber){
                 selectingNumber = false;
@@ -716,8 +715,24 @@ public class UserInterface extends JFrame{
 		JButton USB = new JButton();
 		USB.setBounds(320, 60, 60, 15);
 		USB.addActionListener(e -> {
-				//TODO
-				//CONN/DISC USB (enter a filename??)
+            if(!isExportMenuOpen) {
+                enteredNumber = new StringBuilder();
+                selectingNumber = true;
+                isExportMenuOpen = true;
+                numberSelectionField.setVisible(true);
+                console.setVisible(false);
+                functionMenu.setVisible(false);
+                String exportMenuText = "Export Menu\nEnter run number\nHit the right arrow to enter\nHit export again to cancel.\nExport Run: ";
+                numberSelectionField.setText(exportMenuText);
+                selectedMenuOption = "Export";
+                revalidate();
+            }else{
+                isExportMenuOpen = false;
+                numberSelectionField.setVisible(false);
+                enteredNumber = new StringBuilder();
+                console.setVisible(true);
+                revalidate();
+            }
 		}); 
 		back.add(USB);
 
@@ -733,14 +748,14 @@ public class UserInterface extends JFrame{
 	}
 	
 	private void updateTime(){
-		calendar.getInstance();
+		Calendar.getInstance();
 		totalTime = calendar.get(Calendar.HOUR)*3600 + calendar.get(Calendar.MINUTE)*60 + calendar.get(Calendar.SECOND);
 		sysTime = sdf.format(new Date());
 	}
 
     private void refreshConsole(){
         if(console == null){
-            console = new JTextField();
+            console = new JTextArea();
             console.setEditable(false);
             console.setBounds(280, 250, 220, 200);
             console.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
@@ -757,7 +772,7 @@ public class UserInterface extends JFrame{
             cp.add(functionMenu);
             functionMenuIsOpen = false;
 
-            numberSelectionField = new JTextField();
+            numberSelectionField = new JTextArea();
             numberSelectionField.setEditable(false);
             numberSelectionField.setBounds(280, 250, 220, 200);
             numberSelectionField.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
@@ -770,6 +785,10 @@ public class UserInterface extends JFrame{
             functionMenuIsOpen = true;
             revalidate();
         }else if(!functionMenuIsOpen && selectingNumber){
+            if(isExportMenuOpen){
+                numberSelectionField.setText("");
+                isExportMenuOpen = false;
+            }
             console.setVisible(true);
             numberSelectionField.setVisible(false);
             enteredNumber = new StringBuilder();
