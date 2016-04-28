@@ -566,10 +566,10 @@ public class UserInterface extends JFrame{
 		toggleBackOne.addItemListener(ie -> {
             if (ie.getStateChange() == ItemEvent.SELECTED) {
                 command[0] = CommandConstants.connect;
+                command[2] = "1";
                 sensorType.addActionListener(e ->{
                     command[1] = (String) sensorType.getSelectedItem();
                     sensorType.setVisible(false);
-                    command[2] = "1";
                     updateTime();
                     cTimer.executeCommand(command, totalTime, sysTime);
                 });
@@ -589,10 +589,10 @@ public class UserInterface extends JFrame{
 		toggleBackThree.addItemListener(ie -> {
             if (ie.getStateChange() == ItemEvent.SELECTED) {
                 command[0] = CommandConstants.connect;
+                command[2] = "3";
                 sensorType.addActionListener(e ->{
                     command[1] = (String) sensorType.getSelectedItem();
                     sensorType.setVisible(false);
-                    command[2] = "3";
                     updateTime();
                     cTimer.executeCommand(command, totalTime, sysTime);
                 });
@@ -612,10 +612,10 @@ public class UserInterface extends JFrame{
 		toggleBackFive.addItemListener(ie -> {
             if (ie.getStateChange() == ItemEvent.SELECTED) {
                 command[0] = CommandConstants.connect;
+                command[2] = "5";
                 sensorType.addActionListener(e ->{
                     command[1] = (String) sensorType.getSelectedItem();
                     sensorType.setVisible(false);
-                    command[2] = "5";
                     updateTime();
                     cTimer.executeCommand(command, totalTime, sysTime);
                 });
@@ -635,10 +635,10 @@ public class UserInterface extends JFrame{
 		toggleBackSeven.addItemListener(ie -> {
             if (ie.getStateChange() == ItemEvent.SELECTED) {
                 command[0] = CommandConstants.connect;
+                command[2] = "7";
                 sensorType.addActionListener(e ->{
                     command[1] = (String) sensorType.getSelectedItem();
                     sensorType.setVisible(false);
-                    command[2] = "7";
                     updateTime();
                     cTimer.executeCommand(command, totalTime, sysTime);
                 });
@@ -674,10 +674,10 @@ public class UserInterface extends JFrame{
 		toggleBackTwo.addItemListener(ie -> {
             if (ie.getStateChange() == ItemEvent.SELECTED) {
                 command[0] = CommandConstants.connect;
+                command[2] = "2";
                 sensorType.addActionListener(e ->{
                     command[1] = (String) sensorType.getSelectedItem();
                     sensorType.setVisible(false);
-                    command[2] = "2";
                     updateTime();
                     cTimer.executeCommand(command, totalTime, sysTime);
                 });
@@ -696,11 +696,11 @@ public class UserInterface extends JFrame{
 		toggleBackFour.setBounds(121, 90, 22, 22);
 		toggleBackFour.addItemListener(ie -> {
             if (ie.getStateChange() == ItemEvent.SELECTED) {
+                command[2] = "4";
                 command[0] = CommandConstants.connect;
                 sensorType.addActionListener(e ->{
                     command[1] = (String) sensorType.getSelectedItem();
                     sensorType.setVisible(false);
-                    command[2] = "4";
                     updateTime();
                     cTimer.executeCommand(command, totalTime, sysTime);
                 });
@@ -720,10 +720,10 @@ public class UserInterface extends JFrame{
 		toggleBackSix.addItemListener(ie -> {
             if (ie.getStateChange() == ItemEvent.SELECTED) {
                 command[0] = CommandConstants.connect;
+                command[2] = "6";
                 sensorType.addActionListener(e ->{
                     command[1] = (String) sensorType.getSelectedItem();
                     sensorType.setVisible(false);
-                    command[2] = "6";
                     updateTime();
                     cTimer.executeCommand(command, totalTime, sysTime);
                 });
@@ -743,10 +743,10 @@ public class UserInterface extends JFrame{
 		toggleBackEight.addItemListener(ie -> {
             if (ie.getStateChange() == ItemEvent.SELECTED) {
                 command[0] = CommandConstants.connect;
+                command[2] = "8";
                 sensorType.addActionListener(e ->{
                     command[1] = (String) sensorType.getSelectedItem();
                     sensorType.setVisible(false);
-                    command[2] = "8";
                     updateTime();
                     cTimer.executeCommand(command, totalTime, sysTime);
                 });
