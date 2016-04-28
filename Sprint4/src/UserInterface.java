@@ -12,16 +12,14 @@ public class UserInterface extends JFrame{
 	private ChronoTimer cTimer;
     private String[] command = new String[3];
     private StringBuilder enteredNumber = new StringBuilder();
-    private int finalNumber;
     private SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
     private Calendar calendar = Calendar.getInstance();
     private double totalTime;
     private String sysTime;
-    private String swap1;
     private String selectedMenuOption;
     private JTextField console;
     private JTextField numberSelectionField;
-	private JList functionMenu;
+	private JList<String> functionMenu;
     private Container cp = getContentPane();
     private boolean functionMenuIsOpen;
     private boolean selectingNumber;
@@ -67,7 +65,7 @@ public class UserInterface extends JFrame{
 		right.setBounds(70, 300, 30, 30);
 		right.addActionListener(e -> {
             if(functionMenuIsOpen) {
-                selectedMenuOption = functionMenu.getSelectedValue().toString();
+                selectedMenuOption = functionMenu.getSelectedValue();
                 if (selectedMenuOption.equals("Add Racer") || selectedMenuOption.equals("Clear") || selectedMenuOption.equals("Event") || selectedMenuOption.equals("Print")) {
                     selectingNumber = true;
                     functionMenuIsOpen = false;
@@ -77,7 +75,10 @@ public class UserInterface extends JFrame{
             }else if(selectingNumber){
                 selectingNumber = false;
                 command[0] = selectedMenuOption;
-                //command[1] = finalNumber;
+                command[1] = enteredNumber.toString();
+                console.setVisible(true);
+                numberSelectionField.setVisible(false);
+                enteredNumber = new StringBuilder();
                 updateTime();
                 cTimer.executeCommand(command,totalTime,sysTime);
             }
@@ -392,28 +393,8 @@ public class UserInterface extends JFrame{
 		b0.addActionListener(e -> enteredNumber.append("0"));
 
 		JButton bp = new JButton("#");
-		bp.addActionListener(e -> {
-            //TODO i think conn/disc/swap are the only ones where the number isn't in the second position
-            if(command[0].equals(CommandConstants.connect) || command[0].equals(CommandConstants.disconnect)) {
-                command[2] = enteredNumber.toString();
-                updateTime();
-                cTimer.executeCommand(command,totalTime,sysTime);
-            }else if(command[0].equals(CommandConstants.swap)){
-                if(swap1 == null) {
-                    swap1 = enteredNumber.toString();
-                }else{
-                    command[1] = swap1;
-                    command[2] = enteredNumber.toString();
-                    swap1 = null;
-                    updateTime();
-                    cTimer.executeCommand(command,totalTime,sysTime);
-                }
-            }else{
-                command[1] = enteredNumber.toString();
-                updateTime();
-                cTimer.executeCommand(command,totalTime,sysTime);
-            }
-		}); 
+		bp.addActionListener(e -> enteredNumber.append("#"));
+
 		keypad.add(b1);
 		keypad.add(b2);
 		keypad.add(b3);
@@ -455,7 +436,7 @@ public class UserInterface extends JFrame{
 		back.add(backSeven);
 
 		String[] sensorStrings = {"GATE", "PAD", "EYE"};
-		JComboBox sensorType = new JComboBox(sensorStrings);
+		JComboBox<String> sensorType = new JComboBox<>(sensorStrings);
 		sensorType.setBounds(210, 20, 100, 100);
 		back.add(sensorType);
 		sensorType.setVisible(false);
@@ -694,10 +675,9 @@ public class UserInterface extends JFrame{
             console.setBackground(Color.white);
             cp.add(console);
 
-            //Add racer, event, clear, print need a number
             String functions[] = {"Add Racer","Event","Reset","Did Not Finish","Clear","Print","NewRun","EndRun","Exit"};
             functionMenuIndex = 0;
-            functionMenu = new JList(functions);
+            functionMenu = new JList<>(functions);
             functionMenu.setBounds(280, 250, 220, 200);
             functionMenu.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
             functionMenu.setBackground(Color.white);
