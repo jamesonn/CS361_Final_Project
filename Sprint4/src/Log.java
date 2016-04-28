@@ -5,21 +5,31 @@ import java.util.ArrayList;
  */
 public class Log {
     private ArrayList<String> runs = new ArrayList<>();
-    private String lineByLine;
+    private String latestLine;
+    private String history;
+
+    public Log(){
+        latestLine = "";
+        history = "";
+    }
 
     public void logRun(String runData, int runNum){
         runs.add(runNum,runData);
     }
 
-    public void setLineByLine(String line){
-        lineByLine = line;
+    public void setLatestLine(String line){
+        history += latestLine;
+        history += "\n";
+        latestLine = line;
     }
 
     public String getRun(int run){
         return runs.get(run);
     }
 
-    public String getLineByLine(){
-        return lineByLine;
+    public String getLatestLine(){
+        return latestLine;
     }
+
+    public String getHistory() { return history; }
 }

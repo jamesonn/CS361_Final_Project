@@ -30,15 +30,15 @@ public class ChronoTimer {
 	/**
 	 * switch case parsing of the commands; SysTime string version
 	 * @param commands Array holding string command in [0], then appropriate numbers in [1] or [2]
-	 * @param TotalTime Total time of racer when executeCommand is called
-	 * @param SysTime Current time when executeCommand is called
+	 * @param totalTime Total time of racer when executeCommand is called
+	 * @param sysTime Current time when executeCommand is called
 	 */
-	public void executeCommand(String[] commands, double TotalTime, String SysTime)
+	public void executeCommand(String[] commands, double totalTime, String sysTime)
 	{
 		switch (commands[0]){
 			case "TIME":{
 				if (systemOn){
-					events.add(new Event(SysTime));
+					events.add(new Event(sysTime));
 				} break;
 			}
 			case "ON":{
@@ -74,19 +74,19 @@ public class ChronoTimer {
 					String eventType = commands[1];
 					switch(eventType){
 						case "IND":{//no change necessary, default case
-							events.add(new Event(SysTime));
+							events.add(new Event(sysTime));
 							break;
 						}
 						case "PARIND":{
-							events.add(new PARIND(SysTime));
+							events.add(new PARIND(sysTime));
 							break;
 						}
 						case "GRP":{
-							events.add(new GRP(SysTime));
+							events.add(new GRP(sysTime));
 							break;
 						}
 						case "PARGRP":{
-							events.add(new PARGRP(SysTime));
+							events.add(new PARGRP(sysTime));
 							break;
 						}
 					}
@@ -103,6 +103,7 @@ public class ChronoTimer {
 			case "NUM":{
 				if (systemOn  && eventRunning){
 					events.get(currentEvent-1).addRacer(Integer.parseInt(commands[1]));
+					log.setLatestLine(commands[1] + " " + sysTime);
 				} break;
 			}
 			case "TRIG":{
@@ -113,10 +114,10 @@ public class ChronoTimer {
 					if(sensors[Integer.parseInt(commands[1])-1] != null){
 						Event runningEvent = events.get(currentEvent-1);
 						if (runningEvent instanceof PARGRP){
-							((PARGRP) runningEvent).trigger(Integer.parseInt(commands[1]), TotalTime, sensors);
+							((PARGRP) runningEvent).trigger(Integer.parseInt(commands[1]), totalTime, sensors);
 						}
 						else{
-							runningEvent.trigger(Integer.parseInt(commands[1]), TotalTime);
+							runningEvent.trigger(Integer.parseInt(commands[1]), totalTime);
 						}
 					}
 				} break;
@@ -125,8 +126,8 @@ public class ChronoTimer {
 				if (systemOn && eventRunning){ //Sprint 2; "shorthand for TRIG 1"
 					if(sensors[0] != null){
 					//in GRP & PARGRP trig 1 starts all lanes, in PARIND this would start 1 & 3
-						events.get(currentEvent-1).trigger(3, TotalTime);
-						events.get(currentEvent-1).trigger(1, TotalTime);
+						events.get(currentEvent-1).trigger(3, totalTime);
+						events.get(currentEvent-1).trigger(1, totalTime);
 					//trig 3 MUST be before trig 1 to allow PARIND start otherwise
 					//would case a false-finish for GRP/PARGRP events
 					}
@@ -135,7 +136,7 @@ public class ChronoTimer {
 				if (systemOn && eventRunning){ //Sprint 2; "shorthand for TRIG 2"
 					if(sensors[1] != null){
 						//DOES THIS NEED TO BE A SWITCH CASE????
-						events.get(currentEvent-1).trigger(2, TotalTime);
+						events.get(currentEvent-1).trigger(2, totalTime);
 						
 					}
 				}break;
@@ -163,7 +164,7 @@ public class ChronoTimer {
 				if (systemOn){
                     String runData = "";
 					//TODO: determine if printer is on; see "Operation of Unit" on p4
-					ArrayList<String> eventPrintLines = events.get(currentEvent-1).print(TotalTime);
+					ArrayList<String> eventPrintLines = events.get(currentEvent-1).print(totalTime);
 					//verify passed: System.out.println(eventPrintLines[0]);
 					//j = getPrinterStartTime/Location, however we determine that
 					for(int j = 0; j < eventPrintLines.size(); j++){
@@ -199,11 +200,11 @@ public class ChronoTimer {
 						eventRunning = true;
 						if ( events.get(currentEvent-1).getClass().equals(PARIND.class)){
 							currentEvent++;
-							events.add(new PARIND(SysTime));
+							events.add(new PARIND(sysTime));
 						}
 						else {
 							currentEvent++;
-							events.add(new Event(SysTime));
+							events.add(new Event(sysTime));
 						}
 					}
 					else{ // increment run number

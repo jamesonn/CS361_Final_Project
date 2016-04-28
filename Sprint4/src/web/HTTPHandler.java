@@ -15,11 +15,6 @@ import java.net.InetSocketAddress;
 import java.util.*;
 
 
-*/
-/**
- * Created by Nate on 4/28/2016.
- *//*
-
 public class HTTPHandler {
 
     // a shared area where we get the POST data and then use it in the other handler
@@ -58,8 +53,7 @@ public class HTTPHandler {
                 "<th><a href=\"/displayresults/department\">Department</a></th>" +
                 "<th>Phone Number</th>" +
                 "<tr>";
-        */
-/*for (Employee e : fromJson) {
+        for (Employee e : fromJson) {
             result += "<tr>" +
                     "<td>" + e.getTitle() + "</td>" +
                     "<td>" + e.getFirstName() + "</td>" +
@@ -68,7 +62,7 @@ public class HTTPHandler {
                     "<td>" + e.getDepartment() + "</td>" +
                     "<td>" + e.getPhoneNumber() + "</td>" +
                     "</tr>";
-        }*//*
+        }
 
         result += "</caption>";
         result += "</table>";
@@ -171,4 +165,5 @@ public class HTTPHandler {
             s.close();
         }
     }
-}*/
+}
+*/

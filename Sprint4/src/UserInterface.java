@@ -13,12 +13,13 @@ public class UserInterface extends JFrame{
 
 	private static final long serialVersionUID = 1L;
     private String[] command = new String[3];
+    private String sysTime;
+    private String selectedMenuOption;
+    private String consoleText = "";
     private StringBuilder enteredNumber = new StringBuilder();
     private SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
     private Calendar calendar = Calendar.getInstance();
     private double totalTime;
-    private String sysTime;
-    private String selectedMenuOption;
     private JTextArea console;
     private JTextArea numberSelectionField;
     private JTextArea printer;
@@ -130,6 +131,8 @@ public class UserInterface extends JFrame{
                     printer.setText(log.getRun(Integer.parseInt(command[1])));
                     revalidate();
                 }
+                consoleText += log.getLatestLine();
+                console.setText(consoleText);
             }
 		}); 
 		cp.add(right);
