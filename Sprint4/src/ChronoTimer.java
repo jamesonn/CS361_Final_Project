@@ -19,7 +19,8 @@ public class ChronoTimer {
 	 * ChronoTimer constructor
 	 */
 	public ChronoTimer(){
-		systemOn = true;  
+		systemOn = true;
+		currentEvent = 0;
 		eventRunning = false; //instructions treat this as a class, perhaps solution to tracking what type of event is happening?
 		sensors = new Sensor[8];
 	}
@@ -97,16 +98,16 @@ public class ChronoTimer {
 			}
 			case "NUM":{
 				if (systemOn  && eventRunning){
-					events.get(currentEvent).addRacer(Integer.parseInt(commands[1]));
+					events.get(currentEvent-1).addRacer(Integer.parseInt(commands[1]));
 				} break;
 			}
 			case "TRIG":{
 				if (systemOn  && eventRunning){
 					/*if(sensors[Integer.parseInt(commands[1])-1] != null){
-						events.get(currentEvent).trigger(Integer.parseInt(commands[1])-1, TotalTime);
+						events.get(currentEvent-1).trigger(Integer.parseInt(commands[1])-1, TotalTime);
 					}*/
 					if(sensors[Integer.parseInt(commands[1])-1] != null){
-						Event runningEvent = events.get(currentEvent);
+						Event runningEvent = events.get(currentEvent-1);
 						if (runningEvent instanceof PARGRP){
 							((PARGRP) runningEvent).trigger(Integer.parseInt(commands[1]), TotalTime, sensors);
 						}
@@ -120,8 +121,8 @@ public class ChronoTimer {
 				if (systemOn && eventRunning){ //Sprint 2; "shorthand for TRIG 1"
 					if(sensors[0] != null){
 					//in GRP & PARGRP trig 1 starts all lanes, in PARIND this would start 1 & 3
-						events.get(currentEvent).trigger(3, TotalTime);
-						events.get(currentEvent).trigger(1, TotalTime);
+						events.get(currentEvent-1).trigger(3, TotalTime);
+						events.get(currentEvent-1).trigger(1, TotalTime);
 					//trig 3 MUST be before trig 1 to allow PARIND start otherwise
 					//would case a false-finish for GRP/PARGRP events
 					}
@@ -130,7 +131,7 @@ public class ChronoTimer {
 				if (systemOn && eventRunning){ //Sprint 2; "shorthand for TRIG 2"
 					if(sensors[1] != null){
 						//DOES THIS NEED TO BE A SWITCH CASE????
-						events.get(currentEvent).trigger(2, TotalTime);
+						events.get(currentEvent-1).trigger(2, TotalTime);
 						
 					}
 				}break;
@@ -138,26 +139,26 @@ public class ChronoTimer {
 			case "DNF":{
 				if (systemOn && eventRunning){ //IND only???
 					//Sprint 1; "next competitor to finish will not finish"
-					events.get(currentEvent).didNotFinish();
+					events.get(currentEvent-1).didNotFinish();
 				}break;
 			}
 			case "CLR":{
 				if (systemOn && eventRunning){ 
 					//Sprint 2; "clear NUM as the next competitor" a.k.a. remove them from queue
-					events.get(currentEvent).removeRacer(Integer.parseInt(commands[1]));
+					events.get(currentEvent-1).removeRacer(Integer.parseInt(commands[1]));
 				}break;
 			}
 			case "SWAP":{
 				if (systemOn && eventRunning){ 
 					//Sprint 2; "exchange next two competitors to finish in IND type"
-					events.get(currentEvent).swap();
+					events.get(currentEvent-1).swap();
 				}break;
 			}
 			case "PRINT":{
 				//if (systemOn && eventRunning){ 
 				if (systemOn){ 
 					//TODO: determine if printer is on; see "Operation of Unit" on p4
-					ArrayList<String> log = events.get(currentEvent).print(TotalTime);
+					ArrayList<String> log = events.get(currentEvent-1).print(TotalTime);
 					//verify passed: System.out.println(log[0]);
 					//j = getPrinterStartTime/Location, however we determine that
 					for(int j = 0; j < log.size(); j++){
@@ -188,7 +189,7 @@ public class ChronoTimer {
 
 					if(!eventRunning){
 						eventRunning = true;
-						if ( events.get(currentEvent).getClass().equals(PARIND.class)){
+						if ( events.get(currentEvent-1).getClass().equals(PARIND.class)){
 							currentEvent++;
 							events.add(new PARIND(SysTime));
 						}
@@ -198,7 +199,7 @@ public class ChronoTimer {
 						}
 					}
 					else{ // increment run number
-						events.get(currentEvent).newRun();
+						events.get(currentEvent-1).newRun();
 						
 					}
 				} break;
