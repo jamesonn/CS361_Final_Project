@@ -7,7 +7,6 @@ public class Sensor {
 	private String deviceType;
 	private int sensorNum;
 	private boolean isToggledOn;
-	private boolean isStartSensor;
 	
 	/**
 	 * 
@@ -17,11 +16,6 @@ public class Sensor {
 	public Sensor(String deviceType, int sensorNum){
 		this.deviceType = deviceType;
 		this.sensorNum = sensorNum;
-		if(sensorNum == 1 || sensorNum == 3 || sensorNum == 5 || sensorNum == 7){
-			isStartSensor = true;
-		}else{
-			isStartSensor = false;
-		}
 	}
 	
 	/**
@@ -37,10 +31,6 @@ public class Sensor {
 	 */
 	public void toggle(){
 			isToggledOn = !isToggledOn;		
-	}
-	
-	public boolean isStartSensor(){
-		return isStartSensor;
 	}
 	
 	public String getDeviceType(){

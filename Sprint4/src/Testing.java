@@ -36,12 +36,10 @@ public class Testing {
 		sensor = new Sensor("EYE", 1);
 		assertEquals(sensor.getDeviceType(), "EYE");
 		assertEquals(sensor.getSensorNumber(), 1);
-		assertTrue(sensor.isStartSensor());
 		assertFalse(sensor.canTriggerSensor());
 		sensor = new Sensor("GATE", 2);
 		assertEquals(sensor.getDeviceType(), "GATE");
 		assertEquals(sensor.getSensorNumber(), 2);
-		assertFalse(sensor.isStartSensor());
 		assertFalse(sensor.canTriggerSensor());
 		sensor.toggle();
 		assertTrue(sensor.canTriggerSensor());
