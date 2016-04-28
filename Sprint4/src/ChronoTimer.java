@@ -106,7 +106,13 @@ public class ChronoTimer {
 						events.get(currentEvent).trigger(Integer.parseInt(commands[1])-1, TotalTime);
 					}*/
 					if(sensors[Integer.parseInt(commands[1])-1] != null){
-						events.get(currentEvent).trigger(Integer.parseInt(commands[1]), TotalTime);
+						Event runningEvent = events.get(currentEvent);
+						if (runningEvent instanceof PARGRP){
+							((PARGRP) runningEvent).trigger(Integer.parseInt(commands[1]), TotalTime, sensors);
+						}
+						else{
+							runningEvent.trigger(Integer.parseInt(commands[1]), TotalTime);
+						}
 					}
 				} break;
 			}

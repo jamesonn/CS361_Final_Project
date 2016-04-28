@@ -37,11 +37,14 @@ public class PARGRP extends Event{
 		}
 	}
 	
-	@Override
-	public void trigger(int chan, double t){
+	
+	public void trigger(int chan, double t, Sensor[] sensors){
 		if(chan == 1 && !lanes[0].isReadyEmpty()){//start all
 			for(int i = 0; i < 8; ++i){
 				lanes[i].start(t);
+				if(!sensors[i].canTriggerSensor()){
+					lanes[i].didNotFinish();
+				}
 			}
 		}
 		//TODO somehow check for pads connected
