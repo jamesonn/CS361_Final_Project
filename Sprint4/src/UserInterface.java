@@ -22,11 +22,14 @@ public class UserInterface extends JFrame{
     private JTextArea console;
     private JTextArea numberSelectionField;
 	private JList<String> functionMenu;
+    private JList<String> eventTypes;
     private Container cp = getContentPane();
     private boolean functionMenuIsOpen;
     private boolean selectingNumber;
     private boolean isExportMenuOpen;
+    private boolean isEventListOpen;
     private int functionMenuIndex;
+    private int eventIndex;
 
     public UserInterface(ChronoTimer cTimer){
 		cp.setLayout(null);
@@ -66,14 +69,47 @@ public class UserInterface extends JFrame{
 		BasicArrowButton right = new BasicArrowButton(BasicArrowButton.EAST);
 		right.setBounds(70, 300, 30, 30);
 		right.addActionListener(e -> {
-            if(functionMenuIsOpen) {
+            if(isEventListOpen){
+                selectedMenuOption = eventTypes.getSelectedValue();
+                switch(selectedMenuOption) {
+                    case "IND":
+                        command[1] = "IND";
+                        updateTime();
+                        cTimer.executeCommand(command, totalTime, sysTime);
+                        break;
+                    case "PARIND":
+                        command[1] = "PARIND";
+                        updateTime();
+                        cTimer.executeCommand(command, totalTime, sysTime);
+                        break;
+                    case "GRP":
+                        command[1] = "GRP";
+                        updateTime();
+                        cTimer.executeCommand(command, totalTime, sysTime);
+                        break;
+                    case "PARGRP":
+                        command[1] = "PARGRP";
+                        updateTime();
+                        cTimer.executeCommand(command, totalTime, sysTime);
+                        break;
+                }
+                console.setVisible(true);
+                eventTypes.setVisible(false);
+                isEventListOpen = false;
+            }else if(functionMenuIsOpen) {
                 selectedMenuOption = functionMenu.getSelectedValue();
-                if (selectedMenuOption.equals("Add Racer") || selectedMenuOption.equals("Clear") || selectedMenuOption.equals("Event") || selectedMenuOption.equals("Print")) {
+                if (selectedMenuOption.equals("Add Racer") || selectedMenuOption.equals("Clear") || selectedMenuOption.equals("Print")) {
                     selectingNumber = true;
                     functionMenuIsOpen = false;
                     functionMenu.setVisible(false);
+                    eventTypes.setVisible(false);
                     numberSelectionField.setVisible(true);
                     numberSelectionField.setText(selectedMenuOption + " ");
+                }else if(selectedMenuOption.equals("Event")){
+                    command[0] = selectedMenuOption;
+                    isEventListOpen = true;
+                    eventTypes.setVisible(true);
+                    functionMenu.setVisible(false);
                 }
             }else if(selectingNumber){
                 selectingNumber = false;
@@ -96,6 +132,11 @@ public class UserInterface extends JFrame{
                     functionMenuIndex++;
                     functionMenu.setSelectedIndex(functionMenuIndex);
                 }
+            }else if(isEventListOpen){
+                if(eventIndex < 4){
+                    eventIndex++;
+                    eventTypes.setSelectedIndex(eventIndex);
+                }
             }
 		}); 
 		cp.add(down);
@@ -107,6 +148,11 @@ public class UserInterface extends JFrame{
                 if (functionMenuIndex > 0) {
                     functionMenuIndex--;
                     functionMenu.setSelectedIndex(functionMenuIndex);
+                }
+            }else if(isEventListOpen){
+                if(eventIndex > 0){
+                    eventIndex--;
+                    eventTypes.setSelectedIndex(eventIndex);
                 }
             }
 		}); 
@@ -782,6 +828,16 @@ public class UserInterface extends JFrame{
 			functionMenu.setSelectedIndex(functionMenuIndex);
             cp.add(functionMenu);
             functionMenuIsOpen = false;
+
+            String eventList[] = {"IND","PARIND","GRP","PARGRP"};
+            eventIndex = 0;
+            eventTypes = new JList<>(eventList);
+            eventTypes.setBounds(280, 250, 220, 200);
+            eventTypes.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+            eventTypes.setBackground(Color.white);
+            eventTypes.setSelectedIndex(eventIndex);
+            cp.add(eventTypes);
+            isEventListOpen = false;
 
             numberSelectionField = new JTextArea();
             numberSelectionField.setEditable(false);
