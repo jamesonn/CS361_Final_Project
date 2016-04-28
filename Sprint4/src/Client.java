@@ -1,5 +1,6 @@
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -7,6 +8,8 @@ import java.util.Scanner;
  * Takes input choice and either parses the test data or opens the GUI
  */
 public class Client {
+
+    private HttpURLConnection conn;
 
     protected Client(boolean formatChoiceIsUI, String testFile) {
 
@@ -53,5 +56,33 @@ public class Client {
                 }
             }
         }
+    }
+
+    public String sendData(String route, String data) {
+        String urlSite = "http://localhost" + 8000;
+        StringBuilder response = new StringBuilder();
+        try {
+            URL site = new URL(urlSite);
+            conn = (HttpURLConnection) site.openConnection();
+            conn.setRequestMethod("POST");
+            conn.setDoOutput(true);
+            conn.setDoInput(true);
+            DataOutputStream out = new DataOutputStream(conn.getOutputStream());
+            out.writeBytes("data=" + data);
+            out.flush();
+            out.close();
+            InputStreamReader inputStr = new InputStreamReader(conn.getInputStream());
+
+            // read the characters from the request byte by byte and build up
+            // the Response
+            int nextChar;
+            while ((nextChar = inputStr.read()) > -1) {
+                response = response.append((char) nextChar);
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return response.toString();
     }
 }
