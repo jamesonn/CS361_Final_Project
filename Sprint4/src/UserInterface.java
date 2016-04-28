@@ -18,10 +18,13 @@ public class UserInterface extends JFrame{
     private double totalTime;
     private String sysTime;
     private String swap1;
+    private String selectedMenuOption;
     private JTextField console;
+    private JTextField numberSelectionField;
 	private JList functionMenu;
     private Container cp = getContentPane();
     private boolean functionMenuIsOpen;
+    private boolean selectingNumber;
     private int functionMenuIndex;
 
     public UserInterface(ChronoTimer cTimer){
@@ -45,16 +48,39 @@ public class UserInterface extends JFrame{
 		BasicArrowButton left = new BasicArrowButton(BasicArrowButton.WEST);
 		left.setBounds(30, 300, 30, 30);
 		left.addActionListener(e -> {
-				//TODO
-				//left arrow button
+            if(selectingNumber){
+                selectingNumber = false;
+                functionMenuIsOpen = true;
+                numberSelectionField.setVisible(false);
+                functionMenu.setVisible(true);
+                revalidate();
+            }else if(functionMenuIsOpen){
+                functionMenuIsOpen = false;
+                console.setVisible(true);
+                functionMenu.setVisible(false);
+                revalidate();
+            }
 		}); 
 		cp.add(left);
 
 		BasicArrowButton right = new BasicArrowButton(BasicArrowButton.EAST);
 		right.setBounds(70, 300, 30, 30);
 		right.addActionListener(e -> {
-				//TODO
-				//right arrow button
+            if(functionMenuIsOpen) {
+                selectedMenuOption = functionMenu.getSelectedValue().toString();
+                if (selectedMenuOption.equals("Add Racer") || selectedMenuOption.equals("Clear") || selectedMenuOption.equals("Event") || selectedMenuOption.equals("Print")) {
+                    selectingNumber = true;
+                    functionMenuIsOpen = false;
+                    functionMenu.setVisible(false);
+                    numberSelectionField.setVisible(true);
+                }
+            }else if(selectingNumber){
+                selectingNumber = false;
+                command[0] = selectedMenuOption;
+                //command[1] = finalNumber;
+                updateTime();
+                cTimer.executeCommand(command,totalTime,sysTime);
+            }
 		}); 
 		cp.add(right);
 
@@ -668,7 +694,7 @@ public class UserInterface extends JFrame{
             console.setBackground(Color.white);
             cp.add(console);
 
-            //function menu created, but not visible
+            //Add racer, event, clear, print need a number
             String functions[] = {"Add Racer","Event","Reset","Did Not Finish","Clear","Print","NewRun","EndRun","Exit"};
             functionMenuIndex = 0;
             functionMenu = new JList(functions);
@@ -678,10 +704,24 @@ public class UserInterface extends JFrame{
 			functionMenu.setSelectedIndex(functionMenuIndex);
             cp.add(functionMenu);
             functionMenuIsOpen = false;
-        }else if(!functionMenuIsOpen){
+
+            numberSelectionField = new JTextField();
+            numberSelectionField.setEditable(false);
+            numberSelectionField.setBounds(280, 250, 220, 200);
+            numberSelectionField.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+            numberSelectionField.setBackground(Color.white);
+            cp.add(numberSelectionField);
+            selectingNumber = false;
+        }else if(!functionMenuIsOpen && !selectingNumber) {
             functionMenu.setVisible(true);
             console.setVisible(false);
             functionMenuIsOpen = true;
+            revalidate();
+        }else if(!functionMenuIsOpen && selectingNumber){
+            console.setVisible(true);
+            functionMenu.setVisible(false);
+            functionMenuIsOpen = false;
+            selectingNumber = false;
             revalidate();
         }else if(functionMenuIsOpen){
             console.setVisible(true);
