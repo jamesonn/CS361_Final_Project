@@ -21,6 +21,7 @@ public class UserInterface extends JFrame{
     private String selectedMenuOption;
     private JTextArea console;
     private JTextArea numberSelectionField;
+    private JTextArea printer;
 	private JList<String> functionMenu;
     private JList<String> eventTypes;
     private Container cp = getContentPane();
@@ -28,10 +29,11 @@ public class UserInterface extends JFrame{
     private boolean selectingNumber;
     private boolean isExportMenuOpen;
     private boolean isEventListOpen;
+    private boolean printCalled;
     private int functionMenuIndex;
     private int eventIndex;
 
-    public UserInterface(ChronoTimer cTimer){
+    public UserInterface(ChronoTimer cTimer, Log log){
 		cp.setLayout(null);
 
 		JButton power = new JButton("Power");
@@ -99,6 +101,9 @@ public class UserInterface extends JFrame{
             }else if(functionMenuIsOpen) {
                 selectedMenuOption = functionMenu.getSelectedValue();
                 if (selectedMenuOption.equals("NUM") || selectedMenuOption.equals("CLR") || selectedMenuOption.equals("PRINT")) {
+                    if(selectedMenuOption.equals("PRINT")){
+                        printCalled = true;
+                    }
                     selectingNumber = true;
                     functionMenuIsOpen = false;
                     functionMenu.setVisible(false);
@@ -120,6 +125,11 @@ public class UserInterface extends JFrame{
                 enteredNumber = new StringBuilder();
                 updateTime();
                 cTimer.executeCommand(command,totalTime,sysTime);
+                if(printCalled){
+                    printCalled = false;
+                    printer.setText(log.getRun(Integer.parseInt(command[1])));
+                    revalidate();
+                }
             }
 		}); 
 		cp.add(right);
@@ -397,7 +407,7 @@ public class UserInterface extends JFrame{
 		}); 
 		cp.add(printerPower);
 
-		JTextField printer = new JTextField();
+		printer = new JTextArea();
 		printer.setEditable(false);
 		printer.setBounds(575, 60, 150, 150);
 		printer.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));

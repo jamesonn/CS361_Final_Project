@@ -10,13 +10,14 @@ import java.util.Scanner;
 public class Client {
 
     private HttpURLConnection conn;
+    private Log log;
 
     protected Client(boolean formatChoiceIsUI, String testFile) {
-
-        ChronoTimer cTimer = new ChronoTimer();
+        log = new Log();
+        ChronoTimer cTimer = new ChronoTimer(log);
 
         if(formatChoiceIsUI){
-            UserInterface ui = new UserInterface(cTimer);
+            UserInterface ui = new UserInterface(cTimer, log);
         }else {
             int hours;
             int minutes;

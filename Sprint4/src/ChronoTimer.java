@@ -14,11 +14,13 @@ public class ChronoTimer {
 	//events start at 1 not 0
 	private ArrayList<Event> events = new ArrayList<>();
 	private int currentEvent;
+    private Log log;
 	
 	/**
 	 * ChronoTimer constructor
 	 */
-	public ChronoTimer(){
+	public ChronoTimer(Log log){
+        this.log = log;
 		systemOn = true;
 		currentEvent = 0;
 		eventRunning = false; //instructions treat this as a class, perhaps solution to tracking what type of event is happening?
@@ -158,14 +160,18 @@ public class ChronoTimer {
 			}
 			case "PRINT":{
 				//if (systemOn && eventRunning){ 
-				if (systemOn){ 
+				if (systemOn){
+                    String runData = "";
 					//TODO: determine if printer is on; see "Operation of Unit" on p4
-					ArrayList<String> log = events.get(currentEvent-1).print(TotalTime);
-					//verify passed: System.out.println(log[0]);
+					ArrayList<String> eventPrintLines = events.get(currentEvent-1).print(TotalTime);
+					//verify passed: System.out.println(eventPrintLines[0]);
 					//j = getPrinterStartTime/Location, however we determine that
-					for(int j = 0; j < log.size(); j++){
-						System.out.println(log.get(j));
+					for(int j = 0; j < eventPrintLines.size(); j++){
+                        runData += eventPrintLines.get(j);
+                        runData += "\n";
+						System.out.println(eventPrintLines.get(j));
 					}
+                    log.logRun(runData,Integer.parseInt(commands[1]));
 				} break;
 			}
 			case "EXPORT":{
