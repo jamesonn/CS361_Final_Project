@@ -26,9 +26,9 @@ public class ChronoTimer {
 
 	/**
 	 * switch case parsing of the commands; SysTime string version
-	 * @param commands
-	 * @param TotalTime
-	 * @param SysTime
+	 * @param commands Array holding string command in [0], then appropriate numbers in [1] or [2]
+	 * @param TotalTime Total time of racer when executeCommand is called
+	 * @param SysTime Current time when executeCommand is called
 	 */
 	public void executeCommand(String[] commands, double TotalTime, String SysTime)
 	{
@@ -167,7 +167,7 @@ public class ChronoTimer {
 						writer.write(g.toJson(events));
 						writer.close();
 					}catch(Exception IOException){
-
+						System.out.println("Export in chronotimer failure");
 					}
 				}break;
 			}

@@ -6,6 +6,9 @@ import java.util.Date;
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicArrowButton;
 
+/**]
+ *
+ */
 public class UserInterface extends JFrame{
 
 	private static final long serialVersionUID = 1L;
@@ -712,6 +715,7 @@ public class UserInterface extends JFrame{
 		}); 
 		back.add(toggleBackEight);
 
+        //Handles the Export button
 		JButton USB = new JButton();
 		USB.setBounds(320, 60, 60, 15);
 		USB.addActionListener(e -> {
@@ -746,13 +750,20 @@ public class UserInterface extends JFrame{
         setResizable(false);
 		setVisible(true);
 	}
-	
+
+    /**
+     * Updates system time, called prior to executeCommand being called.
+     */
 	private void updateTime(){
 		Calendar.getInstance();
 		totalTime = calendar.get(Calendar.HOUR)*3600 + calendar.get(Calendar.MINUTE)*60 + calendar.get(Calendar.SECOND);
 		sysTime = sdf.format(new Date());
 	}
 
+    /**
+     * Handles the state changes of the console window. Three States being default console, function menu, export screen,
+     * and number selection screen
+     */
     private void refreshConsole(){
         if(console == null){
             console = new JTextArea();

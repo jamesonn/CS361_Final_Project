@@ -31,7 +31,6 @@ public class Event {
 	/**
 	 * takes the current time and the Racer NUM, makes and adds a new Racer to the IND lane 
 	 * @param bib
-	 * @param newT
 	 */
 	public void addRacer(int bib){
 		Racer r = new Racer(bib);
@@ -42,7 +41,7 @@ public class Event {
 	/**
 	 * Takes the current time and the number triggered;  
 	 * starts or stops based on number triggered;  if a stop adds finished Racer to log
-	 * @param lane
+	 * @param chan
 	 * @param t
 	 */
 	public void trigger(int chan, double t){
