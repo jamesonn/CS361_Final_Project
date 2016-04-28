@@ -51,6 +51,7 @@ public class UserInterface extends JFrame{
                 functionMenuIsOpen = true;
                 numberSelectionField.setVisible(false);
                 functionMenu.setVisible(true);
+                enteredNumber =  new StringBuilder();
                 revalidate();
             }else if(functionMenuIsOpen){
                 functionMenuIsOpen = false;
@@ -359,41 +360,112 @@ public class UserInterface extends JFrame{
 		keypad.setBounds(575, 250, 150, 200);
 
 		JButton b1 = new JButton("1");
-		b1.addActionListener(e -> enteredNumber.append("1"));
+		b1.addActionListener(e -> {
+            if(selectingNumber) {
+                enteredNumber.append("1");
+                numberSelectionField.setText(selectedMenuOption + " " + enteredNumber.toString());
+                revalidate();
+            }
+        });
 
 		JButton b2 = new JButton("2");
-		b2.addActionListener(e -> enteredNumber.append("2"));
+		b2.addActionListener(e -> {
+            if(selectingNumber) {
+                enteredNumber.append("2");
+                numberSelectionField.setText(selectedMenuOption + " " + enteredNumber.toString());
+                revalidate();
+            }
+        });
 
 		JButton b3 = new JButton("3");
-		b3.addActionListener(e -> enteredNumber.append("3"));
+		b3.addActionListener(e -> {
+            if(selectingNumber) {
+                enteredNumber.append("3");
+                numberSelectionField.setText(selectedMenuOption + " " + enteredNumber.toString());
+                revalidate();
+            }
+        });
 
 		JButton b4 = new JButton("4");
-		b4.addActionListener(e -> enteredNumber.append("4"));
+		b4.addActionListener(e -> {
+            if(selectingNumber) {
+                enteredNumber.append("4");
+                numberSelectionField.setText(selectedMenuOption + " " + enteredNumber.toString());
+                revalidate();
+            }
+        });
 
 		JButton b5 = new JButton("5");
-		b5.addActionListener(e -> enteredNumber.append("5"));
+		b5.addActionListener(e -> {
+            if(selectingNumber) {
+                enteredNumber.append("5");
+                numberSelectionField.setText(selectedMenuOption + " " + enteredNumber.toString());
+                revalidate();
+            }
+        });
 
 		JButton b6 = new JButton("6");
-		b6.addActionListener(e -> enteredNumber.append("6"));
+		b6.addActionListener(e -> {
+            if(selectingNumber) {
+                enteredNumber.append("6");
+                numberSelectionField.setText(selectedMenuOption + " " + enteredNumber.toString());
+                revalidate();
+            }
+        });
 
 		JButton b7 = new JButton("7");
-		b7.addActionListener(e -> enteredNumber.append("7"));
+		b7.addActionListener(e -> {
+            if(selectingNumber) {
+                enteredNumber.append("7");
+                numberSelectionField.setText(selectedMenuOption + " " + enteredNumber.toString());
+                revalidate();
+            }
+        });
 
 		JButton b8 = new JButton("8");
-		b8.addActionListener(e -> enteredNumber.append("8"));
+		b8.addActionListener(e -> {
+            if(selectingNumber) {
+                enteredNumber.append("8");
+                numberSelectionField.setText(selectedMenuOption + " " + enteredNumber.toString());
+                revalidate();
+            }
+        });
 
 		JButton b9 = new JButton("9");
-		b9.addActionListener(e -> enteredNumber.append("9"));
+		b9.addActionListener(e -> {
+            if(selectingNumber) {
+                enteredNumber.append("9");
+                numberSelectionField.setText(selectedMenuOption + " " + enteredNumber.toString());
+                revalidate();
+            }
+        });
 
-        //TODO wtf is * supposed to do? im just guessing
 		JButton ba = new JButton("*");
-		ba.addActionListener(e -> enteredNumber.append("*"));
+		ba.addActionListener(e -> {
+            if(selectingNumber) {
+                enteredNumber.append("*");
+                numberSelectionField.setText(selectedMenuOption + " " + enteredNumber.toString());
+                revalidate();
+            }
+        });
 
 		JButton b0 = new JButton("0");
-		b0.addActionListener(e -> enteredNumber.append("0"));
+		b0.addActionListener(e -> {
+            if(selectingNumber) {
+                enteredNumber.append("0");
+                numberSelectionField.setText(selectedMenuOption + " " + enteredNumber.toString());
+                revalidate();
+            }
+        });
 
 		JButton bp = new JButton("#");
-		bp.addActionListener(e -> enteredNumber.append("#"));
+		bp.addActionListener(e -> {
+            if(selectingNumber) {
+                enteredNumber.append("#");
+                numberSelectionField.setText(selectedMenuOption + " " + enteredNumber.toString());
+                revalidate();
+            }
+        });
 
 		keypad.add(b1);
 		keypad.add(b2);
@@ -699,7 +771,8 @@ public class UserInterface extends JFrame{
             revalidate();
         }else if(!functionMenuIsOpen && selectingNumber){
             console.setVisible(true);
-            functionMenu.setVisible(false);
+            numberSelectionField.setVisible(false);
+            enteredNumber = new StringBuilder();
             functionMenuIsOpen = false;
             selectingNumber = false;
             revalidate();
