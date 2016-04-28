@@ -98,14 +98,14 @@ public class UserInterface extends JFrame{
                 isEventListOpen = false;
             }else if(functionMenuIsOpen) {
                 selectedMenuOption = functionMenu.getSelectedValue();
-                if (selectedMenuOption.equals("Add Racer") || selectedMenuOption.equals("Clear") || selectedMenuOption.equals("Print")) {
+                if (selectedMenuOption.equals("NUM") || selectedMenuOption.equals("CLR") || selectedMenuOption.equals("PRINT")) {
                     selectingNumber = true;
                     functionMenuIsOpen = false;
                     functionMenu.setVisible(false);
                     eventTypes.setVisible(false);
                     numberSelectionField.setVisible(true);
                     numberSelectionField.setText(selectedMenuOption + " ");
-                }else if(selectedMenuOption.equals("Event")){
+                }else if(selectedMenuOption.equals("EVENT")){
                     command[0] = selectedMenuOption;
                     isEventListOpen = true;
                     eventTypes.setVisible(true);
@@ -819,7 +819,7 @@ public class UserInterface extends JFrame{
             console.setBackground(Color.white);
             cp.add(console);
 
-            String functions[] = {"Add Racer","Event","Reset","Did Not Finish","Clear","Print","NewRun","EndRun","Exit"};
+            String functions[] = {"NUM","EVENT","RESET","DNF","CLR","PRINT","NEWRUN","ENDRUN","EXIT"};
             functionMenuIndex = 0;
             functionMenu = new JList<>(functions);
             functionMenu.setBounds(280, 250, 220, 200);

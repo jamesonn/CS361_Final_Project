@@ -1,0 +1,19 @@
+body {
+	color : black;
+	background-color: firebrick;
+
+}
+tr:nth-child(even){background-color: white}
+th {
+    background-color: grey;
+    color:black
+}
+th, td {
+    border: 1px solid black;
+}
+table {
+    border: 1px solid black;
+    width: 100%;
+    height: 200px;
+}
+
