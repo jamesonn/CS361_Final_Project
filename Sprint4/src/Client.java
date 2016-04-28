@@ -4,6 +4,9 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import com.google.gson.Gson;
+import web.HTTPHandler;
+
 /**
  * Takes input choice and either parses the test data or opens the GUI
  */
@@ -57,10 +60,11 @@ public class Client {
                 }
             }
         }
+        sendData();
     }
 
     public String sendData() {
-        String urlSite = "http://localhost" + 8000;
+        String urlSite = "http://localhost:8000/sendresults";
         StringBuilder response = new StringBuilder();
         try {
             URL site = new URL(urlSite);
@@ -86,4 +90,9 @@ public class Client {
         }
         return response.toString();
     }
+
+    /*public String getJSON() {
+        Gson g = new Gson();
+        return g.toJson();
+    }*/
 }

@@ -1,4 +1,3 @@
-/*
 package web;
 
 import com.google.gson.Gson;
@@ -21,27 +20,31 @@ public class HTTPHandler {
     static String sharedResponse = "data=[{\"title\":\"Mrs.\",\"firstName\":\"wqewq\",\"lastName\":\"bbbbb\",\"department\":\"aaaaa\",\"phoneNumber\":\"23113\",\"gender\":\"Male\"},{\"title\":\"Col.\",\"firstName\":\"wqeq\",\"lastName\":\"aaaaa\",\"department\":\"bbbbb\",\"phoneNumber\":\"3243324\",\"gender\":\"Female\"}]\n";
     static boolean gotMessageFlag = false;
 
-    public static void main(String[] args) throws Exception {
+    public HTTPHandler(){
 
         // set up a simple HTTP server on our local host
-        HttpServer server = HttpServer.create(new InetSocketAddress(8000), 0);
+        try {
+            HttpServer server = HttpServer.create(new InetSocketAddress(8000), 0);
+            // create a context to get the request to display the results
+            server.createContext("/displayresults/lastname", new DisplayHandlerLastName());
+            server.createContext("/displayresults/firstname", new DisplayHandlerFirstName());
+            server.createContext("/displayresults/department", new DisplayHandlerDepartment());
+            server.createContext("/displayresults/mystyle.css", new CSSHandler());
 
-        // create a context to get the request to display the results
-        server.createContext("/displayresults/lastname", new DisplayHandlerLastName());
-        server.createContext("/displayresults/firstname", new DisplayHandlerFirstName());
-        server.createContext("/displayresults/department", new DisplayHandlerDepartment());
-        server.createContext("/displayresults/mystyle.css", new CSSHandler());
+            // create a context to get the request for the POST
+            server.createContext("/sendresults",new PostHandler());
+            server.setExecutor(null); // creates a default executor
 
-        // create a context to get the request for the POST
-        server.createContext("/sendresults",new PostHandler());
-        server.setExecutor(null); // creates a default executor
+            // get it going
+            System.out.println("Starting Server...");
+            server.start();
+        }catch(IOException e){
 
-        // get it going
-        System.out.println("Starting Server...");
-        server.start();
+        }
     }
 
-    private static String getResponseBodyFromArrayList(ArrayList<Racer> fromJson) {
+    //param ArrayList<Racer> fromJson
+    private static String getResponseBodyFromArrayList() {
         String result = "<link rel=\"stylesheet\" type=\"text/css\" href=\"mystyle.css\">";
         result += "<table>\n";
         result += "<caption>Company Directory";
@@ -53,7 +56,7 @@ public class HTTPHandler {
                 "<th><a href=\"/displayresults/department\">Department</a></th>" +
                 "<th>Phone Number</th>" +
                 "<tr>";
-        for (Employee e : fromJson) {
+        /*for (Employee e : fromJson) {
             result += "<tr>" +
                     "<td>" + e.getTitle() + "</td>" +
                     "<td>" + e.getFirstName() + "</td>" +
@@ -62,7 +65,7 @@ public class HTTPHandler {
                     "<td>" + e.getDepartment() + "</td>" +
                     "<td>" + e.getPhoneNumber() + "</td>" +
                     "</tr>";
-        }
+        }*/
 
         result += "</caption>";
         result += "</table>";
@@ -72,12 +75,13 @@ public class HTTPHandler {
 
     private static void createResponseWithComparator(HttpExchange t, Comparator c) throws IOException {
         Gson g = new Gson();
-        ArrayList<Employee> fromJson = g.fromJson(sharedResponse.substring(5),
+        /*ArrayList<Employee> fromJson = g.fromJson(sharedResponse.substring(5),
                 new TypeToken<Collection<Employee>>() {
                 }.getType());
         Collections.sort(fromJson, c);
-        String response = getResponseBodyFromArrayList(fromJson);
+        String response = getResponseBodyFromArrayList(fromJson);*/
         // write out the response
+        String response = "";
         t.getResponseHeaders().set("Content-Type", "text/html");
         t.sendResponseHeaders(200, response.length());
         OutputStream os = t.getResponseBody();
@@ -87,19 +91,19 @@ public class HTTPHandler {
 
     static class DisplayHandlerLastName implements HttpHandler {
         public void handle(HttpExchange t) throws IOException {
-            createResponseWithComparator(t, new EmployeeLastNameComparator());
+            //createResponseWithComparator(t, new EmployeeLastNameComparator());
         }
     }
 
     static class DisplayHandlerFirstName implements HttpHandler {
         public void handle(HttpExchange t) throws IOException {
-            createResponseWithComparator(t, new EmployeeFirstNameComparator());
+            //createResponseWithComparator(t, new EmployeeFirstNameComparator());
         }
     }
 
     static class DisplayHandlerDepartment implements HttpHandler {
         public void handle(HttpExchange t) throws IOException {
-            createResponseWithComparator(t, new EmployeeDepartmentComparator());
+            //createResponseWithComparator(t, new EmployeeDepartmentComparator());
         }
     }
 
@@ -166,4 +170,3 @@ public class HTTPHandler {
         }
     }
 }
-*/
