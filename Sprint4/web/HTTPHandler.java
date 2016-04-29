@@ -15,7 +15,7 @@ import java.util.*;
 public class HTTPHandler {
 
     // a shared area where we get the POST data and then use it in the other handler
-    static String sharedResponse = "data=[{\"title\":\"Mrs.\",\"firstName\":\"wqewq\",\"lastName\":\"bbbbb\",\"department\":\"aaaaa\",\"phoneNumber\":\"23113\",\"gender\":\"Male\"},{\"title\":\"Col.\",\"firstName\":\"wqeq\",\"lastName\":\"aaaaa\",\"department\":\"bbbbb\",\"phoneNumber\":\"3243324\",\"gender\":\"Female\"}]\n";
+    static String sharedResponse = "data=[{}]";
     static boolean gotMessageFlag = false;
 
     public HTTPHandler(){
@@ -24,8 +24,8 @@ public class HTTPHandler {
         try {
             HttpServer server = HttpServer.create(new InetSocketAddress(8000), 0);
             // create a context to get the request to display the results
-            server.createContext("/displayresults/lastname", new DisplayHandlerLastName());
-            server.createContext("/displayresults/firstname", new DisplayHandlerFirstName());
+            server.createContext("/displayresults/time", new DisplayHandlerTime());
+            server.createContext("/displayresults/number", new DisplayHandlerNumber());
             server.createContext("/displayresults/mystyle.css", new CSSHandler());
 
             // create a context to get the request for the POST
@@ -43,21 +43,19 @@ public class HTTPHandler {
     private static String getResponseBodyFromArrayList(ArrayList<Racer> fromJson) {
         String result = "<link rel=\"stylesheet\" type=\"text/css\" href=\"mystyle.css\">";
         result += "<table>\n";
-        result += "<caption>Company Directory";
+        result += "<caption>Race Results";
         result += "\t<tr>" +
                 "<th>Title</th>" +
-                "<th><a href=\"/displayresults/firstname\">First Name</a></th>" +
-                "<th><a href=\"/displayresults/lastname\">Last Name</a></th>" +
-                "<th>Gender</th>" +
-                "<th><a href=\"/displayresults/department\">Department</a></th>" +
-                "<th>Phone Number</th>" +
+                "<th><a href=\"/displayresults/place\">Place</a></th>" +
+                "<th><a href=\"/displayresults/number\">Bib Number</a></th>" +
+                "<th><a href=\"/displayresults/time\">Time</a></th>" +
                 "<tr>";
-        /*for (Racer racer : fromJson) {
+        for (Racer racer : fromJson) {
             result += "<tr>" +
-                    "<td>" + e.getFirstName() + "</td>" +
-                    "<td>" + e.getLastName() + "</td>" +
+                    "<td>" + racer.getBibNum() + "</td>" +
+                    "<td>" + racer.getTotalTime() + "</td>" +
                     "</tr>";
-        }*/
+        }
 
         result += "</caption>";
         result += "</table>";
@@ -67,13 +65,13 @@ public class HTTPHandler {
 
     private static void createResponseWithComparator(HttpExchange t, Comparator c) throws IOException {
         Gson g = new Gson();
-        /*ArrayList<Employee> fromJson = g.fromJson(sharedResponse.substring(5),
-                new TypeToken<Collection<Employee>>() {
+        ArrayList<Racer> fromJson = g.fromJson(sharedResponse.substring(5),
+                new TypeToken<Collection<Racer>>() {
                 }.getType());
         Collections.sort(fromJson, c);
-        String response = getResponseBodyFromArrayList(fromJson);*/
+        String response = getResponseBodyFromArrayList(fromJson);
         // write out the response
-        String response = "";
+        response = "";
         t.getResponseHeaders().set("Content-Type", "text/html");
         t.sendResponseHeaders(200, response.length());
         OutputStream os = t.getResponseBody();
@@ -81,15 +79,15 @@ public class HTTPHandler {
         os.close();
     }
 
-    static class DisplayHandlerLastName implements HttpHandler {
+    static class DisplayHandlerTime implements HttpHandler {
         public void handle(HttpExchange t) throws IOException {
-            //createResponseWithComparator(t, new EmployeeLastNameComparator());
+            createResponseWithComparator(t, new RacerTimeComparator());
         }
     }
 
-    static class DisplayHandlerFirstName implements HttpHandler {
+    static class DisplayHandlerNumber implements HttpHandler {
         public void handle(HttpExchange t) throws IOException {
-            //createResponseWithComparator(t, new EmployeeFirstNameComparator());
+            createResponseWithComparator(t, new RacerNumberComparator());
         }
     }
 

@@ -5,7 +5,7 @@ import java.util.ArrayList;
  * knows start time, stop time, and total time
  * @author Group 1
  */
-public class Racer {
+public class Racer{
 	private int racerNum;
 	private double startTime;
 	private double stopTime;
@@ -41,5 +41,4 @@ public class Racer {
 		//TODO: Handle race canceled midway through, i.e. stop() never called
 		return ""+ racerNum +" "+ t;
 	}
-
 }
