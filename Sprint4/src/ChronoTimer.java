@@ -51,7 +51,22 @@ public class ChronoTimer {
 	 */
 	public void executeCommand(String[] commands, double totalTime, String sysTime)
 	{
-		switch (commands[0]){
+        String sensorType = "";
+        int sensorNum = 0;
+        String eventType = "";
+        int commandNumber = 0;
+        String commandEntered = commands[0];
+
+        if(commandEntered.equals("CONN")){
+            sensorType = commands[1];
+            sensorNum = Integer.parseInt(commands[2]);
+        }else if (commandEntered.equals("EVENT")){
+            eventType = commands[1];
+        }else{
+            commandNumber = Integer.parseInt(commands[1]);
+        }
+
+		switch (commandEntered){
 			case "TIME":{
 				if (systemOn){
 					events.add(new Event(sysTime));
@@ -74,13 +89,12 @@ public class ChronoTimer {
 			}
 			case "CONN":{
 				if (systemOn){
-					sensors[Integer.parseInt(commands[2])-1] = new Sensor(commands[1],Integer.parseInt(commands[2]));
+					sensors[sensorNum-1] = new Sensor(sensorType,sensorNum);
 				} break;
 			}
 			case "DISC":{
 				if (systemOn){
-					int deviceNum = Integer.parseInt(commands[1]);
-					sensors[deviceNum-1] = null;
+					sensors[commandNumber-1] = null;
 				} break;
 			}
 			case "EVENT":{
@@ -89,8 +103,7 @@ public class ChronoTimer {
                         currentEvent++;
                     }
                     eventCommandCalled = true;
-					//Sprint 2; need a way to tell the system what type of event to handle 
-					String eventType = commands[1];
+					//Sprint 2; need a way to tell the system what type of event to handle
 					switch(eventType){
 						case "IND":{//no change necessary, default case
 							events.add(new Event(sysTime));
@@ -114,14 +127,14 @@ public class ChronoTimer {
 			}
 			case "TOGGLE":{
 				if (systemOn){
-					if(sensors[Integer.parseInt(commands[1])-1] != null){
-						sensors[Integer.parseInt(commands[1])-1].toggle();
+					if(sensors[commandNumber-1] != null){
+						sensors[commandNumber-1].toggle();
 					}
 				} break;
 			}
 			case "NUM":{
 				if (systemOn  && eventRunning){
-					events.get(currentEvent).addRacer(Integer.parseInt(commands[1]));
+					events.get(currentEvent).addRacer(commandNumber);
 					log.setLatestLine(commands[1] + " " + sysTime);
 				} break;
 			}
@@ -131,12 +144,12 @@ public class ChronoTimer {
 						events.get(currentEvent).trigger(Integer.parseInt(commands[1])-1, TotalTime);
 					}*/
                     Event runningEvent = events.get(currentEvent);
-					if(sensors[Integer.parseInt(commands[1])-1] != null){
+					if(sensors[commandNumber-1] != null){
 						if (runningEvent instanceof PARGRP){
-							((PARGRP) runningEvent).trigger(Integer.parseInt(commands[1]), totalTime, sensors);
+							((PARGRP) runningEvent).trigger(commandNumber, totalTime, sensors);
 						}
 						else{
-							runningEvent.trigger(Integer.parseInt(commands[1]), totalTime);
+							runningEvent.trigger(commandNumber, totalTime);
 						}
 					}
 				}
@@ -170,7 +183,7 @@ public class ChronoTimer {
 			case "CLR":{
 				if (systemOn && eventRunning){ 
 					//Sprint 2; "clear NUM as the next competitor" a.k.a. remove them from queue
-					events.get(currentEvent).removeRacer(Integer.parseInt(commands[1]));
+					events.get(currentEvent).removeRacer(commandNumber);
 				}break;
 			}
 			case "SWAP":{
@@ -192,7 +205,7 @@ public class ChronoTimer {
                         runData += "\n";
 						System.out.println(eventPrintLines.get(j));
 					}
-                    log.logRun(runData,Integer.parseInt(commands[1]));
+                    log.logRun(runData,commandNumber);
 				}
                 break;
 			}
@@ -229,6 +242,7 @@ public class ChronoTimer {
                         }
                         log.logRun(runData);
                     }
+                    sendData(getJSON());
 				} break;
 			}
 
@@ -254,7 +268,7 @@ public class ChronoTimer {
 		}//end switch case
 	}//end method
 
-    public String sendData() {
+    public String sendData(String data) {
         String urlSite = "http://localhost:8000/sendresults";
         StringBuilder response = new StringBuilder();
         try {
@@ -264,7 +278,7 @@ public class ChronoTimer {
             conn.setDoOutput(true);
             conn.setDoInput(true);
             DataOutputStream out = new DataOutputStream(conn.getOutputStream());
-            out.writeBytes("data=" + 8000);
+            out.writeBytes("data=" + data);
             out.flush();
             out.close();
             InputStreamReader inputStr = new InputStreamReader(conn.getInputStream());
@@ -281,5 +295,14 @@ public class ChronoTimer {
         }
         return response.toString();
     }
-}//end class
+
+	/**
+	 * this specifically is referring to the racer list
+	 * @return the json of ArrayList<Racer>
+     */
+	public String getJSON() {
+		Gson g = new Gson();
+		return g.toJson(events.get(currentEvent).getParticipants());
+	}
+}
 
