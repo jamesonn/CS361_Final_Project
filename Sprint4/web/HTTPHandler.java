@@ -71,7 +71,6 @@ public class HTTPHandler {
         Collections.sort(fromJson, c);
         String response = getResponseBodyFromArrayList(fromJson);
         // write out the response
-        response = "";
         t.getResponseHeaders().set("Content-Type", "text/html");
         t.sendResponseHeaders(200, response.length());
         OutputStream os = t.getResponseBody();

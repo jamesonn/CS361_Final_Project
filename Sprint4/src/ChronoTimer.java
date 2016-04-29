@@ -62,7 +62,7 @@ public class ChronoTimer {
             sensorNum = Integer.parseInt(commands[2]);
         }else if (commandEntered.equals("EVENT")){
             eventType = commands[1];
-        }else{
+        }else if(commands[1] != null){
             commandNumber = Integer.parseInt(commands[1]);
         }
 
