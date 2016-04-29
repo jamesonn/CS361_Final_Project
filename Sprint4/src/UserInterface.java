@@ -61,7 +61,7 @@ public class UserInterface extends JFrame{
 		cp.add(function);
 
 		BasicArrowButton left = new BasicArrowButton(BasicArrowButton.WEST);
-		left.setBounds(30, 300, 30, 30);
+		left.setBounds(30, 325, 30, 30);
 		left.addActionListener(e -> {
             if(selectingNumber){
                 selectingNumber = false;
@@ -80,7 +80,7 @@ public class UserInterface extends JFrame{
 		cp.add(left);
 
 		BasicArrowButton right = new BasicArrowButton(BasicArrowButton.EAST);
-		right.setBounds(70, 300, 30, 30);
+		right.setBounds(110, 325, 30, 30);
 		right.addActionListener(e -> {
             if(isEventListOpen){
                 selectedMenuOption = eventTypes.getSelectedValue();
@@ -163,7 +163,7 @@ public class UserInterface extends JFrame{
 		cp.add(right);
 
 		BasicArrowButton down = new BasicArrowButton(BasicArrowButton.SOUTH);
-		down.setBounds(110, 300, 30, 30);
+		down.setBounds(70, 360, 30, 30);
 		down.addActionListener(e -> {
             if(functionMenuIsOpen) {
                 if (functionMenuIndex < 9) {
@@ -180,7 +180,7 @@ public class UserInterface extends JFrame{
 		cp.add(down);
 
 		BasicArrowButton up = new BasicArrowButton(BasicArrowButton.NORTH);
-		up.setBounds(150, 300, 30, 30);
+		up.setBounds(70, 290, 30, 30);
 		up.addActionListener(e -> {
             if(functionMenuIsOpen) {
                 if (functionMenuIndex > 0) {
