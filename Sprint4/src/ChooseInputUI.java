@@ -82,7 +82,7 @@ public class ChooseInputUI extends JFrame{
         p.add(test3);
         add(p, gbc);
 
-        p = new JPanel();
+        /*p = new JPanel();
         p.setLayout(new GridBagLayout());
         gbc.gridx = 1;
         gbc.gridy = 3;
@@ -96,6 +96,6 @@ public class ChooseInputUI extends JFrame{
             }
         });
         p.add(test4);
-        add(p, gbc);
+        add(p, gbc);*/
     }
 }

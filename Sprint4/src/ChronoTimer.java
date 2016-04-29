@@ -222,7 +222,7 @@ public class ChronoTimer {
 					Gson g = new Gson();
 					try{
 						BufferedWriter writer = new BufferedWriter(new FileWriter("Export"+commands[1]+".json"));
-						writer.write(g.toJson(events));
+						writer.write(g.toJson(events.get(currentEvent)));
 						writer.close();
 					}catch(Exception IOException){
 						System.out.println("Export in chronotimer failure");
