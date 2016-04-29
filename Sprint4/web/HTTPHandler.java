@@ -45,10 +45,9 @@ public class HTTPHandler {
         result += "<table>\n";
         result += "<caption>Race Results";
         result += "\t<tr>" +
-                "<th>Title</th>" +
-                "<th><a href=\"/displayresults/place\">Place</a></th>" +
                 "<th><a href=\"/displayresults/number\">Bib Number</a></th>" +
                 "<th><a href=\"/displayresults/time\">Time</a></th>" +
+                "<th><a href=\"/displayresults/place\">Place</a></th>" +
                 "<tr>";
         for (Racer racer : fromJson) {
             result += "<tr>" +
