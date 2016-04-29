@@ -203,7 +203,6 @@ public class ChronoTimer {
 					for(int j = 0; j < eventPrintLines.size(); j++){
                         runData += eventPrintLines.get(j);
                         runData += "\n";
-						System.out.println(eventPrintLines.get(j));
 					}
                     log.logRun(runData,commandNumber);
 				}
@@ -245,6 +244,7 @@ public class ChronoTimer {
                     sendData(getJSON());
 				} break;
 			}
+
 
 			case "NEWRUN":{
 				if (systemOn && !eventRunning){
