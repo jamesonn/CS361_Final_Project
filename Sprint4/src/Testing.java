@@ -159,7 +159,7 @@ public class Testing {
 	 */
 	@Test
 	public void testNormalGRP(){
-		Event e = new Event("11:14:30.0");
+		GRP e = new GRP("11:14:30.0");
 		assertFalse(e.getLog().isEmpty());
 		e.addRacer(111);
 		e.addRacer(112);

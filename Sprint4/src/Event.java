@@ -13,7 +13,7 @@ public class Event {
 	//log handles current run only
 	protected ArrayList<String> log = new ArrayList<String>();
 	protected double totalTime = 0;
-	protected String curTime = "";
+	protected static String curTime = "";
 	protected int runNum = 1;
 	protected boolean isActiveRun = false;
 	

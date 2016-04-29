@@ -7,7 +7,6 @@ import java.util.ArrayList;
 public class GRP extends Event{
 	private Lane[] lanes = new Lane[1];
 	private ArrayList<String> log = new ArrayList<String>();
-	private String curTime = "";
 	
 	/**
 	 * Only one lane, overrides the trigger to start all but end individually
