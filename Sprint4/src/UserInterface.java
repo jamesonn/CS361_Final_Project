@@ -24,6 +24,7 @@ public class UserInterface extends JFrame{
     private JTextArea console;
     private JTextArea numberSelectionField;
     private JTextArea printer;
+    private JScrollPane printerScrollPane;
 	private JList<String> functionMenu;
     private JList<String> eventTypes;
     private Container cp = getContentPane();
@@ -433,13 +434,21 @@ public class UserInterface extends JFrame{
 		}); 
 		cp.add(printerPower);
 
+		
+		
 		printer = new JTextArea();
 		printer.setEditable(false);
-		printer.setBounds(575, 60, 150, 150);
-		printer.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+		//printer.setBounds(575, 60, 150, 150);
+		//printer.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
 		printer.setBackground(Color.white);
-		cp.add(printer);
-
+		//cp.add(printer);
+		
+		printerScrollPane = new JScrollPane(printer);
+		printerScrollPane.setBounds(575, 60, 150, 150);
+		printerScrollPane.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+		printerScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		cp.add(printerScrollPane);
+		
 		JPanel keypad = new JPanel(new GridLayout(4,3));
 		keypad.setBounds(575, 250, 150, 200);
 
