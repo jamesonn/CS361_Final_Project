@@ -268,7 +268,7 @@ public class ChronoTimer {
 		}//end switch case
 	}//end method
 
-    public String sendData(String data) {
+    private String sendData(String data) {
         String urlSite = "http://localhost:8000/sendresults";
         StringBuilder response = new StringBuilder();
         try {
@@ -300,7 +300,7 @@ public class ChronoTimer {
 	 * this specifically is referring to the racer list
 	 * @return the json of ArrayList<Racer>
      */
-	public String getJSON() {
+	private String getJSON() {
 		Gson g = new Gson();
 		return g.toJson(events.get(currentEvent).getParticipants());
 	}

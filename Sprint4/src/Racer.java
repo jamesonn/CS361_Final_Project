@@ -9,6 +9,7 @@ public class Racer{
 	private int racerNum;
 	private double startTime;
 	private double stopTime;
+    private double totalTime;
 	private ArrayList<String> runLog = new ArrayList<String>();
 	
 	public Racer(int bibNum){
@@ -33,7 +34,8 @@ public class Racer{
 	}
 	
 	public double getTotalTime(){
-		return stopTime-startTime;	}
+        totalTime = stopTime - startTime;
+		return totalTime;	}
 	
 	public String print(){
 		double time = getTotalTime();
