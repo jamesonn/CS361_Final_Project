@@ -1,5 +1,7 @@
 import com.google.gson.Gson;
 import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -10,6 +12,7 @@ import java.util.Date;
  * @author Group 1
  */
 public class ChronoTimer {
+    private HttpURLConnection conn;
 	private boolean systemOn;
 	private boolean eventRunning;
     private boolean isPrinterOn;
@@ -250,5 +253,33 @@ public class ChronoTimer {
 			}
 		}//end switch case
 	}//end method
+
+    public String sendData() {
+        String urlSite = "http://localhost:8000/sendresults";
+        StringBuilder response = new StringBuilder();
+        try {
+            URL site = new URL(urlSite);
+            conn = (HttpURLConnection) site.openConnection();
+            conn.setRequestMethod("POST");
+            conn.setDoOutput(true);
+            conn.setDoInput(true);
+            DataOutputStream out = new DataOutputStream(conn.getOutputStream());
+            out.writeBytes("data=" + 8000);
+            out.flush();
+            out.close();
+            InputStreamReader inputStr = new InputStreamReader(conn.getInputStream());
+
+            // read the characters from the request byte by byte and build up
+            // the Response
+            int nextChar;
+            while ((nextChar = inputStr.read()) > -1) {
+                response = response.append((char) nextChar);
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return response.toString();
+    }
 }//end class
 
