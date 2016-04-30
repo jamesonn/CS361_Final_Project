@@ -17,6 +17,7 @@ public class UserInterface extends JFrame{
     private String selectedMenuOption;
     private String consoleText = "";
     private String printerText = "";
+    private String previousConsoleLine = "";
     private StringBuilder enteredNumber = new StringBuilder();
     private SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
     private Calendar calendar = Calendar.getInstance();
@@ -25,6 +26,7 @@ public class UserInterface extends JFrame{
     private JTextArea numberSelectionField;
     private JTextArea printer;
     private JScrollPane printerScrollPane;
+    private JScrollPane consoleScroll;
 	private JList<String> functionMenu;
     private JList<String> eventTypes;
     private Container cp = getContentPane();
@@ -110,7 +112,7 @@ public class UserInterface extends JFrame{
                         cTimer.executeCommand(command, totalTime, sysTime);
                         break;
                 }
-                console.setVisible(true);
+                consoleScroll.setVisible(true);
                 eventTypes.setVisible(false);
                 isEventListOpen = false;
             }else if(functionMenuIsOpen) {
@@ -140,7 +142,7 @@ public class UserInterface extends JFrame{
                         printer.setText(printerText);
                         revalidate();
                     }
-                    console.setVisible(true);
+                    consoleScroll.setVisible(true);
                     functionMenu.setVisible(false);
                     functionMenuIsOpen = false;
                 }
@@ -148,7 +150,7 @@ public class UserInterface extends JFrame{
                 selectingNumber = false;
                 command[0] = selectedMenuOption;
                 command[1] = enteredNumber.toString();
-                console.setVisible(true);
+                consoleScroll.setVisible(true);
                 numberSelectionField.setVisible(false);
                 enteredNumber = new StringBuilder();
                 updateTime();
@@ -159,9 +161,12 @@ public class UserInterface extends JFrame{
                     printer.setText(printerText);
                     revalidate();
                 }
-                consoleText += log.getLatestLine();
-                consoleText += "\n";
-                console.setText(consoleText);
+                
+                if(!previousConsoleLine.equals(log.getLatestLine())) {
+                    previousConsoleLine = log.getLatestLine();
+                    consoleText += previousConsoleLine + "\n";
+                    console.setText(consoleText);
+                }
             }
 		}); 
 		cp.add(right);
@@ -367,9 +372,11 @@ public class UserInterface extends JFrame{
             updateTime();
             cTimer.executeCommand(command,totalTime,sysTime);
 
-            consoleText += log.getLatestLine();
-            consoleText += "\n";
-            console.setText(consoleText);
+            if(!previousConsoleLine.equals(log.getLatestLine())) {
+                previousConsoleLine = log.getLatestLine();
+                consoleText += previousConsoleLine + "\n";
+                console.setText(consoleText);
+            }
 		}); 
 		cp.add(finishTwo);
 
@@ -382,9 +389,11 @@ public class UserInterface extends JFrame{
             updateTime();
             cTimer.executeCommand(command,totalTime,sysTime);
 
-            consoleText += log.getLatestLine();
-            consoleText += "\n";
-            console.setText(consoleText);
+            if(!previousConsoleLine.equals(log.getLatestLine())) {
+                previousConsoleLine = log.getLatestLine();
+                consoleText += previousConsoleLine + "\n";
+                console.setText(consoleText);
+            }
 		}); 
 		cp.add(finishFour);
 
@@ -397,9 +406,11 @@ public class UserInterface extends JFrame{
             updateTime();
             cTimer.executeCommand(command,totalTime,sysTime);
 
-            consoleText += log.getLatestLine();
-            consoleText += "\n";
-            console.setText(consoleText);
+            if(!previousConsoleLine.equals(log.getLatestLine())) {
+                previousConsoleLine = log.getLatestLine();
+                consoleText += previousConsoleLine + "\n";
+                console.setText(consoleText);
+            }
 		}); 
 		cp.add(finishSix);
 
@@ -412,9 +423,11 @@ public class UserInterface extends JFrame{
             updateTime();
             cTimer.executeCommand(command,totalTime,sysTime);
 
-            consoleText += log.getLatestLine();
-            consoleText += "\n";
-            console.setText(consoleText);
+            if(!previousConsoleLine.equals(log.getLatestLine())) {
+                previousConsoleLine = log.getLatestLine();
+                consoleText += previousConsoleLine + "\n";
+                console.setText(consoleText);
+            }
 		}); 
 		cp.add(finishEight);
 
@@ -907,10 +920,14 @@ public class UserInterface extends JFrame{
         if(console == null){
             console = new JTextArea();
             console.setEditable(false);
-            console.setBounds(280, 250, 220, 200);
-            console.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
-            console.setBackground(Color.white);
-            cp.add(console);
+            consoleScroll = new JScrollPane(console);
+            consoleScroll.setBounds(280, 250, 220, 200);
+            consoleScroll.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+            consoleScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
+            consoleScroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+            consoleScroll.setBackground(Color.white);
+            consoleScroll.setVisible(true);
+            cp.add(consoleScroll);
 
             String functions[] = {"NUM","EVENT","RESET","DNF","CLR","PRINT","NEWRUN","ENDRUN","EXIT"};
             functionMenuIndex = 0;
@@ -941,7 +958,7 @@ public class UserInterface extends JFrame{
             selectingNumber = false;
         }else if(!functionMenuIsOpen && !selectingNumber) {
             functionMenu.setVisible(true);
-            console.setVisible(false);
+            consoleScroll.setVisible(false);
             functionMenuIsOpen = true;
             revalidate();
         }else if(!functionMenuIsOpen && selectingNumber){
@@ -949,14 +966,14 @@ public class UserInterface extends JFrame{
                 numberSelectionField.setText("");
                 isExportMenuOpen = false;
             }
-            console.setVisible(true);
+            consoleScroll.setVisible(true);
             numberSelectionField.setVisible(false);
             enteredNumber = new StringBuilder();
             functionMenuIsOpen = false;
             selectingNumber = false;
             revalidate();
         }else if(functionMenuIsOpen){
-            console.setVisible(true);
+            consoleScroll.setVisible(true);
             functionMenu.setVisible(false);
             functionMenuIsOpen = false;
             revalidate();
