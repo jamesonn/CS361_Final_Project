@@ -467,10 +467,18 @@ public class UserInterface extends JFrame{
 
 		JButton printerPower = new JButton("Printer Pwr");
 		printerPower.setBounds(600, 20, 100, 30);
+        printerPower.setBackground(Color.RED);
 		printerPower.addActionListener(e -> {
             command[0] = CommandConstants.printPWR;
             updateTime();
             cTimer.executeCommand(command,totalTime,sysTime);
+            if(cTimer.getPrinterStatus()){
+                printerPower.setBackground(Color.GREEN);
+                revalidate();
+            }else{
+                printerPower.setBackground(Color.RED);
+                revalidate();
+            }
 		}); 
 		cp.add(printerPower);
 
