@@ -22,6 +22,7 @@ public class UserInterface extends JFrame{
     private SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
     private Calendar calendar = Calendar.getInstance();
     private double totalTime;
+    private JLabel eventLabel;
     private JTextArea console;
     private JTextArea numberSelectionField;
     private JTextArea printer;
@@ -95,21 +96,25 @@ public class UserInterface extends JFrame{
                         command[1] = "IND";
                         updateTime();
                         cTimer.executeCommand(command, totalTime, sysTime);
+                        eventLabel.setText("Current Event: Individual");
                         break;
                     case "PARIND":
                         command[1] = "PARIND";
                         updateTime();
                         cTimer.executeCommand(command, totalTime, sysTime);
+                        eventLabel.setText("Current Event: Parallel Individual");
                         break;
                     case "GRP":
                         command[1] = "GRP";
                         updateTime();
                         cTimer.executeCommand(command, totalTime, sysTime);
+                        eventLabel.setText("Current Event: Group");
                         break;
                     case "PARGRP":
                         command[1] = "PARGRP";
                         updateTime();
                         cTimer.executeCommand(command, totalTime, sysTime);
+                        eventLabel.setText("Current Event: Group Parallel");
                         break;
                 }
                 consoleScroll.setVisible(true);
@@ -131,6 +136,7 @@ public class UserInterface extends JFrame{
                 }else if(selectedMenuOption.equals("EVENT")){
                     command[0] = selectedMenuOption;
                     isEventListOpen = true;
+                    functionMenuIsOpen = false;
                     eventTypes.setVisible(true);
                     functionMenu.setVisible(false);
                 }else{
@@ -161,7 +167,7 @@ public class UserInterface extends JFrame{
                     printer.setText(printerText);
                     revalidate();
                 }
-                
+
                 if(!previousConsoleLine.equals(log.getLatestLine())) {
                     previousConsoleLine = log.getLatestLine();
                     consoleText += previousConsoleLine + "\n";
@@ -475,7 +481,7 @@ public class UserInterface extends JFrame{
         refreshConsole();
 
 		JLabel consoleLabel = new JLabel("Queue/Running/Final Time");
-		consoleLabel.setBounds(300,460,200,20);
+		consoleLabel.setBounds(315,463,200,20);
 		cp.add(consoleLabel);
 
 		JButton printerPower = new JButton("Printer Pwr");
@@ -918,6 +924,10 @@ public class UserInterface extends JFrame{
      */
     private void refreshConsole(){
         if(console == null){
+            eventLabel = new JLabel("Current Event: Individual");
+            eventLabel.setBounds(280,230,200,20);
+            cp.add(eventLabel);
+
             console = new JTextArea();
             console.setEditable(false);
             consoleScroll = new JScrollPane(console);
