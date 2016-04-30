@@ -109,15 +109,14 @@ public class Event {
 			if(a.endsWith(n)){
 				ArrayList<String> temp = new ArrayList<String>();
 				temp.add(log.remove(0) + " In Progress");
-	//			log.remove(0);
 				temp.addAll(log);
 				log = temp;
 			}
 		}
 		runs.addAll(getLog());
-		for(int i =0; i < runs.size(); i++){
-			System.out.println(runs.get(i));
-		}//check for printing log
+//		for(int i =0; i < runs.size(); i++){
+//			System.out.println(runs.get(i));
+//		}//check for printing log
 		return runs;
 	}
 	
