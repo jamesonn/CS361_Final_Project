@@ -131,7 +131,7 @@ public class UserInterface extends JFrame{
                     command[0] = selectedMenuOption;
                     updateTime();
                     cTimer.executeCommand(command,totalTime,sysTime);
-                    if(selectedMenuOption.equals("ENDRUN")){
+                    if(selectedMenuOption.equals("ENDRUN") && cTimer.getPrinterStatus()){
                         printerText += log.getRun();
                         printer.setText(printerText);
                         revalidate();
@@ -846,7 +846,7 @@ public class UserInterface extends JFrame{
      * Updates system time, called prior to executeCommand being called.
      */
 	private void updateTime(){
-		Calendar.getInstance();
+		calendar = Calendar.getInstance();
 		totalTime = calendar.get(Calendar.HOUR)*3600 + calendar.get(Calendar.MINUTE)*60 + calendar.get(Calendar.SECOND);
 		sysTime = sdf.format(new Date());
 	}

@@ -229,18 +229,16 @@ public class ChronoTimer {
 				}break;
 			}
 			case "ENDRUN":{
-				if (systemOn){ 
+				if (systemOn){
 					eventRunning = false;
-                    if(isPrinterOn){
-                        runData = "";
-                        eventPrintLines = events.get(currentEvent).endRun(totalTime);
-                        for(int j = 0; j < eventPrintLines.size(); j++){
-                            runData += eventPrintLines.get(j);
-                            runData += "\n";
-                            System.out.println(eventPrintLines.get(j));
-                        }
-                        log.logRun(runData);
+                    runData = "";
+                    eventPrintLines = events.get(currentEvent).endRun(totalTime);
+                    for(int j = 0; j < eventPrintLines.size(); j++){
+                        runData += eventPrintLines.get(j);
+                        runData += "\n";
+                        System.out.println(eventPrintLines.get(j));
                     }
+                    log.logRun(runData);
                     sendData(getJSON());
 				} break;
 			}
@@ -265,8 +263,12 @@ public class ChronoTimer {
 				System.exit(0);
 				break;
 			}
-		}//end switch case
-	}//end method
+		}
+	}
+
+    public boolean getPrinterStatus(){
+        return isPrinterOn;
+    }
 
     private String sendData(String data) {
         String urlSite = "http://localhost:8000/sendresults";

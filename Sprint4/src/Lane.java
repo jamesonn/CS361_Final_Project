@@ -21,12 +21,12 @@ public class Lane {
 	/**
 	 * takes first Racer in the active queue and passes t as the Racers stop time;
 	 * returns the string needed for the log
-	 * @param t
+	 * @param totalTime
 	 * @return String
 	 */
-	public String stop(double t){
+	public String stop(double totalTime){
 		curRacer = active.removeFirst();
-		curRacer.stop(t);
+		curRacer.stop(totalTime);
 		return curRacer.print() + " F";
 	}
 	
