@@ -119,7 +119,7 @@ public class Lane {
 		active = tempActive;
 		
 		Queue<Racer> tempReady = new LinkedList<Racer>();
-		if(!isReadyEmpty()){
+		if(!isReadyEmpty()){//top of ready list
 			curRacer = ready.remove();
 			list.add(curRacer.getBibNum()+" "+curRacer.getStartTime()+" >");
 			tempReady.add(curRacer);

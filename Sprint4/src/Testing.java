@@ -129,7 +129,7 @@ public class Testing {
 	 */
 	@Test
 	public void testNormalPARIND(){
-		Event e = new PARIND("11:14:30.0");
+		PARIND e = new PARIND("11:14:30.0");//starts newRun 
 		assertFalse(e.getLog().isEmpty());
 		e.addRacer(111);
 		e.addRacer(112);
@@ -172,7 +172,7 @@ public class Testing {
 		e.trigger(2, 40800.3);//finish R2
 		e.trigger(4, 40810); //do nothing
 		e.trigger(2, 40835.2);//finish R3
-		//R3 and R4 should be in progress
+		//R4 should be in progress
 		
 		ArrayList<String> list = e.print(40900);
 		assertEquals(6, list.size());
@@ -190,7 +190,23 @@ public class Testing {
 	 */
 	@Test
 	public void testNormalPARGRP(){
-		Event e = new Event("11:14:30.0");
+		PARGRP e = new PARGRP("11:14:30.0");
+		assertFalse(e.getLog().isEmpty());
+		e.addRacer(111);
+		e.addRacer(112);
+		e.addRacer(113);
+		e.addRacer(114);
+		e.trigger(1, 40505.5); //start R1
+		e.trigger(1, 40700.5); //do nothing
+		e.trigger(2, 40702.7);//finish R1
+		e.trigger(2, 40800.3);//finish R2
+		e.trigger(2, 40835.2);//finish R3
+		//R4 should be in progress
+		
+		ArrayList<String> list = e.print(40900);
+		assertEquals(6, list.size());
+		assertEquals("11:14:30.0 PARGRP", list.get(0));
+		
 	}
 	
 	/**

@@ -53,11 +53,21 @@ public class Event {
 		if(chan == 2 && !lanes[0].isActiveEmpty()){
 			log.add(lanes[0].stop(t));
 			if(lanes[0].isActiveEmpty() && lanes[0].isReadyEmpty()){
-				
+				isActiveRun = false;
+				resetLog();
 			}
 		}
 	}
 	
+	private void resetLog() {
+		// TODO Auto-generated method stub
+		
+			runs.addAll(getLog());
+			log = new ArrayList<String>();
+		
+		
+	}
+
 	/**
 	 * Swap the next two Racers to finish, those in position 0 and 1
 	 */
