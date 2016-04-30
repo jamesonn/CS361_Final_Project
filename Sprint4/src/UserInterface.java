@@ -63,14 +63,18 @@ public class UserInterface extends JFrame{
 		BasicArrowButton left = new BasicArrowButton(BasicArrowButton.WEST);
 		left.setBounds(30, 325, 30, 30);
 		left.addActionListener(e -> {
-            if(selectingNumber){
+            if(selectingNumber && enteredNumber.toString().equals("")){
                 selectingNumber = false;
                 functionMenuIsOpen = true;
                 numberSelectionField.setVisible(false);
                 functionMenu.setVisible(true);
                 enteredNumber =  new StringBuilder();
                 revalidate();
-            }else if(functionMenuIsOpen){
+            }else if(selectingNumber && !enteredNumber.toString().equals("")){
+                enteredNumber.setLength(enteredNumber.length() - 1);
+                numberSelectionField.setText(selectedMenuOption + " " + enteredNumber.toString());
+                revalidate();
+            } else if(functionMenuIsOpen){
                 functionMenuIsOpen = false;
                 console.setVisible(true);
                 functionMenu.setVisible(false);
@@ -239,6 +243,10 @@ public class UserInterface extends JFrame{
 		startOne.addActionListener(e -> {
             command[0] = CommandConstants.trigger;
             command[1] = "1";
+
+            consoleText += "\n";
+            console.setText(consoleText);
+
             updateTime();
             cTimer.executeCommand(command,totalTime,sysTime);
 		}); 
@@ -250,6 +258,10 @@ public class UserInterface extends JFrame{
 		startThree.addActionListener(e -> {
             command[0] = CommandConstants.trigger;
             command[1] = "3";
+
+            consoleText += "\n";
+            console.setText(consoleText);
+
             updateTime();
             cTimer.executeCommand(command,totalTime,sysTime);
 		}); 
@@ -259,6 +271,10 @@ public class UserInterface extends JFrame{
 		startFive.addActionListener(e -> {
             command[0] = CommandConstants.trigger;
             command[1] = "5";
+
+            consoleText += "\n";
+            console.setText(consoleText);
+
             updateTime();
             cTimer.executeCommand(command,totalTime,sysTime);
 		}); 
@@ -269,6 +285,10 @@ public class UserInterface extends JFrame{
 		startSeven.addActionListener(e -> {
             command[0] = CommandConstants.trigger;
             command[1] = "7";
+
+            consoleText += "\n";
+            console.setText(consoleText);
+
             updateTime();
             cTimer.executeCommand(command,totalTime,sysTime);
 		}); 
@@ -343,8 +363,13 @@ public class UserInterface extends JFrame{
 		finishTwo.addActionListener(e -> {
             command[0] = CommandConstants.trigger;
             command[1] = "2";
+
             updateTime();
             cTimer.executeCommand(command,totalTime,sysTime);
+
+            consoleText += log.getLatestLine();
+            consoleText += "\n";
+            console.setText(consoleText);
 		}); 
 		cp.add(finishTwo);
 
@@ -353,8 +378,13 @@ public class UserInterface extends JFrame{
 		finishFour.addActionListener(e -> {
             command[0] = CommandConstants.trigger;
             command[1] = "4";
+
             updateTime();
             cTimer.executeCommand(command,totalTime,sysTime);
+
+            consoleText += log.getLatestLine();
+            consoleText += "\n";
+            console.setText(consoleText);
 		}); 
 		cp.add(finishFour);
 
@@ -363,8 +393,13 @@ public class UserInterface extends JFrame{
 		finishSix.addActionListener(e -> {
             command[0] = CommandConstants.trigger;
             command[1] = "6";
+
             updateTime();
             cTimer.executeCommand(command,totalTime,sysTime);
+
+            consoleText += log.getLatestLine();
+            consoleText += "\n";
+            console.setText(consoleText);
 		}); 
 		cp.add(finishSix);
 
@@ -373,8 +408,13 @@ public class UserInterface extends JFrame{
 		finishEight.addActionListener(e -> {
             command[0] = CommandConstants.trigger;
             command[1] = "8";
+
             updateTime();
             cTimer.executeCommand(command,totalTime,sysTime);
+
+            consoleText += log.getLatestLine();
+            consoleText += "\n";
+            console.setText(consoleText);
 		}); 
 		cp.add(finishEight);
 
@@ -415,7 +455,7 @@ public class UserInterface extends JFrame{
             command[1] = "8";
             updateTime();
             cTimer.executeCommand(command,totalTime,sysTime);
-		}); 
+		});
 		cp.add(toggleEight);
 
         //This is how the console is now created/refreshed

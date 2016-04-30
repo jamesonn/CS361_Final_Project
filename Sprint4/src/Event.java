@@ -16,12 +16,14 @@ public class Event {
 	protected static String curTime = "";
 	protected int runNum = 1;//used in printing
 	protected boolean isActiveRun = false;
+	private Log cTimerLog;
 	
 	/**
 	 * create an Event object setting the current time to t
 	 * @param t
 	 */
-	public Event(String t){
+	public Event(String t, Log log){
+        cTimerLog = log;
 		lanes[0] = new Lane();
 		updateTime(t);
 		runs.add(curTime+ " IND");
@@ -55,6 +57,7 @@ public class Event {
 			if(lanes[0].isActiveEmpty() && lanes[0].isReadyEmpty()){
 				endRun(t);
 			}
+            cTimerLog.setLatestLine(lanes[0].getCurrentRacer().print() + " F");
 		}
 	}
 	

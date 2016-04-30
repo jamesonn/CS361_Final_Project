@@ -157,4 +157,8 @@ public class Lane {
 	public int getNumRacers(){
 		return ready.size() + active.size();
 	}
+
+	public Racer getCurrentRacer(){
+        return curRacer;
+    }
 }

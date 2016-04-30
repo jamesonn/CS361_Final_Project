@@ -10,8 +10,8 @@ public class PARIND extends Event{
 	 * Handles two active lanes at once;
 	 * @param t
 	 */
-	public PARIND(String t) {
-		super(t);
+	public PARIND(String t, Log log) {
+		super(t, log);
 		runs.clear();
 		lanes = new Lane[2];
 		lanes[0] = new Lane();

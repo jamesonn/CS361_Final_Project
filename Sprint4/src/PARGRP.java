@@ -5,8 +5,8 @@ public class PARGRP extends Event{
 	 * Handles multiple groups at once
 	 * @param t
 	 */
-	public PARGRP(String t) {
-		super(t);
+	public PARGRP(String t, Log log) {
+		super(t, log);
 		runs.clear();
 		//all eight in one lane or 8 lanes?
 		//lanes[0] = new Lane();

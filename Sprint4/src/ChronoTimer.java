@@ -40,7 +40,7 @@ public class ChronoTimer {
         sensors = new Sensor[8];
         Calendar.getInstance();
         systemTime = sdf.format(new Date());
-        events.add(new Event(systemTime));
+        events.add(new Event(systemTime, log));
     }
 
 	/**
@@ -69,7 +69,7 @@ public class ChronoTimer {
 		switch (commandEntered){
 			case "TIME":{
 				if (systemOn){
-					events.add(new Event(sysTime));
+					events.add(new Event(sysTime, log));
 				} break;
 			}
 			case "ON":{
@@ -106,19 +106,19 @@ public class ChronoTimer {
 					//Sprint 2; need a way to tell the system what type of event to handle
 					switch(eventType){
 						case "IND":{//no change necessary, default case
-							events.add(new Event(sysTime));
+							events.add(new Event(sysTime, log));
 							break;
 						}
 						case "PARIND":{
-							events.add(new PARIND(sysTime));
+							events.add(new PARIND(sysTime, log));
 							break;
 						}
 						case "GRP":{
-							events.add(new GRP(sysTime));
+							events.add(new GRP(sysTime, log));
 							break;
 						}
 						case "PARGRP":{
-							events.add(new PARGRP(sysTime));
+							events.add(new PARGRP(sysTime, log));
 							break;
 						}
 					}
@@ -249,10 +249,10 @@ public class ChronoTimer {
                     eventRunning = true;
                     if ( events.get(currentEvent).getClass().equals(PARIND.class)){
                         currentEvent++;
-                        events.add(new PARIND(sysTime));
+                        events.add(new PARIND(sysTime, log));
                     } else {
                         currentEvent++;
-                        events.add(new Event(sysTime));
+                        events.add(new Event(sysTime, log));
                     }
                      // increment run number
                     events.get(currentEvent).newRun();
