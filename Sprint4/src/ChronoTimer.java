@@ -233,7 +233,7 @@ public class ChronoTimer {
 					eventRunning = false;
                     if(isPrinterOn){
                         runData = "";
-                        eventPrintLines = events.get(currentEvent).print(totalTime);
+                        eventPrintLines = events.get(currentEvent).endRun(totalTime);
                         for(int j = 0; j < eventPrintLines.size(); j++){
                             runData += eventPrintLines.get(j);
                             runData += "\n";

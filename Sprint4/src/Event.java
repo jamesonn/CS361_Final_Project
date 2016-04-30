@@ -14,7 +14,7 @@ public class Event {
 	protected ArrayList<String> log = new ArrayList<String>();
 	protected double totalTime = 0;
 	protected static String curTime = "";
-	protected int runNum = 1;
+	protected int runNum = 1;//used in printing
 	protected boolean isActiveRun = false;
 	
 	/**
@@ -53,25 +53,27 @@ public class Event {
 		if(chan == 2 && !lanes[0].isActiveEmpty()){
 			log.add(lanes[0].stop(t));
 			if(lanes[0].isActiveEmpty() && lanes[0].isReadyEmpty()){
-				isActiveRun = false;
-				resetLog();
+				endRun(t);
 			}
 		}
 	}
 	
-	private void resetLog() {
-		// TODO Auto-generated method stub
-		
-			runs.addAll(getLog());
-			log = new ArrayList<String>();
-		
-		
+	/**
+	 * ENDRUN method, ends run & if a race actually finishes
+	 * @return ArrayList<String>
+	 */
+	public ArrayList<String> endRun(double time){
+		log.addAll(lanes[0].print(time));
+		runs.addAll(getLog());
+		log = new ArrayList<String>();
+		isActiveRun = false;
+		return print(time);
 	}
 
 	/**
 	 * Swap the next two Racers to finish, those in position 0 and 1
 	 */
-	public void swap(){
+ 	public void swap(){
 		lanes[0].swap();
 	}
 	
@@ -103,7 +105,7 @@ public class Event {
 		log.addAll(lanes[0].print(time));
 		if(isActiveRun){
 			String a = log.get(0);
-			String n = ""+runNum;
+			String n = ""+(runNum-1);//as runNum was already ++
 			if(a.endsWith(n)){
 				ArrayList<String> temp = new ArrayList<String>();
 				temp.add(log.remove(0) + " In Progress");
