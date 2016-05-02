@@ -1,5 +1,6 @@
 import java.awt.*;
 import java.awt.event.*;
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -513,10 +514,7 @@ public class UserInterface extends JFrame{
 		
 		printer = new JTextArea();
 		printer.setEditable(false);
-		//printer.setBounds(575, 60, 150, 150);
-		//printer.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
 		printer.setBackground(Color.white);
-		//cp.add(printer);
 		
 		printerScrollPane = new JScrollPane(printer);
 		printerScrollPane.setBounds(575, 60, 150, 150);
@@ -678,6 +676,13 @@ public class UserInterface extends JFrame{
 		String[] sensorStrings = {"GATE", "PAD", "EYE"};
 		JComboBox<String> sensorType = new JComboBox<>(sensorStrings);
 		sensorType.setBounds(210, 20, 100, 100);
+		sensorType.addActionListener(e ->{
+            command[1] = (String) sensorType.getSelectedItem();
+            sensorType.setVisible(false);
+            updateTime();
+            cTimer.executeCommand(command, totalTime, sysTime);
+            unlockConnections();
+        });
 		back.add(sensorType);
 		sensorType.setVisible(false);
 
@@ -688,13 +693,6 @@ public class UserInterface extends JFrame{
 				lockConnections();
                 command[0] = CommandConstants.connect;
                 command[2] = "1";
-                sensorType.addActionListener(e ->{
-                    command[1] = (String) sensorType.getSelectedItem();
-                    sensorType.setVisible(false);
-                    updateTime();
-                    cTimer.executeCommand(command, totalTime, sysTime);
-                    unlockConnections();
-                });
                 sensorType.setVisible(true);
             }
             else if (ie.getStateChange() == ItemEvent.DESELECTED) {
@@ -713,13 +711,6 @@ public class UserInterface extends JFrame{
 				lockConnections();
                 command[0] = CommandConstants.connect;
                 command[2] = "3";
-                sensorType.addActionListener(e ->{
-                    command[1] = (String) sensorType.getSelectedItem();
-                    sensorType.setVisible(false);
-                    updateTime();
-                    cTimer.executeCommand(command, totalTime, sysTime);
-                    unlockConnections();
-                });
                 sensorType.setVisible(true);
             }
             else if (ie.getStateChange() == ItemEvent.DESELECTED) {
@@ -738,13 +729,6 @@ public class UserInterface extends JFrame{
 				lockConnections();
                 command[0] = CommandConstants.connect;
                 command[2] = "5";
-                sensorType.addActionListener(e ->{
-                    command[1] = (String) sensorType.getSelectedItem();
-                    sensorType.setVisible(false);
-                    updateTime();
-                    cTimer.executeCommand(command, totalTime, sysTime);
-                    unlockConnections();
-                });
                 sensorType.setVisible(true);
             }
             else if (ie.getStateChange() == ItemEvent.DESELECTED) {
@@ -763,13 +747,6 @@ public class UserInterface extends JFrame{
 				lockConnections();
                 command[0] = CommandConstants.connect;
                 command[2] = "7";
-                sensorType.addActionListener(e ->{
-                    command[1] = (String) sensorType.getSelectedItem();
-                    sensorType.setVisible(false);
-                    updateTime();
-                    cTimer.executeCommand(command, totalTime, sysTime);
-                    unlockConnections();
-                });
                 sensorType.setVisible(true);
             }
             else if (ie.getStateChange() == ItemEvent.DESELECTED) {
@@ -804,13 +781,6 @@ public class UserInterface extends JFrame{
 				lockConnections();
                 command[0] = CommandConstants.connect;
                 command[2] = "2";
-                sensorType.addActionListener(e ->{
-                    command[1] = (String) sensorType.getSelectedItem();
-                    sensorType.setVisible(false);
-                    updateTime();
-                    cTimer.executeCommand(command, totalTime, sysTime);
-                    unlockConnections();
-                });
                 sensorType.setVisible(true);
             }
             else if (ie.getStateChange() == ItemEvent.DESELECTED) {
@@ -829,13 +799,6 @@ public class UserInterface extends JFrame{
 				lockConnections();
                 command[2] = "4";
                 command[0] = CommandConstants.connect;
-                sensorType.addActionListener(e ->{
-                    command[1] = (String) sensorType.getSelectedItem();
-                    sensorType.setVisible(false);
-                    updateTime();
-                    cTimer.executeCommand(command, totalTime, sysTime);
-                    unlockConnections();
-                });
                 sensorType.setVisible(true);
             }
             else if (ie.getStateChange() == ItemEvent.DESELECTED) {
@@ -854,13 +817,6 @@ public class UserInterface extends JFrame{
 				lockConnections();
                 command[0] = CommandConstants.connect;
                 command[2] = "6";
-                sensorType.addActionListener(e ->{
-                    command[1] = (String) sensorType.getSelectedItem();
-                    sensorType.setVisible(false);
-                    updateTime();
-                    cTimer.executeCommand(command, totalTime, sysTime);
-                    unlockConnections();
-                });
                 sensorType.setVisible(true);
             }
             else if (ie.getStateChange() == ItemEvent.DESELECTED) {
@@ -879,13 +835,6 @@ public class UserInterface extends JFrame{
 				lockConnections();
                 command[0] = CommandConstants.connect;
                 command[2] = "8";
-                sensorType.addActionListener(e ->{
-                    command[1] = (String) sensorType.getSelectedItem();
-                    sensorType.setVisible(false);
-                    updateTime();
-                    cTimer.executeCommand(command, totalTime, sysTime);
-                    unlockConnections();
-                });
                 sensorType.setVisible(true);
             }
             else if (ie.getStateChange() == ItemEvent.DESELECTED) {
@@ -938,7 +887,11 @@ public class UserInterface extends JFrame{
      */
 	private void updateTime(){
 		calendar = Calendar.getInstance();
-		totalTime = calendar.get(Calendar.HOUR)*3600 + calendar.get(Calendar.MINUTE)*60 + calendar.get(Calendar.SECOND);
+		double milli = calendar.get(Calendar.MILLISECOND);
+		milli = milli / 1000;  //shift right three places
+		milli = Math.round( milli * 10.0 ) / 10.0;  //round to one decimal place
+		totalTime = calendar.get(Calendar.HOUR)*3600 + calendar.get(Calendar.MINUTE)*60 
+				+ calendar.get(Calendar.SECOND) + milli;
 		sysTime = sdf.format(new Date());
 	}
 
@@ -1013,7 +966,9 @@ public class UserInterface extends JFrame{
             revalidate();
         }
     }
-    
+    /**
+     * locks button functionality
+     */
 	private void lockConnections(){
     	toggleBackOne.setEnabled(false);
     	toggleBackTwo.setEnabled(false);
@@ -1025,6 +980,9 @@ public class UserInterface extends JFrame{
     	toggleBackEight.setEnabled(false);
     }
     
+	/**
+	 * unlocks button functionality
+	 */
     private void unlockConnections(){
     	toggleBackOne.setEnabled(true);
     	toggleBackTwo.setEnabled(true);
