@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * Manages time, racer and lane information;
@@ -43,9 +44,21 @@ public class Event {
 	 * @param bib
 	 */
 	public void addRacer(int bib){
-		Racer r = new Racer(bib);
-		participants.add(r);
-		lanes[0].addRacer(r);
+		boolean foundIt = false;
+		Iterator<Racer> pepsIt = participants.iterator();
+		//for(Iterator<Racer> pepsIt = participants.iterator(); pepsIt.hasNext(); pepsIt.next()){
+		while(pepsIt.hasNext()){
+			if(pepsIt.next().getBibNum() == bib){
+				foundIt = true;
+				lanes[0].addRacer(pepsIt.next());
+				break;
+			}
+		}
+		if(!foundIt){
+			Racer r = new Racer(bib);
+			participants.add(r);
+			lanes[0].addRacer(r);
+		}
 	}
 	
 	/**
