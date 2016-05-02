@@ -196,7 +196,7 @@ public class ChronoTimer {
 			}
 			case "PRINT":{
 				//if (systemOn && eventRunning){ 
-				if (systemOn){
+				if (systemOn && isPrinterOn){
                     runData = "";
 					//TODO: determine if printer is on; see "Operation of Unit" on p4
 					eventPrintLines = events.get(currentEvent).print(totalTime);

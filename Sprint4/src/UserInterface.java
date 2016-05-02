@@ -1,6 +1,5 @@
 import java.awt.*;
 import java.awt.event.*;
-import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -65,6 +64,8 @@ public class UserInterface extends JFrame{
         setLocation(dim.width/4-this.getSize().width/4, dim.height/5-this.getSize().height/5);
 
 		JButton power = new JButton("Power");
+		power.setBackground(Color.GREEN);
+		power.setOpaque(true);
 		power.setBounds(30, 20, 100, 30);  // (x, y, width, height)
 		power.addActionListener(e -> {
             if(cTimer.getSystemStatus()) {
@@ -72,11 +73,13 @@ public class UserInterface extends JFrame{
                 updateTime();
                 cTimer.executeCommand(command,totalTime,sysTime);
                 lockConnections();
+                power.setBackground(Color.RED);
             }else{
                 command[0] = "ON";
                 updateTime();
                 cTimer.executeCommand(command,totalTime,sysTime);
                 unlockConnections();
+                power.setBackground(Color.GREEN);
             }
 		}); 
 		cp.add(power);
@@ -510,6 +513,7 @@ public class UserInterface extends JFrame{
 		JButton printerPower = new JButton("Printer Pwr");
 		printerPower.setBounds(600, 20, 100, 30);
         printerPower.setBackground(Color.RED);
+        printerPower.setOpaque(true);  // needed for OSX color display ????
 		printerPower.addActionListener(e -> {
             command[0] = CommandConstants.printPWR;
             updateTime();
