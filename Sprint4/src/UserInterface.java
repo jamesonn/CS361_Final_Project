@@ -870,6 +870,8 @@ public class UserInterface extends JFrame{
                 isExportMenuOpen = true;
                 numberSelectionField.setVisible(true);
                 console.setVisible(false);
+                eventTypes.setVisible(false);
+                consoleScroll.setVisible(false);
                 functionMenu.setVisible(false);
                 String exportMenuText = "Export Menu\nEnter run number\nHit the right arrow to enter\nHit export again to cancel.\nExport Run: ";
                 numberSelectionField.setText(exportMenuText);
@@ -877,9 +879,11 @@ public class UserInterface extends JFrame{
                 revalidate();
             }else{
                 isExportMenuOpen = false;
+                selectingNumber = false;
                 numberSelectionField.setVisible(false);
                 enteredNumber = new StringBuilder();
                 console.setVisible(true);
+                consoleScroll.setVisible(true);
                 revalidate();
             }
 		}); 
