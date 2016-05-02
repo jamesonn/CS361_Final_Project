@@ -179,9 +179,9 @@ public class Testing {
 		assertEquals("11:14:30.0 GRP", list.get(0));
 		assertEquals("11:14:30.0 Run 1 In Progress", list.get(1));
 		assertEquals("111 197.20 F", list.get(2));
-		assertEquals("112 90.30 F", list.get(3));
-		assertEquals("113 199.50 F", list.get(4));
-		assertEquals("114 90.00 R", list.get(5));
+		assertEquals("112 294.80 F", list.get(3));
+		assertEquals("113 329.70 F", list.get(4));
+		assertEquals("114 394.50 R", list.get(5));
 		
 	}
 	
@@ -190,6 +190,10 @@ public class Testing {
 	 */
 	@Test
 	public void testNormalPARGRP(){
+		ChronoTimer c = new ChronoTimer(new Log());
+		//c.executeCommand("EVENT PARGRP", "11:14:30.0", 0);
+		
+		
 		PARGRP e = new PARGRP("11:14:30.0");
 		assertFalse(e.getLog().isEmpty());
 		e.addRacer(111);
