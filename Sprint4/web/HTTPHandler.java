@@ -26,6 +26,7 @@ public class HTTPHandler {
             // create a context to get the request to display the results
             server.createContext("/displayresults/time", new DisplayHandlerTime());
             server.createContext("/displayresults/number", new DisplayHandlerNumber());
+            server.createContext("/displayresults/place", new DisplayHandlerPlace());
             server.createContext("/displayresults/mystyle.css", new CSSHandler());
 
             // create a context to get the request for the POST
@@ -80,6 +81,12 @@ public class HTTPHandler {
     static class DisplayHandlerTime implements HttpHandler {
         public void handle(HttpExchange t) throws IOException {
             createResponseWithComparator(t, new RacerTimeComparator());
+        }
+    }
+
+    static class DisplayHandlerPlace implements HttpHandler {
+        public void handle(HttpExchange t) throws IOException {
+            createResponseWithComparator(t, new RacerPlaceComparator());
         }
     }
 
