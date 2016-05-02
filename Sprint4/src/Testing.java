@@ -9,7 +9,6 @@ public class Testing {
 	Racer racer, racer2, racer3, racer4;
 	Sensor sensor;
 	Lane lane;
-	Log log;
 	
 	/**
 	 * test racer constructor and getters, start() and stop()
@@ -87,7 +86,7 @@ public class Testing {
 	 */
 	@Test
 	public void testUpdateTime(){
-		Event e = new Event("11:14:30.0", log);
+		Event e = new Event("11:14:30.0");
 		assertEquals(e.getCurTime(), "11:14:30.0");
 		assertEquals(e.getTotalTime(), 40470, 0.0);
 		e.trigger(0, 40502);
@@ -104,7 +103,7 @@ public class Testing {
 	 */
 	@Test
 	public void testNormalIND(){
-		Event e = new Event("11:14:30.0", log);
+		Event e = new Event("11:14:30.0");
 		assertFalse(e.getLog().isEmpty());
 		e.addRacer(111);
 		e.addRacer(112);
@@ -130,7 +129,7 @@ public class Testing {
 	 */
 	@Test
 	public void testNormalPARIND(){
-		PARIND e = new PARIND("11:14:30.0", log);//starts newRun
+		PARIND e = new PARIND("11:14:30.0");//starts newRun
 		assertFalse(e.getLog().isEmpty());
 		e.addRacer(111);
 		e.addRacer(112);
@@ -160,7 +159,7 @@ public class Testing {
 	 */
 	@Test
 	public void testNormalGRP(){
-		GRP e = new GRP("11:14:30.0", log);
+		GRP e = new GRP("11:14:30.0");
 		assertFalse(e.getLog().isEmpty());
 		e.addRacer(111);
 		e.addRacer(112);
@@ -191,7 +190,7 @@ public class Testing {
 	 */
 	@Test
 	public void testNormalPARGRP(){
-		PARGRP e = new PARGRP("11:14:30.0", log);
+		PARGRP e = new PARGRP("11:14:30.0");
 		assertFalse(e.getLog().isEmpty());
 		e.addRacer(111);
 		e.addRacer(112);
@@ -236,7 +235,7 @@ public class Testing {
 		assertEquals(3, laneList.size());
 		
 		
-		Event e = new Event("11:14:30.0", log);
+		Event e = new Event("11:14:30.0");
 		e.addRacer(114);
 		e.trigger(1, 40505.5); //start R1
 		ArrayList<String> eventList = e.print(40900);
