@@ -31,6 +31,14 @@ public class UserInterface extends JFrame{
 	private JList<String> functionMenu;
     private JList<String> eventTypes;
     private Container cp = getContentPane();
+    private JRadioButton toggleBackOne;
+    private JRadioButton toggleBackTwo;
+    private JRadioButton toggleBackThree;
+    private JRadioButton toggleBackFour;
+    private JRadioButton toggleBackFive;
+    private JRadioButton toggleBackSix;
+    private JRadioButton toggleBackSeven;
+    private JRadioButton toggleBackEight;
     private boolean functionMenuIsOpen;
     private boolean selectingNumber;
     private boolean isExportMenuOpen;
@@ -673,10 +681,11 @@ public class UserInterface extends JFrame{
 		back.add(sensorType);
 		sensorType.setVisible(false);
 
-		JRadioButton toggleBackOne = new JRadioButton();
+		toggleBackOne = new JRadioButton();
 		toggleBackOne.setBounds(91, 40, 22, 22);
 		toggleBackOne.addItemListener(ie -> {
-            if (ie.getStateChange() == ItemEvent.SELECTED) {
+			if (ie.getStateChange() == ItemEvent.SELECTED) {
+				lockConnections();
                 command[0] = CommandConstants.connect;
                 command[2] = "1";
                 sensorType.addActionListener(e ->{
@@ -684,6 +693,7 @@ public class UserInterface extends JFrame{
                     sensorType.setVisible(false);
                     updateTime();
                     cTimer.executeCommand(command, totalTime, sysTime);
+                    unlockConnections();
                 });
                 sensorType.setVisible(true);
             }
@@ -696,10 +706,11 @@ public class UserInterface extends JFrame{
 		}); 
 		back.add(toggleBackOne);
 
-		JRadioButton toggleBackThree = new JRadioButton();
+		toggleBackThree = new JRadioButton();
 		toggleBackThree.setBounds(121, 40, 22, 22);
 		toggleBackThree.addItemListener(ie -> {
-            if (ie.getStateChange() == ItemEvent.SELECTED) {
+			if (ie.getStateChange() == ItemEvent.SELECTED) {
+				lockConnections();
                 command[0] = CommandConstants.connect;
                 command[2] = "3";
                 sensorType.addActionListener(e ->{
@@ -707,6 +718,7 @@ public class UserInterface extends JFrame{
                     sensorType.setVisible(false);
                     updateTime();
                     cTimer.executeCommand(command, totalTime, sysTime);
+                    unlockConnections();
                 });
                 sensorType.setVisible(true);
             }
@@ -719,10 +731,11 @@ public class UserInterface extends JFrame{
 		}); 
 		back.add(toggleBackThree);
 
-		JRadioButton toggleBackFive = new JRadioButton();
+		toggleBackFive = new JRadioButton();
 		toggleBackFive.setBounds(151, 40, 22, 22);
 		toggleBackFive.addItemListener(ie -> {
-            if (ie.getStateChange() == ItemEvent.SELECTED) {
+			if (ie.getStateChange() == ItemEvent.SELECTED) {
+				lockConnections();
                 command[0] = CommandConstants.connect;
                 command[2] = "5";
                 sensorType.addActionListener(e ->{
@@ -730,6 +743,7 @@ public class UserInterface extends JFrame{
                     sensorType.setVisible(false);
                     updateTime();
                     cTimer.executeCommand(command, totalTime, sysTime);
+                    unlockConnections();
                 });
                 sensorType.setVisible(true);
             }
@@ -742,10 +756,11 @@ public class UserInterface extends JFrame{
 		}); 
 		back.add(toggleBackFive);
 
-		JRadioButton toggleBackSeven = new JRadioButton();
+		toggleBackSeven = new JRadioButton();
 		toggleBackSeven.setBounds(181, 40, 22, 22);
 		toggleBackSeven.addItemListener(ie -> {
-            if (ie.getStateChange() == ItemEvent.SELECTED) {
+			if (ie.getStateChange() == ItemEvent.SELECTED) {
+				lockConnections();
                 command[0] = CommandConstants.connect;
                 command[2] = "7";
                 sensorType.addActionListener(e ->{
@@ -753,6 +768,7 @@ public class UserInterface extends JFrame{
                     sensorType.setVisible(false);
                     updateTime();
                     cTimer.executeCommand(command, totalTime, sysTime);
+                    unlockConnections();
                 });
                 sensorType.setVisible(true);
             }
@@ -781,10 +797,11 @@ public class UserInterface extends JFrame{
 		backEight.setBounds(190, 70, 10, 10);
 		back.add(backEight);
 
-		JRadioButton toggleBackTwo = new JRadioButton();
+		toggleBackTwo = new JRadioButton();
 		toggleBackTwo.setBounds(91, 90, 22, 22);
 		toggleBackTwo.addItemListener(ie -> {
-            if (ie.getStateChange() == ItemEvent.SELECTED) {
+			if (ie.getStateChange() == ItemEvent.SELECTED) {
+				lockConnections();
                 command[0] = CommandConstants.connect;
                 command[2] = "2";
                 sensorType.addActionListener(e ->{
@@ -792,6 +809,7 @@ public class UserInterface extends JFrame{
                     sensorType.setVisible(false);
                     updateTime();
                     cTimer.executeCommand(command, totalTime, sysTime);
+                    unlockConnections();
                 });
                 sensorType.setVisible(true);
             }
@@ -804,10 +822,11 @@ public class UserInterface extends JFrame{
 		}); 
 		back.add(toggleBackTwo);
 
-		JRadioButton toggleBackFour = new JRadioButton();
+		toggleBackFour = new JRadioButton();
 		toggleBackFour.setBounds(121, 90, 22, 22);
 		toggleBackFour.addItemListener(ie -> {
-            if (ie.getStateChange() == ItemEvent.SELECTED) {
+			if (ie.getStateChange() == ItemEvent.SELECTED) {
+				lockConnections();
                 command[2] = "4";
                 command[0] = CommandConstants.connect;
                 sensorType.addActionListener(e ->{
@@ -815,6 +834,7 @@ public class UserInterface extends JFrame{
                     sensorType.setVisible(false);
                     updateTime();
                     cTimer.executeCommand(command, totalTime, sysTime);
+                    unlockConnections();
                 });
                 sensorType.setVisible(true);
             }
@@ -827,10 +847,11 @@ public class UserInterface extends JFrame{
 		}); 
 		back.add(toggleBackFour);
 
-		JRadioButton toggleBackSix = new JRadioButton();
+		toggleBackSix = new JRadioButton();
 		toggleBackSix.setBounds(151, 90, 22, 22);
 		toggleBackSix.addItemListener(ie -> {
-            if (ie.getStateChange() == ItemEvent.SELECTED) {
+			if (ie.getStateChange() == ItemEvent.SELECTED) {
+				lockConnections();
                 command[0] = CommandConstants.connect;
                 command[2] = "6";
                 sensorType.addActionListener(e ->{
@@ -838,6 +859,7 @@ public class UserInterface extends JFrame{
                     sensorType.setVisible(false);
                     updateTime();
                     cTimer.executeCommand(command, totalTime, sysTime);
+                    unlockConnections();
                 });
                 sensorType.setVisible(true);
             }
@@ -850,10 +872,11 @@ public class UserInterface extends JFrame{
 		}); 
 		back.add(toggleBackSix);
 
-		JRadioButton toggleBackEight = new JRadioButton();
+		toggleBackEight = new JRadioButton();
 		toggleBackEight.setBounds(181, 90, 22, 22);
 		toggleBackEight.addItemListener(ie -> {
-            if (ie.getStateChange() == ItemEvent.SELECTED) {
+			if (ie.getStateChange() == ItemEvent.SELECTED) {
+				lockConnections();
                 command[0] = CommandConstants.connect;
                 command[2] = "8";
                 sensorType.addActionListener(e ->{
@@ -861,6 +884,7 @@ public class UserInterface extends JFrame{
                     sensorType.setVisible(false);
                     updateTime();
                     cTimer.executeCommand(command, totalTime, sysTime);
+                    unlockConnections();
                 });
                 sensorType.setVisible(true);
             }
@@ -988,5 +1012,28 @@ public class UserInterface extends JFrame{
             functionMenuIsOpen = false;
             revalidate();
         }
+    }
+    
+	private void lockConnections(){
+    	toggleBackOne.setEnabled(false);
+    	toggleBackTwo.setEnabled(false);
+    	toggleBackThree.setEnabled(false);
+    	toggleBackFour.setEnabled(false);
+    	toggleBackFive.setEnabled(false);
+    	toggleBackSix.setEnabled(false);
+    	toggleBackSeven.setEnabled(false);
+    	toggleBackEight.setEnabled(false);
+    }
+    
+    private void unlockConnections(){
+    	toggleBackOne.setEnabled(true);
+    	toggleBackTwo.setEnabled(true);
+    	toggleBackThree.setEnabled(true);
+    	toggleBackFour.setEnabled(true);
+    	toggleBackFive.setEnabled(true);
+    	toggleBackSix.setEnabled(true);
+    	toggleBackSeven.setEnabled(true);
+    	toggleBackEight.setEnabled(true);
+    	
     }
 }
