@@ -79,6 +79,7 @@ public class ChronoTimer {
 			case "OFF":{
 				if (systemOn){
 					systemOn = false;
+                    isPrinterOn = false;
 				} break;
 			}
 			case "RESET":{

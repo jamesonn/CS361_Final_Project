@@ -74,8 +74,9 @@ public class UserInterface extends JFrame{
             if(cTimer.getSystemStatus()) {
                 command[0] = "OFF";
                 updateTime();
-                cTimer.executeCommand(command,totalTime,sysTime);
+                setUIDefaultState();
                 lockConnections();
+                cTimer.executeCommand(command,totalTime,sysTime);
                 power.setBackground(Color.RED);
             }else{
                 command[0] = "ON";
@@ -525,15 +526,17 @@ public class UserInterface extends JFrame{
         printerPower.setBackground(Color.RED);
         printerPower.setOpaque(true);  // needed for OSX color display ????
 		printerPower.addActionListener(e -> {
-            command[0] = CommandConstants.printPWR;
-            updateTime();
-            cTimer.executeCommand(command,totalTime,sysTime);
-            if(cTimer.getPrinterStatus()){
-                printerPower.setBackground(Color.GREEN);
-                revalidate();
-            }else{
-                printerPower.setBackground(Color.RED);
-                revalidate();
+            if(cTimer.getSystemStatus()) {
+                command[0] = CommandConstants.printPWR;
+                updateTime();
+                cTimer.executeCommand(command, totalTime, sysTime);
+                if (cTimer.getPrinterStatus()) {
+                    printerPower.setBackground(Color.GREEN);
+                    revalidate();
+                } else {
+                    printerPower.setBackground(Color.RED);
+                    revalidate();
+                }
             }
 		}); 
 		cp.add(printerPower);
