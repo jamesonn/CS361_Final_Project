@@ -21,21 +21,34 @@ public class Racer{
 	
 	public double getStartTime(){ 
 		return startTime; }
-	
+	/**
+	 * start a racer, pass in start time
+	 * @param st
+	 */
 	public void start(double st){ 
 		startTime = st; }
 	
 	public double getEndTime(){
 		return stopTime;	}
-	
+	/**
+	 * stop a racer, pass in end time
+	 * @param st
+	 */
 	public void stop(double st){
 		stopTime = st;	
 		runLog.add(print());
 	}
-	
+	/**
+	 * find total time a racer was running for
+	 * @return
+	 */
 	public double getTotalTime(){
         totalTime = stopTime - startTime;
 		return totalTime;	}
+	
+	public ArrayList<String> getRunLog(){
+		return runLog;
+	}
 	
 	public String print(){
 		double time = getTotalTime();
