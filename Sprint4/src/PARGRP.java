@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class PARGRP extends Event{
-	Sensor[] activeSensors; 
+	private Sensor[] activeSensors = new Sensor[1]; 
 	
 	/**
 	 * Handles multiple groups at once
@@ -53,9 +53,19 @@ public class PARGRP extends Event{
 		}
 	}
 	
+	public void whichSensors(Sensor[] sensors){
+		if(sensors != null){
+			activeSensors = new Sensor[sensors.length];
+			for(int i=0; i < sensors.length; ++i){
+				activeSensors[i] = sensors[i];
+			}
+		}
+		else
+;			//we are screwed
+	}
 	
-	public void trigger(int chan, double t, Sensor[] sensors){
-		activeSensors = sensors;
+	@Override
+	public void trigger(int chan, double t){
 		if(chan == 1 && !lanes[0].isReadyEmpty()){//start all
 			for(int i = 0; i < 8; ++i){
 				lanes[i].start(t);
@@ -129,7 +139,7 @@ public class PARGRP extends Event{
 		//TODO 
 		//DNF cases prevent lane.print isActive loop
 		//how do we determine in-progress vs endRun? isActiveRun?
-		for(int i=0; i < 8; ++i)
+		for(int i=0; i < 8 && activeSensors[i].canTriggerSensor(); ++i)
 			log.addAll(lanes[i].print(time));
 		if(isActiveRun){
 			ArrayList<String> temp = new ArrayList<String>();
@@ -138,9 +148,9 @@ public class PARGRP extends Event{
 			log = temp;
 		}
 		runs.addAll(getLog());
-//		for(int i =0; i < runs.size(); i++){
-//			System.out.println(runs.get(i));
-//		}//check for printing log
+		for(int i =0; i < runs.size(); i++){
+			System.out.println(runs.get(i));
+		}//check for printing log
 		return runs;
 	}
 	
