@@ -43,7 +43,7 @@ public class HTTPHandler {
 
     private static String getResponseBodyFromArrayList(ArrayList<Racer> fromJson) {
         String result = "<link rel=\"stylesheet\" type=\"text/css\" href=\"mystyle.css\">";
-        result += "<table>\n";
+        result += "<table class =\"center\">\n";
         result += "<caption>Race Results";
         result += "\t<tr>" +
                 "<th><a href=\"/displayresults/number\">Bib Number</a></th>" +

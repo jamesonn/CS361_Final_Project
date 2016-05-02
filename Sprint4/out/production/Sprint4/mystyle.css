@@ -2,6 +2,12 @@ body {
 	color : black;
 	background-color: firebrick;
 }
+
+table.center {
+    margin-left:auto;
+    margin-right:auto;
+  }
+
 tr:nth-child(even){background-color: red}
 th {
     background-color: grey;

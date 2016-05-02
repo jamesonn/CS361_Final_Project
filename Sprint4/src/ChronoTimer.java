@@ -62,7 +62,7 @@ public class ChronoTimer {
             sensorNum = Integer.parseInt(commands[2]);
         }else if (commandEntered.equals("EVENT")){
             eventType = commands[1];
-        }else if(commands.length > 1 && commands[1] != null && !commandEntered.equals("TIME")){
+        }else if(commands.length > 1 && commands[1] != null && (!commandEntered.equals("TIME") || !commandEntered.equals("PRINTERPWR"))){
             commandNumber = Integer.parseInt(commands[1]);
         }
 
@@ -84,6 +84,7 @@ public class ChronoTimer {
 			case "RESET":{
 				if (systemOn){
 					currentEvent = 0;
+                    isPrinterOn = false;
 					//event = new Event(SysTime);
 				} break;
 			}
@@ -231,7 +232,7 @@ public class ChronoTimer {
 				}break;
 			}
 			case "ENDRUN":{
-				if (systemOn){
+				if (systemOn && eventRunning){
 					eventRunning = false;
                     runData = "";
                     eventPrintLines = events.get(currentEvent).endRun(totalTime);
@@ -273,6 +274,8 @@ public class ChronoTimer {
     }
 
 	public boolean getSystemStatus(){ return systemOn; }
+
+    public boolean getEventStatus(){ return eventRunning; }
 
     private String sendData(String data) {
         String urlSite = "http://localhost:8000/sendresults";
