@@ -31,6 +31,7 @@ public class Event {
 	}
 
 	public Event(String t){
+		cTimerLog = new Log();
 		lanes[0] = new Lane();
 		updateTime(t);
 		runs.add(curTime+ " IND");
