@@ -231,7 +231,7 @@ public class ChronoTimer {
 				}break;
 			}
 			case "ENDRUN":{
-				if (systemOn){
+				if (systemOn && eventRunning){
 					eventRunning = false;
                     runData = "";
                     eventPrintLines = events.get(currentEvent).endRun(totalTime);
@@ -273,6 +273,8 @@ public class ChronoTimer {
     }
 
 	public boolean getSystemStatus(){ return systemOn; }
+
+    public boolean getEventStatus(){ return eventRunning; }
 
     private String sendData(String data) {
         String urlSite = "http://localhost:8000/sendresults";

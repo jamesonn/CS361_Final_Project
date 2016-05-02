@@ -166,10 +166,13 @@ public class UserInterface extends JFrame{
                     command[0] = selectedMenuOption;
                     updateTime();
                     cTimer.executeCommand(command,totalTime,sysTime);
-                    if(selectedMenuOption.equals("ENDRUN") && cTimer.getPrinterStatus()){
-                        printerText += log.getRun();
-                        printer.setText(printerText);
-                        revalidate();
+
+                    if(cTimer.getEventStatus()) {
+                        if (selectedMenuOption.equals("ENDRUN") && cTimer.getPrinterStatus()) {
+                            printerText += log.getRun();
+                            printer.setText(printerText);
+                            revalidate();
+                        }
                     }
                     consoleScroll.setVisible(true);
                     functionMenu.setVisible(false);
