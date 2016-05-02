@@ -29,6 +29,13 @@ public class Event {
 		runs.add(curTime+ " IND");
 		newRun();
 	}
+
+	public Event(String t){
+		lanes[0] = new Lane();
+		updateTime(t);
+		runs.add(curTime+ " IND");
+		newRun();
+	}
 	
 	/**
 	 * takes the current time and the Racer NUM, makes and adds a new Racer to the IND lane 

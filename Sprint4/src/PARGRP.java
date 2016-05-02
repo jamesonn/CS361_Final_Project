@@ -18,7 +18,21 @@ public class PARGRP extends Event{
 		runs.add(curTime+ " PARGRP");
 		newRun();
 	}
-	
+
+	public PARGRP(String t) {
+		super(t);
+		runs.clear();
+		//all eight in one lane or 8 lanes?
+		//lanes[0] = new Lane();
+		lanes = new Lane[8];
+		for(int i = 0; i < 8; ++i){
+			lanes[i] = new Lane();
+		}
+		updateTime(t);
+		runs.add(curTime+ " PARGRP");
+		newRun();
+	}
+
 	@Override
 	public void addRacer(int bib){
 		Racer r = new Racer(bib);

@@ -19,6 +19,16 @@ public class PARIND extends Event{
 		runs.add(curTime+ " PARIND");
 		newRun();
 	}
+
+	public PARIND(String t) {
+		super(t);
+		runs.clear();
+		lanes = new Lane[2];
+		lanes[0] = new Lane();
+		lanes[1] = new Lane();
+		runs.add(curTime+ " PARIND");
+		newRun();
+	}
 	
 	@Override
 	public void addRacer(int bib){

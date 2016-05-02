@@ -20,6 +20,15 @@ public class GRP extends Event{
 		runs.add(curTime+ " GRP");
 		newRun();
 	}
+
+	public GRP(String t) {
+		super(t);
+		runs.clear();
+		lanes[0] = new Lane();
+		updateTime(t);
+		runs.add(curTime+ " GRP");
+		newRun();
+	}
 	
 	/**
 	 * Only one lane, overrides the trigger to start all but end individually
