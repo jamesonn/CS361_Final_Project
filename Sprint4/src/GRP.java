@@ -5,8 +5,6 @@ import java.util.ArrayList;
  * @author Group 1
  */
 public class GRP extends Event{
-	private Lane[] lanes = new Lane[1];
-	private ArrayList<String> log = new ArrayList<String>();
 	
 	/**
 	 * Only one lane, overrides the trigger to start all but end individually
