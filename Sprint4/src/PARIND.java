@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * Handles two active lanes at once;
@@ -32,13 +33,26 @@ public class PARIND extends Event{
 	
 	@Override
 	public void addRacer(int bib){
-		Racer r = new Racer(bib);
-		participants.add(r);
-		if(lanes[0].getNumRacers() <= lanes[1].getNumRacers())
-			lanes[0].addRacer(r);
-		else
-			lanes[1].addRacer(r);
-		//TODO: verify order of adding racers to lanes, currently adds to lane 1 first
+		boolean foundIt = false;
+		Iterator<Racer> pepsIt = participants.iterator();
+		while(pepsIt.hasNext()){
+			if(pepsIt.next().getBibNum() == bib){
+				foundIt = true;
+				if(lanes[0].getNumRacers() <= lanes[1].getNumRacers())
+					lanes[0].addRacer(pepsIt.next());
+				else
+					lanes[1].addRacer(pepsIt.next());
+				break;
+			}
+		}
+		if(!foundIt){
+			Racer r = new Racer(bib);
+			participants.add(r);
+			if(lanes[0].getNumRacers() <= lanes[1].getNumRacers())
+				lanes[0].addRacer(r);
+			else
+				lanes[1].addRacer(r);
+		}
 	}
 	
 	@Override

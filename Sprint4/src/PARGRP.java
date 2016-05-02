@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class PARGRP extends Event{
 	private Sensor[] activeSensors = new Sensor[1]; 
@@ -37,19 +38,29 @@ public class PARGRP extends Event{
 
 	@Override
 	public void addRacer(int bib){
-		Racer r = new Racer(bib);
-		if(participants.size() < 8){
-			//add racer
-			participants.add(r);
-			for(int i=0; i < 8; ++i){
-				if(lanes[i].getNumRacers() != 1){
-					lanes[i].addRacer(r);
-					break;
-				}
+		boolean foundIt = false;
+		Iterator<Racer> pepsIt = participants.iterator();
+		while(pepsIt.hasNext()){
+			if(pepsIt.next().getBibNum() == bib){
+				foundIt = true;
+				break; //illegal
 			}
 		}
-		else{
-			//not allowed
+		if(!foundIt){
+			Racer r = new Racer(bib);
+			if(participants.size() < 8){
+				//add racer
+				participants.add(r);
+				for(int i=0; i < 8; ++i){
+					if(lanes[i].getNumRacers() != 1){
+						lanes[i].addRacer(r);
+						break;
+					}
+				}
+			}
+			else{
+				//not allowed
+			}
 		}
 	}
 	
