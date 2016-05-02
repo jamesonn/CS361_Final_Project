@@ -272,6 +272,8 @@ public class ChronoTimer {
         return isPrinterOn;
     }
 
+	public boolean getSystemStatus(){ return systemOn; }
+
     private String sendData(String data) {
         String urlSite = "http://localhost:8000/sendresults";
         StringBuilder response = new StringBuilder();

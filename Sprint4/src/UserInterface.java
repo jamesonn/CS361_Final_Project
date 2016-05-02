@@ -39,17 +39,25 @@ public class UserInterface extends JFrame{
     private JRadioButton toggleBackSix;
     private JRadioButton toggleBackSeven;
     private JRadioButton toggleBackEight;
+    private JRadioButton toggleOne;
+    private JRadioButton toggleTwo;
+    private JRadioButton toggleThree;
+    private JRadioButton toggleFour;
+    private JRadioButton toggleFive;
+    private JRadioButton toggleSix;
+    private JRadioButton toggleSeven;
+    private JRadioButton toggleEight;
+    private JButton function;
+    private JButton USB;
     private boolean functionMenuIsOpen;
     private boolean selectingNumber;
     private boolean isExportMenuOpen;
     private boolean isEventListOpen;
     private boolean printCalled;
-    private boolean isSystemOn;
     private int functionMenuIndex;
     private int eventIndex;
 
     public UserInterface(ChronoTimer cTimer, Log log){
-        isSystemOn = true;
 		cp.setLayout(null);
 
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
@@ -58,15 +66,21 @@ public class UserInterface extends JFrame{
 		JButton power = new JButton("Power");
 		power.setBounds(30, 20, 100, 30);  // (x, y, width, height)
 		power.addActionListener(e -> {
-            if(isSystemOn) {
+            if(cTimer.getSystemStatus()) {
                 command[0] = "OFF";
+                updateTime();
+                cTimer.executeCommand(command,totalTime,sysTime);
+                lockConnections();
             }else{
                 command[0] = "ON";
+                updateTime();
+                cTimer.executeCommand(command,totalTime,sysTime);
+                unlockConnections();
             }
 		}); 
 		cp.add(power);
 
-		JButton function = new JButton("FUNCTION");
+		function = new JButton("FUNCTION");
 		function.setBounds(30, 250, 100, 30);
 		function.addActionListener(e -> refreshConsole());
 		cp.add(function);
@@ -313,7 +327,7 @@ public class UserInterface extends JFrame{
 		}); 
 		cp.add(startSeven);
 
-		JRadioButton toggleOne = new JRadioButton();
+		toggleOne = new JRadioButton();
 		toggleOne.setBounds(341, 100, 22, 22);
 		toggleOne.addActionListener(e -> {
             command[0] = CommandConstants.toggle;
@@ -323,7 +337,7 @@ public class UserInterface extends JFrame{
 		}); 
 		cp.add(toggleOne);
 
-		JRadioButton toggleThree = new JRadioButton();
+		toggleThree = new JRadioButton();
 		toggleThree.setBounds(371, 100, 22, 22);
 		toggleThree.addActionListener(e -> {
             command[0] = CommandConstants.toggle;
@@ -333,7 +347,7 @@ public class UserInterface extends JFrame{
 		}); 
 		cp.add(toggleThree);
 
-		JRadioButton toggleFive = new JRadioButton();
+		toggleFive = new JRadioButton();
 		toggleFive.setBounds(401, 100, 22, 22);
 		toggleFive.addActionListener(e -> {
             command[0] = CommandConstants.toggle;
@@ -343,7 +357,7 @@ public class UserInterface extends JFrame{
 		}); 
 		cp.add(toggleFive);
 
-		JRadioButton toggleSeven = new JRadioButton();
+		toggleSeven = new JRadioButton();
 		toggleSeven.setBounds(431, 100, 22, 22);
 		toggleSeven.addActionListener(e -> {
             command[0] = CommandConstants.toggle;
@@ -445,7 +459,7 @@ public class UserInterface extends JFrame{
 		}); 
 		cp.add(finishEight);
 
-		JRadioButton toggleTwo = new JRadioButton();
+		toggleTwo = new JRadioButton();
 		toggleTwo.setBounds(341, 190, 22, 22);
 		toggleTwo.addActionListener(e -> {
             command[0] = CommandConstants.toggle;
@@ -455,7 +469,7 @@ public class UserInterface extends JFrame{
 		}); 
 		cp.add(toggleTwo);
 
-		JRadioButton toggleFour = new JRadioButton();
+		toggleFour = new JRadioButton();
 		toggleFour.setBounds(371, 190, 22, 22);
 		toggleFour.addActionListener(e -> {
             command[0] = CommandConstants.toggle;
@@ -465,7 +479,7 @@ public class UserInterface extends JFrame{
 		}); 
 		cp.add(toggleFour);
 
-		JRadioButton toggleSix = new JRadioButton();
+		toggleSix = new JRadioButton();
 		toggleSix.setBounds(401, 190, 22, 22);
 		toggleSix.addActionListener(e -> {
             command[0] = CommandConstants.toggle;
@@ -475,7 +489,7 @@ public class UserInterface extends JFrame{
 		}); 
 		cp.add(toggleSix);
 
-		JRadioButton toggleEight = new JRadioButton();
+		toggleEight = new JRadioButton();
 		toggleEight.setBounds(431, 190, 22, 22);
 		toggleEight.addActionListener(e -> {
             command[0] = CommandConstants.toggle;
@@ -898,7 +912,7 @@ public class UserInterface extends JFrame{
 		back.add(toggleBackEight);
 
         //Handles the Export button
-		JButton USB = new JButton();
+		USB = new JButton();
 		USB.setBounds(320, 60, 60, 15);
 		USB.addActionListener(e -> {
             if(!isExportMenuOpen) {
@@ -1023,6 +1037,16 @@ public class UserInterface extends JFrame{
     	toggleBackSix.setEnabled(false);
     	toggleBackSeven.setEnabled(false);
     	toggleBackEight.setEnabled(false);
+        toggleOne.setEnabled(false);
+        toggleTwo.setEnabled(false);
+        toggleThree.setEnabled(false);
+        toggleFour.setEnabled(false);
+        toggleFive.setEnabled(false);
+        toggleSix.setEnabled(false);
+        toggleSeven.setEnabled(false);
+        toggleEight.setEnabled(false);
+        function.setEnabled(false);
+        USB.setEnabled(false);
     }
     
     private void unlockConnections(){
@@ -1034,6 +1058,15 @@ public class UserInterface extends JFrame{
     	toggleBackSix.setEnabled(true);
     	toggleBackSeven.setEnabled(true);
     	toggleBackEight.setEnabled(true);
-    	
+        toggleOne.setEnabled(true);
+        toggleTwo.setEnabled(true);
+        toggleThree.setEnabled(true);
+        toggleFour.setEnabled(true);
+        toggleFive.setEnabled(true);
+        toggleSix.setEnabled(true);
+        toggleSeven.setEnabled(true);
+        toggleEight.setEnabled(true);
+        function.setEnabled(true);
+        USB.setEnabled(true);
     }
 }
