@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 
 public class PARGRP extends Event{
+	Sensor[] activeSensors; 
+	
 	/**
 	 * Handles multiple groups at once
 	 * @param t
@@ -39,10 +41,11 @@ public class PARGRP extends Event{
 	
 	
 	public void trigger(int chan, double t, Sensor[] sensors){
+		activeSensors = sensors;
 		if(chan == 1 && !lanes[0].isReadyEmpty()){//start all
 			for(int i = 0; i < 8; ++i){
 				lanes[i].start(t);
-				if(!sensors[i].canTriggerSensor()){
+				if(!activeSensors[i].canTriggerSensor()){
 					log.add(lanes[i].didNotFinish());
 				}
 			}
@@ -110,11 +113,20 @@ public class PARGRP extends Event{
 	@Override
 	public ArrayList<String> print(double time){
 		//TODO 
-		
 		//DNF cases prevent lane.print isActive loop
 		//how do we determine in-progress vs endRun? isActiveRun?
-		
-		
+		for(int i=0; i < 8; ++i)
+			log.addAll(lanes[i].print(time));
+		if(isActiveRun){
+			ArrayList<String> temp = new ArrayList<String>();
+			temp.add(log.remove(0) + " In Progress");
+			temp.addAll(log);
+			log = temp;
+		}
+		runs.addAll(getLog());
+//		for(int i =0; i < runs.size(); i++){
+//			System.out.println(runs.get(i));
+//		}//check for printing log
 		return runs;
 	}
 	
