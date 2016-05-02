@@ -13,6 +13,7 @@ import javax.swing.plaf.basic.BasicArrowButton;
 public class UserInterface extends JFrame{
 
 	private static final long serialVersionUID = 1L;
+    private ChronoTimer cTimer;
     private String[] command = new String[3];
     private String sysTime;
     private String selectedMenuOption;
@@ -50,6 +51,7 @@ public class UserInterface extends JFrame{
     private JRadioButton toggleEight;
     private JButton function;
     private JButton USB;
+    private JButton printerPower;
     private boolean functionMenuIsOpen;
     private boolean selectingNumber;
     private boolean isExportMenuOpen;
@@ -59,6 +61,7 @@ public class UserInterface extends JFrame{
     private int eventIndex;
 
     public UserInterface(ChronoTimer cTimer, Log log){
+        this.cTimer = cTimer;
 		cp.setLayout(null);
 
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
@@ -166,6 +169,10 @@ public class UserInterface extends JFrame{
                     command[0] = selectedMenuOption;
                     updateTime();
                     cTimer.executeCommand(command,totalTime,sysTime);
+
+                    if(selectedMenuOption.equals("RESET")){
+                        setUIDefaultState();
+                    }
 
                     if(cTimer.getEventStatus()) {
                         if (selectedMenuOption.equals("ENDRUN") && cTimer.getPrinterStatus()) {
@@ -510,7 +517,7 @@ public class UserInterface extends JFrame{
 		consoleLabel.setBounds(315,463,200,20);
 		cp.add(consoleLabel);
 
-		JButton printerPower = new JButton("Printer Pwr");
+		printerPower = new JButton("Printer Pwr");
 		printerPower.setBounds(600, 20, 100, 30);
         printerPower.setBackground(Color.RED);
 		printerPower.addActionListener(e -> {
@@ -1033,5 +1040,30 @@ public class UserInterface extends JFrame{
         toggleEight.setEnabled(true);
         function.setEnabled(true);
         USB.setEnabled(true);
+    }
+
+    private void setUIDefaultState(){
+        toggleOne.setSelected(false);
+        toggleTwo.setSelected(false);
+        toggleThree.setSelected(false);
+        toggleFour.setSelected(false);
+        toggleFive.setSelected(false);
+        toggleSix.setSelected(false);
+        toggleSeven.setSelected(false);
+        toggleEight.setSelected(false);
+
+        toggleBackOne.setSelected(false);
+        toggleBackTwo.setSelected(false);
+        toggleBackThree.setSelected(false);
+        toggleBackFour.setSelected(false);
+        toggleBackFive.setSelected(false);
+        toggleBackSix.setSelected(false);
+        toggleBackSeven.setSelected(false);
+        toggleBackEight.setSelected(false);
+
+        if(cTimer.getPrinterStatus()){
+            printerPower.setBackground(Color.RED);
+            revalidate();
+        }
     }
 }
