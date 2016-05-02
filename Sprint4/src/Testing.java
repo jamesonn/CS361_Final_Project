@@ -190,22 +190,24 @@ public class Testing {
 	 */
 	@Test
 	public void testNormalPARGRP(){
-		ChronoTimer c = new ChronoTimer(new Log());
-		//c.executeCommand("EVENT PARGRP", "11:14:30.0", 0);
-		
-		
 		PARGRP e = new PARGRP("11:14:30.0");
+		Sensor[] sensors = new Sensor[4];
+		sensors[0] = new Sensor("EYE", 1);
+		sensors[1] = new Sensor("GATE", 2);
+		sensors[2] = new Sensor("GATE", 3);
+		sensors[3] = new Sensor("PAD", 4);
+		e.whichSensors(sensors);
 		assertFalse(e.getLog().isEmpty());
 		e.addRacer(111);
 		e.addRacer(112);
 		e.addRacer(113);
 		e.addRacer(114);
 		e.trigger(1, 40505.5); //start R1
-		e.trigger(1, 40700.5); //do nothing
-		e.trigger(2, 40702.7);//finish R1
-		e.trigger(2, 40800.3);//finish R2
-		e.trigger(2, 40835.2);//finish R3
-		//R4 should be in progress
+		e.trigger(1, 40700.5); //finish R1
+		e.trigger(2, 40702.7);//finish R2
+		e.trigger(2, 40800.3);//do nothing
+		e.trigger(3, 40835.2);//finish R3
+		//R4 should be in progress - DNF
 		
 		ArrayList<String> list = e.print(40900);
 		assertEquals(6, list.size());
