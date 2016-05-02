@@ -79,9 +79,11 @@ public class PARGRP extends Event{
 	public void trigger(int chan, double t){
 		if(chan == 1 && !lanes[0].isReadyEmpty()){//start all
 			for(int i = 0; i < 8; ++i){
-				lanes[i].start(t);
-				if(!activeSensors[i].canTriggerSensor()){
-					log.add(lanes[i].didNotFinish());
+				if(!lanes[i].isReadyEmpty()){
+					lanes[i].start(t);
+					if(!activeSensors[i].canTriggerSensor()){
+						log.add(lanes[i].didNotFinish());
+					}
 				}
 			}
 		}
