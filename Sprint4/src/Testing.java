@@ -90,10 +90,10 @@ public class Testing {
 		assertEquals(e.getCurTime(), "11:14:30.0");
 		assertEquals(e.getTotalTime(), 40470, 0.0);
 		e.trigger(0, 40502);
-		assertEquals(e.getCurTime(), "11:15:2.00");
+		assertEquals(e.getCurTime(), "11:15:2.0");
 		assertEquals(e.getTotalTime(), 40502, 0.0);
 		e.trigger(0, 43199.9);
-		assertEquals(e.getCurTime(), "11:59:59.90");
+		assertEquals(e.getCurTime(), "11:59:59.9");
 		assertEquals(e.getTotalTime(), 43199.9, 0.0);
 		
 	}
@@ -118,9 +118,9 @@ public class Testing {
 		assertEquals(5, list.size());
 		assertEquals("11:14:30.0 IND", list.get(0));
 		assertEquals("11:14:30.0 Run 1 In Progress", list.get(1));
-		assertEquals("112 227.80 F", list.get(2));
+		assertEquals("112 227.8 F", list.get(2));
 		assertEquals("111 DNF", list.get(3));
-		assertEquals("113 249.00 R", list.get(4));
+		assertEquals("113 249.0 R", list.get(4));
 		
 	}
 	
@@ -146,10 +146,10 @@ public class Testing {
 		assertEquals(6, list.size());
 		assertEquals("11:14:30.0 PARIND", list.get(0));
 		assertEquals("11:14:30.0 Run 1 In Progress", list.get(1));
-		assertEquals("111 197.20 F", list.get(2));
-		assertEquals("112 90.30 F", list.get(3));
-		assertEquals("113 199.50 R", list.get(4));
-		assertEquals("114 90.00 R", list.get(5));
+		assertEquals("111 197.2 F", list.get(2));
+		assertEquals("112 90.3 F", list.get(3));
+		assertEquals("113 199.5 R", list.get(4));
+		assertEquals("114 90.0 R", list.get(5));
 		
 		
 	}
@@ -178,10 +178,10 @@ public class Testing {
 		assertEquals(6, list.size());
 		assertEquals("11:14:30.0 GRP", list.get(0));
 		assertEquals("11:14:30.0 Run 1 In Progress", list.get(1));
-		assertEquals("111 197.20 F", list.get(2));
-		assertEquals("112 294.80 F", list.get(3));
-		assertEquals("113 329.70 F", list.get(4));
-		assertEquals("114 394.50 R", list.get(5));
+		assertEquals("111 197.2 F", list.get(2));
+		assertEquals("112 294.8 F", list.get(3));
+		assertEquals("113 329.7 F", list.get(4));
+		assertEquals("114 394.5 R", list.get(5));
 		
 	}
 	
