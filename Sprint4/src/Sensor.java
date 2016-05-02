@@ -40,4 +40,6 @@ public class Sensor {
 	public int getSensorNumber(){
 		return this.sensorNum;
 	}
+
+	public boolean getStatus(){ return isToggledOn; }
 }
