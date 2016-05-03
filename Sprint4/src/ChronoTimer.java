@@ -147,11 +147,6 @@ public class ChronoTimer {
 					}*/
                     Event runningEvent = events.get(currentEvent);
 					if(sensors[commandNumber-1] != null && sensors[commandNumber-1].canTriggerSensor()){
-<<<<<<< HEAD
-=======
-						if (runningEvent instanceof PARGRP){
-							((PARGRP) runningEvent).whichSensors(sensors);
->>>>>>> de07e2325776640fdcb626c4942f088289ec7b33
 							runningEvent.trigger(commandNumber, totalTime);
 					}
 				}
@@ -313,4 +308,3 @@ public class ChronoTimer {
 		return g.toJson(events.get(currentEvent).getParticipants());
 	}
 }
-
