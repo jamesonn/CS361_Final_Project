@@ -138,9 +138,9 @@ public class Event {
 			}
 		}
 		runs.addAll(getLog());
-//		for(int i =0; i < runs.size(); i++){
-//			System.out.println(runs.get(i));
-//		}//check for printing log
+		for(int i =0; i < runs.size(); i++){
+			System.out.println(runs.get(i));
+		}//check for printing log
 		return runs;
 	}
 	

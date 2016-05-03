@@ -232,9 +232,11 @@ public class Testing {
 		assertEquals(3, laneList.size());
 		take = new Racer(222);
 		lane.removeRacer(take);
-		assertEquals(3, laneList.size());
-		
-		
+		assertEquals(3, laneList.size());				
+	}
+	
+	@Test
+	public void testCLRracer1(){
 		Event e = new Event("11:14:30.0");
 		e.addRacer(114);
 		e.trigger(1, 40505.5); //start R1
@@ -246,6 +248,5 @@ public class Testing {
 		//does not overwrite info if on same race
 		assertEquals(3, eventList.size()); 
 		assertEquals("114 CLR", eventList.get(2));
-		
 	}
 }
