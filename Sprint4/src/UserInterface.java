@@ -7,7 +7,8 @@ import javax.swing.*;
 import javax.swing.plaf.basic.BasicArrowButton;
 
 /**
- *
+ * handles creation and management of GUI; interface to ChronoTimer
+ * @author Group 1
  */
 public class UserInterface extends JFrame{
 
