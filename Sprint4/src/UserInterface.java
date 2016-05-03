@@ -203,7 +203,7 @@ public class UserInterface extends JFrame{
                 cTimer.executeCommand(command,totalTime,sysTime);
                 if(printCalled && cTimer.getPrinterStatus()){
                     printCalled = false;
-                    printerText += log.getRun(Integer.parseInt(command[1]));
+                    printerText += log.getRun(Integer.parseInt(command[1])) + "\n";
                     printer.setText(printerText);
                     revalidate();
                 }
