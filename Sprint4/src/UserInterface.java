@@ -201,7 +201,7 @@ public class UserInterface extends JFrame{
                 enteredNumber = new StringBuilder();
                 updateTime();
                 cTimer.executeCommand(command,totalTime,sysTime);
-                if(printCalled){
+                if(printCalled && cTimer.getPrinterStatus()){
                     printCalled = false;
                     printerText += log.getRun(Integer.parseInt(command[1]));
                     printer.setText(printerText);
