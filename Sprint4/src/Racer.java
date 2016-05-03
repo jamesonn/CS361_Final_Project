@@ -71,7 +71,6 @@ public class Racer{
 	}
 	
 	 private static String getNameFromFile(int bibCheck){
-	    	String temp = "";
 	    	File instructions;
 	        Scanner instructionParser;
 	        ArrayList<String> instructionLines = new ArrayList<>();
@@ -98,6 +97,6 @@ public class Racer{
 	                System.out.println("Something went wrong parsing test data");
 	            }
 	        }
-	    	return temp;
+	    	return "";  //no name found in file
 	    }
 }
