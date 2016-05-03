@@ -1,4 +1,7 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * constructor requires racerNum and laneNum; 
@@ -15,6 +18,7 @@ public class Racer{
 	
 	public Racer(int bibNum){
 		racerNum = bibNum;
+		name = getNameFromFile(bibNum);
 	}
 
 	public int getBibNum(){ 
@@ -65,4 +69,34 @@ public class Racer{
 	public void setName(String newName){
 		this.name = newName;
 	}
+	
+	 private static String getNameFromFile(int bibCheck){
+	    	File instructions;
+	        Scanner instructionParser;
+	        ArrayList<String> instructionLines = new ArrayList<>();
+
+	        try {
+	            instructions = new File("racers.txt");
+	            instructionParser = new Scanner(instructions);
+	            while (instructionParser.hasNextLine()) {
+	                instructionLines.add(instructionParser.nextLine());
+	            }
+	            instructionParser.close();
+	        } catch (FileNotFoundException e1) {
+	            System.out.println("Something went wrong opening the racer file");
+	        }
+	        
+	        for (int i = 0; i < instructionLines.size(); i++) {
+	            try {
+	            	String[] racerInfo = instructionLines.get(i).split("\t");
+	                int bib = Integer.parseInt(racerInfo[0]);
+	                if (bibCheck == bib) {
+	                	return racerInfo[1];
+	                }
+	            } catch (Exception e) {
+	                System.out.println("Something went wrong parsing test data");
+	            }
+	        }
+	    	return "";  //no name found in file
+	    }
 }

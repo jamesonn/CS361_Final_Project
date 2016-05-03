@@ -7,7 +7,8 @@ import javax.swing.*;
 import javax.swing.plaf.basic.BasicArrowButton;
 
 /**
- *
+ * handles creation and management of GUI; interface to ChronoTimer
+ * @author Group 1
  */
 public class UserInterface extends JFrame{
 
@@ -201,9 +202,9 @@ public class UserInterface extends JFrame{
                 enteredNumber = new StringBuilder();
                 updateTime();
                 cTimer.executeCommand(command,totalTime,sysTime);
-                if(printCalled){
+                if(printCalled && cTimer.getPrinterStatus()){
                     printCalled = false;
-                    printerText += log.getRun(Integer.parseInt(command[1]));
+                    printerText += log.getRun(Integer.parseInt(command[1])) + "\n";
                     printer.setText(printerText);
                     revalidate();
                 }
