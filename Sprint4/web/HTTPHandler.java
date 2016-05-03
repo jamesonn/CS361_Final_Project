@@ -58,7 +58,6 @@ public class HTTPHandler {
                 "<tr>";
         for (Racer racer : fromJson) {
         	int bibNo = racer.getBibNum();
-        	racer.setName(getNameFromFile(bibNo));
         	String name = racer.getName();
         	String time = String.format("%.1f", racer.getTotalTime());
             result += "<tr>" +
@@ -74,36 +73,6 @@ public class HTTPHandler {
 
     }
 
-    private static String getNameFromFile(int bibCheck){
-    	String temp = "";
-    	File instructions;
-        Scanner instructionParser;
-        ArrayList<String> instructionLines = new ArrayList<>();
-
-        try {
-            instructions = new File("racers.txt");
-            instructionParser = new Scanner(instructions);
-            while (instructionParser.hasNextLine()) {
-                instructionLines.add(instructionParser.nextLine());
-            }
-            instructionParser.close();
-        } catch (FileNotFoundException e1) {
-            System.out.println("Something went wrong opening the racer file");
-        }
-        
-        for (int i = 0; i < instructionLines.size(); i++) {
-            try {
-            	String[] racerInfo = instructionLines.get(i).split("\t");
-                int bib = Integer.parseInt(racerInfo[0]);
-                if (bibCheck == bib) {
-                	return racerInfo[1];
-                }
-            } catch (Exception e) {
-                System.out.println("Something went wrong parsing test data");
-            }
-        }
-    	return temp;
-    }
     
     private static void createResponseWithComparator(HttpExchange t, Comparator c) throws IOException {
         Gson g = new Gson();
