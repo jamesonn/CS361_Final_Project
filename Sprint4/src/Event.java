@@ -115,8 +115,9 @@ public class Event {
 		Racer temp = new Racer(bib);
 		Iterator<Racer> pepsIt = participants.iterator();
 		while(pepsIt.hasNext()){
-			if(pepsIt.next().getBibNum() == bib){
-				log.add(lanes[0].removeRacer(temp));
+			Racer racer = pepsIt.next();
+			if(racer.getBibNum() == bib){
+				log.set(log.size()-1,lanes[0].removeRacer(racer));
 				break; //illegal
 			}
 		}
@@ -139,11 +140,12 @@ public class Event {
 				log = temp;
 			}
 		}
-		runs.addAll(getLog());
+        ArrayList<String> progressList = runs;
+		progressList.addAll(getLog());
 		for(int i =0; i < runs.size(); i++){
 			System.out.println(runs.get(i));
 		}//check for printing log
-		return runs;
+		return progressList;
 	}
 	
 	/**

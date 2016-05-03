@@ -11,6 +11,7 @@ public class Lane {
 	private Queue<Racer> ready = new LinkedList<Racer>();
 	private LinkedList<Racer> active = new LinkedList<Racer>();
 	private Racer curRacer;
+    private Boolean removedRacerFound;
 	
 	public void start(double t){
 		curRacer = ready.remove();
@@ -62,11 +63,12 @@ public class Lane {
 	 * @return
 	 */
 	public String removeRacer(Racer find){
+        removedRacerFound = false;
 		if(ready.contains(find)){
 			Queue<Racer> temp = new LinkedList<Racer>();
 			String removed = "checking lane removeRacer"; // should only print this if ready is empty
 			
-			while(!ready.isEmpty()){
+			while(!ready.isEmpty() && !removedRacerFound){
 				if(curRacer.getBibNum() != find.getBibNum()){
 					// add to temp queue
 					temp.add(curRacer);
@@ -74,6 +76,12 @@ public class Lane {
 				}
 				else{
 					removed = curRacer.getBibNum() + " CLR";
+                    for(int i = 0; i < ready.size(); i++){
+                        if(curRacer.getBibNum() == find.getBibNum()){
+                            active.remove(i);
+                        }
+                    }
+                    removedRacerFound = true;
 				}
 			}
 			ready = temp;
@@ -83,7 +91,7 @@ public class Lane {
 			Queue<Racer> temp = new LinkedList<Racer>();
 			String removed = "checking lane removeRacer"; // should only print this if ready is empty
 			
-			while(!active.isEmpty()){
+			while(!active.isEmpty() && !removedRacerFound){
 				if(curRacer.getBibNum() != find.getBibNum()){
 					// add to temp queue
 					temp.add(curRacer);
@@ -91,6 +99,12 @@ public class Lane {
 				}
 				else{
 					removed = curRacer.getBibNum() + " CLR";
+                    for(int i = 0; i < active.size(); i++){
+                        if(curRacer.getBibNum() == find.getBibNum()){
+                            active.remove(i);
+                        }
+                    }
+                    removedRacerFound = true;
 				}
 			}
 			ready = temp;
