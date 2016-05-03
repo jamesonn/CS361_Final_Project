@@ -113,13 +113,11 @@ public class Event {
 	 */
 	public void removeRacer(int bib){
 		Racer temp = new Racer(bib);
-		if(participants.contains(temp)){
-			Iterator<Racer> pepsIt = participants.iterator();
-			while(pepsIt.hasNext()){
-				if(pepsIt.next().getBibNum() == bib){
-					log.add(lanes[0].removeRacer(temp));
-					break; //illegal
-				}
+		Iterator<Racer> pepsIt = participants.iterator();
+		while(pepsIt.hasNext()){
+			if(pepsIt.next().getBibNum() == bib){
+				log.add(lanes[0].removeRacer(temp));
+				break; //illegal
 			}
 		}
 	}
