@@ -146,15 +146,8 @@ public class ChronoTimer {
 						events.get(currentEvent).trigger(Integer.parseInt(commands[1])-1, TotalTime);
 					}*/
                     Event runningEvent = events.get(currentEvent);
-					if(sensors[commandNumber-1] != null && sensors[commandNumber-1].getStatus()){
-						if (runningEvent instanceof PARGRP){
-							((PARGRP) runningEvent).whichSensors(sensors);
+					if(sensors[commandNumber-1] != null && sensors[commandNumber-1].canTriggerSensor()){
 							runningEvent.trigger(commandNumber, totalTime);
-//							((PARGRP) runningEvent).trigger(commandNumber, totalTime, sensors);
-						}
-						else{
-							runningEvent.trigger(commandNumber, totalTime);
-						}
 					}
 				}
                 break;

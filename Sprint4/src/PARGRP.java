@@ -2,8 +2,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class PARGRP extends Event{
-	private Sensor[] activeSensors = new Sensor[1]; 
-	
 	/**
 	 * Handles multiple groups at once
 	 * @param t
@@ -11,8 +9,6 @@ public class PARGRP extends Event{
 	public PARGRP(String t, Log log) {
 		super(t, log);
 		runs.clear();
-		//all eight in one lane or 8 lanes?
-		//lanes[0] = new Lane();
 		lanes = new Lane[8];
 		for(int i = 0; i < 8; ++i){
 			lanes[i] = new Lane();
@@ -25,8 +21,6 @@ public class PARGRP extends Event{
 	public PARGRP(String t) {
 		super(t);
 		runs.clear();
-		//all eight in one lane or 8 lanes?
-		//lanes[0] = new Lane();
 		lanes = new Lane[8];
 		for(int i = 0; i < 8; ++i){
 			lanes[i] = new Lane();
@@ -63,32 +57,19 @@ public class PARGRP extends Event{
 			}
 		}
 	}
-	
-	public void whichSensors(Sensor[] sensors){
-		if(sensors != null){
-			activeSensors = new Sensor[sensors.length];
-			for(int i=0; i < sensors.length; ++i){
-				activeSensors[i] = sensors[i];
-			}
-		}
-		else
-;			//we are screwed
-	}
-	
+
 	@Override
 	public void trigger(int chan, double t){
 		if(chan == 1 && !lanes[0].isReadyEmpty()){//start all
 			for(int i = 0; i < 8; ++i){
 				if(!lanes[i].isReadyEmpty()){
 					lanes[i].start(t);
-					if(!activeSensors[i].canTriggerSensor()){
 						log.add(lanes[i].didNotFinish());
-					}
 				}
 			}
 		}
-		//TODO somehow check for pads connected
-		else if(lanes[0].isReadyEmpty()){//already started bool?
+		//check for pads connected handled in ChronoTimer 
+		else if(lanes[0].isReadyEmpty() && isActiveRun){
 			switch(chan){
 				case 1:{
 					if(!lanes[0].isActiveEmpty())
@@ -146,13 +127,25 @@ public class PARGRP extends Event{
 		if(found){ log.add(racer);}
 	}
 	
+	@Override
+	public ArrayList<String> endRun(double time){
+		for(int i=0; i < 8; ++i){
+			//anyone left doesn't have an active channel, so DNF
+			if(!lanes[i].isActiveEmpty())
+				log.add(lanes[i].didNotFinish());
+		}
+		runs.addAll(getLog());
+		log = new ArrayList<String>();
+		isActiveRun = false;
+		return print(time);
+	}
 	
 	@Override
 	public ArrayList<String> print(double time){
 		//TODO 
 		//DNF cases prevent lane.print isActive loop
 		//how do we determine in-progress vs endRun? isActiveRun?
-		for(int i=0; i < 8 && activeSensors[i].canTriggerSensor(); ++i)
+		for(int i=0; i < 8; ++i)
 			log.addAll(lanes[i].print(time));
 		if(isActiveRun){
 			ArrayList<String> temp = new ArrayList<String>();
