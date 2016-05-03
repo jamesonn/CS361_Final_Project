@@ -29,6 +29,7 @@ public class HTTPHandler {
             HttpServer server = HttpServer.create(new InetSocketAddress(8000), 0);
             // create a context to get the request to display the results
             server.createContext("/displayresults/time", new DisplayHandlerTime());
+            server.createContext("/displayresults/name", new DisplayHandlerName());
             server.createContext("/displayresults/number", new DisplayHandlerNumber());
             server.createContext("/displayresults/place", new DisplayHandlerPlace());
             server.createContext("/displayresults/mystyle.css", new CSSHandler());
@@ -57,9 +58,9 @@ public class HTTPHandler {
                 "<tr>";
         for (Racer racer : fromJson) {
         	int bibNo = racer.getBibNum();
-        	String name = getNameFromFile("racers.txt", bibNo);
+        	racer.setName(getNameFromFile(bibNo));
+        	String name = racer.getName();
         	String time = String.format("%.1f", racer.getTotalTime());
-        	
             result += "<tr>" +
                     "<td>" + bibNo + "</td>" +
                     "<td>" + name + "</td>" +
@@ -73,14 +74,14 @@ public class HTTPHandler {
 
     }
 
-    private static String getNameFromFile(String file, int bibCheck){
+    private static String getNameFromFile(int bibCheck){
     	String temp = "";
     	File instructions;
         Scanner instructionParser;
         ArrayList<String> instructionLines = new ArrayList<>();
 
         try {
-            instructions = new File(file);
+            instructions = new File("/racers.txt");
             instructionParser = new Scanner(instructions);
             while (instructionParser.hasNextLine()) {
                 instructionLines.add(instructionParser.nextLine());
@@ -122,6 +123,12 @@ public class HTTPHandler {
     static class DisplayHandlerTime implements HttpHandler {
         public void handle(HttpExchange t) throws IOException {
             createResponseWithComparator(t, new RacerTimeComparator());
+        }
+    }
+    
+    static class DisplayHandlerName implements HttpHandler {
+        public void handle(HttpExchange t) throws IOException {
+            createResponseWithComparator(t, new RacerNameComparator());
         }
     }
 

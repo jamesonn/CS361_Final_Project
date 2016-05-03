@@ -11,7 +11,7 @@ public class Racer{
 	private double stopTime;
     private double totalTime;
 	private ArrayList<String> runLog = new ArrayList<String>();
-	private String name = null;
+	private String name;
 	
 	public Racer(int bibNum){
 		racerNum = bibNum;
@@ -58,11 +58,11 @@ public class Racer{
 		return ""+ racerNum +" "+ t;
 	}
 	
-	private String getName(){
+	public String getName(){
 		return this.name;
 	}
 	
-	private void setName(String newName){
+	public void setName(String newName){
 		this.name = newName;
 	}
 }
