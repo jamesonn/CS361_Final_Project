@@ -6,7 +6,7 @@ import java.util.Date;
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicArrowButton;
 
-/**]
+/**
  *
  */
 public class UserInterface extends JFrame{
