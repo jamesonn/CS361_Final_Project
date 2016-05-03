@@ -114,10 +114,14 @@ public class Event {
 	public void removeRacer(int bib){
 		Racer temp = new Racer(bib);
 		if(participants.contains(temp)){
-			log.add(lanes[0].removeRacer(temp));
-			//System.out.println("in removeRacer method");
+			Iterator<Racer> pepsIt = participants.iterator();
+			while(pepsIt.hasNext()){
+				if(pepsIt.next().getBibNum() == bib){
+					log.add(lanes[0].removeRacer(temp));
+					break; //illegal
+				}
+			}
 		}
-		//System.out.println("outside if statement in RemoveRacer");
 	}
 	
 	/**
