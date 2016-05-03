@@ -81,7 +81,7 @@ public class HTTPHandler {
         ArrayList<String> instructionLines = new ArrayList<>();
 
         try {
-            instructions = new File("/racers.txt");
+            instructions = new File("racers.txt");
             instructionParser = new Scanner(instructions);
             while (instructionParser.hasNextLine()) {
                 instructionLines.add(instructionParser.nextLine());
