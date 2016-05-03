@@ -109,7 +109,10 @@ public class UserInterface extends JFrame{
                 revalidate();
             } else if(functionMenuIsOpen){
                 functionMenuIsOpen = false;
+                isEventListOpen = false;
+                consoleScroll.setVisible(true);
                 console.setVisible(true);
+                eventTypes.setVisible(false);
                 functionMenu.setVisible(false);
                 revalidate();
             }
