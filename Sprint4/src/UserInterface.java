@@ -548,7 +548,7 @@ public class UserInterface extends JFrame{
 		printer.setBackground(Color.white);
 		
 		printerScrollPane = new JScrollPane(printer);
-		printerScrollPane.setBounds(575, 60, 150, 150);
+		printerScrollPane.setBounds(550, 60, 200, 150);
 		printerScrollPane.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
 		printerScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		cp.add(printerScrollPane);

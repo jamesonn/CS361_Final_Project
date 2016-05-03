@@ -11,6 +11,7 @@ public class Racer{
 	private double stopTime;
     private double totalTime;
 	private ArrayList<String> runLog = new ArrayList<String>();
+	private String name = null;
 	
 	public Racer(int bibNum){
 		racerNum = bibNum;
@@ -55,5 +56,13 @@ public class Racer{
 		String t = String.format("%.1f", time);
 		//TODO: Handle race canceled midway through, i.e. stop() never called
 		return ""+ racerNum +" "+ t;
+	}
+	
+	private String getName(){
+		return this.name;
+	}
+	
+	private void setName(String newName){
+		this.name = newName;
 	}
 }

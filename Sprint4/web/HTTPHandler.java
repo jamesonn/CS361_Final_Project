@@ -6,11 +6,15 @@ import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.InetSocketAddress;
 import java.util.*;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class HTTPHandler {
 
@@ -47,13 +51,19 @@ public class HTTPHandler {
         result += "<caption>Race Results";
         result += "\t<tr>" +
                 "<th><a href=\"/displayresults/number\">Bib Number</a></th>" +
+                "<th><a href=\"/displayresults/number\">Name</a></th>" +
                 "<th><a href=\"/displayresults/time\">Time</a></th>" +
                 "<th><a href=\"/displayresults/place\">Place</a></th>" +
                 "<tr>";
         for (Racer racer : fromJson) {
+        	int bibNo = racer.getBibNum();
+        	String name = getNameFromFile("racers.txt", bibNo);
+        	String time = String.format("%.1f", racer.getTotalTime());
+        	
             result += "<tr>" +
-                    "<td>" + racer.getBibNum() + "</td>" +
-                    "<td>" + racer.getTotalTime() + "</td>" +
+                    "<td>" + bibNo + "</td>" +
+                    "<td>" + name + "</td>" +
+                    "<td>" + time + "</td>" +
                     "</tr>";
         }
 
@@ -63,6 +73,37 @@ public class HTTPHandler {
 
     }
 
+    private static String getNameFromFile(String file, int bibCheck){
+    	String temp = "";
+    	File instructions;
+        Scanner instructionParser;
+        ArrayList<String> instructionLines = new ArrayList<>();
+
+        try {
+            instructions = new File(file);
+            instructionParser = new Scanner(instructions);
+            while (instructionParser.hasNextLine()) {
+                instructionLines.add(instructionParser.nextLine());
+            }
+            instructionParser.close();
+        } catch (FileNotFoundException e1) {
+            System.out.println("Something went wrong opening the racer file");
+        }
+        
+        for (int i = 0; i < instructionLines.size(); i++) {
+            try {
+            	String[] racerInfo = instructionLines.get(i).split("\t");
+                int bib = Integer.parseInt(racerInfo[0]);
+                if (bibCheck == bib) {
+                	return racerInfo[1];
+                }
+            } catch (Exception e) {
+                System.out.println("Something went wrong parsing test data");
+            }
+        }
+    	return temp;
+    }
+    
     private static void createResponseWithComparator(HttpExchange t, Comparator c) throws IOException {
         Gson g = new Gson();
         ArrayList<Racer> fromJson = g.fromJson(sharedResponse.substring(5),
