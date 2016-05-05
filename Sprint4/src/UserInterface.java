@@ -296,9 +296,6 @@ public class UserInterface extends JFrame{
             command[0] = CommandConstants.trigger;
             command[1] = "1";
 
-            consoleText += "\n";
-            console.setText(consoleText);
-
             updateTime();
             cTimer.executeCommand(command,totalTime,sysTime);
 		}); 
@@ -311,9 +308,6 @@ public class UserInterface extends JFrame{
             command[0] = CommandConstants.trigger;
             command[1] = "3";
 
-            consoleText += "\n";
-            console.setText(consoleText);
-
             updateTime();
             cTimer.executeCommand(command,totalTime,sysTime);
 		}); 
@@ -323,9 +317,6 @@ public class UserInterface extends JFrame{
 		startFive.addActionListener(e -> {
             command[0] = CommandConstants.trigger;
             command[1] = "5";
-
-            consoleText += "\n";
-            console.setText(consoleText);
 
             updateTime();
             cTimer.executeCommand(command,totalTime,sysTime);
@@ -337,9 +328,6 @@ public class UserInterface extends JFrame{
 		startSeven.addActionListener(e -> {
             command[0] = CommandConstants.trigger;
             command[1] = "7";
-
-            consoleText += "\n";
-            console.setText(consoleText);
 
             updateTime();
             cTimer.executeCommand(command,totalTime,sysTime);
