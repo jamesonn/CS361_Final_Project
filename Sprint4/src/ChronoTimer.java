@@ -13,6 +13,7 @@ import java.util.Date;
  */
 public class ChronoTimer {
     private HttpURLConnection conn;
+    private boolean isE1changed = true;
 	private boolean systemOn;
 	private boolean eventRunning;
     private boolean isPrinterOn;
@@ -111,18 +112,34 @@ public class ChronoTimer {
 					switch(eventType){
 						case "IND":{//no change necessary, default case
 							events.add(new Event(sysTime, log));
+							if(isE1changed){
+								currentEvent++;
+								isE1changed = false;
+							}
 							break;
 						}
 						case "PARIND":{
 							events.add(new PARIND(sysTime, log));
+							if(isE1changed){
+								currentEvent++;
+								isE1changed = false;
+							}
 							break;
 						}
 						case "GRP":{
+							if(isE1changed){
+								currentEvent++;
+								isE1changed = false;
+							}
 							events.add(new GRP(sysTime, log));
 							break;
 						}
 						case "PARGRP":{
 							events.add(new PARGRP(sysTime, log));
+							if(isE1changed){
+								currentEvent++;
+								isE1changed = false;
+							}
 							break;
 						}
 					}
@@ -248,13 +265,13 @@ public class ChronoTimer {
 			case "NEWRUN":{
 				if (systemOn && !eventRunning){
                     eventRunning = true;
-                    if ( events.get(currentEvent).getClass().equals(PARIND.class)){
-                        currentEvent++;
-                        events.add(new PARIND(sysTime, log));
-                    } else {
-                        currentEvent++;
-                        events.add(new Event(sysTime, log));
-                    }
+//                    if ( events.get(currentEvent).getClass().equals(PARIND.class)){
+//                        currentEvent++;
+//                        events.add(new PARIND(sysTime, log));
+//                    } else {
+//                        currentEvent++;
+//                        events.add(new Event(sysTime, log));
+//                    }
                      // increment run number
                     events.get(currentEvent).newRun();
 				}
