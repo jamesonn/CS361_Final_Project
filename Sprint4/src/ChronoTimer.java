@@ -112,7 +112,7 @@ public class ChronoTimer {
 					switch(eventType){
 						case "IND":{//no change necessary, default case
 							events.add(new Event(sysTime, log));
-							if(isE1changed){
+							if(!isE1changed){
 								currentEvent++;
 								isE1changed = false;
 							}
@@ -120,14 +120,14 @@ public class ChronoTimer {
 						}
 						case "PARIND":{
 							events.add(new PARIND(sysTime, log));
-							if(isE1changed){
+							if(!isE1changed){
 								currentEvent++;
 								isE1changed = false;
 							}
 							break;
 						}
 						case "GRP":{
-							if(isE1changed){
+							if(!isE1changed){
 								currentEvent++;
 								isE1changed = false;
 							}
@@ -136,7 +136,7 @@ public class ChronoTimer {
 						}
 						case "PARGRP":{
 							events.add(new PARGRP(sysTime, log));
-							if(isE1changed){
+							if(!isE1changed){
 								currentEvent++;
 								isE1changed = false;
 							}
