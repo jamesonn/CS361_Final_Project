@@ -13,9 +13,11 @@ public class Sensor {
 	 * @param deviceType
 	 * @param sensorNum
 	 */
-	public Sensor(String deviceType, int sensorNum){
+
+	public Sensor(String deviceType, int sensorNum, boolean sensorState){
 		this.deviceType = deviceType;
 		this.sensorNum = sensorNum;
+        isToggledOn = sensorState;
 	}
 	
 	/**
@@ -30,7 +32,11 @@ public class Sensor {
 	 * toggles the boolean isToggledOn
 	 */
 	public void toggle(){
-			isToggledOn = !isToggledOn;		
+			if(isToggledOn){
+				isToggledOn = false;
+			}else{
+				isToggledOn = true;
+			}
 	}
 	
 	public String getDeviceType(){

@@ -17,6 +17,7 @@ public class ChronoTimer {
 	private boolean eventRunning;
     private boolean isPrinterOn;
     private boolean eventCommandCalled;
+    private boolean[] sensorToggle;
 	private Sensor[] sensors;
 	//events start at 1 not 0
 	private ArrayList<Event> events = new ArrayList<>();
@@ -32,6 +33,7 @@ public class ChronoTimer {
 	 */
 	public ChronoTimer(Log log) {
         this.log = log;
+        sensorToggle = new boolean[] {false,false,false,false,false,false,false,false};
         systemOn = true;
         isPrinterOn = false;
         eventCommandCalled = false;
@@ -91,7 +93,7 @@ public class ChronoTimer {
 			}
 			case "CONN":{
 				if (systemOn){
-					sensors[sensorNum-1] = new Sensor(sensorType,sensorNum);
+					sensors[sensorNum-1] = new Sensor(sensorType,sensorNum,sensorToggle[sensorNum-1]);
 				} break;
 			}
 			case "DISC":{
@@ -131,7 +133,9 @@ public class ChronoTimer {
 				if (systemOn){
 					if(sensors[commandNumber-1] != null){
 						sensors[commandNumber-1].toggle();
-					}
+					}else{
+                        sensorToggle[commandNumber-1] = !sensorToggle[commandNumber-1];
+                    }
 				} break;
 			}
 			case "NUM":{

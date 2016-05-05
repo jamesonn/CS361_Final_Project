@@ -33,11 +33,11 @@ public class Testing {
 	 */
 	@Test
 	public void testSensor(){
-		sensor = new Sensor("EYE", 1);
+		sensor = new Sensor("EYE", 1, false);
 		assertEquals(sensor.getDeviceType(), "EYE");
 		assertEquals(sensor.getSensorNumber(), 1);
 		assertFalse(sensor.canTriggerSensor());
-		sensor = new Sensor("GATE", 2);
+		sensor = new Sensor("GATE", 2, false);
 		assertEquals(sensor.getDeviceType(), "GATE");
 		assertEquals(sensor.getSensorNumber(), 2);
 		assertFalse(sensor.canTriggerSensor());
