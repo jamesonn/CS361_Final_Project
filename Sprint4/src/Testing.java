@@ -207,6 +207,11 @@ public class Testing {
 		ArrayList<String> list = e.print(40900);
 		assertEquals(6, list.size());
 		assertEquals("11:14:30.0 PARGRP", list.get(0));
+		assertEquals("11:14:30.0 Run 1 In Progress", list.get(1));
+		assertEquals("111 195.0 F", list.get(2));
+		assertEquals("112 197.2 F", list.get(3));
+		assertEquals("113 329.7 F", list.get(4));
+		assertEquals("114 DNF", list.get(5));
 		
 	}
 	
