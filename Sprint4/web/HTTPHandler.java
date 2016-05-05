@@ -159,7 +159,7 @@ public class HTTPHandler {
         @Override
         public void handle(HttpExchange httpExchange) throws IOException {
             String filename = httpExchange.getRequestURI().toString();
-            File file = new File("src/com/example/" + filename.substring(filename.lastIndexOf('/') + 1));
+            File file = new File("web/" + filename.substring(filename.lastIndexOf('/') + 1));
             Headers h = httpExchange.getResponseHeaders();
             h.set("Content-Type", "text/css");
             OutputStream os = httpExchange.getResponseBody();

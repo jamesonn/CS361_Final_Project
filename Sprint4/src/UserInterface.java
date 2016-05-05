@@ -182,8 +182,8 @@ public class UserInterface extends JFrame{
                         setUIDefaultState();
                     }
 
-                    if(cTimer.getEventStatus()) {
-                        if (selectedMenuOption.equals("ENDRUN") && cTimer.getPrinterStatus()) {
+                    if(selectedMenuOption.equals("ENDRUN")) {
+                        if (cTimer.getPrinterStatus()) {
                             printerText += log.getRun();
                             printer.setText(printerText);
                             revalidate();
