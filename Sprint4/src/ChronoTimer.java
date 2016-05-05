@@ -305,6 +305,13 @@ public class ChronoTimer {
      */
 	private String getJSON() {
 		Gson g = new Gson();
-		return g.toJson(events.get(currentEvent).getParticipants());
+        ArrayList<Racer> racersToExport = new ArrayList<>();
+        ArrayList<Racer> participants = events.get(currentEvent).getParticipants();
+        for( int i = 0; i < participants.size(); i++){
+            if(participants.get(i).getRunLog().size() == events.get(currentEvent).getRun()){
+                racersToExport.add(participants.get(i));
+            }
+        }
+		return g.toJson(racersToExport);
 	}
 }

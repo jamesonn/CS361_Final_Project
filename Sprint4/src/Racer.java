@@ -98,5 +98,5 @@ public class Racer{
 	            }
 	        }
 	    	return "";  //no name found in file
-	    }
+	 }
 }

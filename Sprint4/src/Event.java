@@ -206,4 +206,8 @@ public class Event {
 		return participants;
 		
 	}
+
+	public int getRun(){
+		return runNum;
+	}
 }
