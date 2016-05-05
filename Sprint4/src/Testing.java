@@ -202,6 +202,7 @@ public class Testing {
 		e.trigger(2, 40800.3);//do nothing
 		e.trigger(3, 40835.2);//finish R3
 		//R4 should be in progress - DNF
+		//e.endRun(40899.0);
 		
 		ArrayList<String> list = e.print(40900);
 		assertEquals(6, list.size());
@@ -232,11 +233,9 @@ public class Testing {
 		assertEquals(3, laneList.size());
 		take = new Racer(222);
 		lane.removeRacer(take);
-		assertEquals(3, laneList.size());				
-	}
-	
-	@Test
-	public void testCLRracer1(){
+		assertEquals(3, laneList.size());
+		
+		
 		Event e = new Event("11:14:30.0");
 		e.addRacer(114);
 		e.trigger(1, 40505.5); //start R1
@@ -248,5 +247,6 @@ public class Testing {
 		//does not overwrite info if on same race
 		assertEquals(3, eventList.size()); 
 		assertEquals("114 CLR", eventList.get(2));
+		
 	}
 }

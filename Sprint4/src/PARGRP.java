@@ -64,8 +64,8 @@ public class PARGRP extends Event{
 			for(int i = 0; i < 8; ++i){
 				if(!lanes[i].isReadyEmpty()){
 					lanes[i].start(t);
-						log.add(lanes[i].didNotFinish());
 				}
+
 			}
 		}
 		//check for pads connected handled in ChronoTimer 
@@ -145,6 +145,13 @@ public class PARGRP extends Event{
 		//TODO 
 		//DNF cases prevent lane.print isActive loop
 		//how do we determine in-progress vs endRun? isActiveRun?
+		
+		for(int i=0; i < 8; ++i){
+			//anyone left doesn't have an active channel, so DNF
+			if(!lanes[i].isActiveEmpty())
+				log.add(lanes[i].didNotFinish());
+		}
+		
 		for(int i=0; i < 8; ++i)
 			log.addAll(lanes[i].print(time));
 		if(isActiveRun){
