@@ -114,23 +114,23 @@ public class ChronoTimer {
 							events.add(new Event(sysTime, log));
 							if(!isE1changed){
 								currentEvent++;
-								isE1changed = false;
 							}
+                            isE1changed = false;
 							break;
 						}
 						case "PARIND":{
 							events.add(new PARIND(sysTime, log));
 							if(!isE1changed){
 								currentEvent++;
-								isE1changed = false;
 							}
+                            isE1changed = false;
 							break;
 						}
 						case "GRP":{
 							if(!isE1changed){
 								currentEvent++;
-								isE1changed = false;
 							}
+                            isE1changed = false;
 							events.add(new GRP(sysTime, log));
 							break;
 						}
@@ -138,8 +138,8 @@ public class ChronoTimer {
 							events.add(new PARGRP(sysTime, log));
 							if(!isE1changed){
 								currentEvent++;
-								isE1changed = false;
 							}
+                            isE1changed = false;
 							break;
 						}
 					}
