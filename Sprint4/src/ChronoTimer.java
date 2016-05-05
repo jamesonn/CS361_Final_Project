@@ -312,7 +312,7 @@ public class ChronoTimer {
         ArrayList<Racer> racersToExport = new ArrayList<>();
         ArrayList<Racer> participants = events.get(currentEvent).getParticipants();
         for( int i = 0; i < participants.size(); i++){
-            if(participants.get(i).getRunLog().size() == events.get(currentEvent).getRun()){
+            if(participants.get(i).getRunLog().size() == events.get(currentEvent).getRun()-1){
                 racersToExport.add(participants.get(i));
             }
         }
